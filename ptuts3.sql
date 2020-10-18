@@ -1,21 +1,21 @@
 -- Supréssion TABLEs if EXISTS
 	
-	DROP TABLE If Exists Personne;
-	DROP TABLE If Exists Auteur;
-	DROP TABLE If Exists Intermediaire;
-	DROP TABLE If Exists Beneficiaire;
-	DROP TABLE If Exists Don;
 	DROP TABLE If Exists Joyaux_vaiselle;
 	DROP TABLE If Exists Pension;
 	DROP TABLE If Exists Vetement_Drap;
 	DROP TABLE If Exists Animaux;
+	DROP TABLE If Exists Don;
+	DROP TABLE If Exists Auteur;
+	DROP TABLE If Exists Intermediaire;
+	DROP TABLE If Exists Beneficiaire;
+	DROP TABLE If Exists Personne;
 
 -- Création TABLEs
 
 	CREATE TABLE Personne (
 		idPersonne Integer PRIMARY KEY,
 		nom Varchar(100) not null,
-		statut blob );
+		statut text );
 		
 	CREATE TABLE Auteur (
 		idAuteur Integer PRIMARY KEY,
@@ -32,41 +32,42 @@
 	CREATE TABLE Don (
 		idDon Integer PRIMARY KEY,
 		idAuteur Integer not null,
-		idIntermediaire Integer not null,
+		idIntermediaire Integer,
 		idBeneficiaire Integer not null );
 		
 	CREATE TABLE Pension (
 		idP Integer PRIMARY KEY,
-		nature blob not null default "Aucune Mention Particulière",
+		nature text not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
-		formes blob not null,
+		formes text not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
 		sources Varchar(150) not null ) ;
 		
 	CREATE TABLE Joyaux_vaiselle (
 		idJV Integer PRIMARY KEY,
-		nature blob not null default "Aucune Mention Particulière",
+		nature text not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
-		formes blob not null,
+		poids Varchar(200),
+		formes text not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
 		sources Varchar(150) not null ) ;
 		
 	CREATE TABLE Vetement_Drap (
 		idVD Integer PRIMARY KEY,
-		nature blob not null default "Aucune Mention Particulière",
+		nature text not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
-		formes blob not null,
+		formes text not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
 		sources Varchar(150) not null ) ;
 		
 	CREATE TABLE Animaux (
 		idA Integer PRIMARY KEY,
-		nature blob not null default "Aucune Mention Particulière",
+		nature text not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
-		formes blob not null,
+		formes text not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
 		sources Varchar(150) not null ) ;
