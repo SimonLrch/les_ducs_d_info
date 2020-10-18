@@ -1,14 +1,14 @@
 -- Supréssion TABLEs if EXISTS
 	
-	DROP TABLE If Exists Personne;
-	DROP TABLE If Exists Auteur;
-	DROP TABLE If Exists Intermediaire;
-	DROP TABLE If Exists Beneficiaire;
-	DROP TABLE If Exists Don;
 	DROP TABLE If Exists Joyaux_vaiselle;
 	DROP TABLE If Exists Pension;
 	DROP TABLE If Exists Vetement_Drap;
 	DROP TABLE If Exists Animaux;
+	DROP TABLE If Exists Don;
+	DROP TABLE If Exists Auteur;
+	DROP TABLE If Exists Intermediaire;
+	DROP TABLE If Exists Beneficiaire;
+	DROP TABLE If Exists Personne;
 
 -- Création TABLEs
 
