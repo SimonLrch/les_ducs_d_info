@@ -15,7 +15,7 @@
 	CREATE TABLE Personne (
 		idPersonne Integer PRIMARY KEY,
 		nom Varchar(100) not null,
-		statut blob );
+		statut text );
 		
 	CREATE TABLE Auteur (
 		idAuteur Integer PRIMARY KEY,
@@ -37,37 +37,37 @@
 		
 	CREATE TABLE Pension (
 		idP Integer PRIMARY KEY,
-		nature blob not null default "Aucune Mention Particulière",
+		nature text not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
-		formes blob not null,
+		formes text not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
 		sources Varchar(150) not null ) ;
 		
 	CREATE TABLE Joyaux_vaiselle (
 		idJV Integer PRIMARY KEY,
-		nature blob not null default "Aucune Mention Particulière",
+		nature text not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
 		poids Varchar(200),
-		formes blob not null,
+		formes text not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
 		sources Varchar(150) not null ) ;
 		
 	CREATE TABLE Vetement_Drap (
 		idVD Integer PRIMARY KEY,
-		nature blob not null default "Aucune Mention Particulière",
+		nature text not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
-		formes blob not null,
+		formes text not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
 		sources Varchar(150) not null ) ;
 		
 	CREATE TABLE Animaux (
 		idA Integer PRIMARY KEY,
-		nature blob not null default "Aucune Mention Particulière",
+		nature text not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
-		formes blob not null,
+		formes text not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
 		sources Varchar(150) not null ) ;
