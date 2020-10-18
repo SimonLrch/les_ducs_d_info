@@ -32,7 +32,7 @@
 	CREATE TABLE Don (
 		idDon Integer PRIMARY KEY,
 		idAuteur Integer not null,
-		idIntermediaire Integer not null,
+		idIntermediaire Integer,
 		idBeneficiaire Integer not null );
 		
 	CREATE TABLE Pension (
@@ -48,6 +48,7 @@
 		idJV Integer PRIMARY KEY,
 		nature blob not null default "Aucune Mention Particulière",
 		lieu Varchar(50) not null default "Aucune Mention",
+		poids Varchar(200),
 		formes blob not null,
 		prix Varchar(200) not null default "Aucune Mention",
 		informations Varchar(50) not null,
