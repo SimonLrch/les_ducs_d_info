@@ -1,0 +1,237 @@
+:root {
+	--btn-color: #007bec;
+	--btn-color-hover: #68b1f3;
+}
+
+/*---------------------------|Reset-css|---------------------------*/
+html {
+	font-size: 62.5%;
+}
+body {
+	background-color: #eaeaea;
+	color: #191919;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 1.4em; /* equiv 14px */
+	line-height: 1.5; /* adapt to your design */
+}
+
+/* font-sizing for content */
+/* preserve vertical-rythm, thanks to http://soqr.fr/vertical-rhythm/ */
+p,
+ul,
+ol,
+dl,
+blockquote,
+pre,
+td,
+th,
+label,
+textarea,
+caption,
+details, 
+figure, 
+hgroup {
+	font-size: 1em; /* equiv 14px */
+	line-height: 1.5;
+	margin: 1.5em 0 0;
+}
+h1, .h1-like {
+	font-size: 1.8571em; /* equiv 26px */
+	font-weight: normal;
+	line-height: 1.6154em;
+	margin: .8077em 0 0 0;
+}
+h2, .h2-like {
+	font-size: 1.7143em; /* equiv 24px */
+	font-weight: normal;
+	line-height: 1.75em;
+	margin: .875em 0 0 0;
+}
+h3, .h3-like {
+	font-size: 1.5714em; /* equiv 22px */
+	font-weight: normal;
+	line-height: 1.909em;
+	margin: .9545em 0 0 0;
+}
+h4, .h4-like {
+	font-size: 1.4286em; /* equiv 20px */
+	font-weight: normal;
+	line-height: 1.05em;
+	margin:  1.05em 0 0 0;
+}
+h5, .h5-like {
+	font-size: 1.2857em; /* equiv 18px */
+	font-weight: normal;
+	line-height: 1.1667em;
+	margin:  1.1667em 0 0 0;
+}
+h6, .h6-like {
+	font-size: 1.1429em; /* equiv 16px */
+	font-weight: normal;
+	line-height: 1.3125em;
+	margin:  1.3125em 0 0 0;
+}
+
+/* alternate font-sizing */
+.smaller {
+	font-size: .7143em; /* equiv 10px */
+	line-height: 2.1em;
+}
+.small {
+	font-size: .8571em; /* equiv 12px */
+	line-height: 1.75em;
+}
+.big {
+	font-size: 1.1429em; /* equiv 16px */
+	line-height: 1.3125em;
+}
+.bigger {
+	font-size: 1.2857em; /* equiv 18px */
+	line-height: 1.1667em;
+}
+.biggest {
+	font-size: 1.4286em; /* equiv 20px */
+	line-height: 1.05em;
+}
+
+/* soft reset */
+html,
+body,
+textarea,
+figure,
+label {
+	margin: 0;
+	padding: 0;
+}
+ul,
+ol {
+	padding-left: 2em;
+}
+code, 
+pre,
+samp {
+	white-space: pre-wrap;
+	font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+}
+code { line-height: 1em; }
+table { margin-bottom: 1.5em; }
+
+/* avoid margins on nested elements */
+li p,
+li ul,
+li ol {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* HTML5 tags */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+	display: block;
+}
+
+/* max values */
+img, table, td, blockquote, code, pre, textarea, input, video {
+	max-width: 100%;
+}
+
+/* you shall not pass */
+div, textarea, table, td, th, code, pre, samp {
+	word-wrap: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	-o-hyphens: auto;
+	hyphens: auto;
+}
+
+/* pictures */
+img {
+	width: auto;
+	height: auto;
+	vertical-align: middle;
+}
+a img { border: 0; }
+
+/* scripts */
+body > script {display: none !important;}
+
+/*---------------------------|Main|---------------------------*/
+.container-main {
+	display: flex;
+	width: 100%;
+	height: 100%;
+    min-height: 100vh;
+}
+	.container-main form {
+		margin: auto;
+		max-width: 50em;
+		width: 100%;
+	}
+		.title-form {
+			display: flex;
+			flex-direction: column;
+			margin: 2em 0;
+			text-align: center;
+		}
+			.steps-title {
+				display: flex;
+			}
+				.steps-title h3 {
+					margin: auto;
+				}
+		.global-form {
+			margin: 2em 0;
+			padding: 2.5em;
+			background-color: white;
+			border-radius: 20px;
+		}
+			.form-step {
+				display: none;
+				flex-direction: column;
+			}
+			.active-step {
+				display: flex;
+			}
+				.form-step h4 {
+					margin-top: 1em;
+					margin-bottom: 0.5em;
+					font-size: 18pt;
+				}
+					.form-step h4:first-child {
+						margin-top: 0;
+					}
+				.form-step label {
+					margin-bottom: 0.2em;
+					font-size: 14pt;
+				}
+				.form-step input, .form-step select, .form-step textarea {
+					margin-bottom: 1em;
+					padding: 0.5em 1em;
+					border-radius: 15px;
+					border: 1px solid gray;
+					font-size: 11pt;
+				}
+				.container-btn-form {
+					display: flex;
+					justify-content: flex-end;
+				}
+					.container-btn-form button {
+						cursor: pointer;
+						margin: 0.5em;
+						padding: 0 2em;
+						width: 100%;
+						background-color: var(--btn-color);
+						color: white;
+						border: none;
+						border-radius: 50px;
+						line-height: 50px;
+						font-family: "Sk-Modernist-Bold", "Inter", Sans-serif;
+						font-size: 16pt;
+						overflow: hidden;
+					}
+					.next-button {
+						max-width: 50%;
+					}
+						.container-btn-form button:hover {
+							background-color: var(--btn-color-hover);
+						}
