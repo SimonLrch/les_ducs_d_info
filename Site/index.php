@@ -27,11 +27,11 @@
 
                     <h4>Bénéficiaire</h4>
                     <label>Nom</label>
-                    <input type="text" name="beneficiere-name" />
+                    <input type="text" name="beneficiaire-name" />
                     <label>Statut</label>
-                    <input type="text" name="beneficiere-statut" />
+                    <input type="text" name="beneficiaire-statut" />
 
-                    <h4>Donateur</h4>
+                    <h4>Intermédiaire</h4>
                     <label>Don</label>
                     <input type="text" name="intermediaire-name" />
                     <label>Statut</label>
@@ -58,7 +58,7 @@
                     <label>Poids</label>
                     <input type="text" name="details-poids" />
                     <label>Prix</label>
-                    <input type="number" name="details-prix" />
+                    <input type="text" name="details-prix" />
                     <label>Sources</label>
                     <input type="text" name="details-sources" />
                     <label>Natures</label>

@@ -49,7 +49,7 @@
 	CREATE TABLE Don(
 	idDon integer(10) primary key not null auto_increment,
 	forme text not null,
-	nature text not null default "Aucun Mention Particulière",
+	nature text not null,
 	prix varchar(200) not null default "Aucune Mention",
 	typeDon varchar(25) not null,
 	dateDon date,
@@ -62,14 +62,14 @@
 	
 	CREATE TABLE Intermediaire (
 	idDon integer(10) not null,
-	idIntemediaire integer(10) not null);
+	idIntemerdiaire integer(10) not null);
 	
 -- Contraintes
 	
 	-- Clef Primaire
 	
 	ALTER TABLE Intermediaire
-	ADD PRIMARY KEY (idDon, idIntemediaire); 
+	ADD PRIMARY KEY (idDon, idIntemerdiaire); 
 	
 	-- Clef Etrangères
 	
@@ -105,6 +105,6 @@
 	ADD FOREIGN KEY (idDon) REFERENCES Don(idDon); 
 	
 	ALTER TABLE Intermediaire
-	ADD FOREIGN KEY (idIntemediaire) REFERENCES Personne(idPersonne);
+	ADD FOREIGN KEY (idIntemerdiaire) REFERENCES Personne(idPersonne);
 	
 	
