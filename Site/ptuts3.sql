@@ -1,111 +1,110 @@
+/* 
+-- Création bdd
+	-- drop if exist
+		DROP SCHEMA IF EXISTS PtutS3;
+		
+	-- Crétaion schema
+		Create Schema PtutS3;
+
+	-- Use Schema
+	Use  PtutS3; */
+	
 -- Supréssion TABLEs if EXISTS
 	
-	DROP TABLE If Exists Joyaux_vaiselle;
-	DROP TABLE If Exists Pension;
-	DROP TABLE If Exists Vetement_Drap;
-	DROP TABLE If Exists Animaux;
-	DROP TABLE If Exists Don;
-	DROP TABLE If Exists Auteur;
 	DROP TABLE If Exists Intermediaire;
-	DROP TABLE If Exists Beneficiaire;
-	DROP TABLE If Exists Personne;
+    DROP TABLE If Exists Don;
+    DROP TABLE If Exists Personne;
+	DROP TABLE If Exists Statut;
+	DROP TABLE If Exists Calendrier;
+	DROP TABLE If Exists TypeDon;
+	DROP TABLE If Exists Lieu;
+	DROP TABLE If Exists Poids;
+	DROP TABLE If Exists SourceDon;	
 
 -- Création TABLEs
 
 	CREATE TABLE Personne (
-		idPersonne Integer PRIMARY KEY,
-		nom Varchar(100) not null,
-		statut text );
-		
-	CREATE TABLE Auteur (
-		idAuteur Integer PRIMARY KEY,
-		idPersonne Integer not null );
-		
+	idPersonne integer(10) primary key not null auto_increment,
+	nom varchar(100) not null,
+	fonction varchar(100) not null);
+	
+	CREATE TABLE Statut (
+	fonction varchar(100) primary key not null);
+	
+	CREATE TABLE Calendrier(
+	dateDon date primary key not null);
+	
+	CREATE TABLE TypeDon (
+	typedon varchar(25) primary key not null);
+	
+	CREATE TABLE Lieu (
+	emplacement varchar(25) primary key not null default "Aucune Mention");
+	
+	CREATE TABLE Poids (
+	masse varchar(100) primary key not null);
+	
+	CREATE TABLE SourceDon (
+	recherche varchar(150) primary key not null);
+	
+	CREATE TABLE Don(
+	idDon integer(10) primary key not null auto_increment,
+	forme text not null,
+	nature text not null default "Aucun Mention Particulière",
+	prix varchar(200) not null default "Aucune Mention",
+	typeDon varchar(25) not null,
+	dateDon date,
+	idAuteur integer(10) not null,
+	idBeneficiaire integer(10) not null,
+	emplacement varchar(25) not null,
+	sourceDon varchar(150) not null,
+	masse varchar(100) not null);
+	
+	
 	CREATE TABLE Intermediaire (
-		idIntermediaire Integer PRIMARY KEY,
-		idPersonne Integer not null );
-		
-	CREATE TABLE Beneficiaire (
-		idBeneficiaire Integer PRIMARY KEY,
-		idPersonne Integer not null );
-		
-	CREATE TABLE Don (
-		idDon Integer PRIMARY KEY,
-		idAuteur Integer not null,
-		idIntermediaire Integer,
-		idBeneficiaire Integer not null );
-		
-	CREATE TABLE Pension (
-		idP Integer PRIMARY KEY,
-		nature text not null default "Aucune Mention Particulière",
-		lieu Varchar(50) not null default "Aucune Mention",
-		formes text not null,
-		prix Varchar(200) not null default "Aucune Mention",
-		informations Varchar(50) not null,
-		sources Varchar(150) not null ) ;
-		
-	CREATE TABLE Joyaux_vaiselle (
-		idJV Integer PRIMARY KEY,
-		nature text not null default "Aucune Mention Particulière",
-		lieu Varchar(50) not null default "Aucune Mention",
-		poids Varchar(200),
-		formes text not null,
-		prix Varchar(200) not null default "Aucune Mention",
-		informations Varchar(50) not null,
-		sources Varchar(150) not null ) ;
-		
-	CREATE TABLE Vetement_Drap (
-		idVD Integer PRIMARY KEY,
-		nature text not null default "Aucune Mention Particulière",
-		lieu Varchar(50) not null default "Aucune Mention",
-		formes text not null,
-		prix Varchar(200) not null default "Aucune Mention",
-		informations Varchar(50) not null,
-		sources Varchar(150) not null ) ;
-		
-	CREATE TABLE Animaux (
-		idA Integer PRIMARY KEY,
-		nature text not null default "Aucune Mention Particulière",
-		lieu Varchar(50) not null default "Aucune Mention",
-		formes text not null,
-		prix Varchar(200) not null default "Aucune Mention",
-		informations Varchar(50) not null,
-		sources Varchar(150) not null ) ;
-	
-	
+	idDon integer(10) not null,
+	idIntemediaire integer(10) not null);
 	
 -- Contraintes
 	
+	-- Clef Primaire
+	
+	ALTER TABLE Intermediaire
+	ADD PRIMARY KEY (idDon, idIntemediaire); 
+	
 	-- Clef Etrangères
 	
-		-- Personnes 
-		ALTER TABLE Auteur
-		ADD FOREIGN KEY (idPersonne) REFERENCES Personne(idPersonne); 
+	-- Personne
+	ALTER TABLE Personne
+	ADD FOREIGN KEY (fonction) REFERENCES Statut(fonction); 
 	
-		ALTER TABLE Intermediaire
-		ADD FOREIGN KEY (idPersonne) REFERENCES Personne(idPersonne); 
-		
-		ALTER TABLE Beneficiaire
-		ADD FOREIGN KEY (idPersonne) REFERENCES Personne(idPersonne); 
-		
-		-- Dons
-		ALTER TABLE Don
-		ADD FOREIGN KEY (idAuteur) REFERENCES Auteur(idAuteur); 
-		
-		ALTER TABLE Don
-		ADD FOREIGN KEY (idIntermediaire) REFERENCES Intermediaire(idIntermediaire);
-		
-		ALTER TABLE Don
-		ADD FOREIGN KEY (idBeneficiaire) REFERENCES Beneficiaire(idBeneficiaire);
-		
-		ALTER TABLE Pension
-		ADD FOREIGN KEY (idP) REFERENCES DOn(idDon);
-		
-		ALTER TABLE Joyaux_vaiselle
-		ADD FOREIGN KEY (idJV) REFERENCES DOn(idDon);
-		
-		ALTER TABLE Vetement_Drap
-		ADD FOREIGN KEY (idVD) REFERENCES DOn(idDon);
-		
-		ALTER TABLE Animaux
-		ADD FOREIGN KEY (idA) REFERENCES DOn(idDon);
+	-- Don
+	ALTER TABLE Don
+	ADD FOREIGN KEY (typeDon) REFERENCES TypeDon(typeDon); 
+	
+	ALTER TABLE Don
+	ADD FOREIGN KEY (dateDon) REFERENCES Calendrier(dateDon);
+	
+	ALTER TABLE Don
+	ADD FOREIGN KEY (idAuteur) REFERENCES Personne(idPersonne);
+	
+	ALTER TABLE Don
+	ADD FOREIGN KEY (idBeneficiaire) REFERENCES Personne(idPersonne);
+	
+	ALTER TABLE Don
+	ADD FOREIGN KEY (emplacement) REFERENCES Lieu(emplacement);
+	
+	ALTER TABLE Don
+	ADD FOREIGN KEY (sourceDon) REFERENCES SourceDon(recherche);
+	
+	ALTER TABLE Don
+	ADD FOREIGN KEY (masse) REFERENCES Poids(masse);
+	
+	
+	-- Intermediaire
+	ALTER TABLE Intermediaire
+	ADD FOREIGN KEY (idDon) REFERENCES Don(idDon); 
+	
+	ALTER TABLE Intermediaire
+	ADD FOREIGN KEY (idIntemediaire) REFERENCES Personne(idPersonne);
+	
+	
