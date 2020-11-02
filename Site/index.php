@@ -13,8 +13,8 @@
             <div class="title-form">
                 <h2>Ajout d'un don</h2>
                 <div class="steps-title">
-                    <h3>Personnes</h3>
-                    <h3>Détails</h3>
+                    <h3 class="active-title"><span>1</span>Personnes</h3>
+                    <h3><span>2</span>Détails</h3>
                 </div>
             </div>
             <div class="global-form">
