@@ -1,15 +1,15 @@
 /* 
--- Création bdd
+-- Création BDD
 	-- drop if exist
 		DROP SCHEMA IF EXISTS PtutS3;
 		
-	-- Crétaion schema
+	-- Création schema
 		Create Schema PtutS3;
 
 	-- Use Schema
 	Use  PtutS3; */
 	
--- Supréssion TABLEs if EXISTS
+-- Supression TABLES if EXISTS
 	
 	DROP TABLE If Exists Intermediaire;
     DROP TABLE If Exists Don;
@@ -21,7 +21,7 @@
 	DROP TABLE If Exists Poids;
 	DROP TABLE If Exists SourceDon;	
 
--- Création TABLEs
+-- Création TABLES
 
 	CREATE TABLE Personne (
 	idPersonne integer(10) primary key not null auto_increment,
@@ -62,14 +62,14 @@
 	
 	CREATE TABLE Intermediaire (
 	idDon integer(10) not null,
-	idIntemerdiaire integer(10) not null);
+	idIntermediaire integer(10) not null);
 	
 -- Contraintes
 	
 	-- Clef Primaire
 	
 	ALTER TABLE Intermediaire
-	ADD PRIMARY KEY (idDon, idIntemerdiaire); 
+	ADD PRIMARY KEY (idDon, idIntermediaire); 
 	
 	-- Clef Etrangères
 	
@@ -105,6 +105,6 @@
 	ADD FOREIGN KEY (idDon) REFERENCES Don(idDon); 
 	
 	ALTER TABLE Intermediaire
-	ADD FOREIGN KEY (idIntemerdiaire) REFERENCES Personne(idPersonne);
+	ADD FOREIGN KEY (idIntermediaire) REFERENCES Personne(idPersonne);
 	
 	

@@ -55,12 +55,14 @@
     else      $details_natures= null;
 	
 	// On vérifie si les champs sont vides ( autres que intermédiaire et poids)
-	if(empty($donateur_name) OR empty($donateur_statut) OR empty($beneficiaire_name) OR empty($beneficiaire_statut) OR empty($details_typeDon) OR empty($details_date) OR empty($details_lieu) OR empty($details_formes) OR empty($details_prix) OR empty($details_sources) OR empty($details_natures))
+/**	if(empty($donateur_name) OR empty($donateur_statut) OR empty($beneficiaire_name) OR empty($beneficiaire_statut) OR empty($details_typeDon) OR empty($details_date) OR empty($details_lieu) OR empty($details_formes) OR empty($details_prix) OR empty($details_sources) OR empty($details_natures))
 	{
 		echo '<font color="red">Attention, seul les champs intermédiaire et poids peuvent rester vide !</font>';
 	}
+
 	else
 	{
+**/
 		// connexion à la base
 		$db = mysqli_connect('localhost', 'root', 'root') or die('Erreur de connexion ' . mysqli_error());
 
@@ -74,11 +76,10 @@
 		$stmt->bind_param('s',$donateur_statut);
 		$stmt->execute();
 		
-		$result = get_result($stmt);
-		while ($row = array_shift($result)) 
-		{
-			$output =  $row['Count(*)'];
-		}
+		$output = get_output($stmt);
+		echo "$output : ".$output
+		print_r($output);
+/**
 		// S'il n'existe pas déjà 
 		if($output == 0)
 		{
@@ -356,8 +357,8 @@
 
 		// on affiche le résultat pour le visiteur
 		echo 'Les données ont bien été mises à jours';
-
+**/
 		mysqli_close($db);  // on ferme la connexion
-	}
+	//}
 
 ?>

@@ -1,19 +1,23 @@
 <?php
-function get_result(\mysqli_stmt $statement)
+
+function get_one_result($query)
 {
-    $result = array();
-    $statement->store_result();
-    for ($i = 0; $i < $statement->num_rows; $i++)
-    {
-        $metadata = $statement->result_metadata();
-        $params = array();
-        while ($field = $metadata->fetch_field())
-        {
-            $params[] = &$result[$i][$field->name];
-        }
-        call_user_func_array(array($statement, 'bind_result'), $params);
-        $statement->fetch();
-    }
-    return $result;
+	//Préparer la requête préparée ;
+	$stmt = $query["pdo"]->prepare($query["sql"]);
+	//Exécuter la requêter préparée avec la liste d'attributs
+	$stmt->execute($query["attributes"]);
+	
+	//Obtenir le résultat
+	while ($row = $stmt->fetch())
+	{
+		$output = $row['Res'];
+	}
+	
+	//Fermer la connexion
+	$stmt->closeCursor();
+	
+	//Renvoyer le résultat
+	return $output;
 }
+
 ?>

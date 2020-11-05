@@ -2,19 +2,19 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Formulaire Stage</title>
+    <title>Formulaire Don</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/mainStyle.css">
     <script defer src="script/mainScript.js"></script>
 </head>
 <body>
     <div class="container-main">
-        <form method="POST" action="formulaireStage.php">
+        <form method="POST" action="formulaireDon.php">
             <div class="title-form">
                 <h2>Ajout d'un don</h2>
                 <div class="steps-title">
-                    <h3 class="active-title"><span>1</span>Personnes</h3>
-                    <h3><span>2</span>Détails</h3>
+                    <h3 class="active-title"><span>1. </span>Personnes</h3>
+                    <h3><span>2. </span>Détails</h3>
                 </div>
             </div>
             <div class="global-form">
@@ -47,7 +47,7 @@
                         <option value="pensions">Pensions</option>
                         <option value="animaux">Animaux</option>
                         <option value="vetement-draps">Vêtements et draps</option>
-                        <option value="joyaux-vaiselle">Joyaux et vaiselle</option>
+                        <option value="joyaux-vaisselle">Joyaux et vaisselle</option>
                     </select>
                     <label>Date</label>
                     <input type="date" name="details-date" />
