@@ -20,7 +20,7 @@
             <div class="global-form">
                 <div class="form-step active-step" id="form-step1">
                     <h4>Donateur</h4>
-                    <label>Don</label>
+                    <label>Nom</label>
                     <input type="text" name="donateur-name" />
                     <label>Statut</label>
                     <input type="text" name="donateur-statut" />
@@ -32,7 +32,7 @@
                     <input type="text" name="beneficiaire-statut" />
 
                     <h4>Intermédiaire</h4>
-                    <label>Don</label>
+                    <label>Nom</label>
                     <input type="text" name="intermediaire-name" />
                     <label>Statut</label>
                     <input type="text" name="intermediaire-statut" />
