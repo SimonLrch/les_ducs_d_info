@@ -313,5 +313,17 @@
 		}	
 		$pdo ->commit();
 	}
+	
+	echo '
+<!DOCTYPE html>
+<html lang="fr">
+    <body>
+		<br/>
+        <a href="./index.php">Revenir au Formulaire</a>
+
+    </body>
+
+</html>
+';
 
 ?>                                                                      
