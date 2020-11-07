@@ -24,19 +24,16 @@
                     <input type="text" name="donateur-name" />
                     <label>Statut</label>
                     <input type="text" name="donateur-statut" />
-
                     <h4>Bénéficiaire</h4>
                     <label>Nom</label>
                     <input type="text" name="beneficiaire-name" />
                     <label>Statut</label>
                     <input type="text" name="beneficiaire-statut" />
-
                     <h4>Intermédiaire</h4>
                     <label>Nom</label>
-                    <input type="text" name="intermediaire-name" />
+                    <input type="text" name="intermediaire-name" value="Aucune mention"/>
                     <label>Statut</label>
-                    <input type="text" name="intermediaire-statut" />
-
+                    <input type="text" name="intermediaire-statut" value="Aucune mention"/>
                     <div class="container-btn-form">
                         <button class="next-button" type="button">Suivant</button>
                     </div>
@@ -52,18 +49,17 @@
                     <label>Date</label>
                     <input type="date" name="details-date" />
                     <label>Lieu</label>
-                    <input type="text" name="details-lieu" />
+                    <input type="text" name="details-lieu" value="Aucune mention"/>
                     <label>Formes</label>
-                    <input type="text" name="details-formes" />
+                    <input type="text" name="details-formes" value="Aucune mention"/>
                     <label>Poids</label>
-                    <input type="text" name="details-poids" />
+                    <input type="text" name="details-poids" value="Aucune mention"/>
                     <label>Prix</label>
-                    <input type="text" name="details-prix" />
+                    <input type="text" name="details-prix" value="Aucune mention"/>
                     <label>Sources</label>
-                    <input type="text" name="details-sources" />
+                    <input type="text" name="details-sources" value="Aucune mention"/>
                     <label>Natures</label>
-                    <textarea name="details-natures"></textarea>
-
+                    <textarea name="details-natures">Aucune mention particulière</textarea>
                     <div class="container-btn-form">
                         <button class="previous-button" type="button">Précédent</button>
                         <button type="submit">Confirmer</button>
