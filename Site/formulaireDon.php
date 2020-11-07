@@ -49,7 +49,7 @@
 	}
     else
 	{
-		$intermediaire_name= null;
+		$intermediaire_name= "Auncune mention";
 		$idIntermediaire = -1;
 	}
  
@@ -60,7 +60,7 @@
 	}
     else 
 	{
-		$intermediaire_statut= null;//Exception
+		$intermediaire_statut= "Aucune mention";//Exception
 	}
 
     //Formes
@@ -140,7 +140,7 @@
 		
 	}
     else {
-		$details_poids= null;
+		$details_poids= "Aucune mention";
 	}
 	
 	 //Lieu
@@ -320,10 +320,8 @@
     <body>
 		<br/>
         <a href="./index.php">Revenir au Formulaire</a>
-
     </body>
-
 </html>
 ';
 
-?>                                                                      
+?>              
