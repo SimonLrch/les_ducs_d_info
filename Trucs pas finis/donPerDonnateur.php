@@ -41,33 +41,19 @@ function Afficher_infos_donneur($_id,$_db)
             array_push($noms_Receveurs,$row['nomB']);
         }
     }
-
-
-
-    //Affichage html
-    echo '
-                    <!DOCTYPE html>
-                    <html lang="fr">
-                        <body>
-                            <br/>
-                            <br/>
-                            <h1>'.$nomDonneur.' '. $fonctionDonneur.'</h1>
-                            <p>';
-
-    for($i =0; $i < count($idsReceveurs);$i++){
-        echo '<br/>' .$noms_Receveurs[$i] .'';
-    }
-
-
-
-    echo'
-                            </p>
-                        </body>
-                    </html>
-                    ';
-
-}
-
-Afficher_infos_donneur($_GET["id"],$db);
-
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<body>
+    <h1>'.$nomDonneur.' '. $fonctionDonneur.'</h1>
+    <p><?php
+        for($i =0; $i < count($idsReceveurs);$i++){
+            echo '<br/>' .$noms_Receveurs[$i] .'';
+        }
+    ?>
+    </p>
+</body>
+</html>
+
+<!--Afficher_infos_donneur($_GET["id"],$db);-->
