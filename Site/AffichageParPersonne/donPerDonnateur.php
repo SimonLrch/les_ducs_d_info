@@ -116,7 +116,12 @@ $id = $_GET["id"];
 
 <!DOCTYPE html>
 <html lang="fr">
+	<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
 <body>
+	<?php include'../include/mainHeader.php' ?>
+	<section class="inner-box section-hero">
+            <span>Restitution Par Donneurs</span>
+    </section>
 <?php if($nomDonneur != null): ?>
         <h1><?php echo ' '.$nomDonneur.' '. $fonctionDonneur.''; ?></h1>
         <p>
