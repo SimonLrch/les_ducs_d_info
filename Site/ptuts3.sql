@@ -7,7 +7,7 @@
 		Create Schema PtutS3;
 
 	-- Use Schema
-	Use  PtutS3; */
+	Use PtutS3; */
 	
 -- Supression TABLES if EXISTS
 	

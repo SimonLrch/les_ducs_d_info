@@ -26,18 +26,12 @@ while ($row= $req->fetch())
 <!--HTML-->
 <!DOCTYPE html>
 <html lang="fr">
-    <body>
+<body>
     <h1>Liste des Donnateurs</h1>
     <p>
     <?php for ($i = 0; $i < count($idsDonneurs) ; $i++) { //Afficher tous les donneurs
-
-        echo ' <a href="donPerDonnateur.php?id='. $idsDonneurs[$i] .'">
-                ' .$nomsDonneurs[$i] . '  ' . $fonctionsDonneurs[$i] . ' </a> <br/>
-
-                    ';
-
+        echo ' <a href="donPerDonnateur.php?id='. $idsDonneurs[$i] .'">' .$nomsDonneurs[$i] . '  ' . $fonctionsDonneurs[$i] . ' </a> <br/>';
     }  ?>
     </p>
-    </body>
-
+</body>
 </html>
