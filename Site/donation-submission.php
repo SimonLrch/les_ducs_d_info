@@ -49,15 +49,15 @@
                     <label>Date</label>
                     <input type="date" name="details-date" />
                     <label>Lieu</label>
-                    <input type="text" name="details-lieu" placeholder="Aucune mention"/>
+                    <input type="text" name="details-lieu" />
                     <label>Formes</label>
-                    <input type="text" name="details-formes" placeholder="Aucune mention"/>
+                    <input type="text" name="details-formes" />
                     <label>Poids</label>
-                    <input type="text" name="details-poids" placeholder="Aucune mention"/>
+                    <input type="text" name="details-poids" placeholder="Aucune mention" />
                     <label>Prix</label>
-                    <input type="text" name="details-prix" placeholder="Aucune mention"/>
+                    <input type="text" name="details-prix" />
                     <label>Sources</label>
-                    <input type="text" name="details-sources" placeholder="Aucune mention"/>
+                    <input type="text" name="details-sources" />
                     <label>Natures</label>
                     <textarea name="details-natures" placeholder="Aucune mention particulière"></textarea>
                     <div class="container-btn-form">
