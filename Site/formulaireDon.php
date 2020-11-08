@@ -166,7 +166,7 @@
 		$host = 'localhost';
 		$db   = 'PtutS3';
 		$user = 'root';
-		$pass = 'root';
+		$pass = '';
 		$charset = 'utf8mb4';
 
 		$dsn = "mysql:host=$host;dbname=$db;charset=$charset";

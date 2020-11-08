@@ -1,6 +1,7 @@
 :root {
 	--btn-color: #007bec;
 	--btn-color-hover: #68b1f3;
+	--border-radius-box: 20px;
 }
 
 /*---------------------------|Reset-css|---------------------------*/
@@ -157,7 +158,7 @@ body > script {display: none !important;}
 
 /*---------------------------|Header|---------------------------*/
 .topbar {
-	position: fixed;
+	position: sticky;
 	display: flex;
 	padding: 0 3em;
 	top: 0;
@@ -178,18 +179,100 @@ body > script {display: none !important;}
 		height: 100%;
 	}
 		.topbar-menu a {
+			position: relative;
 			display: flex;
-			margin: 0 1em;
+			padding: 0 1em;
 			height: 100%;
 			align-items: center;
+			text-decoration: none;
+		}
+		.topbar-menu a:after {
+			content: " ";
+			position: absolute;
+			display: block;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 2px;
+		}
+		.topbar-menu a:hover:after {
+			background-color: gray;
 		}
 /*---------------------------|Main|---------------------------*/
 .container-main {
 	display: flex;
+	flex-direction: column;
 	width: 100%;
 	height: 100%;
     min-height: 100vh;
 }
+	.section-hero {
+		min-height: 10em;
+		width: 100%;
+	}
+	.section-hero-main {
+		min-height: 100vh;
+	}
+	.inner-box {
+		display: flex;
+		margin: auto;
+		max-width: 1200px;
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+	}
+		.section-hero span {
+			font-size: 30px;
+			font-weight: bold;
+		}
+		.section-hero-main span {
+			font-size: 40px;
+			font-weight: bold;
+		}
+/*---------------------------|Grid|---------------------------*/
+.grid-list {
+	display: grid;
+	width: 100%;
+	margin: 0 auto;
+	grid-template-columns: repeat(auto-fit, minmax(575px, 1fr));
+	grid-gap: 25px;
+	justify-content: center;
+}
+	.grid-cell {
+		display: inline-block;
+		margin: 0;
+		padding: 20px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+.grid-restitution {
+	font-size: 20px;
+	text-decoration: none;
+}
+.grid-restitution a {
+	text-decoration: none;
+	color: black;
+}
+	.grid-restitution .grid-cell {
+		padding: 30px;
+		background-color: white;
+		border-radius: var(--border-radius-box);
+	}
+		.grid-restitution .grid-cell img {
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+			border-radius: var(--border-radius-box);
+			overflow: hidden;
+		}
+		.grid-restitution .grid-cell span {
+			display: flex;
+			padding-top: 15px;
+			width: 100%;
+			justify-content: center;
+		}
 /*---------------------------|Form|---------------------------*/
 	.container-main form {
 		margin: auto;
@@ -230,7 +313,7 @@ body > script {display: none !important;}
 			margin: 2em 0;
 			padding: 2.5em;
 			background-color: white;
-			border-radius: 20px;
+			border-radius: var(--border-radius-box);
 		}
 			.form-step {
 				display: none;
