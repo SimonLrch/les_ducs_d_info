@@ -15,7 +15,7 @@
         </section>
         <section class="inner-box">
             <div class="grid-list grid-restitution">
-                <a href="#" class="grid-cell">
+                <a href="http://localhost/PtutS3/AffichageParPersonne/AffichageParPersonne.php" class="grid-cell">
                     <img src="" />
                     <span>Par donneur</span>
                 </a>
@@ -23,7 +23,7 @@
                     <img src="" />
                     <span>Chronologique</span>
                 </a>
-                <a href="#" class="grid-cell">
+                <a href="http://localhost/PtutS3/AffichageGeographique/DonGeographique.php" class="grid-cell">
                     <img src="" />
                     <span>Géographique</span>
                 </a>
