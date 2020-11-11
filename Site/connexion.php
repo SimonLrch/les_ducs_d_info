@@ -1,3 +1,4 @@
+<?php require_once("include/formulaireConnexion.php"); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,10 +9,25 @@
     <script defer src="script/mainScript.js"></script>
 </head>
 <body>
-    <?php include'include/mainHeader.php' ?>
+    <?php include("include/mainHeader.php") ?>
     <main class="container-main">
         <section class="inner-box section-hero">
             <span>🚧 Connexion - Page en chantier 🚧</span>
+        </section>
+        <section class="inner-box">
+            <form method="POST" action="formulaireConnexion.php">
+                <div class="global-form">
+                    <div class="form-step active-step" id="form-step1">
+                        <label>Email</label>
+                        <input type="text" name="connect-email">
+                        <label>Mot de passe</label>
+                        <input type="text" name="connect-password">
+                        <div class="container-btn-form">
+                            <button type="submit" name="connect-submit">Se connecter</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </section>
     </main>
 </body>
