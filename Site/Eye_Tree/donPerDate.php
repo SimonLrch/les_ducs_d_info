@@ -1,12 +1,12 @@
 <?php
 
 //Connexion bd
-$db = new PDO('mysql:host=localhost; dbname=PtutS3', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-
+require_once("../include/dbConfig.php");
 $date = $_GET["date"];
 
 //Variables
 $datesTab = [];
+$nombre_don = 0;
 
 $idAuteurs = [];
 $nomAuteurs = [];
@@ -24,18 +24,25 @@ $lieux = [];
 $id_don_lieux = [];
 $nb_don_lieux = [];
 
-    //Liste dates
+    //DATE
         //Requête donne une liste de dates
-        $req = $db->query('SELECT dateDon as dateD from don
+        $req = $pdo->query('SELECT dateDon as dateD from don
                                                     group by dateDon');
         while ($row= $req->fetch())
         {
             array_push($datesTab,$row['dateD']);
         }
 
+        //Requête nombre de dons
+        $req = $pdo->query('SELECT COUNT(idDon) as NbDon FROM don where dateDon = "'.$date.'"');
+        while ($row= $req->fetch())
+        {
+            $nombre_don = $row["NbDon"];
+        }
+
     //AUTEURs
         //Requête => iddonneur
-        $req = $db->query('SELECT idAuteur as idA from don where dateDon = "'.$date.'"
+        $req = $pdo->query('SELECT idAuteur as idA from don where dateDon = "'.$date.'"
                                             group by idAuteur');
         while ($row= $req->fetch())
         {
@@ -43,7 +50,7 @@ $nb_don_lieux = [];
         }
 
         //Requête info Auteur
-        $req = $db->query('SELECT personne.nom as nomA, personne.fonction as fonctionA from don
+        $req = $pdo->query('SELECT personne.nom as nomA, personne.fonction as fonctionA from don
                                                 INNER JOIN personne on personne.idPersonne = don.idAuteur 
                                                 where don.dateDon = "'.$date.'"
                                                 group by personne.idPersonne');
@@ -55,7 +62,7 @@ $nb_don_lieux = [];
 
         //Requête nombre de don par Auteur
         for($i =0; $i < count($idAuteurs); $i++){
-            $req = $db->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $idAuteurs[$i] .' and dateDon = "'.$date.'"');
+            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $idAuteurs[$i] .' and dateDon = "'.$date.'"');
             while ($row= $req->fetch())
             {
                 array_push($nb_don_auteurs,$row['nbDon']);
@@ -64,7 +71,7 @@ $nb_don_lieux = [];
 
     //RECEVEURS
         //Requête => iddonneur
-        $req = $db->query('SELECT idBeneficiaire as idB from don where dateDon = "'.$date.'"
+        $req = $pdo->query('SELECT idBeneficiaire as idB from don where dateDon = "'.$date.'"
                                                 group by idBeneficiaire');
         while ($row= $req->fetch())
         {
@@ -72,7 +79,7 @@ $nb_don_lieux = [];
         }
 
         //Requête info Beneficiaire
-        $req = $db->query('SELECT personne.nom as nomB, personne.fonction as fonctionB from don
+        $req = $pdo->query('SELECT personne.nom as nomB, personne.fonction as fonctionB from don
                                                     INNER JOIN personne on personne.idPersonne = don.idBeneficiaire 
                                                     where don.dateDon = "'.$date.'"
                                                     group by personne.idPersonne');
@@ -84,7 +91,7 @@ $nb_don_lieux = [];
 
         //Requête nombre de don par Beneficiaire
         for($i =0; $i < count($idBeneficiaires); $i++){
-            $req = $db->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $idBeneficiaires[$i] .' and dateDon = "'.$date.'"');
+            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $idBeneficiaires[$i] .' and dateDon = "'.$date.'"');
             while ($row= $req->fetch())
             {
                 array_push($nb_don_beneficiaires,$row['nbDon']);
@@ -93,7 +100,7 @@ $nb_don_lieux = [];
 
     //Lieux
         //Requête => lieux
-        $req = $db->query('SELECT emplacement as lieu from don where dateDon = "'.$date.'"
+        $req = $pdo->query('SELECT emplacement as lieu from don where dateDon = "'.$date.'"
                                                 group by emplacement');
         while ($row= $req->fetch())
         {
@@ -102,7 +109,7 @@ $nb_don_lieux = [];
 
         //Requête nombre de don par date
         for($i =0; $i < count($lieux); $i++){
-            $req = $db->query('SELECT count(idDon) as nbDon FROM don where emplacement ="'. $lieux[$i] .'" and dateDon = "'.$date.'"');
+            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where emplacement ="'. $lieux[$i] .'" and dateDon = "'.$date.'"');
             while ($row= $req->fetch())
             {
                 array_push($nb_don_lieux,$row['nbDon']);
@@ -122,15 +129,19 @@ $nb_don_lieux = [];
             <span>Restitution Par Dates</span>
     </section>
 <?php if(in_array($date,$datesTab)): ?>
-        <h1><?php echo 'Dons fait au '.$date.''; ?></h1>
-        <h2>Personnes ayant données à cette date : </h2>
-        <p>
+    <p><a href="../AffichageChronologique/DonSelonChronologie.php">Voir avec un calendrier</a>  </p>
+    <h1><?php echo 'Dons fait au '.$date.''; ?></h1>
+    <p>
+        <br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
+    </p>
+    <details>
+        <summary>Personnes ayant données le <?php echo ''.$date.''; ?> : </summary><p>
             <?php
             for($i =0; $i < count($idAuteurs);$i++)
             {
-                echo '<h3><a href="donPerDonnateur.php?id=' . $idAuteurs[$i] . '">' . $nomAuteurs[$i] . ' :  ' . $fonctionAuteurs[$i] . '</a> ( ' . $nb_don_auteurs[$i] . ' )</h3>';
+                echo '<details><summary><a href="donPerDonnateur.php?id=' . $idAuteurs[$i] . '">' . $nomAuteurs[$i] . ' :  ' . $fonctionAuteurs[$i] . '</a> ( ' . $nb_don_auteurs[$i] . ' )</summary><p>';
                 //Requête pour avoir les dons par donneurs:
-                $req = $db->query('SELECT idDon as idD FROM don where idAuteur =' . $idAuteurs[$i] . ' and dateDon = "' . $date . '"');
+                $req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $idAuteurs[$i] . ' and dateDon = "' . $date . '"');
                 while ($row = $req->fetch())
                 {
                     array_push($id_don_auteurs, $row['idD']);
@@ -141,57 +152,61 @@ $nb_don_lieux = [];
                     <br/>';
                 }
                 $id_don_auteurs = []; //reset le tableau
+                echo '</p></details>';
             }
             ?>
 
-        </p>
-        <h2>Personnes ayant reçu a des dons à cette date : </h2>
-        <p>
+    </p>
+    </details>
+    <details>
+        <summary>Personnes ayant reçu a des dons le <?php echo ''.$date.''; ?> : </summary><p>
 
-            <?php
-            for($i =0; $i < count($idAuteurs);$i++)
+        <?php
+        for($i =0; $i < count($idAuteurs);$i++)
+        {
+            echo '<details><summary><a href="donPerDonnateur.php?id=' . $idBeneficiaires[$i] . '">' . $nomBeneficiaires[$i] . ' :  ' . $fonctionBeneficiaires[$i] . '</a> ( ' . $nb_don_beneficiaires[$i] . ' )</summary><p>';
+            //Requête pour avoir les dons par donneurs:
+            $req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $idBeneficiaires[$i] . ' and dateDon = "' . $date . '"');
+            while ($row = $req->fetch())
             {
-                echo '<h3><a href="donPerDonnateur.php?id=' . $idBeneficiaires[$i] . '">' . $nomBeneficiaires[$i] . ' :  ' . $fonctionBeneficiaires[$i] . '</a> ( ' . $nb_don_beneficiaires[$i] . ' )</h3>';
-                //Requête pour avoir les dons par donneurs:
-                $req = $db->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $idBeneficiaires[$i] . ' and dateDon = "' . $date . '"');
-                while ($row = $req->fetch())
-                {
-                    array_push($id_don_beneficiaires, $row['idD']);
-                }
-                for ($j = 0; $j < count($id_don_beneficiaires); $j++)
-                {
-                    echo ' <a href="..\Afficher_don.php?id=' . $id_don_beneficiaires[$j] . '">Don ' . $id_don_beneficiaires[$j] . '</a>
-                    <br/>';
-                }
-                $id_don_beneficiaires = []; //reset le tableau
+                array_push($id_don_beneficiaires, $row['idD']);
             }
-            ?>
-
-        </p>
-        <h2>Lieux dans le quels les dons à cette dates ont été fait : </h2>
-        <p>
-
-            <?php
-            for($i =0; $i < count($lieux);$i++)
+            for ($j = 0; $j < count($id_don_beneficiaires); $j++)
             {
-                echo '<h3><a href="donPerVille.php.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . ' </a> ( ' . $nb_don_lieux[$i] . ' )</h3>';
-                //Requête pour avoir les dons par donneurs:
-                $req = $db->query('SELECT idDon as idD FROM don where emplacement ="' . $lieux[$i] . '" and dateDon = "' . $date . '"
-                ');
-                while ($row = $req->fetch())
-                {
-                    array_push($id_don_lieux, $row['idD']);
-                }
-                for ($j = 0; $j < count($id_don_lieux); $j++)
-                {
-                    echo ' <a href="..\Afficher_don.php?id=' . $id_don_lieux[$j] . '">Don ' . $id_don_lieux[$j] . '</a>
-                    <br/>';
-                }
-                $id_don_lieux = []; //reset le tableau
+                echo ' <a href="..\Afficher_don.php?id=' . $id_don_beneficiaires[$j] . '">Don ' . $id_don_beneficiaires[$j] . '</a>
+                <br/>';
             }
-            ?>
+            $id_don_beneficiaires = []; //reset le tableau
+            echo '</p></details>';
+        }
+        ?>
 
-        </p>
+    </p>
+    </details>
+        <details><summary>Lieux dans lesquels les dons du <?php echo ''.$date.''; ?> ont été fait : </summary><p>
+
+        <?php
+        for($i =0; $i < count($lieux);$i++)
+        {
+            echo '<details><summary><a href="donPerVille.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . ' </a> ( ' . $nb_don_lieux[$i] . ' )</summary><p>';
+            //Requête pour avoir les dons par donneurs:
+            $req = $pdo->query('SELECT idDon as idD FROM don where emplacement ="' . $lieux[$i] . '" and dateDon = "' . $date . '"
+            ');
+            while ($row = $req->fetch())
+            {
+                array_push($id_don_lieux, $row['idD']);
+            }
+            for ($j = 0; $j < count($id_don_lieux); $j++)
+            {
+                echo ' <a href="..\Afficher_don.php?id=' . $id_don_lieux[$j] . '">Don ' . $id_don_lieux[$j] . '</a>
+                <br/>';
+            }
+            $id_don_lieux = []; //reset le tableau
+            echo '</p></details>';
+        }
+        ?>
+
+    </p>
 
 
 

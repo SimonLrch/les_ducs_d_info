@@ -1,6 +1,6 @@
 <?php
 
-$db = new PDO('mysql:host=localhost; dbname=PtutS3', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+require_once("include/dbConfig.php");
 
 $id = $_GET["id"];
 
@@ -26,7 +26,7 @@ $prix = '';
 
 
 //Requete 1, sur table don
-$req = $db->query('SELECT typeDon as TypeD, forme as FormeD, nature as NatureD, prix as PrixD, 
+$req = $pdo->query('SELECT typeDon as TypeD, forme as FormeD, nature as NatureD, prix as PrixD, 
                 dateDon as DateD, masse as PoidD, emplacement as LieuD, sourceDon as SourceD FROM don where idDon = '. $id .'');
 while ($row= $req->fetch())
 {
@@ -42,7 +42,7 @@ $source = $row['SourceD'];
 }
 
 //Requete 2, sur table Personne / Auteur
-$req = $db->query('SELECT idPersonne as idA, nom as NomA, fonction as FonctionA FROM personne INNER JOIN don on personne.idPersonne = don.idAuteur where idDon = '. $id .'');
+$req = $pdo->query('SELECT idPersonne as idA, nom as NomA, fonction as FonctionA FROM personne INNER JOIN don on personne.idPersonne = don.idAuteur where idDon = '. $id .'');
 while ($row= $req->fetch())
 {
     $nomAuteur = $row['NomA'];
@@ -51,7 +51,7 @@ while ($row= $req->fetch())
 }
 
 //Requete 3, sur table Personne / Destinataire
-$req = $db->query('SELECT idPersonne as idD, nom as NomD, fonction as FonctionD FROM personne INNER JOIN don on personne.idPersonne = don.idBeneficiaire where idDon = '. $id .'');
+$req = $pdo->query('SELECT idPersonne as idD, nom as NomD, fonction as FonctionD FROM personne INNER JOIN don on personne.idPersonne = don.idBeneficiaire where idDon = '. $id .'');
 while ($row= $req->fetch())
 {
     $nomDestinataire = $row['NomD'];
@@ -60,7 +60,7 @@ while ($row= $req->fetch())
 }
 
 //Requete 4, sur table Personne via table intermédiaire
-$req = $db->query('SELECT personne.idPersonne as idI, personne.nom as NomI, personne.fonction as FonctionI FROM personne
+$req = $pdo->query('SELECT personne.idPersonne as idI, personne.nom as NomI, personne.fonction as FonctionI FROM personne
                                 INNER JOIN intermediaire on personne.idPersonne = intermediaire.idIntermediaire 
                                 LEFT JOIN don on intermediaire.idDon = don.idDon
                 WHERE don.idDon = '. $id .'');
