@@ -15,7 +15,7 @@
         </section>
         <section class="inner-box">
             <div class="grid-list grid-restitution">
-                <a href="http://localhost/PtutS3/AffichageParPersonne/listDonneurs.php" class="grid-cell">
+                <a href="http://localhost/PtutS3/Eye_Tree/listDonneurs.php" class="grid-cell">
                     <img src="Images/ParDonneur.png" />
                     <span>Par donneur</span>
                 </a>

@@ -8,10 +8,13 @@ $id = $_GET["id"];
 //Création de variable
 $nomAuteur = '';
 $fonctionAuteur = '';
+$idAuteur = '';
 $nomDestinataire = '';
 $fonctionDestinataire = '';
+$idDestinataire = '';
 $nomIntermediaire = '';
 $fonctionIntermediaire = '';
+$idIntermediaire = '';
 $TypeDon = '';
 $FormeDon = '';
 $Poids = '';
@@ -39,23 +42,25 @@ $Source = $row['SourceD'];
 }
 
 //Requete 2, sur table Personne / Auteur
-$req = $db->query('SELECT nom as NomA, fonction as FonctionA FROM personne INNER JOIN don on personne.idPersonne = don.idAuteur where idDon = '. $id .'');
+$req = $db->query('SELECT idPersonne as idA, nom as NomA, fonction as FonctionA FROM personne INNER JOIN don on personne.idPersonne = don.idAuteur where idDon = '. $id .'');
 while ($row= $req->fetch())
 {
     $nomAuteur = $row['NomA'];
     $fonctionAuteur = $row['FonctionA'];
+    $idAuteur = $row['idA'];
 }
 
 //Requete 3, sur table Personne / Destinataire
-$req = $db->query('SELECT nom as NomD, fonction as FonctionD FROM personne INNER JOIN don on personne.idPersonne = don.idBeneficiaire where idDon = '. $id .'');
+$req = $db->query('SELECT idPersonne as idD, nom as NomD, fonction as FonctionD FROM personne INNER JOIN don on personne.idPersonne = don.idBeneficiaire where idDon = '. $id .'');
 while ($row= $req->fetch())
 {
     $nomDestinataire = $row['NomD'];
     $fonctionDestinataire = $row['FonctionD'];
+    $idDestinataire = $row['idD'];
 }
 
 //Requete 4, sur table Personne via table intermédiaire
-$req = $db->query('SELECT personne.nom as NomI, personne.fonction as FonctionI FROM personne
+$req = $db->query('SELECT personne.idPersonne as idI, personne.nom as NomI, personne.fonction as FonctionI FROM personne
                                 INNER JOIN intermediaire on personne.idPersonne = intermediaire.idIntermediaire 
                                 LEFT JOIN don on intermediaire.idDon = don.idDon
                 WHERE don.idDon = '. $id .'');
@@ -63,16 +68,12 @@ while ($row= $req->fetch())
 {
     $nomIntermediaire = $row['NomI'];
     $fonctionIntermediaire = $row['FonctionI'];
+    $idIntermediaire = $row['idI'];
 }
 
 //remplacement par "non renseigné" des champs pouvant être null
 if ($Poids == null){
     $Poids = 'aucune mention de poids';
-}
-
-if ($nomIntermediaire == null){
-    $nomIntermediaire = 'aucune mention';
-    $fonctionIntermediaire = '';
 }
 
 ?>
@@ -82,14 +83,24 @@ if ($nomIntermediaire == null){
 <!DOCTYPE html>
 <html lang="fr">
     <body>
+    <?php include'include/mainHeader.php' ?>
         <br/>
         <br/>
         <h1>Don numéro <?php echo ' ' . $id .''; ?></h1>
         <p>
             <br/>
-            <br/>Auteur : <?php echo '  '. $nomAuteur .' ' . $fonctionAuteur .''; ?>
-            <br/>A l' intention de :<?php echo ' ' . $nomDestinataire .' ' . $fonctionDestinataire.''; ?>
-            <br/>Par le bais de : <?php echo ' ' . $nomIntermediaire.' ' . $fonctionIntermediaire .''; ?>
+            <br/>Auteur : <?php echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idAuteur .'">' . $nomAuteur .' ' . $fonctionAuteur .'</a>'; ?>
+            <br/>A l' intention de :<?php echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idDestinataire .'">' . $nomDestinataire .' ' . $fonctionDestinataire .'</a>'; ?>
+            <br/>Par le bais de : <?php
+                    if($nomIntermediaire == null)
+                    {
+                        echo 'Aucune Mention';
+                    }
+                    else
+                    {
+                         echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idIntermediaire .'">' . $nomIntermediaire .' ' . $fonctionIntermediaire .'</a>';
+                    }
+                    ?>
             <br/>
             <br/>Type :<?php echo ' ' . $TypeDon .''; ?>
             <br/>Forme :<?php echo ' ' . $FormeDon .''; ?>

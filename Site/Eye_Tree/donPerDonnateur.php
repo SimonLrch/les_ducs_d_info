@@ -19,6 +19,10 @@ $id = $_GET["id"];
     $dates = [];
     $nb_Don_dates = [];
 
+    $id_dons_receveurs = [];
+    $id_dons_lieux = [];
+    $id_dons_date = [];
+
 
     //Requête => donneur
     $req = $db->query('SELECT nom as nomD, fonction as fonctionD FROM personne
@@ -119,9 +123,6 @@ $id = $_GET["id"];
 	<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
 <body>
 	<?php include'../include/mainHeader.php' ?>
-	<section class="inner-box section-hero">
-            <span>Restitution Par Donneurs</span>
-    </section>
 <?php if($nomDonneur != null): ?>
         <h1><?php echo ' '.$nomDonneur.' '. $fonctionDonneur.''; ?></h1>
         <p>
@@ -129,17 +130,40 @@ $id = $_GET["id"];
         </p>
         <h2> A fait des don à : </h2>
         <p><?php
-            for($i =0; $i < count($idsReceveurs);$i++){
-                echo '<a href="donPerDonnateur.php?id='. $idsReceveurs[$i] .'">' .$noms_Receveurs[$i] .' '.$fonctions_Receveurs[$i] .'</a> ( '. $nb_Don_pers[$i] . ' )</br>';
+            for($i =0; $i < count($idsReceveurs);$i++)
+            {
+                echo '<h3><a href="donPerDonnateur.php?id=' . $idsReceveurs[$i] . '">' . $noms_Receveurs[$i] . ' ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</h3>';
+                //Requête pour avoir les dons par receveur:
+                $req = $db->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and idBeneficiaire =' . $idsReceveurs[$i] . '');
+                while ($row = $req->fetch())
+                {
+                    array_push($id_dons_receveurs, $row['idD']);
+                }
+                for ($j = 0; $j < count($id_dons_receveurs); $j++)
+                {
+                    echo ' <a href="..\Afficher_don.php?id=' . $id_dons_receveurs[$j] . '">Don ' . $id_dons_receveurs[$j] . '</a>
+                    <br/>';
+                }
+                $id_dons_receveurs = []; //reset le tableau
             }
              ?>
         </p>
         <h2> En ces endroits : </h2>
         <p>
             <?php
-            for($i =0; $i < count($lieux);$i++){
-                echo ' ' .$lieux[$i] .' ( '. $nb_Don_lieux[$i] . ' )
-             <br/>';
+            for($i =0; $i < count($lieux);$i++)
+            {
+                echo ' <h3><a href="donPerVille.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . '</a> ( ' . $nb_Don_lieux[$i] . ' )</h3>';
+                //Requête pour avoir les dons par ville:
+                $req = $db->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and emplacement ="' . $lieux[$i] . '"');
+                while ($row = $req->fetch()) {
+                    array_push($id_dons_lieux, $row['idD']);
+                }
+                for ($j = 0; $j < count($id_dons_lieux); $j++) {
+                    echo ' <a href="..\Afficher_don.php?id=' . $id_dons_lieux[$j] . '">Don ' . $id_dons_lieux[$j] . '</a>
+                    <br/>';
+                }
+                $id_dons_lieux = []; //reset le tableau
             }
             ?>
 
@@ -148,19 +172,19 @@ $id = $_GET["id"];
         <p>
 
             <?php
-            for($i =0; $i < count($dates);$i++){
-                echo ' ' .$dates[$i] .' ( '. $nb_Don_dates[$i] . ' )
-             <br/>';
-            }
-            ?>
-
-        </p>
-        <h2> Liste des dons : </h2>
-        <p>
-            <?php
-            for($i =0; $i < count($id_dons);$i++){
-            echo ' <a href="..\Afficher_don.php?id='. $id_dons[$i] .'">Don ' .$id_dons[$i] .'</a>
-             <br/>';
+            for($i =0; $i < count($dates);$i++)
+            {
+                echo '<h3><a href="donPerDate.php?date=' . $dates[$i] . '">' .$dates[$i] .'</a> ( '. $nb_Don_dates[$i] . ' )</h3>';
+                //Requête pour avoir les dons par date:
+                $req = $db->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and dateDon ="' . $dates[$i] . '"');
+                while ($row = $req->fetch()) {
+                    array_push($id_dons_date, $row['idD']);
+                }
+                for ($j = 0; $j < count($id_dons_date); $j++) {
+                    echo ' <a href="..\Afficher_don.php?id=' . $id_dons_date[$j] . '">Don ' . $id_dons_date[$j] . '</a>
+                    <br/>';
+                }
+                $id_dons_date = []; //reset le tableau
             }
             ?>
 
@@ -173,7 +197,7 @@ $id = $_GET["id"];
 <?php elseif($nomDonneur == null): ?> <!-- si l'id envoyée ne correspondait pas à celle d'un donnateur, nomdonnateur == nul -->
 
     <h1> Aucun don n'a été fait par cette personne</h1>
-    <p> <a href="listDonneurs.php">Revenir à la liste des donateurs</a> </p>
+    <p><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Revenir à la page précédente</a></p>
 
 <?php endif; ?>
 </body>
