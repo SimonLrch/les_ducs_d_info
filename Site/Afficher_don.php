@@ -15,14 +15,14 @@ $idDestinataire = '';
 $nomIntermediaire = '';
 $fonctionIntermediaire = '';
 $idIntermediaire = '';
-$TypeDon = '';
-$FormeDon = '';
-$Poids = '';
-$Date = '';
-$Lieu = '';
-$Raison = '';
-$Source = '';
-$Prix = '';
+$typeDon = '';
+$formeDon = '';
+$poids = '';
+$date = '';
+$lieu = '';
+$raison = '';
+$source = '';
+$prix = '';
 
 
 //Requete 1, sur table don
@@ -30,14 +30,14 @@ $req = $db->query('SELECT typeDon as TypeD, forme as FormeD, nature as NatureD, 
                 dateDon as DateD, masse as PoidD, emplacement as LieuD, sourceDon as SourceD FROM don where idDon = '. $id .'');
 while ($row= $req->fetch())
 {
-$TypeDon = $row['TypeD'];
-$FormeDon = $row['FormeD'];
-$Raison = $row['NatureD'];
-$Prix = $row['PrixD'];
-$Date = $row['DateD'];
-$Poids = $row['PoidD'];
-$Lieu = $row['LieuD'];
-$Source = $row['SourceD'];
+$typeDon = $row['TypeD'];
+$formeDon = $row['FormeD'];
+$raison = $row['NatureD'];
+$prix = $row['PrixD'];
+$date = $row['DateD'];
+$poids = $row['PoidD'];
+$lieu = $row['LieuD'];
+$source = $row['SourceD'];
 
 }
 
@@ -71,10 +71,6 @@ while ($row= $req->fetch())
     $idIntermediaire = $row['idI'];
 }
 
-//remplacement par "non renseigné" des champs pouvant être null
-if ($Poids == null){
-    $Poids = 'aucune mention de poids';
-}
 
 ?>
 
@@ -89,8 +85,8 @@ if ($Poids == null){
         <h1>Don numéro <?php echo ' ' . $id .''; ?></h1>
         <p>
             <br/>
-            <br/>Auteur : <?php echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idAuteur .'">' . $nomAuteur .' ' . $fonctionAuteur .'</a>'; ?>
-            <br/>A l' intention de :<?php echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idDestinataire .'">' . $nomDestinataire .' ' . $fonctionDestinataire .'</a>'; ?>
+            <br/>Auteur : <?php echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idAuteur .'">' . $nomAuteur .'  : ' . $fonctionAuteur .'</a>'; ?>
+            <br/>A l' intention de :<?php echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idDestinataire .'">' . $nomDestinataire .' : ' . $fonctionDestinataire .'</a>'; ?>
             <br/>Par le bais de : <?php
                     if($nomIntermediaire == null)
                     {
@@ -98,21 +94,30 @@ if ($Poids == null){
                     }
                     else
                     {
-                         echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idIntermediaire .'">' . $nomIntermediaire .' ' . $fonctionIntermediaire .'</a>';
+                         echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idIntermediaire .'">' . $nomIntermediaire .' : ' . $fonctionIntermediaire .'</a>';
                     }
                     ?>
             <br/>
-            <br/>Type :<?php echo ' ' . $TypeDon .''; ?>
-            <br/>Forme :<?php echo ' ' . $FormeDon .''; ?>
-            <br/>Poids :<?php echo ' ' . $Poids .''; ?>
-            <br/>Prix :  <?php echo ' ' . $Prix .''; ?>
+            <br/>Type :<?php echo ' ' . $typeDon .''; ?>
+            <br/>Forme :<?php echo ' ' . $formeDon .''; ?>
+            <br/>Poids :<?php //Poid peut être null
+                    if($poids == null)
+                    {
+                        echo 'Aucune Mention de poids';
+                    }
+                    else
+                    {
+                        echo '' . $poids .' ';
+                    }
+                    ?>
+            <br/>Prix :  <?php echo ' ' . $prix .''; ?>
             <br/>
-            <br/>Date :<?php echo ' ' . $Date .''; ?>
-            <br/>Lieu:  <?php echo ' ' . $Lieu .''; ?>
+            <br/>Date :<?php echo ' <a href="Eye_Tree/donPerDate.php?date=' . $date . '">' . $date .'</a>'; ?>
+            <br/>Lieu:  <?php echo '<a href="Eye_Tree/donPerVille.php?emplacement=' . $lieu . '">' . $lieu .'</a>'; ?>
             <br/>
-            <br/>Raison :<?php echo ' ' . $Raison .''; ?>
+            <br/>Raison :<?php echo ' ' . $raison .''; ?>
             <br/>
-            <br/>Source: <?php echo ' ' . $Source .''; ?>
+            <br/>Source: <?php echo ' ' . $source .''; ?>
 
         </p>
 
