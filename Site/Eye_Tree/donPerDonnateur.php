@@ -45,7 +45,8 @@ $id = $_GET["id"];
 
     //Requête  nombre de don par id de Beneficiaire
     for($i =0; $i < count($idsReceveurs); $i++){
-        $req = $db->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $id .' and idBeneficiaire = "' . $idsReceveurs[$i].'"');
+        $req = $db->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $id .' and idBeneficiaire = "' . $idsReceveurs[$i].'"
+                                    group by idBeneficiaire');
         while ($row= $req->fetch())
         {
             array_push($nb_Don_pers,$row['nbDon']);
@@ -124,7 +125,7 @@ $id = $_GET["id"];
 <body>
 	<?php include'../include/mainHeader.php' ?>
 <?php if($nomDonneur != null): ?>
-        <h1><?php echo ' '.$nomDonneur.' '. $fonctionDonneur.''; ?></h1>
+        <h1><?php echo ' Dons fait part '.$nomDonneur.' : '. $fonctionDonneur.''; ?></h1>
         <p>
             <br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
         </p>
@@ -132,7 +133,7 @@ $id = $_GET["id"];
         <p><?php
             for($i =0; $i < count($idsReceveurs);$i++)
             {
-                echo '<h3><a href="donPerDonnateur.php?id=' . $idsReceveurs[$i] . '">' . $noms_Receveurs[$i] . ' ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</h3>';
+                echo '<h3><a href="donPerDonnateur.php?id=' . $idsReceveurs[$i] . '">' . $noms_Receveurs[$i] . ' :  ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</h3>';
                 //Requête pour avoir les dons par receveur:
                 $req = $db->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and idBeneficiaire =' . $idsReceveurs[$i] . '');
                 while ($row = $req->fetch())
@@ -181,7 +182,7 @@ $id = $_GET["id"];
                     array_push($id_dons_date, $row['idD']);
                 }
                 for ($j = 0; $j < count($id_dons_date); $j++) {
-                    echo ' <a href="..\Afficher_don.php?id=' . $id_dons_date[$j] . '">Don ' . $id_dons_date[$j] . '</a>
+                    echo ' <a href="..\Afficher_don.php?id= ' . $id_dons_date[$j] . '">Don ' . $id_dons_date[$j] . '</a>
                     <br/>';
                 }
                 $id_dons_date = []; //reset le tableau
