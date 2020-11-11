@@ -370,3 +370,20 @@ body > script {display: none !important;}
 						.container-btn-form button:hover {
 							background-color: var(--btn-color-hover);
 						}
+
+/*---------------------------|Eye-Tree|---------------------------*/
+
+.Eye-Tree-titre1 {
+	font-size: 15pt;
+	font-weight: bold;
+	/*outline: solid;*/
+}
+
+.Eye-Tree-titre2 {
+	font-size: 12pt;
+	padding-left: 10pt;
+}
+
+.Eye-Tree-content {
+	padding-left: 20pt;
+}

@@ -134,12 +134,12 @@ $id = $_GET["id"];
         </p>
 
     <details>
-        <summary>A fait des don à : </summary>
+        <summary class="Eye-Tree-titre1">A fait des don à : </summary>
             <p><?php
             for($i =0; $i < count($idsReceveurs);$i++)
             {
                 echo '<details>
-                <summary><a href="donPerDonnateur.php?id=' . $idsReceveurs[$i] . '">' . $noms_Receveurs[$i] . ' :  ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</summary> <p>';
+                <summary class="Eye-Tree-titre2"><a href="donPerDonnateur.php?id=' . $idsReceveurs[$i] . '">' . $noms_Receveurs[$i] . ' :  ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
                 //Requête pour avoir les dons par receveur:
                 $req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and idBeneficiaire =' . $idsReceveurs[$i] . '');
                 while ($row = $req->fetch())
@@ -153,18 +153,18 @@ $id = $_GET["id"];
                     <br/>';
                 }
                 $id_dons_receveurs = []; //reset le tableau
-                echo '</p></details>';
+                echo '</p></div></details>';
             }
              ?>
         </p></details>
         <details>
-            <summary>En ces endroits :</summary>
+            <summary class="Eye-Tree-titre1">En ces endroits :</summary>
         <p>
             <?php
             for($i =0; $i < count($lieux);$i++)
             {
                 echo ' <details>
-                <summary><a href="donPerVille.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . '</a> ( ' . $nb_Don_lieux[$i] . ' )</summary><p>';
+                <summary class="Eye-Tree-titre2"><a href="donPerVille.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . '</a> ( ' . $nb_Don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
                 //Requête pour avoir les dons par ville:
                 $req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and emplacement ="' . $lieux[$i] . '"');
                 while ($row = $req->fetch()) {
@@ -175,20 +175,20 @@ $id = $_GET["id"];
                     <br/>';
                 }
                 $id_dons_lieux = []; //reset le tableau
-                echo '</p></details>';
+                echo '</p></div></details>';
             }
             ?>
 
         </p>
         </details>
         <details>
-        <summary>A ces dates :</summary>
+        <summary class="Eye-Tree-titre1">A ces dates :</summary>
         <p>
 
             <?php
             for($i =0; $i < count($dates);$i++)
             {
-                echo ' <details><summary><a href="donPerDate.php?date=' . $dates[$i] . '">' .$dates[$i] .'</a> ( '. $nb_Don_dates[$i] . ' )</summary><p>';
+                echo ' <details><summary class="Eye-Tree-titre2"><a href="donPerDate.php?date=' . $dates[$i] . '">' .$dates[$i] .'</a> ( '. $nb_Don_dates[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
                 //Requête pour avoir les dons par date:
                 $req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and dateDon ="' . $dates[$i] . '"');
                 while ($row = $req->fetch()) {
@@ -199,7 +199,7 @@ $id = $_GET["id"];
                     <br/>';
                 }
                 $id_dons_date = []; //reset le tableau
-                echo '</p></details>';
+                echo '</p></div></details>';
             }
             ?>
 

@@ -80,8 +80,7 @@ while ($row= $req->fetch())
 <html lang="fr">
     <body>
     <?php include'include/mainHeader.php' ?>
-        <br/>
-        <br/>
+    </section>
         <h1>Don numéro <?php echo ' ' . $id .''; ?></h1>
         <p>
             <br/>
