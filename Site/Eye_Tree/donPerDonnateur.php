@@ -1,7 +1,9 @@
 <?php
 
 //Connexion bd
-require_once("../include/dbConfig.php");
+require_once ('../include/dbConfig.php');
+
+$pdo = getPDO("PtutS3");
 
 $id = $_GET["id"];
 
