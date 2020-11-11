@@ -13,6 +13,21 @@
         <section class="inner-box section-hero">
             <span>🚧 Connexion - Page en chantier 🚧</span>
         </section>
+        <section class="inner-box">
+            <form method="POST" action="formulaireConnexion.php">
+                <div class="global-form">
+                    <div class="form-step active-step" id="form-step1">
+                        <label>Email</label>
+                        <input type="text" name="donateur-name">
+                        <label>Mot de passe</label>
+                        <input type="text" name="donateur-statut">
+                        <div class="container-btn-form">
+                            <button type="submit">Se connecter</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
     </main>
 </body>
 </html>
