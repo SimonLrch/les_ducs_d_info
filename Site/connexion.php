@@ -12,16 +12,17 @@
     <?php include("include/mainHeader.php") ?>
     <main class="container-main">
         <section class="inner-box section-hero">
-            <span>🚧 Connexion - Page en chantier 🚧</span>
+            <span>Connexion</span>
         </section>
         <section class="inner-box">
-            <form method="POST" action="formulaireConnexion.php">
+            <form method="POST" action="">
                 <div class="global-form">
                     <div class="form-step active-step" id="form-step1">
                         <label>Email</label>
-                        <input type="text" name="connect-email">
+                        <input type="email" name="connect-email">
                         <label>Mot de passe</label>
-                        <input type="text" name="connect-password">
+                        <input type="password" name="connect-password">
+                        <span><?php if(isset($error)) {echo $error;} ?></span>
                         <div class="container-btn-form">
                             <button type="submit" name="connect-submit">Se connecter</button>
                         </div>

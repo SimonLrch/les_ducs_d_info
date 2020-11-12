@@ -111,6 +111,7 @@
 	else
 	{
 		require_once("include/dbConfig.php");
+		getPDO("PtutS3");
 		$pdo->beginTransaction();
 		//----- Vérification de l'existence ou non des valeurs dans la BDD-----
 		try {
