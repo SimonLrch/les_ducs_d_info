@@ -19,5 +19,5 @@
     Email varchar(255) not null unique,
     HashPassword varchar(255) not null,
     Nom varchar(50) not null,
-    Prénom varchar(50) not null,
+    Prenom varchar(50) not null,
     TypeCompte varchar(50) not null);
