@@ -25,7 +25,6 @@ try {
             }
             else {
                 $data = $result->fetch();
-                echo '<pre>'; print_r($data); echo '</pre>';
                 //On vérifie que le mot de passe correspond bien (algo utilisé : PASSWORD_BCRYPT)
                 if (!password_verify($password, $data["HashPassword"])) {
                     $error = "Votre adresse mail ou votre mot de passe est incorrect";
@@ -34,6 +33,7 @@ try {
                     $_SESSION["nom"] = $data["Nom"];
                     $_SESSION["prenom"] = $data["Prenom"];
                     $_SESSION["email"] = $email;
+                    header("Location: profil/profil.php");
                 }
             }
         }

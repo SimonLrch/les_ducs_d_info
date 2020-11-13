@@ -23,7 +23,7 @@
                     <img src="images/Chronologie.png" />
                     <span>Chronologique</span>
                 </a>
-                <a href="../AffichageGeographique/DonGeographique.php" class="grid-cell">
+                <a href="AffichageGeographique/DonGeographique.php" class="grid-cell">
                     <img src="images/Geographique.png" />
                     <span>Géographique</span>
                 </a>
