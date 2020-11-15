@@ -15,20 +15,20 @@
         </section>
         <section class="inner-box">
             <div class="grid-list grid-restitution">
-                <a href="http://localhost/PtutS3/AffichageParPersonne/listDonneurs.php" class="grid-cell">
-                    <img src="Images/ParDonneur.png" />
+                <a href="Eye_Tree/listDonneurs.php" class="grid-cell">
+                    <img src="images/ParDonneur.png" />
                     <span>Par donneur</span>
                 </a>
                 <a href="#" class="grid-cell">
-                    <img src="Images/Chronologie.png" />
+                    <img src="images/Chronologie.png" />
                     <span>Chronologique</span>
                 </a>
-                <a href="http://localhost/PtutS3/AffichageGeographique/DonGeographique.php" class="grid-cell">
-                    <img src="Images/Geographique.png" />
+                <a href="AffichageGeographique/DonGeographique.php" class="grid-cell">
+                    <img src="images/Geographique.png" />
                     <span>Géographique</span>
                 </a>
                 <a href="#" class="grid-cell">
-                    <img src="Images/Sunburst.png" />
+                    <img src="images/Sunburst.png" />
                     <span>Sunburst</span>
                 </a>
             </div>

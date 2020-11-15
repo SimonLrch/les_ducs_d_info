@@ -1,160 +1,134 @@
 <?php
  include("getresult.php");
     // On commence par récupérer les champs
-    //Donateurs
+	//Attribution des variables :
+	//des personnes
+	$donateur_name = $donateur_statut = $beneficiaire_name = $beneficiaire_statut = null;
+	$intermediaire_name = $intermediaire_statut = "Aucune mention d'intermédiaire";
+	//des détails
+    $details_sources = "Aucune mention de Source";
+	$details_poids = "Aucune mention de Poids";
+	$details_formes = "Aucune mention de Forme";
+	$details_natures = "Aucune mention de Nature";
+	$details_prix = "Aucune mention de Prix";
+	$details_lieu = "Aucune mention de Lieu";
+	//Donateurs
 
-    if(isset($_POST['donateur-name']))
+	if(isset($_POST['donateur-name']) AND $_POST['donateur-name'] != '')
 	{
 		$donateur_name=$_POST['donateur-name'];
 	}
-    else
-	{
-		$donateur_name= null; //Exception
-	}
- 
-    if(isset($_POST['donateur-statut']))      
+	if(isset($_POST['donateur-statut']) AND $_POST['donateur-statut'])      
 	{
 		$donateur_statut=$_POST['donateur-statut'];
-		$Liste_Personne[$donateur_name] = $donateur_statut;
 	}
-    else
-	{		
-		$donateur_statut= null;//Exception
-	}
-
     //Bénéficiaire
     if(isset($_POST['beneficiaire-name']))     
 	{
 		$beneficiaire_name=$_POST['beneficiaire-name'];
 	}
-    else
-	{
-		$beneficiaire_name= null; //Exception
-	}
- 
     if(isset($_POST['beneficiaire-statut']))      
 	{
 		$beneficiaire_statut=$_POST['beneficiaire-statut'];
-		$Liste_Personne[$beneficiaire_name] = $beneficiaire_statut;
-	}
-    else      
-	{
-		$beneficiaire_statut= null;//Exception
 	}
 
-        //Intermédiaire
-    if(isset($_POST['intermediaire-name']))
+    //Intermédiaire
+    if(isset($_POST['intermediaire-name'])  AND $_POST['intermediaire-name'] != '')
 	{
 		$intermediaire_name=$_POST['intermediaire-name'];
 	}
     else
 	{
-		$intermediaire_name= "Auncune mention";
 		$idIntermediaire = -1;
 	}
- 
-    if(isset($_POST['intermediaire-statut']))
+    if(isset($_POST['intermediaire-statut']) AND $_POST['intermediaire-statut'] != '')
 	{
 		$intermediaire_statut=$_POST['intermediaire-statut'];
-		$Liste_Personne[$intermediaire_name] = $intermediaire_statut;
-	}
-    else 
-	{
-		$intermediaire_statut= "Aucune mention";//Exception
+		$Liste_Personne["Intermédiaire"] = array($intermediaire_name,$intermediaire_statut);
+
 	}
 
     //Formes
-    if(isset($_POST['details-formes']))
+    if(isset($_POST['details-formes']) AND $_POST['details-formes'] != '')
 	{
 		$details_formes=$_POST['details-formes'];
-		$Info_don["A"] = $details_formes;
 
-	}
-    else 
-	{
-		$details_formes= null;
 	}
 	//Natures
-    if(isset($_POST['details-natures']))
+    if(isset($_POST['details-natures']) AND $_POST['details-natures'] != '')
 	{
 		$details_natures=$_POST['details-natures'];
-		$Info_don["B"] = $details_natures;
 	}
-    else
-	{
-		$details_natures= null;
-	}
-	    //Prix
-    if(isset($_POST['details-prix']))
+	//Prix
+    if(isset($_POST['details-prix']) AND $_POST['details-prix'] != '')
 	{
 		$details_prix=$_POST['details-prix'];
-		$Info_don["C"] = $details_prix;
-
-	}
-	
-    else
-	{
-		$details_prix= null;
 	}
 	//Type de Don
     if(isset($_POST['details-typeDon']))
 	{
 		$details_typeDon=$_POST['details-typeDon'];
-		$Liste_Autres[$details_typeDon]=["TypeDon","TypeDon"];
-		$Info_don["D"] = $details_typeDon;
 	}
-    else
-	{
-		$details_typeDon= null;
-	}
-	
     //Date
     if(isset($_POST['details-date']))
 	{
 		$details_date=$_POST['details-date'];
-		$Liste_Autres[$details_date]=["Calendrier","DateDon"];
-		$Info_don["E"] = $details_date;
-
 	}
-    else 
-	{
-		$details_date= null;
-	}
-	 //Sources
-    if(isset($_POST['details-sources']))
+	//Sources
+    if(isset($_POST['details-sources']) AND $_POST['details-sources'] != '')
 	{
 		$details_sources=$_POST['details-sources'];
-		$Liste_Autres[$details_sources]=["sourceDon","recherche"];
-		$Info_don["I"] = $details_sources;
-	}
-    else 
-	{
-		$details_sources= null;
 	}
     //Poids
-    if(isset($_POST['details-poids']))
+    if(isset($_POST['details-poids']) AND $_POST['details-poids'] != '')
 	{
 		$details_poids=$_POST['details-poids'];
-		$Liste_Autres[$details_poids]=["Poids","Masse"];
-		$Info_don["J"] = $details_poids;
-		
 	}
-    else {
-		$details_poids= "Aucune mention";
-	}
-	
-	 //Lieu
-    if(isset($_POST['details-lieu']))
+	//Lieu
+    if(isset($_POST['details-lieu']) AND $_POST['details-lieu'] != '') 
 	{
 		$details_lieu=$_POST['details-lieu'];
-		$Liste_Autres[$details_lieu]=["Lieu","Emplacement"];
-		$Info_don["H"] = $details_lieu;
 	}
-    else 
-	{
-		$details_lieu= null;
-	}
-	
+	//Ajout des valeurs dans les listes nécessaires au bon fonctionnement de la partie suivante
+	$Liste_Personne["Donateur"] = array($donateur_name,$donateur_statut);
+	$Liste_Personne["Bénéficiaire"] = array($beneficiaire_name,$beneficiaire_statut);
+	$Info_don["A"] = $details_formes;
+	$Info_don["B"] = $details_natures;
+	$Info_don["C"] = $details_prix;
+	$Liste_Autres[$details_typeDon]=["TypeDon","TypeDon"];
+	$Info_don["D"] = $details_typeDon;
+	$Liste_Autres[$details_date]=["Calendrier","DateDon"];
+	$Info_don["E"] = $details_date;
+	$Liste_Autres[$details_sources]=["sourceDon","recherche"];
+	$Info_don["I"] = $details_sources;
+	$Liste_Autres[$details_poids]=["Poids","Masse"];
+	$Info_don["J"] = $details_poids;
+	$Liste_Autres[$details_lieu]=["Lieu","Emplacement"];
+	$Info_don["H"] = $details_lieu; 
+/*
+	//Si nécessaire pour faire des test
+	 echo 'Donateur name : '.$donateur_name .'<br>';
+	 echo 'Donateur statut : '.$donateur_statut .'<br>';
+	 echo 'Beneficiaire name : '.$beneficiaire_name .'<br>';
+	 echo 'Beneficiaire statut : '.$beneficiaire_statut  .'<br>';
+	 echo 'Intermediaire name : '.$intermediaire_name .'<br>';
+	 echo 'Intermedaire statut : '.$intermediaire_statut .'<br>';
+	 echo 'typeDon : '.$details_typeDon .'<br>';
+	 echo 'Date : '.$details_date .'<br>';
+	 echo 'Source : '.$details_sources .'<br>';
+	 echo 'Poids : '.$details_poids .'<br>';
+	 echo 'Forme : '.$details_formes .'<br>';
+	 echo 'Natures : '.$details_natures .'<br>';
+	 echo 'Prix : '.$details_prix .'<br>';
+	 echo 'Lieu : '.$details_lieu .'<br>';
+	 print_r($Liste_Personne);
+	 echo '<br>';
+	 print_r($Info_don);
+	 echo '<br>';
+	 print_r($Liste_Autres);
+	 echo '<br>';
+*/
+	 
 	// On vérifie si les champs sont vides ( autres que intermédiaire et poids)
 	if(empty($donateur_name) OR empty($donateur_statut) OR empty($beneficiaire_name) OR empty($beneficiaire_statut) OR empty($details_typeDon) OR empty($details_date) OR empty($details_lieu) OR empty($details_formes) OR empty($details_prix) OR empty($details_sources) OR empty($details_natures))
 	{
@@ -162,28 +136,12 @@
 	}
 	else
 	{
-		 //Création d'une connexion avec la base de données
-		$host = 'localhost';
-		$db   = 'PtutS3';
-		$user = 'root';
-		$pass = '';
-		$charset = 'utf8mb4';
-
-		$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-		$options = [
-			PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-			PDO::ATTR_EMULATE_PREPARES   => false,
-		];
-		try {
-			 $pdo = new PDO($dsn, $user, $pass, $options);
-		} catch (\PDOException $e) {
-			 throw new \PDOException($e->getMessage(), (int)$e->getCode());
-		}
+		require_once("include/dbConfig.php");
+		$pdo = getPDO("PtutS3");
 		$pdo->beginTransaction();
 		//----- Vérification de l'existence ou non des valeurs dans la BDD-----
 		try {
-			foreach($Liste_Personne as $personne => $statut)
+			foreach($Liste_Personne as $Niveau => $info)
 			{
 				//---Vérification des statuts des personnes---
 				//Création d'un KeyArray composé de 
@@ -193,7 +151,7 @@
 					//La requête à préparer
 					"sql" => "SELECT Count(*) as Res from statut WHERE fonction = ?",
 					//L'attribut statut changeant à chaque loop. Dans un array car pdo execute avec une liste d'attributs
-					"attributes"=>array($statut)
+					"attributes"=>array($info[1])
 				];	
 				// Si le statut n'existe pas déjà dans la BDD : la fonction renvoie 0
 				if(get_one_result($sql_statuts) == 0)
@@ -212,7 +170,7 @@
 					//La requête à préparer
 					"sql" => "SELECT Count(*) as Res from personne WHERE nom = ? AND fonction = ?",
 					//Les attributs personne et  statut changeant à chaque loop. Dans un array car pdo execute avec une liste d'attributs
-					"attributes"=>array($personne,$statut)
+					"attributes"=>$info
 				];
 				
 				//Si la personne n'existe pas dans la BDD : la fonction renvoie 0
@@ -228,22 +186,23 @@
 				$sql_id_personnes = [
 				"pdo" =>$pdo,
 				"sql"=>"SELECT idPersonne as Res from personne WHERE nom = ? AND fonction = ?",
-				"attributes"=>array($personne,$statut)
+				"attributes"=>$info
 				];
 				//On ajoute l'Id la liste d'information par rapport au don
+
 				//L'id de l'auteur à l'emplacement F
-				if($personne == $donateur_name)
+				if($Niveau == "Donateur")
 				{
 					$Info_don["F"] = get_one_result($sql_id_personnes);
 					
 				}
 				//L'id du bénéficiaire à l'emplacement G
-				else if ($personne == $beneficiaire_name)
+				else if ($Niveau == "Bénéficiaire")
 				{
 					$Info_don["G"] = get_one_result($sql_id_personnes);
 				}
 				//L'id de l'intermediaire
-				else if ($personne == $intermediaire_name)
+				else if ($Niveau == "Intermédiaire")
 				{
 					$idIntermediaire = get_one_result($sql_id_personnes);
 				}
