@@ -9,7 +9,7 @@
 </section>
 <?php if(in_array($date,$datesTab)): ?>
 <p><a href="../AffichageChronologique/DonSelonChronologie.php">Voir avec un calendrier</a>  </p>
-<h1><?php echo 'Dons fait au '.$date.''; ?></h1>
+<h1><?php echo 'Dons fait le '.$date.''; ?></h1>
 <p>
     <br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
 </p>
