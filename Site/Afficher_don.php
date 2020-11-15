@@ -80,6 +80,11 @@ while ($row= $req->fetch())
 
 <!DOCTYPE html>
 <html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="style/mainStyle.css">
+		<script defer src="script/mainScript.js"></script>
+	</head>
     <body>
     <?php include'include/mainHeader.php' ?>
         <br/>
