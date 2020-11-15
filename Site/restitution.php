@@ -19,7 +19,7 @@
                     <img src="images/ParDonneur.png" />
                     <span>Par donneur</span>
                 </a>
-                <a href="#" class="grid-cell">
+                <a href="http://localhost/PtutS3/AffichageChronologique/DonSelonChronologie.php" class="grid-cell">
                     <img src="images/Chronologie.png" />
                     <span>Chronologique</span>
                 </a>
