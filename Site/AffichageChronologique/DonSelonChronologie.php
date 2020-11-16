@@ -39,7 +39,7 @@
 		<form lang="en" method="post" action="DonSelonChronologie.php">
 			<input type="date" id="start" name="calendrier"
 				   value="1400-01-01"
-				   min="1400-01-01" max="1600-12-31">
+				   min="1400-01-01" max="2000-12-31">
 			<input  type="submit" id="insere" name="insereDon">
 		</form>
 		<p>
