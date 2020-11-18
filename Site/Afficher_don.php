@@ -92,8 +92,8 @@ while ($row= $req->fetch())
         <h1>Don numéro <?php echo ' ' . $id .''; ?></h1>
         <p>
             <br/>
-            <br/>Auteur : <?php echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idAuteur .'">' . $nomAuteur .'  : ' . $fonctionAuteur .'</a>'; ?>
-            <br/>A l' intention de :<?php echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idDestinataire .'">' . $nomDestinataire .' : ' . $fonctionDestinataire .'</a>'; ?>
+            <br/>Auteur : <?php echo '<a href="PerData/donPerDonnateur.php?id='. $idAuteur .'">' . $nomAuteur .'  : ' . $fonctionAuteur .'</a>'; ?>
+            <br/>A l' intention de :<?php echo '<a href="PerData/donPerDonnateur.php?id='. $idDestinataire .'">' . $nomDestinataire .' : ' . $fonctionDestinataire .'</a>'; ?>
             <br/>Par le bais de : <?php
                     if($nomIntermediaire == null)
                     {
@@ -101,7 +101,7 @@ while ($row= $req->fetch())
                     }
                     else
                     {
-                         echo '<a href="Eye_Tree/donPerDonnateur.php?id='. $idIntermediaire .'">' . $nomIntermediaire .' : ' . $fonctionIntermediaire .'</a>';
+                         echo '<a href="PerData/donPerDonnateur.php?id='. $idIntermediaire .'">' . $nomIntermediaire .' : ' . $fonctionIntermediaire .'</a>';
                     }
                     ?>
             <br/>
@@ -119,8 +119,8 @@ while ($row= $req->fetch())
                     ?>
             <br/>Prix :  <?php echo ' ' . $prix .''; ?>
             <br/>
-            <br/>Date :<?php echo ' <a href="Eye_Tree/donPerDate.php?date=' . $date . '">' . $date .'</a>'; ?>
-            <br/>Lieu:  <?php echo '<a href="Eye_Tree/donPerVille.php?emplacement=' . $lieu . '">' . $lieu .'</a>'; ?>
+            <br/>Date :<?php echo ' <a href="PerData/donPerDate.php?date=' . $date . '">' . $date .'</a>'; ?>
+            <br/>Lieu:  <?php echo '<a href="PerData/donPerVille.php?emplacement=' . $lieu . '">' . $lieu .'</a>'; ?>
             <br/>
             <br/>Raison :<?php echo ' ' . $raison .''; ?>
             <br/>

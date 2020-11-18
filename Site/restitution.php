@@ -15,7 +15,7 @@
         </section>
         <section class="inner-box">
             <div class="grid-list grid-restitution">
-                <a href="Eye_Tree/listDonneurs.php" class="grid-cell">
+                <a href="PerData/listDonneurs.php" class="grid-cell">
                     <img src="images/ParDonneur.png" />
                     <span>Par donneur</span>
                 </a>

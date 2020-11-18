@@ -47,7 +47,7 @@
 		if(isset($_POST['insereDon'])){ // si formulaire soumis
 			for ($i = 0; $i < count($dates) ; $i++) {
 				if ( ($_POST['calendrier']) == ($dates[$i]) ){
-					echo ' <a href="../Eye_Tree/donPerDate.php?date='. $dates[$i] .'></a><br/>';
+					echo ' <a href="../PerData/donPerDate.php?date='. $dates[$i] .'></a><br/>';
 				}else{
 					exit('Date non répertorié');
 				}
