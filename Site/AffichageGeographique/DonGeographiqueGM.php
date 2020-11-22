@@ -2,7 +2,8 @@
 <html>
 	<?php
 		//Connexion bd
-		$db = new PDO('mysql:host=localhost; dbname=PtutS3', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		require_once("../include/dbConfig.php");
+		$db = getPDO("PtutS3");
 		
 		//Création des variables
 		$nomVille = [];
