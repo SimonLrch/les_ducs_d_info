@@ -98,9 +98,7 @@
         // Nous initialisons une liste de marqueurs
 		var villes;
 		for (int i = 0; i < nom_villes.length; i++){
-			villes += {
-                nom_villes[i] : { "lat": 48.852969, "lon": 2.349903 }
-            };
+			villes += { nom_villes[i] : { "lat": latitude[i], "lon": longitude[i] }};
 		}
 		
 	    // Fonction d'initialisation de la carte
