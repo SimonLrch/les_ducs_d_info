@@ -272,15 +272,20 @@
 		}	
 		$pdo ->commit();
 	}
+
 	
+
+
+//AFFICHAGE RETOUR
 	echo '
 <!DOCTYPE html>
-<html lang="fr">
-    <body>
-		<br/>
-        <a href="./index.php">Revenir au Formulaire</a>
-    </body>
-</html>
+	<html lang="fr"> 
+
+		<body>
+			<br/>
+			<a href="./index.php">Revenir au Formulaire</a>
+		</body>
+	</html>
 ';
 
 ?>              

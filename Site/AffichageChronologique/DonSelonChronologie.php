@@ -1,6 +1,4 @@
-<!Doctype html>
-<html>
-	<?php
+<?php
 	// Conexion à la base de données
 	$db = new PDO('mysql:host=localhost; dbname=PtutS3', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
@@ -18,6 +16,13 @@
 		$dates = [];
 		$nb_Don_dates = [];
 
+		//pour converstion
+		$dates_fr= [];
+		$ateEntree = 1400-01-01;
+		$dateEntree_fr = 01-01-1400;
+
+
+
 		//Requête , les différentes dates
 		$req = $db->query("SELECT dateDon FROM calendrier");
 		while ($row= $req->fetch())
@@ -25,8 +30,38 @@
 			array_push($dates,$row['dateDon']);
 		}
 
-	?>
-	<head>
+		//conversion en date
+		$format = "Y-m-d";
+
+		for ($i = 0; $i < count($dates);$i++){
+			$dates_fr[$i] = DateTime::createFromFormat($format, $dates[$i]);
+
+		}
+
+
+        $estDansDate = false;
+		//vérifie le formulaire et convertis le string en date
+
+		if(isset($_POST['insereDon'])){ // si formulaire soumis récupérer la date
+
+			$dateEntree = $_POST['calendrier'];
+			$dateEntree_fr = DateTime::createFromFormat($format, $dateEntree);
+            
+           
+            for($i=0;$i < count($dates_fr); $i++){
+                if($dateEntree_fr == $dates_fr[$i]){
+                    $estDansDate = true;
+                }
+            }
+
+        }
+
+ 
+		?>
+		
+<!Doctype html>
+<html>
+<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
 	</head>
@@ -39,22 +74,29 @@
 		<form lang="en" method="post" action="DonSelonChronologie.php">
 			<input type="date" id="start" name="calendrier"
 				   value="1400-01-01"
-				   min="1400-01-01" max="2000-12-31">
+				   min="1400-01-01">
 			<input  type="submit" id="insere" name="insereDon">
 		</form>
-		<p>
-		<?php 
-		if(isset($_POST['insereDon'])){ // si formulaire soumis
-			for ($i = 0; $i < count($dates) ; $i++) {
-				if ( ($_POST['calendrier']) == ($dates[$i]) ){
-					echo ' <a href="../PerData/donPerDate.php?date='. $dates[$i] .'></a><br/>';
-				}else{
-					exit('Date non répertorié');
-				}
-			}
-		}
-		?>
-		</p>
+
+
+
+		<?php if(isset($_POST['insereDon'])): ?>
+
+			<?php if ($estDansDate == true): ?>
+				<p>
+				<?php echo '<a href="..\PerData\donPerDate.php?date=' . $dateEntree_fr->format('Y-m-d') . '">Aller à la page du '. $dateEntree_fr->format('Y-m-d') .'</a>' ?>
+				</p>
+
+			<?php elseif($estDansDate == false): ?>
+				<p>
+				Aucun don n'a été fais à cette date.
+				</p>
+
+			<?php endif; ?>
+
+	
+		<?php endif; ?>
+
 	</body>
 
 </html>
