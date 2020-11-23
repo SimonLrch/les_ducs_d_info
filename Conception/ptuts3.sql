@@ -29,7 +29,7 @@
 	fonction varchar(100) not null);
 	
 	CREATE TABLE Statut (
-	fonction varchar(100) primary key not null);
+	fonction varchar(255) primary key not null);
 	
 	CREATE TABLE Calendrier(
 	dateDon date primary key not null);
