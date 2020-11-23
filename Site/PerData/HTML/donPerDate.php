@@ -8,7 +8,7 @@
     <span>Restitution Par Dates</span>
 </section>
 <?php if(in_array($date,$datesTab)): ?>
-<p><a href="../AffichageChronologique/DonSelonChronologie.php">Voir avec un calendrier</a>  </p>
+<p><a href="../AffichageChronologique/DonSelonChronologie.php">Voir avec le calendrier</a>  </p>
 <h1><?php echo 'Dons fait le '.$date.''; ?></h1>
 <p>
     <br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
@@ -91,10 +91,7 @@
     </p>
 
 
-
-
-
-    <?php elseif(!in_array($date,$datesTab)): ?> <!-- si l'id du lieu envoyé ne correspond pas a une date dans la bd -->
+    <?php elseif(!in_array($date,$datesTab)): ?> <!-- si l'id de la date envoyé ne correspond pas a une date dans la bd -->
 
         <h1> Aucun don n'a été fait à cette date</h1>
         <p><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Revenir à la page précédente</a></p>

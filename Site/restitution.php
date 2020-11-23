@@ -19,7 +19,7 @@
                     <img src="images/ParDonneur.png" />
                     <span>Par donneur</span>
                 </a>
-                <a href="http://localhost/PtutS3/AffichageChronologique/DonSelonChronologie.php" class="grid-cell">
+                <a href="AffichageChronologique/DonSelonChronologie.php" class="grid-cell">
                     <img src="images/Chronologie.png" />
                     <span>Chronologique</span>
                 </a>
@@ -27,7 +27,7 @@
                     <img src="images/Geographique.png" />
                     <span>Géographique</span>
                 </a>
-                <a href="#" class="grid-cell">
+                <a href="AffichageSunburst/DonSunburst.php" class="grid-cell">
                     <img src="images/Sunburst.png" />
                     <span>Sunburst</span>
                 </a>
