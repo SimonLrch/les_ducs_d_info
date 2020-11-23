@@ -1,10 +1,12 @@
 function Calendar(element, initDate) {
-    this.date = new Date();
+    this.date = (initDate==null) ? new Date() : initDate;
 
     this.day = this.date.getDate();
     this.month = this.date.getMonth();
     this.year = this.date.getFullYear();
 
+    this.dateSelected = this.date;
+    
     this.listDays = [
         "Lundi",
         "Mardi",
@@ -48,10 +50,11 @@ function Calendar(element, initDate) {
     this.calendarHeaderContainer.id = "calendar-header";
     this.calendarTitle.id = "calendar-title";
     this.calendarPreviousButton.id = "calendar-previous-btn";
-    this.calendarNextButton.id = "calendar-previous-btn";
+    this.calendarNextButton.id = "calendar-next-btn";
     this.calendarDateContainer.id = "calendar-date-container";
     this.calendarGridDays.id = "calendar-grid";
 
+    this.showDates(this.month, this.year);
     this.initHeader();
     this.initGrid();
 
@@ -62,13 +65,41 @@ Calendar.prototype.initHeader = function() {
     //On s'assure que l'élément principal est vide
     this.calendarHeaderContainer.innerHTML = "";
 
+    //On crée le titre
     this.calendarTitle.innerText = this.listMonths[this.month] + " " + this.year;
-    this.calendarHeaderContainer.appendChild(this.calendarTitle);
     
-    let arrowSVG = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 492 492\" style=\"enable-background:new 0 0 492 492;\" xml:space=\"preserve\"><path d=\"M198.608,246.104L382.664,62.04c5.068-5.056,7.856-11.816,7.856-19.024c0-7.212-2.788-13.968-7.856-19.032l-16.128-16.12 C361.476,2.792,354.712,0,347.504,0s-13.964,2.792-19.028,7.864L109.328,227.008c-5.084,5.08-7.868,11.868-7.848,19.084 c-0.02,7.248,2.76,14.028,7.848,19.112l218.944,218.932c5.064,5.072,11.82,7.864,19.032,7.864c7.208,0,13.964-2.792,19.032-7.864 l16.124-16.12c10.492-10.492,10.492-27.572,0-38.06L198.608,246.104z\"/></svg>";
+    //On crée les boutons de changement de mois
+    let arrowSVG = '<svg enable-background=\"new 0 0 386.257 386.257" viewBox="0 0 492 492" xmlns="http://www.w3.org/2000/svg"><path d="M198.608 246.104L382.664 62.04c5.068-5.056 7.856-11.816 7.856-19.024 0-7.212-2.788-13.968-7.856-19.032l-16.128-16.12C361.476 2.792 354.712 0 347.504 0s-13.964 2.792-19.028 7.864L109.328 227.008c-5.084 5.08-7.868 11.868-7.848 19.084-.02 7.248 2.76 14.028 7.848 19.112l218.944 218.932c5.064 5.072 11.82 7.864 19.032 7.864 7.208 0 13.964-2.792 19.032-7.864l16.124-16.12c10.492-10.492 10.492-27.572 0-38.06L198.608 246.104z"></path></svg>';
     this.calendarPreviousButton.innerHTML = arrowSVG;
+    this.calendarNextButton.innerHTML = arrowSVG;
+    let objCalendar = this;
+    this.calendarHeaderContainer.addEventListener("click", function(event) {
+        let item = event.target;
+        if(item.closest("#" + objCalendar.calendarPreviousButton.id) != null) {
+            //Si le mois correspond à Janvier
+            if (objCalendar.month == 0) {
+                objCalendar.month = 11;
+                objCalendar.year -= 1;
+            } else {
+                objCalendar.month -= 1;
+            }
+            objCalendar.update();
+        }
+        if(item.closest("#" + objCalendar.calendarNextButton.id) != null) {
+            //Si le mois correspond à Décembre
+            if (objCalendar.month == 11) {
+                objCalendar.month = 0;
+                objCalendar.year += 1;
+            } else {
+                objCalendar.month += 1;
+            }
+            objCalendar.update();
+        }
+    });
     
     this.calendarHeaderContainer.appendChild(this.calendarPreviousButton);
+    this.calendarHeaderContainer.appendChild(this.calendarTitle);
+    this.calendarHeaderContainer.appendChild(this.calendarNextButton);
 
     this.calendarMainContainer.appendChild(this.calendarHeaderContainer);
 }
@@ -90,12 +121,28 @@ Calendar.prototype.initGrid = function() {
     daysToShow.forEach(day => {
         let dayElt = document.createElement("span")
         if (day != null) {
+            if (this.dateSelected.toString() == day.toString()) {
+                dayElt.classList.add("calendar-selected");
+            }
+            /*if (this.listDaysContent.contains(day)) {
+                dayElt.classList.add("calendar-date-content");
+            }*/
             dayElt.innerText = day.toString().split(' ')[2];
         }
         else {
             dayElt.classList.add("calendar-date-null");
         }
         this.calendarGridDays.appendChild(dayElt);
+    });
+
+    let objCalendar = this;
+    this.calendarGridDays.addEventListener("click", function(event) {
+        let item = event.target;
+        if (item.nodeName == objCalendar.calendarGridDays.children[0].nodeName && !item.classList.contains("calendar-date-null")) {
+            Array.from(document.querySelectorAll(".calendar-selected")).forEach(element => element.classList.remove("calendar-selected"));
+            item.classList.add("calendar-selected");
+            objCalendar.dateSelected = new Date(objCalendar.year, objCalendar.month, item.innerText);
+        }
     });
 
     this.calendarMainContainer.appendChild(this.calendarGridDays);
@@ -110,4 +157,35 @@ Calendar.prototype.getDaysOfMonth = function(month, year) {
         date.setDate(date.getDate() + 1);
     }
     return listOfDays;
+}
+
+Calendar.prototype.update = function() {
+    this.date = new Date(this.year, this.month);
+    this.day = this.date.getDate();
+    this.month = this.date.getMonth();
+    this.year = this.date.getFullYear();
+    
+    this.showDates(this.month, this.year);
+
+    let objCalendar = this;
+    window.requestAnimationFrame(function() {
+        objCalendar.calendarTitle.innerText = objCalendar.listMonths[objCalendar.month] + " " + objCalendar.year;
+        objCalendar.initGrid();
+    });
+}
+
+Calendar.prototype.showDates = function(month, year) {
+    let objCalendar = this;
+    this.listDaysContent = null;
+    if (month != null && year != null) {
+        let xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                objCalendar.listDaysContent = this.responseText.split("|");
+            }
+        };
+        xmlhttp.open("GET","calendarScript.php?currentMonth="+month+"&currentYear="+year,true);
+        xmlhttp.send();
+    }
+    console.log("\"" + this.listDaysContent + "\"");
 }
