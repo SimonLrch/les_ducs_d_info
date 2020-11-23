@@ -1,14 +1,59 @@
 #calendar-main {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 600px;
+    height: 600px;
+    background-color: white;
+    box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 #calendar-header {
+    display: flex;
+    width: 100%;
+    height: 200px;
+    background-color: #167e56;
+    color: white;
+    fill: white;
+    align-items: center;
+    justify-content: space-around;
 }
 #calendar-title {
+    margin: 0;
+}
+#calendar-header button {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+}
+#calendar-header button svg {
+    width: 100%;
+    height: 100%;
+}
+#calendar-next-btn svg {
+    transform: scale(-1,1);
 }
 
 #calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    height: 100%;
 }
 #calendar-grid span {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
 }
 .calendar-date-null {
+}
+.calendar-selected {
+    background-color: #888;
+    color: white;
+}
+.calendar-date-content {
+    color: red;
 }
