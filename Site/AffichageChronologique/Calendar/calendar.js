@@ -7,6 +7,8 @@ function Calendar(element, initDate) {
 
     this.dateSelected = this.date;
     
+    this.listDaysContent = null;
+    
     this.listDays = [
         "Lundi",
         "Mardi",
@@ -54,9 +56,9 @@ function Calendar(element, initDate) {
     this.calendarDateContainer.id = "calendar-date-container";
     this.calendarGridDays.id = "calendar-grid";
 
-    this.showDates(this.month, this.year);
     this.initHeader();
     this.initGrid();
+    this.showDates(this.month, this.year);
 
     this.docElement.appendChild(this.calendarMainContainer);
 }
@@ -134,7 +136,7 @@ Calendar.prototype.initGrid = function() {
         }
         this.calendarGridDays.appendChild(dayElt);
     });
-
+    
     let objCalendar = this;
     this.calendarGridDays.addEventListener("click", function(event) {
         let item = event.target;
@@ -175,17 +177,31 @@ Calendar.prototype.update = function() {
 }
 
 Calendar.prototype.showDates = function(month, year) {
+    const url = "calendarScript.php?currentMonth="+(month+1)+"&currentYear="+year;
     let objCalendar = this;
-    this.listDaysContent = null;
-    if (month != null && year != null) {
-        let xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                objCalendar.listDaysContent = this.responseText.split("|");
+
+    //On récupère les données de la bdd
+    fetch(url).then(function (response) { //On récupère les données de la bdd
+        return response.json();
+    }).then(function(body) { //On afficher le résultat
+        console.log(body);
+        objCalendar.listDaysContent = body;
+        objCalendar.listDaysContent.forEach((day) => {
+            currentDate = Date.parse(day.date);
+        });
+    }).catch(function(err) {
+        console.error("La bdd n'a pas pu être chargé dans le calendrier : " + err);
+    });
+}
+
+Calendar.prototype.getHTMLOfDate = function(date) {
+    let objCalendar = this;
+    let listHtmlDate = [];
+    if (date.getFullYear == this.year && date.getMonth == this.day) {
+        this.calendarGridDays.forEach(function(dayHtml) {
+            if(objCalendar.day == date.getDate) {
+                listHtmlDate.push(dayHtml);
             }
-        };
-        xmlhttp.open("GET","calendarScript.php?currentMonth="+month+"&currentYear="+year,true);
-        xmlhttp.send();
+        });
     }
-    console.log("\"" + this.listDaysContent + "\"");
 }
