@@ -1,0 +1,12 @@
+
+      { "Category" : "Pension",
+
+      "Auteur": "json_encode($auteur, JSON_HEX_QUOT)",
+      "Label": "$label",
+      "Statut": "$statut",
+      "Lieu": "$lieu",
+      "Informations": "$informations",
+      "Nature": "$nature",
+      "Formes": "$formes",
+      
+      "EmployeesCount" : 1 }

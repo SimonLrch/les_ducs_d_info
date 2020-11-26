@@ -12,8 +12,8 @@
 -- Supression TABLES if EXISTS
 	
 	DROP TABLE If Exists Intermediaire;
-    DROP TABLE If Exists Don;
-    DROP TABLE If Exists Personne;
+    	DROP TABLE If Exists Don;
+    	DROP TABLE If Exists Personne;
 	DROP TABLE If Exists Statut;
 	DROP TABLE If Exists Calendrier;
 	DROP TABLE If Exists TypeDon;
@@ -26,7 +26,7 @@
 	CREATE TABLE Personne (
 	idPersonne integer(10) primary key not null auto_increment,
 	nom varchar(100) not null,
-	fonction varchar(100) not null);
+	fonction varchar(255) not null);
 	
 	CREATE TABLE Statut (
 	fonction varchar(255) primary key not null);
@@ -41,7 +41,8 @@
 	emplacement varchar(25) primary key not null default "Aucune Mention");
 	
 	CREATE TABLE Poids (
-	masse varchar(100) primary key not null);
+	idPoids integer(10) primary key not null auto_increment,
+    masse text not null);
 	
 	CREATE TABLE SourceDon (
 	recherche varchar(150) primary key not null);
@@ -57,7 +58,7 @@
 	idBeneficiaire integer(10) not null,
 	emplacement varchar(25) not null,
 	sourceDon varchar(150) not null,
-	masse varchar(100) not null);
+	idPoids integer(10) not null);
 	
 	
 	CREATE TABLE Intermediaire (
@@ -97,7 +98,7 @@
 	ADD FOREIGN KEY (sourceDon) REFERENCES SourceDon(recherche);
 	
 	ALTER TABLE Don
-	ADD FOREIGN KEY (masse) REFERENCES Poids(masse);
+    ADD FOREIGN KEY (idPoids) REFERENCES Poids(idPoids);
 	
 	
 	-- Intermediaire

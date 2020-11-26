@@ -37,13 +37,15 @@ class CSV_to_JSON:
                     if rows['Nature'] == "":
                         rows['Nature'] = "Aucune mention Particulière"
                     else:
-                        rows['Nature'] = rows['Nature'].replace("\"","")
+                        rows['Nature'] = rows['Nature'].replace("\"","\\\"")
+                    if rows['Auteur'] == "":
+                        rows['Auteur'] = "Aucune mention"
                     if rows['Lieu'] == "":
                         rows['Lieu'] == "Aucune mention"
                     if rows['Formes'] == "":
                         rows['Formes'] = "Aucune mention"
                     else:
-                        rows['Formes'] = rows['Formes'].replace("\"","")
+                        rows['Formes'] = rows['Formes'].replace("\"","\\\"")
 
                     if rows['Poids'] == "":
                         rows['Poids'] = "Aucune mention"
@@ -56,6 +58,7 @@ class CSV_to_JSON:
             # Ouvir fichier JSON en écriture
             with open(jsonFilePath, 'w', encoding='utf-8') as jsonfile:
                 jsonfile.write(json.dumps(self.data, ensure_ascii=False, indent=4))
+
         # Si il y a une quelconque erreur, elle est levée
         except:
             Error.ErrorMessage(Error, str(sys.exc_info()[1]))
@@ -175,5 +178,6 @@ class CSV_to_JSON:
                     self.Win.lw_Validation.item(self.Win.lw_Validation.row(item)).setForeground(QtGui.QColor('red'))
                 self.Win.lw_CSVfiles.clear()
                 self.Win.listCSV.clear()
+                
     def GetlistJSON(self):
         return self.listJSON

@@ -7,6 +7,8 @@ function Calendar(element, initDate) {
 
     this.dateSelected = this.date;
     
+    this.listDaysContent = null;
+    
     this.listDays = [
         "Lundi",
         "Mardi",
@@ -54,9 +56,9 @@ function Calendar(element, initDate) {
     this.calendarDateContainer.id = "calendar-date-container";
     this.calendarGridDays.id = "calendar-grid";
 
-    this.showDates(this.month, this.year);
     this.initHeader();
     this.initGrid();
+    this.showDates(this.month, this.year);
 
     this.docElement.appendChild(this.calendarMainContainer);
 }
@@ -124,9 +126,6 @@ Calendar.prototype.initGrid = function() {
             if (this.dateSelected.toString() == day.toString()) {
                 dayElt.classList.add("calendar-selected");
             }
-            /*if (this.listDaysContent.contains(day)) {
-                dayElt.classList.add("calendar-date-content");
-            }*/
             dayElt.innerText = day.toString().split(' ')[2];
         }
         else {
@@ -134,7 +133,7 @@ Calendar.prototype.initGrid = function() {
         }
         this.calendarGridDays.appendChild(dayElt);
     });
-
+    
     let objCalendar = this;
     this.calendarGridDays.addEventListener("click", function(event) {
         let item = event.target;
@@ -175,17 +174,41 @@ Calendar.prototype.update = function() {
 }
 
 Calendar.prototype.showDates = function(month, year) {
+    const url = "calendarScript.php?currentMonth="+(month+1)+"&currentYear="+year;
     let objCalendar = this;
-    this.listDaysContent = null;
-    if (month != null && year != null) {
-        let xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                objCalendar.listDaysContent = this.responseText.split("|");
+
+    //On récupère les données de la bdd
+    fetch(url).then(function (response) { //On récupère les données de la bdd
+        return response.json();
+    }).then(function(body) { //On afficher le résultat
+        console.log(body);
+        objCalendar.listDaysContent = body;
+        let increment = 0;
+        //On regarde chaque date (élément graphique) du calendrier
+        Array.from(objCalendar.calendarGridDays.children).forEach(dayHtml => {
+            //On vérifie si l'élément HTML correspond bien a une date
+            if (!dayHtml.classList.contains("calendar-date-null")) {
+                increment++;
+                let currentDateStr = objCalendar.year + "-" + objCalendar.month+1 + "-" + ((increment < 10) ? "0"+increment : increment);
+                //On vérifie si on a la date de l'élément HTML dans notre bdd
+                if (objCalendar.listDaysContent.some(item => item.date == currentDateStr)) {
+                    dayHtml.classList.add("calendar-date-content");
+                }
             }
-        };
-        xmlhttp.open("GET","calendarScript.php?currentMonth="+month+"&currentYear="+year,true);
-        xmlhttp.send();
+        });
+    }).catch(function(err) { //En cas d'erreur
+        console.error("La bdd n'a pas pu être chargé dans le calendrier : " + err);
+    });
+}
+
+Calendar.prototype.getHTMLOfDate = function(date) {
+    let objCalendar = this;
+    let listHtmlDate = [];
+    if (date.getFullYear == this.year && date.getMonth == this.day) {
+        this.calendarGridDays.forEach(function(dayHtml) {
+            if(objCalendar.day == date.getDate) {
+                listHtmlDate.push(dayHtml);
+            }
+        });
     }
-    console.log("\"" + this.listDaysContent + "\"");
 }

@@ -2,12 +2,14 @@
 	// Conexion à la base de données
 	require_once("../include/dbConfig.php");
     $db = getPDO("PtutS3");
-    
+
     if (isset($_GET["currentMonth"]) && isset($_GET["currentYear"])) {
-        $req = $db->prepare("SELECT dateDon FROM calendrier WHERE YEAR(dateDon) = ? AND MONTH(dateDon) = ?");
-        $req->execute(array($_GET["currentMonth"], $_GET["currentYear"]));
+		$nbYear = $_GET["currentYear"];
+		$nbMouth = $_GET["currentMonth"];
+        $req = $db->prepare("SELECT dateDon AS date FROM calendrier WHERE YEAR(dateDon) = ? AND MONTH(dateDon) = ?");
+		$req->execute(array($nbYear, $nbMouth));
         $res = $req->fetchAll();
-        echo implode("|", $res);
+		echo json_encode($res);
     }
 
 	//Création de variable
