@@ -32,6 +32,8 @@
 
     <?php
 
+    require_once("../SQL_TO_JSON/sql_to_json.php");
+
     $chart=new EJ\SunburstChart("container");
 
     $tooltip = new EJ\SunburstChart\Tooltip();
@@ -39,18 +41,19 @@
     $chartTitle= new EJ\SunburstChart\Title();
     $chartTitle->text("Sunburst");
 
-    $Json ='
+    $Json = $DonJson_Tous;
 
-
+    /*
+    '
      [
-     { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Raoul de Cohakem", "Statut": "Seigneur de Cohakem, chevalier et chambellan du duc", "Nature": "Pour sa pension a luy ordonne par mondit seigneur qui est de 200 écus chacun an tant comme il plaira a mon dit seigneur paiez a deux termes cest assavoir noel et saint Jehan dont ledit seigneur veult commence le premier paiement au terme de noel 1404 pour que ledit chevalier soit tousiours plus tenu e astraint de servir mon dit seigneur et pour autres causes plus a plain contenues es lettres diceluy seigneur donne a Paris le 6e jour de septembre lan dessusdit desquelle la coppie dicelles collacionnees a loriginal est cy rendu pour les termes de noel 1405 et saint Jehan 1406", "Lieu": "Paris", "Formes": "Pension de 200 écus/an, payée en deux termes (Noël et la Saint-Jehan)", "Informations": "6 September 1404", "Sources": "ADCO, B 1543, f 68 v","EmployeesCount" : 1 },
+     { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Jean avec Peur", "Statut": "Seigneur de Cohakem, chevalier et chambellan du duc", "Nature": "Pour sa pension a luy ordonne par mondit seigneur qui est de 200 écus chacun an tant comme il plaira a mon dit seigneur paiez a deux termes cest assavoir noel et saint Jehan dont ledit seigneur veult commence le premier paiement au terme de noel 1404 pour que ledit chevalier soit tousiours plus tenu e astraint de servir mon dit seigneur et pour autres causes plus a plain contenues es lettres diceluy seigneur donne a Paris le 6e jour de septembre lan dessusdit desquelle la coppie dicelles collacionnees a loriginal est cy rendu pour les termes de noel 1405 et saint Jehan 1406", "Lieu": "Paris", "Formes": "Pension de 200 écus/an, payée en deux termes (Noël et la Saint-Jehan)", "Informations": "6 September 1404", "Sources": "ADCO, B 1543, f 68 v","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Pierre de Marigny", "Statut": "Avocat au Parlement et conseiller du duc audit Parlement", "Nature": "Tant comme il plaira audit seigneur et quil sent mettra de ses causes a la pension de fr. chacun an si comme il appert par mandement de mondit seigneur donne a Paris le 17e jour de septembre lan 1404 ainsi signe par mondit seigneur duquel mandement la coppie collacionne a loriginal par lun des secretaires de mondit seigneur est cy rendu pour ce", "Lieu": "Paris", "Formes": "Pension de 20 fr./an", "Informations": "17 September 1404", "Sources": "ADCO, B 1543, f 71 r","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "André Cotin", "Statut": "Avocat au Parlement et conseiller du duc audit Parlement", "Nature": "Pour sa pension qui semble est de 20 fr. par an tant quil plaira a mondit seigneur et quil sent mettra de ses causes si comme il appert par mandement dicelluy seigneur donne a Paris le dit 17e jour de septembre lan 1404 ainsi signe par monseigneur le duc duquel la copie collacionne a loriginal par lun des secretaires de mondit seigneur est cy rendu", "Lieu": "Paris", "Formes": "Pension de 20 fr./an", "Informations": "17 September 1404", "Sources": "ADCO, B 1543, f 71 r","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Guyot de Savigny", "Statut": "Ecuyer d écurie du duc", "Nature": "Paiement pour sa pension de 160 fr./an", "Lieu": "Aucune mention", "Formes": "80 fr. (quittance)", "Informations": "30 January 1409", "Sources": "ADCO, B 1556, f° 54 v°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Girard de Bourbon", "Statut": "Seigneur de Montperroux, chevalier, conseiller et chambellan du duc", "Nature": "Pension de 500 fr./an, payée en deux termes (de 6 mois en 6 mois) ", "Lieu": "Aucune mention", "Formes": "Pension de 500 fr./an, payée en deux termes (6 mois en 6 mois)", "Informations": "31 January 1409", "Sources": "ADCO, B 1558, f° 56 v° et 57 r°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Antoine de Craon", "Statut": "Cousin, chevalier, conseiller et chambellan du duc", "Nature": "Pension de 400 fr./an", "Lieu": "Aucune mention", "Formes": "Pension de 400 fr./an", "Informations": "31 January 1409", "Sources": "ADCO, B 1558, f° 57 v°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Lourdin de Saligny", "Statut": "Chevalier, conseiller et chambellan du duc", "Nature": "Pension de 500 fr./an, payée en deux termes (la Saint-Jean et Noël)", "Lieu": "Aucune mention", "Formes": "Pension de 500 fr./an, payée en deux termes (la Saint-Jean et Noël)", "Informations": "31 January 1409", "Sources": "ADCO, B 1558, f° 57 v°","EmployeesCount" : 1 },
-{ "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Christophe d Albourg", "Statut": "Trompette du duc", "Nature": "Paiement pour sa pension de 100 écus/an", "Lieu": "Aucune mention", "Formes": "20 fr. (quittance)", "Informations": "1 February 1409", "Sources": "ADCO, B 1556, f° 53 r°","EmployeesCount" : 1 },
+{ "Category" : "Pension", "Auteur": "Jean avec Peur", "Label" : "Christophe d Albourg", "Statut": "Trompette du duc", "Nature": "Paiement pour sa pension de 100 écus/an", "Lieu": "Aucune mention", "Formes": "20 fr. (quittance)", "Informations": "1 February 1409", "Sources": "ADCO, B 1556, f° 53 r°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Pierre de Montbertault", "Statut": "Conseiller et ancien contrôleur général des finances du duc", "Nature": "Paiement pour sa pension de 500 écus/an", "Lieu": "Aucune mention", "Formes": "400 fr. (quittance)", "Informations": "3 February 1409", "Sources": "ADCO, B 1556, f° 48 v°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Pierre Cauchon", "Statut": "Maître en ars et licencié en décret", "Nature": "Pension de 50 fr., payée en deux termes (Noël et la Saint-Jean-Baptiste) en tant que conseiller du duc. Le premier terme commencera à la Saint-Jean 1409", "Lieu": "Paris", "Formes": "Pension de 50 fr./an", "Informations": "6 February 1409", "Sources": "ADCO, B 1576, f° 113 v°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Robert de Wavrin", "Statut": "Seigneur de Wavrin, conseiller et chambellan du duc", "Nature": "Paiement pour sa pension de 80 fr./mois", "Lieu": "Aucune mention", "Formes": "35 fr. (quittance)", "Informations": "1 March 1409", "Sources": "ADCO, B 1558, f° 62 r°","EmployeesCount" : 1 },
@@ -67,8 +70,8 @@
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Jean d Aunay, dit Le Gallois d Aunay", "Statut": "Chevalier et maître d hôtel du duc et de la duchesse", "Nature": "Pour ce paie audit messire Jehan pour le terme de may 1407 par sa quittance cy rendue avec la coppie des dictes lettres colacionne par maistre Guillaume Vignier secretaire de mondit seigneur tout cy rendue 120 fr. pour ce", "Lieu": "Paris", "Formes": "120 fr. (partie de pension)", "Informations": "31 May 1407", "Sources": "ADCO, B 1547, f° 77 r°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Jean Bateteau", "Statut": "Ecuyer et panetier du duc", "Nature": "Rappel de sa pension annuelle de 160 fr./an, payée en deux termes (Saint-André et le dernier jour de mai)", "Lieu": "Paris", "Formes": "160 fr. (quittance)", "Informations": "31 May 1407", "Sources": "ADCO, B 1547, f° 79 v°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Jacques de Villers", "Statut": "Ecuyer et échanson du duc", "Nature": "Rappel de sa pension annuelle de 160 fr./an, payée en deux termes (Saint-André et le dernier jour de mai)", "Lieu": "Aucune mention", "Formes": "160 fr. (quittance)", "Informations": "31 May 1407", "Sources": "ADCO, B 1547, f° 78 v° et 79 r°","EmployeesCount" : 1 },
-{ "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Etienne Moreau", "Statut": "Contrôleur de la dépense de l hôtel du duc", "Nature": "Rappel de sa pension annuelle de 160 fr./an, payée en deux termes (Saint-André et le dernier jour de mai)", "Lieu": "Aucune mention", "Formes": "160 fr. (quittance)", "Informations": "31 May 1407", "Sources": "ADCO, B 1547, f° 80 r°","EmployeesCount" : 1 },
-{ "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Girart de Bourbon", "Statut": "Ecuyer d écurie du duc", "Nature": "Rappel de sa pension annuelle de 160 fr./an, payée en deux termes (Saint-André et le dernier jour de mai)", "Lieu": "Aucune mention", "Formes": "160 fr. (quittance)", "Informations": "3 June 1407", "Sources": "ADCO, B 1554, f° 59 r°","EmployeesCount" : 1 },
+{ "Category" : "Pension", "Auteur": "Jean Peur", "Label" : "Etienne Moreau", "Statut": "Contrôleur de la dépense de l hôtel du duc", "Nature": "Rappel de sa pension annuelle de 160 fr./an, payée en deux termes (Saint-André et le dernier jour de mai)", "Lieu": "Aucune mention", "Formes": "160 fr. (quittance)", "Informations": "31 May 1407", "Sources": "ADCO, B 1547, f° 80 r°","EmployeesCount" : 1 },
+{ "Category" : "Pension", "Auteur": "Jean avec Peur", "Label" : "Girart de Bourbon", "Statut": "Ecuyer d écurie du duc", "Nature": "Rappel de sa pension annuelle de 160 fr./an, payée en deux termes (Saint-André et le dernier jour de mai)", "Lieu": "Aucune mention", "Formes": "160 fr. (quittance)", "Informations": "3 June 1407", "Sources": "ADCO, B 1554, f° 59 r°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Baudouin, dit Beaugois d Ailly", "Statut": "Chevalier, conseiller et chambellan du duc, vidame d Amiens", "Nature": "Paiement pour sa pension de 500 fr./an", "Lieu": "Aucune mention", "Formes": "100 fr. (quittance)", "Informations": "3 June 1407", "Sources": "ADCO, B 1556, f° 57 r°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Jean, dit Le bâtard du Bochet", "Statut": "Ecuyer et panetier du duc", "Nature": "Rappel de sa pension annuelle de 160 fr./an, payée en deux termes (Saint-André et le dernier jour de mai)", "Lieu": "Aucune mention", "Formes": "160 fr. (quittance)", "Informations": "8 June 1407", "Sources": "ADCO, B 1554, f° 59 v°","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Jean de Velery", "Statut": "Maître de la chambre aux deniers", "Nature": "Pour ce paie a lui pour ung an servi au 9e jour de juillet 1407 par sa quittance cy rendue avec la coppie des dictez lettrez collacionnee par maistre Baude des Bordes", "Lieu": "Aucune mention", "Formes": "200 fr. (pension)", "Informations": "9 July 1407", "Sources": "ADCO, B 1547, f° 81 v°","EmployeesCount" : 1 },
@@ -78,7 +81,7 @@
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Jean Perier", "Statut": "Avocat au Parlement et conseiller du duc audit Parlement", "Nature": "A semble pension de 20 fr. par an tant quil plaira a mondit seigneur et quil sent mettra de ses causes si comme il appert par mandement de mondit seigneur donne a Paris le dit 17e jour de septembre lan 1404 duquel la coppie collacionne a loriginal par lun des secretaires de mondit seigneur est cy rendu audit maistre Jehan pour sa dicte pension du parlement", "Lieu": "Paris", "Formes": "Pension de 20 fr./an", "Informations": "17 September 1404", "Sources": "ADCO, B 1543, f 71 r","EmployeesCount" : 1 },
 { "Category" : "Pension", "Auteur": "Jean sans Peur", "Label" : "Jean Haguenin", "Statut": "Avocat au Parlement et conseiller du duc audit Parlement", "Nature": "A semble pension de 20 fr. par an tant quil plaira a mondit seigneur et quil sent mettra de ses causes si comme il appert par mandement de mondit seigneur donne a Paris le dit 17e jour de septembre lan 1404 duquel la coppie collacionne a loriginal par lun des secretaires de mondit seigneur est cy rendu audit maistre Jehan pour sa dicte pension du parlement", "Lieu": "Paris", "Formes": "Pension de 20 fr./an", "Informations": "17 September 1404", "Sources": "ADCO, B 1543, f 71 r","EmployeesCount" : 1 }
 
-      ]';
+      ]'; */
 
 
     //décodage des accents
@@ -97,20 +100,23 @@
     $level6 = new EJ\SunburstChart\Level();
     $level7 = new EJ\SunburstChart\Level();
     $level8 = new EJ\SunburstChart\Level();
+    $level9 = new EJ\SunburstChart\Level();
 
 
     //ajout des noms aux différents niveaux
     $level1->groupMemberPath("Auteur");
-    $level2->groupMemberPath("Label");
+    $level2->groupMemberPath("Beneficiaire");
     $level3->groupMemberPath("Statut");
     $level4->groupMemberPath("Lieu");
-    $level5->groupMemberPath("Informations");
+    $level5->groupMemberPath("Date");
     $level6->groupMemberPath("Nature");
-    $level7->groupMemberPath("Formes");
-    $level8->groupMemberPath("Sources");
+    $level7->groupMemberPath("Poids");
+    $level8->groupMemberPath("Formes");
+    $level9->groupMemberPath("Sources");
+    
 
     //affichage des différents niveaux
-    $levelCollection = array($level1, $level2, $level3, $level4,$level5,$level6,$level7,$level8);
+    $levelCollection = array($level1, $level2, $level3, $level4,$level5,$level6,$level7,$level8,$level9);
 
     $dataLabel = new EJ\SunburstChart\DataLabelSetting();
     $dataLabel->visible(true);
@@ -119,9 +125,9 @@
     $legend->visible(true)->position("top");
 
     $zoom = new EJ\SunburstChart\ZoomSetting();
-    $zoom->enable(false);
+    $zoom->enable(true);
 
-    echo $chart->dataSource($Json)->valueMemberPath("EmployeesCount")->size($size)->levels($levelCollection)->innerRadius('0.2')->dataLabelSettings($dataLabel)->tooltip($tooltip)->title($chartTitle)->legend($legend)->zoomSettings($zoom)->render();
+    echo $chart->dataSource($Json)->valueMemberPath("DonCount")->size($size)->levels($levelCollection)->innerRadius('0.2')->dataLabelSettings($dataLabel)->tooltip($tooltip)->title($chartTitle)->legend($legend)->zoomSettings($zoom)->render();
 
     ?>
 </div>
