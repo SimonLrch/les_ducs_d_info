@@ -1,0 +1,239 @@
+[
+    {
+        "taskID": 1,
+        "taskName": "Project Schedule",
+        "startDate": "02/06/2017",
+        "endDate": "03/10/2017",
+        "taskColor": "#F2A4A7",
+        "progressColor": "#DE605C",
+        "subtasks": [
+            {
+                "taskID": 2,
+                "taskName": "Planning",
+                "startDate": "02/06/2017",
+                "endDate": "02/10/2017",
+                "taskColor": "#79BDC9",
+                "progressColor": "#59AAB4",
+                "subtasks": [
+                    {
+                        "taskID": 3,
+                        "taskName": "Plan timeline",
+                        "startDate": "02/06/2017",
+                        "endDate": "02/10/2017",
+                        "duration": 6,
+                        "progress": "60",
+                        "resourceId": [
+                            1
+                        ]
+                    },
+                    {
+                        "taskID": 4,
+                        "taskName": "Plan budget",
+                        "startDate": "02/06/2017",
+                        "endDate": "02/10/2017",
+                        "duration": 6,
+                        "progress": "90",
+                        "resourceId": [
+                            5
+                        ]
+                    },
+                    {
+                        "taskID": 5,
+                        "taskName": "Allocate resources",
+                        "startDate": "02/06/2017",
+                        "endDate": "02/10/2017",
+                        "duration": 6,
+                        "progress": "75",
+                        "resourceId": [
+                            6
+                        ]
+                    },
+                    {
+                        "taskID": 6,
+                        "taskName": "Planning complete",
+                        "startDate": "02/06/2017",
+                        "endDate": "02/10/2017",
+                        "duration": 0,
+                        "predecessor": "3FS,4FS,5FS",
+                        "resourceId": [
+                            1
+                        ]
+                    }
+                ]
+            },
+            {
+                "taskID": 7,
+                "taskName": "Design",
+                "startDate": "02/13/2017",
+                "endDate": "02/17/2017",
+                "taskColor": "#93b8a6",
+                "progressColor": "#7AA992",
+                "subtasks": [
+                    {
+                        "taskID": 8,
+                        "taskName": "Software Specification",
+                        "startDate": "02/13/2017",
+                        "endDate": "02/15/2017",
+                        "duration": 3,
+                        "progress": "60",
+                        "predecessor": "6FS",
+                        "resourceId": [
+                            2
+                        ]
+                    },
+                    {
+                        "taskID": 9,
+                        "taskName": "Develop prototype",
+                        "startDate": "02/13/2017",
+                        "endDate": "02/15/2017",
+                        "duration": 3,
+                        "progress": "100",
+                        "predecessor": "6FS",
+                        "resourceId": [
+                            3
+                        ]
+                    },
+                    {
+                        "taskID": 10,
+                        "taskName": "Get approval from customer",
+                        "startDate": "02/16/2017",
+                        "endDate": "02/17/2017",
+                        "duration": 2,
+                        "progress": "100",
+                        "predecessor": "9FS",
+                        "resourceId": [
+                            1
+                        ]
+                    },
+                    {
+                        "taskID": 11,
+                        "taskName": "Design complete",
+                        "startDate": "02/17/2017",
+                        "endDate": "02/17/2017",
+                        "duration": 0,
+                        "predecessor": "10FS",
+                        "resourceId": [
+                            2
+                        ]
+                    }
+                ]
+            },
+            {
+                "taskID": 12,
+                "taskName": "Implementation",
+                "startDate": "02/20/2017",
+                "endDate": "03/02/2017",
+                "taskColor": "#FAC9CD",
+                "progressColor": "#F2928D",
+                "subtasks": [
+                    {
+                        "taskID": 13,
+                        "taskName": "Development Task 1",
+                        "startDate": "02/20/2017",
+                        "endDate": "02/22/2017",
+                        "duration": 3,
+                        "progress": "50",
+                        "predecessor": "11FS",
+                        "resourceId": [
+                            3
+                        ]
+                    },
+                    {
+                        "taskID": 14,
+                        "taskName": "Development Task 2",
+                        "startDate": "02/20/2017",
+                        "endDate": "02/22/2017",
+                        "duration": 3,
+                        "progress": "50",
+                        "predecessor": "11FS",
+                        "resourceId": [
+                            3
+                        ]
+                    },
+                    {
+                        "taskID": 15,
+                        "taskName": "Testing",
+                        "startDate": "02/23/2017",
+                        "endDate": "02/25/2017",
+                        "duration": 2,
+                        "progress": "0",
+                        "predecessor": "13FS,14FS",
+                        "resourceId": [
+                            4
+                        ]
+                    },
+                    {
+                        "taskID": 16,
+                        "taskName": "Bug fix",
+                        "startDate": "02/27/2017",
+                        "endDate": "02/28/2017",
+                        "duration": 2,
+                        "progress": "0",
+                        "predecessor": "15FS",
+                        "resourceId": [
+                            3
+                        ]
+                    },
+                    {
+                        "taskID": 17,
+                        "taskName": "Customer review meeting",
+                        "startDate": "03/01/2017",
+                        "endDate": "03/02/2017",
+                        "duration": 2,
+                        "progress": "0",
+                        "predecessor": "16FS",
+                        "resourceId": [
+                            1
+                        ]
+                    },
+                    {
+                        "taskID": 18,
+                        "taskName": "Implemenation complete",
+                        "startDate": "03/02/2017",
+                        "endDate": "03/02/2017",
+                        "duration": 0,
+                        "predecessor": "17FS",
+                        "resourceId": [
+                            2
+                        ]
+                    }
+                ]
+            },
+            {
+                "taskID": 19,
+                "taskName": "Integration",
+                "startDate": "03/03/2017",
+                "endDate": "03/05/2017",
+                "duration": 2,
+                "progress": "0",
+                "predecessor": "18FS",
+                "resourceId": [
+                    3
+                ]
+            },
+            {
+                "taskID": 20,
+                "taskName": "Final Testing",
+                "startDate": "03/06/2017",
+                "endDate": "03/07/2017",
+                "duration": 2,
+                "progress": "0",
+                "predecessor": "19FS",
+                "resourceId": [
+                    4
+                ]
+            },
+            {
+                "taskID": 21,
+                "taskName": "Final Delivery",
+                "startDate": "03/07/2017",
+                "endDate": "03/07/2017",
+                "duration": 0,
+                "predecessor": "20FS",
+                "resourceId": [
+                    1
+                ]
+            }
+        ]
+    }
+]

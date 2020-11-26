@@ -1,12 +1,9 @@
 <div id="footer">
-    <div class="bottom-links">
+    <div class="footer">
         <div class="left">
-            <div class="sync-text">
-                Copyright &copy; 2020 IUT Dijon.
+            <div class="text">
+                Projet Tutoré S3 Les ducs d'info
             </div>
-        </div>
-        <div class="right">
-          
         </div>
     </div>
 </div>
