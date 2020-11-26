@@ -52,17 +52,18 @@ for($i = 0 ; $i < count($idDon); $i++){
 
     $DonJson_Seul =  '{ "Category" : "'.$test.'", "Auteur": "'.$test.'", "Label" : "'.$test.'", "Statut": "'.$test.'", "Nature": "'.$test.'", "Lieu": "'.$test.'", "Formes": "'.$test.'", "Date": "'.$test.'", "Sources": "'.$test.'" Poids = "'.$test.'",DonCount = "1"}';
     
-    if($i != count($idDon))
+    if($i != count($idDon)-1)
     {
-        echo 'oui';
         $DonJson_Tous .= $DonJson_Seul . ',';
     }
     else{
-        echo 'non';
+        $DonJson_Tous .= $DonJson_Seul;
     }
 }
 
+$DonJson_Tous .= ']';
 
-echo $DonJson_Seul;
+
+echo $DonJson_Tous;
 
 ?>
