@@ -126,9 +126,6 @@ Calendar.prototype.initGrid = function() {
             if (this.dateSelected.toString() == day.toString()) {
                 dayElt.classList.add("calendar-selected");
             }
-            /*if (this.listDaysContent.contains(day)) {
-                dayElt.classList.add("calendar-date-content");
-            }*/
             dayElt.innerText = day.toString().split(' ')[2];
         }
         else {
@@ -186,10 +183,20 @@ Calendar.prototype.showDates = function(month, year) {
     }).then(function(body) { //On afficher le résultat
         console.log(body);
         objCalendar.listDaysContent = body;
-        objCalendar.listDaysContent.forEach((day) => {
-            currentDate = Date.parse(day.date);
+        let increment = 0;
+        //On regarde chaque date (élément graphique) du calendrier
+        Array.from(objCalendar.calendarGridDays.children).forEach(dayHtml => {
+            //On vérifie si l'élément HTML correspond bien a une date
+            if (!dayHtml.classList.contains("calendar-date-null")) {
+                increment++;
+                let currentDateStr = objCalendar.year + "-" + objCalendar.month+1 + "-" + ((increment < 10) ? "0"+increment : increment);
+                //On vérifie si on a la date de l'élément HTML dans notre bdd
+                if (objCalendar.listDaysContent.some(item => item.date == currentDateStr)) {
+                    dayHtml.classList.add("calendar-date-content");
+                }
+            }
         });
-    }).catch(function(err) {
+    }).catch(function(err) { //En cas d'erreur
         console.error("La bdd n'a pas pu être chargé dans le calendrier : " + err);
     });
 }
