@@ -104,7 +104,7 @@
     $level2->groupMemberPath("Label");
     $level3->groupMemberPath("Statut");
     $level4->groupMemberPath("Lieu");
-    $level5->groupMemberPath("Informations");
+    $level5->groupMemberPath("Date");
     $level6->groupMemberPath("Nature");
     $level7->groupMemberPath("Formes");
     $level8->groupMemberPath("Sources");
@@ -121,7 +121,7 @@
     $zoom = new EJ\SunburstChart\ZoomSetting();
     $zoom->enable(false);
 
-    echo $chart->dataSource($Json)->valueMemberPath("EmployeesCount")->size($size)->levels($levelCollection)->innerRadius('0.2')->dataLabelSettings($dataLabel)->tooltip($tooltip)->title($chartTitle)->legend($legend)->zoomSettings($zoom)->render();
+    echo $chart->dataSource($Json)->valueMemberPath("DonCount")->size($size)->levels($levelCollection)->innerRadius('0.2')->dataLabelSettings($dataLabel)->tooltip($tooltip)->title($chartTitle)->legend($legend)->zoomSettings($zoom)->render();
 
     ?>
 </div>
