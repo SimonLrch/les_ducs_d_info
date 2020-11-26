@@ -9,16 +9,16 @@ $pdo = getPDO("PtutS3");
 $idDon  = [];
 
 $idAuteur = [];
-$nomAuteur = [];
-$fonctionAuteur = [];
+$nomAuteur = '';
+//$fonctionAuteur = '';
 
 $idBeneficiaire = [];
-$nomBeneficiaire = [];
-$fonctionBeneficiaire = [];
+$nomBeneficiaire = '';
+$fonctionBeneficiaire = '';
 
-$idIntermedaire = [];
-$nomIntermedaire = [];
-$fonctionIntermedaire = [];
+//$idIntermedaire = [];
+//$nomIntermedaire = [];
+//$fonctionIntermedaire = [];*/
 
 $lieu = [];
 $statut = [];
@@ -35,7 +35,6 @@ $sources = [];
 $DonJson_Seul = '';
 $DonJson_Tous = '[';
 
-$test = 'oui';
 
 
 
@@ -83,9 +82,29 @@ for($i = 0 ; $i < count($idDon); $i++)
 for($i = 0 ; $i < count($idDon); $i++)
 {
 
-    $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$test.'", "Beneficiaire" : "'.$test.'", "Statut": "'.$test.'", 
-        "Nature": "'.$nature[$i].'", "Lieu": "'.$test.'", "Formes": "'.$test.'", "Date": "'.$test.'", "Sources": "'.$test.'" ,
-        "Poids" = "'.$test.'","DonCount"= "1"}';
+     //Auteur
+    $req = $pdo->query('SELECT nom as nomA
+         from don inner join personne on don.idAuteur =personne.idPersonne
+         where idPersonne ='.$idAuteur[$i].'');
+    while ($row= $req->fetch())
+    {
+        $nomAuteur = $row['nomA'];
+    }
+
+    //Beneficiaire
+    $req = $pdo->query('SELECT nom as nomB,
+            fonction as statut
+    from don inner join personne on don.idBeneficiaire =personne.idPersonne
+    where idPersonne ='.$idBeneficiaire[$i].'');
+    while ($row= $req->fetch())
+    {
+        $nomBeneficiaire = $row['nomB'];
+        $fonctionBeneficiaire = $row['statut'];
+    }
+
+    $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$nomAuteur.'" ,"Beneficiaire" : "'.$nomBeneficiaire.'","Statut": "'.$fonctionBeneficiaire.'" ,
+        "Nature": "'.$nature[$i].'", "Lieu": "'.$lieu[$i].'", "Formes": "'.$forme[$i].'", "Date": "'.$date[$i].'", "Sources": "'.$sources[$i].'" ,
+        "Poids" = "'.$poids[$i].'","DonCount"= "1"}';
     
     if($i != count($idDon)-1)
     {
