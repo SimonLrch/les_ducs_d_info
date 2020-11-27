@@ -95,8 +95,6 @@
 	    var lon = 2.349903;
 	    var macarte = null;
         var markerClusters; // Servira à stocker les groupes de marqueurs
-        // Nous initialisons une liste de marqueurs
-		console.log(nom_villes.length);
 		
 	    // Fonction d'initialisation de la carte
         function initMap() {
