@@ -94,10 +94,10 @@
 	    var macarte = null;
         var markerClusters; // Servira à stocker les groupes de marqueurs
         // Nous initialisons une liste de marqueurs
-		/*var villes;
+		var villes;
 		for (int i = 0; i < nom_villes.length; i++){
 			villes += { nom_villes[i] : { "lat": latitude[i], "lon": longitude[i] }};
-		}*/
+		}
 		
 	    // Fonction d'initialisation de la carte
         function initMap() {
@@ -123,15 +123,15 @@
 					iconAnchor: [25, 50],
 					popupAnchor: [-3, -76],
 				});
-				/*var marker = L.marker([villes[ville].lat, villes[ville].lon], { icon: myIcon }); // pas de addTo(macarte), l'affichage sera géré par la bibliothèque des clusters		
+				var marker = L.marker([villes[ville].lat, villes[ville].lon], { icon: myIcon }); // pas de addTo(macarte), l'affichage sera géré par la bibliothèque des clusters		
 				var id = document.getElementById("idDon").innerHTML;
 				marker.bindPopup(ville + " " + id[0]);
 				markers.push(marker); // Nous ajoutons le marqueur à la liste des marqueurs
-				markerClusters.addLayer(marker); // Nous ajoutons le marqueur aux groupes*/
+				markerClusters.addLayer(marker); // Nous ajoutons le marqueur aux groupes
 			}
-			/*var group = new L.featureGroup(markers); // Nous créons le groupe des marqueurs pour adapter le zoom
+			var group = new L.featureGroup(markers); // Nous créons le groupe des marqueurs pour adapter le zoom
 			macarte.fitBounds(group.getBounds().pad(0.5)); // Nous demandons à ce que tous les marqueurs soient visibles, et ajoutons un padding (pad(0.5)) pour que les marqueurs ne soient pas coupés
-			macarte.addLayer(markerClusters);*/
+			macarte.addLayer(markerClusters);
 		}
 	    window.onload = function(){
 		// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
