@@ -6,15 +6,22 @@
 		$db_villes = new PDO('mysql:host=localhost; dbname=PtutS3_villes', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		
 		//Création des variables
+		$id = [];
 		$nomVille = [];
 		$sourceVille = [];
 		$lat = [];
 		$longi = [];
 		
-		
 		$villes = [];
 		$latitude = [];
 		$longitude = [];
+		
+		//Requête de l'id du don
+		$req = $db->query('SELECT idDon FROM don');
+		while ($row = $req->fetch())
+		{
+			$id = $row['idDon'];
+		}
 		
 		//Requête du lieu
 		$req = $db->query('SELECT emplacement FROM Lieu');
@@ -47,7 +54,8 @@
 					if($nomVille[$i] == $sourceVille[$j]){
 							$villes[$i] = $nomVille[$i];
 							$latitude[$i] = $lat[$j];
-							$ongitude[$i] = $longi[$j];
+							$longitude[$i] = $longi[$j];
+							echo 'Ville : '. $villes[$i].' : lat = '. $latitude[$i] .' / lon = '. $longitude[$i] .'';
 					}
 				}
 			}
@@ -66,23 +74,13 @@
 	    }
 		</style>
 	</style>
-	<title>Carte</title>
+	<title>Géographique</title>
     </head>
     <body>
 		<?php include'../include/mainHeader.php' ?>
 		<section class="inner-box section-hero">
             <span>Restitution Géographique</span>
         </section>
-	<div id="idDon">
-		<?php
-			//Requête de l'id du don
-			$req = $db->query('SELECT idDon FROM don');
-			while ($row = $req->fetch())
-			{
-				$id = $row['idDon'];
-			}
-		?>
-	</div>
 	<div id="map">
 	    <!-- Ici s'affichera la carte -->
 	</div>
