@@ -52,13 +52,15 @@
 		for($i = 0; $i < count($nomVille); $i++){
 				for($j = 0; $j < count($sourceVille); $j++){
 					if($nomVille[$i] == $sourceVille[$j]){
-							$villes[$i] = $nomVille[$i];
 							$latitude[$i] = $lat[$j];
 							$longitude[$i] = $longi[$j];
-							echo 'Ville : '. $villes[$i].' : lat = '. $latitude[$i] .' / lon = '. $longitude[$i] .'';
 					}
 				}
 			}
+			
+		for ($i = 0; $i < count($nomVille); $i++){
+			$villes[$i] = '[{ '. $nomVille[$i] .' : { "lat": '. $latitude[$i] .', "lon": '. $longitude[$i] .' }}]';
+		}
 			
 	?>
     <head>
@@ -94,10 +96,7 @@
 	    var macarte = null;
         var markerClusters; // Servira à stocker les groupes de marqueurs
         // Nous initialisons une liste de marqueurs
-		var villes;
-		for (int i = 0; i < nom_villes.length; i++){
-			villes += { nom_villes[i] : { "lat": latitude[i], "lon": longitude[i] }};
-		}
+		console.log(nom_villes.length);
 		
 	    // Fonction d'initialisation de la carte
         function initMap() {
@@ -140,9 +139,7 @@
 	</script>
 	<script>
 		var id = <?php echo json_encode($id); ?>;
-		var nom_villes = <?php echo json_encode($villes); ?>;
-		var latitude = <?php echo json_encode($latitude); ?>;
-		var longitude = <?php echo json_encode($longitude); ?>;
+		var villes = <?php echo json_encode($villes); ?>;
 	</script>
     </body>
 </html>
