@@ -6,15 +6,22 @@
 		$db_villes = new PDO('mysql:host=localhost; dbname=PtutS3_villes', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		
 		//Création des variables
+		$id = [];
 		$nomVille = [];
 		$sourceVille = [];
 		$lat = [];
 		$longi = [];
 		
-		
 		$villes = [];
 		$latitude = [];
 		$longitude = [];
+		
+		//Requête de l'id du don
+		$req = $db->query('SELECT idDon FROM don');
+		while ($row = $req->fetch())
+		{
+			$id = $row['idDon'];
+		}
 		
 		//Requête du lieu
 		$req = $db->query('SELECT emplacement FROM Lieu');
@@ -47,7 +54,8 @@
 					if($nomVille[$i] == $sourceVille[$j]){
 							$villes[$i] = $nomVille[$i];
 							$latitude[$i] = $lat[$j];
-							$ongitude[$i] = $longi[$j];
+							$longitude[$i] = $longi[$j];
+							echo 'Ville : '. $villes[$i].' : lat = '. $latitude[$i] .' / lon = '. $longitude[$i] .'';
 					}
 				}
 			}
@@ -66,23 +74,13 @@
 	    }
 		</style>
 	</style>
-	<title>Carte</title>
+	<title>Géographique</title>
     </head>
     <body>
 		<?php include'../include/mainHeader.php' ?>
 		<section class="inner-box section-hero">
             <span>Restitution Géographique</span>
         </section>
-	<div id="idDon">
-		<?php
-			//Requête de l'id du don
-			$req = $db->query('SELECT idDon FROM don');
-			while ($row = $req->fetch())
-			{
-				$id = $row['idDon'];
-			}
-		?>
-	</div>
 	<div id="map">
 	    <!-- Ici s'affichera la carte -->
 	</div>
@@ -96,10 +94,10 @@
 	    var macarte = null;
         var markerClusters; // Servira à stocker les groupes de marqueurs
         // Nous initialisons une liste de marqueurs
-		var villes;
+		/*var villes;
 		for (int i = 0; i < nom_villes.length; i++){
 			villes += { nom_villes[i] : { "lat": latitude[i], "lon": longitude[i] }};
-		}
+		}*/
 		
 	    // Fonction d'initialisation de la carte
         function initMap() {
@@ -125,15 +123,15 @@
 					iconAnchor: [25, 50],
 					popupAnchor: [-3, -76],
 				});
-				var marker = L.marker([villes[ville].lat, villes[ville].lon], { icon: myIcon }); // pas de addTo(macarte), l'affichage sera géré par la bibliothèque des clusters		
+				/*var marker = L.marker([villes[ville].lat, villes[ville].lon], { icon: myIcon }); // pas de addTo(macarte), l'affichage sera géré par la bibliothèque des clusters		
 				var id = document.getElementById("idDon").innerHTML;
 				marker.bindPopup(ville + " " + id[0]);
 				markers.push(marker); // Nous ajoutons le marqueur à la liste des marqueurs
-				markerClusters.addLayer(marker); // Nous ajoutons le marqueur aux groupes
+				markerClusters.addLayer(marker); // Nous ajoutons le marqueur aux groupes*/
 			}
-			var group = new L.featureGroup(markers); // Nous créons le groupe des marqueurs pour adapter le zoom
+			/*var group = new L.featureGroup(markers); // Nous créons le groupe des marqueurs pour adapter le zoom
 			macarte.fitBounds(group.getBounds().pad(0.5)); // Nous demandons à ce que tous les marqueurs soient visibles, et ajoutons un padding (pad(0.5)) pour que les marqueurs ne soient pas coupés
-			macarte.addLayer(markerClusters);
+			macarte.addLayer(markerClusters);*/
 		}
 	    window.onload = function(){
 		// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
