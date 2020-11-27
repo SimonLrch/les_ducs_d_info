@@ -98,25 +98,30 @@ class JSON_to_SQL:
         for don in self.json_file:
             for item in self.json_file[don]:
                 # récupérer l'id de l'auteur du don
-                req_auteur = 'SELECT idPersonne FROM personne WHERE nom = "' + str(item['Auteur'])+'"'
+                req_auteur = 'SELECT idPersonne FROM personne WHERE nom = "' + item['Auteur']+'"'
                 cursor.execute(req_auteur)
                 auteur = cursor.fetchone()['idPersonne']
 
                 # récupérer l'id du bénéficiaire
-                req_beneficiaire = 'SELECT idPersonne FROM personne WHERE nom = "' + str(item['Beneficiaire'])+'"'
+                req_beneficiaire = 'SELECT idPersonne FROM personne WHERE nom = "' + item['Beneficiaire']+'"'
                 cursor.execute(req_beneficiaire)
                 beneficiaire = cursor.fetchone()['idPersonne']
 
                 # récupérer le type de don
                 typeD = self.nameJson
 
+                # récupérer l'id de la masse du don
+                req_masse = 'SELECT idPoids FROM Poids WHERE masse = "' + item['Poids'] + '"'
+                cursor.execute(req_masse)
+                masse = cursor.fetchone()['idPoids']
+
                 # insertion dans la table don
                 req_don = 'INSERT IGNORE INTO don(forme, nature, prix, typeDon, dateDon, idAuteur, idBeneficiaire,' \
-                          'emplacement, sourceDon, masse) VALUES ("' + str(item['Formes'])+ '", "' \
-                          + str(item['Nature'])+ '", "' + str(item['Prix']) + '", "' + typeD \
-                          + '", STR_TO_DATE("' + str(item['Informations']) + '","%d %M %Y"), "' \
-                          + str(auteur) + '", "' + str(beneficiaire) + '", "' + str(item['Lieu']) \
-                          + '", "' + str(item['Sources']) + '", "' + str(item['Poids']) + '") '
+                          'emplacement, sourceDon, idPoids) VALUES ("' + item['Formes'] + '", "' \
+                          + item['Nature'] + '", "' + item['Prix'] + '", "' + typeD \
+                          + '", STR_TO_DATE("' + item['Informations'] + '","%d %M %Y"), "' \
+                          + str(auteur) + '", "' + str(beneficiaire) + '", "' + item['Lieu'] \
+                          + '", "' + item['Sources'] + '", "' + str(masse) + '") '
                 cursor.execute(req_don)
                 self.con.commit()
                 # récupérer l'id de l'intermédiaire si il y en a un
@@ -132,7 +137,7 @@ class JSON_to_SQL:
                                  + str(item['Informations']) + '","%d %M %Y") AND idAuteur = "' \
                                  + str(auteur) + '" AND idBeneficiaire = "' + str(beneficiaire) \
                                  + '" AND emplacement = "' + str(item['Lieu']) + '" AND sourceDon = "' \
-                                 + str(item['Sources']) + '" AND masse = "' + str(item['Poids'])+'"'
+                                 + str(item['Sources']) + '" AND idPoids = "' + str(masse) +'"'
 
                     cursor.execute(req_id_don)
                     id_don = cursor.fetchone()['idDon']
@@ -168,7 +173,16 @@ class JSON_to_SQL:
                             else:
                                 query = 'INSERT IGNORE INTO Personne(nom,fonction) ' \
                                         'VALUES ("' + info[p] + '", "Statut Inconnu")'
-                            cursor.execute(query)
+                            
+                        else:
+                            if p == "Beneficiaire":
+                                if (info['Statut']!= "" ):                                    
+                                    query = 'SELECT fonction FROM personne WHERE nom ="' + info[p] +'"'
+                                    cursor.execute(query)
+                                    res = cursor.fetchone()['fonction']
+                                    if (str(res)=="Statut Inconnu"):
+                                        query = 'UPDATE personne SET fonction = "' + info['Statut'] + '" WHERE nom = "' + info[p] + '"'
+                        cursor.execute(query)
         self.con.commit()
         cursor.close()
 

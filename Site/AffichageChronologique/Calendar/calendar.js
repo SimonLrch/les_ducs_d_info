@@ -48,6 +48,8 @@ function Calendar(element, initDate) {
     this.calendarDateContainer = document.createElement("div");
     this.calendarGridDays = document.createElement("div");
 
+    this.calendarDetailsContainer = document.createElement("div");
+
     this.calendarMainContainer.id = "calendar-main";
     this.calendarHeaderContainer.id = "calendar-header";
     this.calendarTitle.id = "calendar-title";
@@ -55,6 +57,8 @@ function Calendar(element, initDate) {
     this.calendarNextButton.id = "calendar-next-btn";
     this.calendarDateContainer.id = "calendar-date-container";
     this.calendarGridDays.id = "calendar-grid";
+    this.calendarDetailsContainer.id = "calendar-date-details";
+
 
     this.initHeader();
     this.initGrid();
@@ -141,6 +145,7 @@ Calendar.prototype.initGrid = function() {
             Array.from(document.querySelectorAll(".calendar-selected")).forEach(element => element.classList.remove("calendar-selected"));
             item.classList.add("calendar-selected");
             objCalendar.dateSelected = new Date(objCalendar.year, objCalendar.month, item.innerText);
+            objCalendar.getInfoDate(objCalendar.dateSelected);
         }
     });
 
@@ -177,10 +182,10 @@ Calendar.prototype.showDates = function(month, year) {
     const url = "calendarScript.php?currentMonth="+(month+1)+"&currentYear="+year;
     let objCalendar = this;
 
-    //On récupère les données de la bdd
-    fetch(url).then(function (response) { //On récupère les données de la bdd
+    //On récupère les données de la bdd (Fonction asynchrone)
+    fetch(url).then(function (response) { //Ensuite on récupère les données de la bdd
         return response.json();
-    }).then(function(body) { //On afficher le résultat
+    }).then(function(body) { //Ensuite on afficher le résultat
         console.log(body);
         objCalendar.listDaysContent = body;
         let increment = 0;
@@ -211,4 +216,30 @@ Calendar.prototype.getHTMLOfDate = function(date) {
             }
         });
     }
+}
+
+Calendar.prototype.getInfoDate = function(date) {
+    const url = "showDetailsDate.php?currentDay="+date.getDate()+"&currentMonth="+(date.getMonth()+1)+"&currentYear="+date.getFullYear();
+    let objCalendar = this;
+
+    //On récupère les données de la bdd (Fonction asynchrone)
+    fetch(url).then(function (response) { //Ensuite on récupère les données de la bdd
+        return response.json();
+    }).then(function(body) { //Ensuite on afficher le résultat
+        console.log(body);
+        if (body.length != 0) {
+            objCalendar.calendarDetailsContainer.innerHTML = "";
+            Array.from(body).forEach(elt => {
+                let detailsTitle = document.createElement("h3");
+                detailsTitle.innerText = elt.idDon;
+                objCalendar.calendarDetailsContainer.appendChild(detailsTitle);
+            });
+            objCalendar.docElement.appendChild(objCalendar.calendarDetailsContainer);
+        }
+        else {
+            objCalendar.calendarDetailsContainer.remove();
+        }
+    }).catch(function(err) { //En cas d'erreur
+        console.error("La bdd n'a pas pu être chargé à la date indiqué : " + err);
+    });
 }

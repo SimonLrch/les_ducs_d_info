@@ -76,10 +76,17 @@ for($i = 0 ; $i < count($idDon); $i++)
         array_push($categorie,$row['typeD']);
     }
 
+    if($poids[$i] == '')
+    {
+        $poids[$i] = 'Aucune Mention' ;
+    }
+
 }
 
+
+
 //remplir chaque ligne du json
-for($i = 0 ; $i < count($idDon); $i++)
+for($i = 0 ; $i < count($idDon); $i++) //
 {
 
      //Auteur
@@ -102,15 +109,15 @@ for($i = 0 ; $i < count($idDon); $i++)
         $fonctionBeneficiaire = $row['statut'];
     }
 
-    $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$nomAuteur.'" ,"Beneficiaire" : "'.$nomBeneficiaire.'","Statut": "'.$fonctionBeneficiaire.'" ,
-        "Nature": "'.$nature[$i].'", "Lieu": "'.$lieu[$i].'", "Formes": "'.$forme[$i].'", "Date": "'.$date[$i].'", "Sources": "'.$sources[$i].'" ,
-        "Poids" = "'.$poids[$i].'","DonCount"= "1"}';
+    $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$nomAuteur.'", "Beneficiaire" : "'.$nomBeneficiaire.'", "Statut": "'.$fonctionBeneficiaire.'", "Nature": "'.$nature[$i].'", "Lieu": "'.$lieu[$i].'", "Formes": "'.$forme[$i].'", "Date": "'.$date[$i].'", "Sources": "'.$sources[$i].'", "Poids" : "'.$poids[$i].'" ,"DonCount" : 1 }';
+    
     
     if($i != count($idDon)-1)
     {
         $DonJson_Tous .= $DonJson_Seul . ',';
     }
-    else{
+    else
+    {
         $DonJson_Tous .= $DonJson_Seul;
     }
 }
@@ -118,6 +125,6 @@ for($i = 0 ; $i < count($idDon); $i++)
 $DonJson_Tous .= ']';
 
 
-echo $DonJson_Tous;
+//echo $DonJson_Tous;
 
 ?>
