@@ -207,6 +207,9 @@
 					$idIntermediaire = get_one_result($sql_id_personnes);
 				}
 			}
+
+
+
 			//Après l'ajout des deux id Auteur et bénéficiaires dans la liste, il faut la mettre maintenant dans l'ordre des éléments dans la BDD, arrangé en ordre alphabétique pour la clé
 			ksort($Info_don);
 			//---Vérification des autres données---
@@ -226,14 +229,25 @@
 				if(get_one_result($sql_Autres) == 0)
 				{
 					//Ajout de la nouvelle information dans la Table correspondante
-					$stmt = $pdo->prepare("INSERT INTO $TableAndColumn[0] VALUES (?)");
+					$stmt = $pdo->prepare("INSERT INTO $TableAndColumn[0]($TableAndColumn[1]) VALUES (?)");
 					$stmt->execute($sql_Autres["attributes"]);
 					$stmt->closeCursor();
 				}
 			}
 				
+			//Récupération de l'idPoids
+			$sql_id_Poids= [
+				"pdo"=>$pdo,
+				"sql"=>"SELECT idPoids AS Res FROM Poids WHERE masse = ?",
+				"attributes"=>array($Info_don['J']),
+			];
+			//On change le details_poids en idPoids
+			echo $Info_don['J'].'<br>';
+			echo get_one_result($sql_id_Poids).'<br>';
+			$Info_don['J'] = get_one_result($sql_id_Poids);
+			echo $Info_don['J'].'<br>';
 			// Ajout du Don dans la base de données:
-			$sql = "INSERT INTO don(forme, nature, prix, typeDon, dateDon, idAuteur, idBeneficiaire, emplacement, sourceDon, masse) VALUES (?,?,?,?,?,?,?,?,?,?)";
+			$sql = "INSERT INTO don(forme, nature, prix, typeDon, dateDon, idAuteur, idBeneficiaire, emplacement, sourceDon, idPoids) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			$stmt = $pdo->prepare($sql);
 			$stmt->execute(array_values($Info_don));
 			$stmt->closeCursor();
@@ -245,7 +259,7 @@
 				$sql_IdDon = 
 				[
 				"pdo" => $pdo,
-				"sql" => "SELECT idDon as Res FROM don WHERE forme = ? AND nature = ? AND prix = ? AND typeDon = ? AND dateDon = ? AND idAuteur = ? AND idBeneficiaire = ? AND emplacement = ? AND sourceDon = ? AND masse = ?",
+				"sql" => "SELECT idDon as Res FROM don WHERE forme = ? AND nature = ? AND prix = ? AND typeDon = ? AND dateDon = ? AND idAuteur = ? AND idBeneficiaire = ? AND emplacement = ? AND sourceDon = ? AND idPoids = ?",
 				"attributes" => (array_values($Info_don))
 				];
 				$idDon = get_one_result($sql_IdDon);
