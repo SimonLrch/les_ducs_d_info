@@ -5,7 +5,7 @@
 <body>
 <?php include'../include/mainHeader.php' ?>
 <?php if($nomDonneur != null): ?>
-<h1><?php echo ' Dons fait part '.$nomDonneur.' : '. $fonctionDonneur.''; ?></h1>
+<h1><?php echo ' Dons fait par '.$nomDonneur.' : '. $fonctionDonneur.''; ?></h1>
 <p>
     <br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
 </p>

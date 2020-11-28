@@ -218,8 +218,8 @@ Calendar.prototype.showDates = function(month, year) {
     });
 }
 
-Calendar.prototype.getInfoDate = function(date) {
-    const url = "showDetailsDate.php?currentDay="+date.getDate()+"&currentMonth="+(date.getMonth()+1)+"&currentYear="+date.getFullYear();
+Calendar.prototype.getInfoDate = function(dateParam) {
+    const url = "showDetailsDate.php?currentDay="+dateParam.getDate()+"&currentMonth="+(dateParam.getMonth()+1)+"&currentYear="+dateParam.getFullYear();
     let objCalendar = this;
 
     //On récupère les données de la bdd (Fonction asynchrone)
@@ -228,18 +228,50 @@ Calendar.prototype.getInfoDate = function(date) {
     }).then(function(body) { //Ensuite on afficher le résultat
         console.log("getInfoDate : ");
         console.log(body);
+
+        //On réinitialise les objets déjà affichés
+        objCalendar.calendarDetailsContainer.innerHTML = "";
+
+        //On place le titre indiquant la date sélectionné
+        let dateTitle = document.createElement("h4");
+        dateTitle.innerText = dateParam.toUTCString();
+        objCalendar.calendarDetailsContainer.appendChild(dateTitle);
+
         if (body.length != 0) {
-            objCalendar.calendarDetailsContainer.innerHTML = "";
+            //Pour chaque don trouvé
             Array.from(body).forEach(elt => {
-                let detailsTitle = document.createElement("h3");
-                detailsTitle.innerText = elt.idDon;
-                objCalendar.calendarDetailsContainer.appendChild(detailsTitle);
+                let detailsContainer = document.createElement("div");
+
+                let detailsTitle = document.createElement("h4");
+                detailsTitle.innerText = elt.id;
+                detailsContainer.appendChild(detailsTitle);
+
+                let detailsTextContainer = document.createElement("div");
+                function createSpanElt(innerText) {
+                    let spanElt = document.createElement("span");
+                    spanElt.innerText = innerText;
+                    detailsTextContainer.appendChild(spanElt);
+                }
+                createSpanElt("Forme : " + elt.forme);
+                createSpanElt("Valeur : " + elt.valeur);
+                createSpanElt("Nature : " + elt.nature);
+                createSpanElt("Lieu : " + elt.lieu);
+                createSpanElt("Source : " + elt.source);
+                detailsContainer.appendChild(detailsTextContainer);
+
+                objCalendar.calendarDetailsContainer.appendChild(detailsContainer);
             });
-            objCalendar.docElement.appendChild(objCalendar.calendarDetailsContainer);
         }
         else {
-            objCalendar.calendarDetailsContainer.remove();
+            let detailsContainer = document.createElement("div");
+
+            let detailsTitle = document.createElement("h4");
+            detailsTitle.innerText = "Il n'y a pas de don effectué sur cette date";
+            detailsContainer.appendChild(detailsTitle);
+
+            objCalendar.calendarDetailsContainer.appendChild(detailsContainer);
         }
+        objCalendar.docElement.appendChild(objCalendar.calendarDetailsContainer);
     }).catch(function(err) { //En cas d'erreur
         console.error("La bdd n'a pas pu être chargé à la date indiqué : " + err);
     });

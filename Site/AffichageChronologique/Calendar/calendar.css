@@ -2,15 +2,18 @@
     --main-color: #167e56;
 }
 
-#calendar-main {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
+#calendar-main, #calendar-date-details{
+    margin: 20px auto;
     width: 600px;
-    height: 600px;
     background-color: white;
     box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.2);
     overflow: hidden;
+}
+/*---/Calendar Main/---*/
+#calendar-main {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
 }
 
 #calendar-header {
@@ -66,4 +69,29 @@
     background-color: var(--main-color);
     border-radius: inherit;
     color: white;
+}
+
+/*---/Calendar Details/---*/
+#calendar-date-details {
+    box-sizing: border-box;
+    padding: 20px;
+}
+#calendar-date-details h3 {
+    font-weight: bold;
+}
+#calendar-date-details h4 {
+    margin: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+#calendar-date-details > div {
+    float: left;
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+}
+#calendar-date-details > div > div {
+    display: flex;
+    flex-direction: column;
 }

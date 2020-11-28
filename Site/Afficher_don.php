@@ -109,7 +109,7 @@ while ($row= $req->fetch())
             <br/>
             <br/>Auteur : <?php echo '<a href="PerData/donPerDonnateur.php?id='. $idAuteur .'">' . $nomAuteur .'  : ' . $fonctionAuteur .'</a>'; ?>
             <br/>A l' intention de :<?php echo '<a href="PerData/donPerDonnateur.php?id='. $idDestinataire .'">' . $nomDestinataire .' : ' . $fonctionDestinataire .'</a>'; ?>
-            <br/>Par le bais de : <?php
+            <br/>Par le biais de : <?php
                     if($nomIntermediaire == null)
                     {
                         echo 'Aucune Mention';
