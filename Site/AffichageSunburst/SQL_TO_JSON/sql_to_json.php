@@ -118,13 +118,7 @@ for($i = 0 ; $i < count($idDon); $i++) //
     }
 
 
-
-    if($poids == '')
-    {
-        $poids = 'Aucune Mention' ;
-    }
-
-    $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$nomAuteur.'", "Beneficiaire" : "'.$nomBeneficiaire.'", "Statut": "'.$fonctionBeneficiaire.'", "Nature": "'.$nature[$i].'", "Lieu": "'.$lieu[$i].'", "Formes": "'.$forme[$i].'", "Date": "'.$date[$i].'", "Sources": "'.$sources[$i].'", "Poids" : "'.$poids[$i].'" ,"DonCount" : 1 }';
+    $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$nomAuteur.'", "Beneficiaire" : "'.$nomBeneficiaire.'", "Statut": "'.$fonctionBeneficiaire.'", "Nature": "'.$nature[$i].'", "Lieu": "'.$lieu[$i].'", "Formes": "'.$forme[$i].'", "Date": "'.$date[$i].'", "Sources": "'.$sources[$i].'", "Poids" : "'.$poids.'" ,"DonCount" : 1 }';
     
     
     if($i != count($idDon)-1)

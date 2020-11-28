@@ -27,7 +27,7 @@
                     <img src="images/Geographique.png" />
                     <span>Géographique</span>
                 </a>
-                <a href="AffichageSunburst/DonSunburst.php" class="grid-cell">
+                <a href="AffichageSunburst/#Data Visualization/SunburstChart/default.php" class="grid-cell">
                     <img src="images/Sunburst.png" />
                     <span>Sunburst</span>
                 </a>
