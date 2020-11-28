@@ -111,8 +111,9 @@
     $level5->groupMemberPath("Date");
     $level6->groupMemberPath("Nature");
     $level7->groupMemberPath("Poids");
-    $level8->groupMemberPath("Formes");
-    $level9->groupMemberPath("Sources");
+    $level8->groupMemberPath("Sources");
+    $level9->groupMemberPath("Formes");
+    
     
 
     //affichage des différents niveaux

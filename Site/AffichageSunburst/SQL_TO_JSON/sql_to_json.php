@@ -23,12 +23,14 @@ $fonctionBeneficiaire = '';
 $lieu = [];
 $statut = [];
 $nature = [];
-$poids = [];
 $categorie = [];
 $forme = [];
 $prix = [];
 $date = []; 
 $sources = [];
+
+$poids = '';
+$idPoids = [];
 
 
 //Declaration des variable pour bd
@@ -56,9 +58,9 @@ for($i = 0 ; $i < count($idDon); $i++)
                         forme as forme,
                         idAuteur as idA,
                         idBeneficiaire as idB,
-                        masse as poids,
                         nature as nature,
                         prix as prix,
+                        idPoids as poids,
                         sourceDon as sourceD,
                         typeDon as typeD
                         from don where idDon ='.$idDon[$i].'');
@@ -69,17 +71,14 @@ for($i = 0 ; $i < count($idDon); $i++)
         array_push($forme,$row['forme']);
         array_push($idAuteur,$row['idA']);
         array_push($idBeneficiaire,$row['idB']);
-        array_push($poids,$row['poids']);
         array_push($nature,$row['nature']);
         array_push($prix,$row['prix']);
         array_push($sources,$row['sourceD']);
         array_push($categorie,$row['typeD']);
+        array_push($idPoids,$row['poids']);
     }
 
-    if($poids[$i] == '')
-    {
-        $poids[$i] = 'Aucune Mention' ;
-    }
+    
 
 }
 
@@ -107,6 +106,22 @@ for($i = 0 ; $i < count($idDon); $i++) //
     {
         $nomBeneficiaire = $row['nomB'];
         $fonctionBeneficiaire = $row['statut'];
+    }
+
+    //Poids
+    $req = $pdo->query('SELECT masse as poids
+    from don natural join poids
+    where idPoids ='.$idPoids[$i].'');
+    while ($row= $req->fetch())
+    {
+        $poids = $row['poids'];
+    }
+
+
+
+    if($poids == '')
+    {
+        $poids = 'Aucune Mention' ;
     }
 
     $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$nomAuteur.'", "Beneficiaire" : "'.$nomBeneficiaire.'", "Statut": "'.$fonctionBeneficiaire.'", "Nature": "'.$nature[$i].'", "Lieu": "'.$lieu[$i].'", "Formes": "'.$forme[$i].'", "Date": "'.$date[$i].'", "Sources": "'.$sources[$i].'", "Poids" : "'.$poids[$i].'" ,"DonCount" : 1 }';

@@ -11,15 +11,21 @@ $id = $_GET["id"];
 $nomAuteur = '';
 $fonctionAuteur = '';
 $idAuteur = '';
+
 $nomDestinataire = '';
 $fonctionDestinataire = '';
 $idDestinataire = '';
+
 $nomIntermediaire = '';
 $fonctionIntermediaire = '';
 $idIntermediaire = '';
+
 $typeDon = '';
 $formeDon = '';
+
+$idPoids = '';
 $poids = '';
+
 $date = '';
 $lieu = '';
 $raison = '';
@@ -29,7 +35,7 @@ $prix = '';
 
 //Requete 1, sur table don
 $req = $pdo->query('SELECT typeDon as TypeD, forme as FormeD, nature as NatureD, prix as PrixD, 
-                dateDon as DateD, masse as PoidD, emplacement as LieuD, sourceDon as SourceD FROM don where idDon = '. $id .'');
+                dateDon as DateD, idPoids as PoidD, emplacement as LieuD, sourceDon as SourceD FROM don where idDon = '. $id .'');
 while ($row= $req->fetch())
 {
 $typeDon = $row['TypeD'];
@@ -37,7 +43,7 @@ $formeDon = $row['FormeD'];
 $raison = $row['NatureD'];
 $prix = $row['PrixD'];
 $date = $row['DateD'];
-$poids = $row['PoidD'];
+$idPoids = $row['PoidD'];
 $lieu = $row['LieuD'];
 $source = $row['SourceD'];
 
@@ -71,6 +77,15 @@ while ($row= $req->fetch())
     $nomIntermediaire = $row['NomI'];
     $fonctionIntermediaire = $row['FonctionI'];
     $idIntermediaire = $row['idI'];
+}
+
+//Requete sur le poids
+$req = $pdo->query('SELECT masse as poids from poids natural join don
+                WHERE idPoids = '. $idPoids .'');
+while ($row= $req->fetch())
+{
+    $poids = $row['poids'];
+
 }
 
 
