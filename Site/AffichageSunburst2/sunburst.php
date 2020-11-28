@@ -1,3 +1,5 @@
+<?php include_once("sql_to_json.php"); ?>
+
 <!DOCTYPE html>
 <head>
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -8,56 +10,7 @@
 
 <script>
     // JSON data
-    var json = 
-{
-    "name": "TOPICS", "children": 
-    [
-        {
-            "name": "Topic A",
-            "children": 
-            [
-                {
-                    "name": "Sub A1", "size": 4}, {"name": "Sub A2", "size": 4
-                    }
-                ]
-        }, 
-        {
-            "name": "Topic B",
-            "children": 
-            [
-                {
-                    "name": "Sub B1", "size": 3
-                }, 
-                {
-                    "name": "Sub B2", "size": 3
-                },
-                {
-                    "name": "Sub B3", "size": 3
-                }
-            ]
-        }, 
-        {
-            "name": "Topic C",
-            "children":
-            [
-                {
-                    "name": "Sub C1", 
-                    "children" :
-                    [
-                        { 
-                            "name " : "Sub C1a"
-                            , "size": 3
-                        }
-                    ]
-                }, 
-                {
-                    "name": "Sub C2", 
-                    "size": 4
-                }
-            ]
-        }
-    ]
-};
+    var json = <?php echo $DonJson_Tous ?> ;
 
     // Variables
     var width = 500;

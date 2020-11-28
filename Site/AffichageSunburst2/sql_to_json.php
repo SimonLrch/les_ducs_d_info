@@ -1,7 +1,7 @@
 <?php
 
 //conexion bd
-require_once ('../../include/dbConfig.php');
+require_once ('../include/dbConfig.php');
 
 $pdo = getPDO("PtutS3");
 
@@ -10,7 +10,7 @@ $idDon  = [];
 
 $idAuteur = [];
 $nomAuteur = '';
-//$fonctionAuteur = '';
+$fonctionAuteur = '';
 
 $idBeneficiaire = [];
 $nomBeneficiaire = '';
@@ -33,111 +33,181 @@ $poids = '';
 $idPoids = [];
 
 
-//Declaration des variable pour bd
-$DonJson_Seul = '';
-$DonJson_Tous = '{
-    "name : "root",
-    "children" : [';
 
 
 
 
-//Requête pour liste des id
 
-$req = $pdo->query('SELECT idDon as id from don group by idDon');
+//requête pour avoir les id des Auteurs
+$req = $pdo->query('SELECT idAuteur as idA from don group by idAuteur');
 while ($row= $req->fetch())
 {
-    array_push($idDon,$row['id']);
-}
-
-
-//requête pour remplir chaque variable
-for($i = 0 ; $i < count($idDon); $i++)
-{
-    //sur table don
-    $req = $pdo->query('SELECT dateDon as dateD ,
-                        emplacement as lieu,
-                        forme as forme,
-                        idAuteur as idA,
-                        idBeneficiaire as idB,
-                        nature as nature,
-                        prix as prix,
-                        idPoids as poids,
-                        sourceDon as sourceD,
-                        typeDon as typeD
-                        from don where idDon ='.$idDon[$i].'');
-    while ($row= $req->fetch())
-    {
-        array_push($date,$row['dateD']);
-        array_push($lieu,$row['lieu']);
-        array_push($forme,$row['forme']);
-        array_push($idAuteur,$row['idA']);
-        array_push($idBeneficiaire,$row['idB']);
-        array_push($nature,$row['nature']);
-        array_push($prix,$row['prix']);
-        array_push($sources,$row['sourceD']);
-        array_push($categorie,$row['typeD']);
-        array_push($idPoids,$row['poids']);
-    }
-
-    
-
+    array_push($idAuteur,$row["idA"]);
 }
 
 
 
-//remplir chaque ligne du json
-for($i = 0 ; $i < count($idDon); $i++) //
+//Remplir le json
+
+
+$DonJson_Tous = '
+                {
+                "name": "Dons", "children": 
+                [
+            ';
+            
+for($i = 0 ; $i < count($idAuteur); $i++) //
 {
 
-     //Auteur
-    $req = $pdo->query('SELECT nom as nomA
-         from don inner join personne on don.idAuteur =personne.idPersonne
-         where idPersonne ='.$idAuteur[$i].'');
+    //requete détails Auteurs
+    $req = $pdo->query('SELECT nom as nomA, fonction as fonctionA
+    from don inner join personne on don.idAuteur =personne.idPersonne
+    where idPersonne ='.$idAuteur[$i].'');
     while ($row= $req->fetch())
     {
-        $nomAuteur = $row['nomA'];
+        $nomAuteur = $row["nomA"];
+        $fonctionAuteur = $row["fonctionA"];
     }
 
-    //Beneficiaire
-    $req = $pdo->query('SELECT nom as nomB,
-            fonction as statut
-    from don inner join personne on don.idBeneficiaire =personne.idPersonne
-    where idPersonne ='.$idBeneficiaire[$i].'');
+    //Json
+    $DonJson_Auteur = '{
+                        "name" : " '. $nomAuteur.' '. $fonctionAuteur.'",
+                        "children" : [';
+
+    //requete idBeneficiaire
+    $req = $pdo->query('SELECT distinct(idBeneficiaire) as idB from don 
+                        where idAuteur = '. $idAuteur[$i].'');
     while ($row= $req->fetch())
     {
-        $nomBeneficiaire = $row['nomB'];
-        $fonctionBeneficiaire = $row['statut'];
+        array_push($idBeneficiaire,$row["idB"]);
     }
 
-    //Poids
-    $req = $pdo->query('SELECT masse as poids
-    from don natural join poids
-    where idPoids ='.$idPoids[$i].'');
-    while ($row= $req->fetch())
+    for($j=0;$j < count($idBeneficiaire);$j++)
     {
-        $poids = $row['poids'];
+
+        //requete détails Beneficiaires
+        $req = $pdo->query('SELECT nom as nomB, fonction as fonctionB
+        from don inner join personne on don.idBeneficiaire =personne.idPersonne
+        where idPersonne ='.$idBeneficiaire[$j].'');
+        while ($row= $req->fetch())
+        {
+            $nomBeneficiaire = $row["nomB"];
+            $fonctionBeneficiaire = $row["fonctionB"];
+        }
+
+        //json
+        $DonJson_Beneficiaire = '{
+            "name" : " '. $nomBeneficiaire.' '. $fonctionBeneficiaire.' ",
+            "children" : [';
+
+         //requete lieux
+        $req = $pdo->query('SELECT distinct(emplacement) as lieu from don 
+        where idBeneficiaire = '. $idBeneficiaire[$j].'');
+        while ($row= $req->fetch())
+        {
+        array_push($lieu,$row["lieu"]);
+        }
+
+        for ($h=0;$h< count($lieu);$h++)
+        {
+            $DonJson_Lieu = '{
+                "name" : " lieu ",
+                "size" : 1}';
+
+            if($h != count($lieu)-1)
+            {
+                $DonJson_Beneficiaire .= $DonJson_Lieu . ',';
+            }
+            else
+            {
+                $DonJson_Beneficiaire .= $DonJson_Lieu;
+            }
+        }
+
+        $DonJson_Beneficiaire .= ']}';
+
+        if($j != count($idBeneficiaire)-1)
+        {
+            $DonJson_Auteur .= $DonJson_Beneficiaire . ',';
+        }
+        else
+        {
+            $DonJson_Auteur .= $DonJson_Beneficiaire;
+        }
+
     }
 
 
+    $idBeneficiaire = []; //reset pour le prochain auteur de don
 
+    //Json
+    $DonJson_Auteur .= ']}';
 
-    $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$nomAuteur.'", "Beneficiaire" : "'.$nomBeneficiaire.'", "Statut": "'.$fonctionBeneficiaire.'", "Nature": "'.$nature[$i].'", "Lieu": "'.$lieu[$i].'", "Formes": "'.$forme[$i].'", "Date": "'.$date[$i].'", "Sources": "'.$sources[$i].'", "Poids" : "'.$poids.'" ,"DonCount" : 1 }';
-    
-    
-    if($i != count($idDon)-1)
+    if($i != count($idAuteur)-1)
     {
-        $DonJson_Tous .= $DonJson_Seul . ',';
+        $DonJson_Tous .= $DonJson_Auteur . ',';
     }
     else
     {
-        $DonJson_Tous .= $DonJson_Seul;
+        $DonJson_Tous .= $DonJson_Auteur;
     }
+
 }
 
-$DonJson_Tous .= '}';
+
+$DonJson_Tous .= ']}';
 
 
-//echo $DonJson_Tous;
+/*$test1 = ' {
+    "name": "TOPICS", "children": 
+    [
+        {
+            "name": "Topic A",
+            "children": 
+            [
+                {
+                    "name": "Sub A1", "size": 4}, {"name": "Sub A2", "size": 4
+                    }
+                ]
+        }, 
+        {
+            "name": "Topic B",
+            "children": 
+            [
+                {
+                    "name": "Sub B1", "size": 3
+                }, 
+                {
+                    "name": "Sub B2", "size": 3
+                },
+                {
+                    "name": "Sub B3", "size": 3
+                }
+            ]
+        }, 
+        {
+            "name": "Topic C",
+            "children":
+            [
+                {
+                    "name": "Sub C1", 
+                    "children" :
+                    [
+                        { 
+                            "name " : "Sub C1a"
+                            , "size": 3
+                        }
+                    ]
+                }, 
+                {
+                    "name": "Sub C2", 
+                    "size": 4
+                }
+            ]
+        }
+    ]
+}'; */
+
+echo $DonJson_Tous;
 
 ?>
