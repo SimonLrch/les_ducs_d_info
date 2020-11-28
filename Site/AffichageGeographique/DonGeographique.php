@@ -2,8 +2,9 @@
 <html>
 	<?php
 		//Connexion bd
-		$db = new PDO('mysql:host=localhost; dbname=PtutS3', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-		$db_villes = new PDO('mysql:host=localhost; dbname=PtutS3_villes', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		require_once("../include/dbConfig.php");
+		$db = getPDO("PtutS3");
+		$db_villes = getPDO("PtutS3_villes");
 		
 		//Création des variables
 		$id = [];
@@ -48,20 +49,27 @@
 		{
 			array_push($longi,$row['longitude']);
 		}
-		
-		for($i = 0; $i < count($nomVille); $i++){
-				for($j = 0; $j < count($sourceVille); $j++){
-					if($nomVille[$i] == $sourceVille[$j]){
-							$latitude[$i] = $lat[$j];
-							$longitude[$i] = $longi[$j];
-					}
+		//Si on veut afficher les villes non trouvés
+		/*for($i = 0; $i < count($nomVille); $i++){
+			for ($j = 0; $j < count($sourceVille); $j++) {
+				if($nomVille[$i] == $sourceVille[$j]){
+					$latitude[$i] = $lat[$j];
+					$longitude[$i] = $longi[$j];
 				}
 			}
-			
-		for ($i = 0; $i < count($nomVille); $i++){
-			$villes[$i] = '[{ '. $nomVille[$i] .' : { "lat": '. $latitude[$i] .', "lon": '. $longitude[$i] .' }}]';
 		}
-			
+		for ($i = 0; $i < count($nomVille); $i++){
+			$villes[$i] = array($nomVille[$i] => array("lat" => $latitude[$i], "lon" => $longitude[$i]));
+		}*/
+		//Si on veut afficher QUE les villes trouvés
+		for($i = 0; $i < count($nomVille); $i++){
+			for ($j = 0; $j < count($sourceVille); $j++) {
+				if($nomVille[$i] == $sourceVille[$j]){
+					array_push($villes, array($nomVille[$i] => array("lat" => $lat[$j], "lon" => $longi[$j])));
+				}
+			}
+		}
+		$ville = json_encode($villes);
 	?>
     <head>
         <meta charset="utf-8">
@@ -89,7 +97,12 @@
         <!-- Fichiers Javascript -->
         <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
         <script type='text/javascript' src='https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js'></script>
+	<script>
+		var id = <?php echo json_encode($id); ?>;
+		var villes = <?php echo json_encode($villes); ?>;
+	</script>
 	<script type="text/javascript">
+		console.log(villes);
 	    // On initialise la latitude et la longitude de Paris (centre de la carte)
 	    var lat = 48.852969;
 	    var lon = 2.349903;
@@ -134,10 +147,6 @@
 		// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
 		initMap(); 
 	    };
-	</script>
-	<script>
-		var id = <?php echo json_encode($id); ?>;
-		var villes = <?php echo json_encode($villes); ?>;
 	</script>
     </body>
 </html>
