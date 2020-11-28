@@ -59,12 +59,25 @@ function Calendar(element, initDate) {
     this.calendarGridDays.id = "calendar-grid";
     this.calendarDetailsContainer.id = "calendar-date-details";
 
-
+    this.initCalendar();
     this.initHeader();
     this.initGrid();
     this.showDates(this.month, this.year);
 
     this.docElement.appendChild(this.calendarMainContainer);
+}
+
+Calendar.prototype.initCalendar = function() {
+    let objCalendar = this;
+    this.calendarGridDays.addEventListener("click", function(event) {
+        let item = event.target;
+        if (item.nodeName == objCalendar.calendarGridDays.children[0].nodeName && !item.classList.contains("calendar-date-null")) {
+            Array.from(document.querySelectorAll(".calendar-selected")).forEach(element => element.classList.remove("calendar-selected"));
+            item.classList.add("calendar-selected");
+            objCalendar.dateSelected = new Date(objCalendar.year, objCalendar.month, item.innerText);
+            objCalendar.getInfoDate(objCalendar.dateSelected);
+        }
+    });
 }
 
 Calendar.prototype.initHeader = function() {
@@ -137,17 +150,6 @@ Calendar.prototype.initGrid = function() {
         }
         this.calendarGridDays.appendChild(dayElt);
     });
-    
-    let objCalendar = this;
-    this.calendarGridDays.addEventListener("click", function(event) {
-        let item = event.target;
-        if (item.nodeName == objCalendar.calendarGridDays.children[0].nodeName && !item.classList.contains("calendar-date-null")) {
-            Array.from(document.querySelectorAll(".calendar-selected")).forEach(element => element.classList.remove("calendar-selected"));
-            item.classList.add("calendar-selected");
-            objCalendar.dateSelected = new Date(objCalendar.year, objCalendar.month, item.innerText);
-            objCalendar.getInfoDate(objCalendar.dateSelected);
-        }
-    });
 
     this.calendarMainContainer.appendChild(this.calendarGridDays);
 }
@@ -161,6 +163,15 @@ Calendar.prototype.getDaysOfMonth = function(month, year) {
         date.setDate(date.getDate() + 1);
     }
     return listOfDays;
+}
+
+Calendar.prototype.getDateText = function (date) {
+    // Setting current date as readable text.
+    let dayAsText = (date.getDate()<10) ? "0"+date.getDate() : ""+date.getDate();
+    let monthAsText = ((date.getMonth()+1)<10) ? "0"+(date.getMonth()+1) : ""+(date.getMonth()+1);
+    let yearAsText = ""+date.getFullYear();
+
+    return yearAsText + "-" + monthAsText + "-" + dayAsText;
 }
 
 Calendar.prototype.update = function() {
@@ -194,7 +205,8 @@ Calendar.prototype.showDates = function(month, year) {
             //On vérifie si l'élément HTML correspond bien a une date
             if (!dayHtml.classList.contains("calendar-date-null")) {
                 increment++;
-                let currentDateStr = objCalendar.year + "-" + objCalendar.month+1 + "-" + ((increment < 10) ? "0"+increment : increment);
+                let currentDateStr = objCalendar.getDateText(new Date(objCalendar.year, objCalendar.month, increment));
+
                 //On vérifie si on a la date de l'élément HTML dans notre bdd
                 if (objCalendar.listDaysContent.some(item => item.date == currentDateStr)) {
                     dayHtml.classList.add("calendar-date-content");
@@ -206,18 +218,6 @@ Calendar.prototype.showDates = function(month, year) {
     });
 }
 
-Calendar.prototype.getHTMLOfDate = function(date) {
-    let objCalendar = this;
-    let listHtmlDate = [];
-    if (date.getFullYear == this.year && date.getMonth == this.day) {
-        this.calendarGridDays.forEach(function(dayHtml) {
-            if(objCalendar.day == date.getDate) {
-                listHtmlDate.push(dayHtml);
-            }
-        });
-    }
-}
-
 Calendar.prototype.getInfoDate = function(date) {
     const url = "showDetailsDate.php?currentDay="+date.getDate()+"&currentMonth="+(date.getMonth()+1)+"&currentYear="+date.getFullYear();
     let objCalendar = this;
@@ -226,6 +226,7 @@ Calendar.prototype.getInfoDate = function(date) {
     fetch(url).then(function (response) { //Ensuite on récupère les données de la bdd
         return response.json();
     }).then(function(body) { //Ensuite on afficher le résultat
+        console.log("getInfoDate : ");
         console.log(body);
         if (body.length != 0) {
             objCalendar.calendarDetailsContainer.innerHTML = "";
