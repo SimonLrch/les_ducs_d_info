@@ -35,7 +35,9 @@ $idPoids = [];
 
 //Declaration des variable pour bd
 $DonJson_Seul = '';
-$DonJson_Tous = '[';
+$DonJson_Tous = '{
+    "name : "root",
+    "children" : [';
 
 
 
@@ -118,6 +120,8 @@ for($i = 0 ; $i < count($idDon); $i++) //
     }
 
 
+
+
     $DonJson_Seul =  '{ "Category" : "'.$categorie[$i].'", "Auteur": "'.$nomAuteur.'", "Beneficiaire" : "'.$nomBeneficiaire.'", "Statut": "'.$fonctionBeneficiaire.'", "Nature": "'.$nature[$i].'", "Lieu": "'.$lieu[$i].'", "Formes": "'.$forme[$i].'", "Date": "'.$date[$i].'", "Sources": "'.$sources[$i].'", "Poids" : "'.$poids.'" ,"DonCount" : 1 }';
     
     
@@ -131,7 +135,7 @@ for($i = 0 ; $i < count($idDon); $i++) //
     }
 }
 
-$DonJson_Tous .= ']';
+$DonJson_Tous .= '}';
 
 
 //echo $DonJson_Tous;

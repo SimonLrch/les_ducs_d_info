@@ -3,31 +3,8 @@
     <?php
     //chargement de la librairie
     require_once '../EJ/AutoLoad.php';
-/*
-    //Connexion bd
-    //$db = new PDO('mysql:host=localhost; dbname=PtutS3', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-
-    //Création des variables
-
-    $auteur = [];
-    $label = [];
-    $statut = [];
-    $lieu = [];
-    $informations = [];
-    $nature = [];
-    $formes = [];
-    $sources = [];
 
 
-    $auteur = 'Test_auteur';
-    $label = 'Test_label';
-    $statut = 'Test_statut';
-    $lieu = 'Test_lieu';
-    $informations = 'Test_informations';
-    $nature = 'Test_nature';
-    $formes = 'Test_formes';
-    $sources = 'Test_sources';
-    */
     ?>
 
     <?php
@@ -85,7 +62,8 @@
 
 
     //décodage des accents
-    $Json = preg_replace('/,\s*([\]}])/m', '$1', utf8_encode($Json));
+    //$Json = preg_replace('/,\s*([\]}])/m', '$1', utf8_encode($Json)); //les accent marche pas avec ca mais marchent sans cette ligne
+
     $Json = json_decode($Json,true);
 
 
@@ -111,8 +89,9 @@
     $level5->groupMemberPath("Date");
     $level6->groupMemberPath("Nature");
     $level7->groupMemberPath("Poids");
-    $level8->groupMemberPath("Formes");
-    $level9->groupMemberPath("Sources");
+    $level8->groupMemberPath("Sources");
+    $level9->groupMemberPath("Formes");
+    
     
 
     //affichage des différents niveaux
