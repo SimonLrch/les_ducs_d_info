@@ -56,15 +56,6 @@
     // Fade all but the current sequence, and show it in the breadcrumb trail.
 function mouseover(d) {
 
-var percentage = (100 * d.value / totalSize).toPrecision(3);
-var percentageString = percentage + "%";
-if (percentage < 0.1) {
-  percentageString = "< 0.1%";
-}
-
-d3.select("#percentage")
-    .text(percentageString);
-
 d3.select("#explanation")
     .style("visibility", "");
 
@@ -112,8 +103,7 @@ d3.select("#explanation")
 
     //affichage du texte au centre
 <div id="explanation" style="visibility: hidden, position: absolute, top: 260px, left: 305px, width: 140px,text-align: center, color: #666, z-index: -1;">
-          <span id="percentage"></span><br/>
-          of visits begin with this sequence of pages
+          <br/>
         </div>
 
 </html>
