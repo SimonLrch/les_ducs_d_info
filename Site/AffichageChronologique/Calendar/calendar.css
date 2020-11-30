@@ -44,12 +44,17 @@
     transform: scale(-1,1);
 }
 
-#calendar-grid {
+#calendar-grid-months {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     height: 100%;
 }
-#calendar-grid span {
+.calendar-grid time {
     position: relative;
     display: flex;
     margin: 10%;

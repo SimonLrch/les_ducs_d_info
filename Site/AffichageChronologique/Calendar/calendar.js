@@ -46,7 +46,7 @@ function Calendar(element, initDate) {
     this.calendarNextButton = document.createElement("button");
 
     this.calendarDateContainer = document.createElement("div");
-    this.calendarGridDays = document.createElement("div");
+    this.calendarGridMonths = document.createElement("div");
 
     this.calendarDetailsContainer = document.createElement("div");
 
@@ -56,25 +56,25 @@ function Calendar(element, initDate) {
     this.calendarPreviousButton.id = "calendar-previous-btn";
     this.calendarNextButton.id = "calendar-next-btn";
     this.calendarDateContainer.id = "calendar-date-container";
-    this.calendarGridDays.id = "calendar-grid";
+    this.calendarGridMonths.id = "calendar-grid-months";
     this.calendarDetailsContainer.id = "calendar-date-details";
 
     this.initCalendar();
     this.initHeader();
     this.initGrid();
-    this.showDates(this.month, this.year);
 
     this.docElement.appendChild(this.calendarMainContainer);
 }
 
 Calendar.prototype.initCalendar = function() {
     let objCalendar = this;
-    this.calendarGridDays.addEventListener("click", function(event) {
+    this.calendarGridMonths.addEventListener("click", function(event) {
         let item = event.target;
-        if (item.nodeName == objCalendar.calendarGridDays.children[0].nodeName && !item.classList.contains("calendar-date-null")) {
+        if (item.nodeName == objCalendar.calendarGridMonths.children[0].children[0].nodeName && !item.classList.contains("calendar-date-null")) {
             Array.from(document.querySelectorAll(".calendar-selected")).forEach(element => element.classList.remove("calendar-selected"));
             item.classList.add("calendar-selected");
-            objCalendar.dateSelected = new Date(objCalendar.year, objCalendar.month, item.innerText);
+            let dateTimeHtml = item.dateTime.split("-");
+            objCalendar.dateSelected = new Date(dateTimeHtml[0], parseInt(dateTimeHtml[1])-1, dateTimeHtml[2]);
             objCalendar.getInfoDate(objCalendar.dateSelected);
         }
     });
@@ -125,9 +125,26 @@ Calendar.prototype.initHeader = function() {
 
 Calendar.prototype.initGrid = function() {
     //On s'assure que l'élément principal est vide
-    this.calendarGridDays.innerHTML = "";
+    this.calendarGridMonths.innerHTML = "";
 
-    let daysToShow = this.getDaysOfMonth(this.month, this.year);
+    //On fait une boucle du nombre de mois que l'on affiche
+    for (let monthCount = 0; monthCount < 12; monthCount++) {
+        //On dessine un mois
+        let listOfDaysGrid = this.drawMonth(this.month+monthCount, this.year);
+        let calendarGridDays = document.createElement("div");
+        listOfDaysGrid.forEach(day => {
+            calendarGridDays.appendChild(day);
+        });
+        calendarGridDays.classList.add("calendar-grid");
+        this.calendarGridMonths.appendChild(calendarGridDays);
+
+        this.showDatesOfMonth(this.month+monthCount, this.year);
+    }
+    this.calendarMainContainer.appendChild(this.calendarGridMonths);
+}
+
+Calendar.prototype.drawMonth = function(month, year) {
+    let daysToShow = this.getDaysOfMonth(month, year);
 
     //On prends le premier jour du mois
     let firstDay = daysToShow[0].getDay();
@@ -137,23 +154,32 @@ Calendar.prototype.initGrid = function() {
     //On ajoute des éléments null pour mettre des espaces devant le premier jour
     daysToShow = Array(firstDay-1).fill(null).concat(daysToShow);
 
+    let calendarGridFinal = [];
+    
     daysToShow.forEach(day => {
-        let dayElt = document.createElement("span")
+        let dayElt = document.createElement("time");
         if (day != null) {
             if (this.dateSelected.toString() == day.toString()) {
                 dayElt.classList.add("calendar-selected");
             }
-            dayElt.innerText = day.toString().split(' ')[2];
+            let dayString = day.toString().split(" ")[2];
+            dayElt.innerText = dayString;
+            dayElt.setAttribute("datetime", this.getDateText(new Date(year, month, dayString)));
         }
         else {
             dayElt.classList.add("calendar-date-null");
         }
-        this.calendarGridDays.appendChild(dayElt);
+        calendarGridFinal.push(dayElt);
     });
-
-    this.calendarMainContainer.appendChild(this.calendarGridDays);
+    return calendarGridFinal;
 }
 
+/**
+ * Donne chaque jour du mois et de l'année indiqué
+ * @param {int} month numéro du mois désiré
+ * @param {int} year numéro de l'année désiré
+ * @return liste contenant des objets date de chaque jours du mois
+ */
 Calendar.prototype.getDaysOfMonth = function(month, year) {
     let listOfDays = [];
     let date = new Date(year, month, 1);
@@ -180,7 +206,7 @@ Calendar.prototype.update = function() {
     this.month = this.date.getMonth();
     this.year = this.date.getFullYear();
     
-    this.showDates(this.month, this.year);
+    this.showDatesOfMonth(this.month, this.year);
 
     let objCalendar = this;
     window.requestAnimationFrame(function() {
@@ -189,7 +215,7 @@ Calendar.prototype.update = function() {
     });
 }
 
-Calendar.prototype.showDates = function(month, year) {
+Calendar.prototype.showDatesOfMonth = function(month, year) {
     const url = "calendarScript.php?currentMonth="+(month+1)+"&currentYear="+year;
     let objCalendar = this;
 
@@ -199,17 +225,17 @@ Calendar.prototype.showDates = function(month, year) {
     }).then(function(body) { //Ensuite on afficher le résultat
         console.log(body);
         objCalendar.listDaysContent = body;
-        let increment = 0;
+        let dayIncrement = 0;
         //On regarde chaque date (élément graphique) du calendrier
-        Array.from(objCalendar.calendarGridDays.children).forEach(dayHtml => {
+        Array.from(objCalendar.calendarGridMonths.children[month].children).forEach(dayHtml => {
             //On vérifie si l'élément HTML correspond bien a une date
             if (!dayHtml.classList.contains("calendar-date-null")) {
-                increment++;
-                let currentDateStr = objCalendar.getDateText(new Date(objCalendar.year, objCalendar.month, increment));
+                dayIncrement++;
+                let currentDateStr = objCalendar.getDateText(new Date(year, month, dayIncrement));
 
                 //On vérifie si on a la date de l'élément HTML dans notre bdd
-                if (objCalendar.listDaysContent.some(item => item.date == currentDateStr)) {
-                    dayHtml.classList.add("calendar-date-content");
+                if (body.some(item => item.date == currentDateStr)) {
+                   dayHtml.classList.add("calendar-date-content");
                 }
             }
         });
