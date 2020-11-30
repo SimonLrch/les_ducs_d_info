@@ -1,0 +1,172 @@
+{
+    "1": [
+        {
+            "IdDon": "1",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "186",
+            "Beneficiaire": "Yvon de Kermelec",
+            "Statut": "Ecuyer d'écurie du duc",
+            "Nature": "Aucune mention particulière",
+            "Lieu": "Aucune mention",
+            "Formes": "Un cheval morel à courte queue valant 50 écus",
+            "Poids": "Aucune mention",
+            "Prix": "50 écus",
+            "Informations": "16 May 1408",
+            "Sources": "ADCO, B 1554, f° 109 v° et 110 r°"
+        }
+    ],
+    "2": [
+        {
+            "IdDon": "2",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "496",
+            "Beneficiaire": "Willequin Bloc",
+            "Statut": "Fauconnier du duc",
+            "Nature": "Aucune mention particulière",
+            "Lieu": "Gand",
+            "Formes": "Un cheval valant 20 écus d'or",
+            "Poids": "Aucune mention",
+            "Prix": "20 écus d'or",
+            "Informations": "11 February 1407",
+            "Sources": "ADCO, B 1547, f° 113 r°"
+        }
+    ],
+    "3": [
+        {
+            "IdDon": "3",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "496",
+            "Beneficiaire": "Willequin Bloc",
+            "Statut": "Fauconnier du duc",
+            "Nature": "Aucune mention",
+            "Lieu": "Gand",
+            "Formes": "Un cheval bai à courte queue valant 30 fr.",
+            "Poids": "Aucune mention",
+            "Prix": "30 fr. monn. royal",
+            "Informations": "10 August 1407",
+            "Sources": "ADCO, B 1547, f° 114 v° et 115 r°"
+        }
+    ],
+    "4": [
+        {
+            "IdDon": "4",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "359",
+            "Beneficiaire": "Waléran III de Luxembourg",
+            "Statut": "Comte de Saint-Pol",
+            "Nature": "En paiement de ses arrérages en vertue de sa pension",
+            "Lieu": "Paris",
+            "Formes": "Deux coursiers valant 405 fr.",
+            "Poids": "Aucune mention",
+            "Prix": "405 fr. monn. royal",
+            "Informations": "14 April 1410",
+            "Sources": "ADCO, B 1560, f° 124 r°"
+        }
+    ],
+    "5": [
+        {
+            "IdDon": "5",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "359",
+            "Beneficiaire": "Waléran III de Luxembourg",
+            "Statut": "Comte de Saint-Pol, connétable de France",
+            "Nature": "Aucune mention particulière",
+            "Lieu": "Aucune mention",
+            "Formes": "Un cheval roux bai à longue queue ",
+            "Poids": "Aucune mention",
+            "Prix": "Aucune mention",
+            "Informations": "12 September 1412",
+            "Sources": "ADCO, B 1571, f° 152 v° et 153 r°"
+        }
+    ],
+    "6": [
+        {
+            "IdDon": "6",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "Des représentants de Bohême",
+            "IdBene": "2301",
+            "Beneficiaire": "Un évêque des marches de Bohême",
+            "Statut": "Statut Inconnu",
+            "Nature": "Lors d'une ambassade de représentants de la Bohême",
+            "Lieu": "Paris",
+            "Formes": "Une belle mule valant 80 fr.",
+            "Poids": "Aucune mention",
+            "Prix": "80 fr. monn. royal",
+            "Informations": "25 September 1409",
+            "Sources": "ADCO, B 1558, f° 107 r°"
+        }
+    ],
+    "7": [
+        {
+            "IdDon": "7",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "2298",
+            "Beneficiaire": "Thibaud de Lugny",
+            "Statut": "Veneur du duc",
+            "Nature": "Aucune mention particulière",
+            "Lieu": "Paris",
+            "Formes": "Un cheval gris à longue queue valant 40 fr.",
+            "Poids": "Aucune mention",
+            "Prix": "40 fr. monn. royal",
+            "Informations": "22 June 1409",
+            "Sources": "ADCO, B 1558, f° 105 v°"
+        }
+    ],
+    "8": [
+        {
+            "IdDon": "8",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "2285",
+            "Beneficiaire": "Thibaud de Laval",
+            "Statut": "Chambellan du roi de Sicile",
+            "Nature": "Aucune mention particulière",
+            "Lieu": "Paris",
+            "Formes": "Un cheval valant 120 écus",
+            "Poids": "Aucune mention",
+            "Prix": "120 écus",
+            "Informations": "10 April 1408",
+            "Sources": "ADCO, B 1554, f° 108 r°"
+        }
+    ],
+    "9": [
+        {
+            "IdDon": "9",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "817",
+            "Beneficiaire": "Simon de Craon",
+            "Statut": "Chevalier et chambellan du duc",
+            "Nature": "Aucune mention particulière",
+            "Lieu": "Bruges",
+            "Formes": "Un cheval noir à longue queue valant 100 fr.",
+            "Poids": "Aucune mention",
+            "Prix": "100 fr. monn. royal",
+            "Informations": "4 January 1414",
+            "Sources": "ADCO, B 1576, f° 165 v° et 166 r°"
+        }
+    ],
+    "10": [
+        {
+            "IdDon": "10",
+            "Auteur": "Jean sans Peur",
+            "Intermediaire": "",
+            "IdBene": "267",
+            "Beneficiaire": "Roland d'Uutkerke",
+            "Statut": "Capitaine de Malines, conseiller du duc",
+            "Nature": "Aucune mention particulière",
+            "Lieu": "",
+            "Formes": "Un grand cheval à longue queue pour la joute",
+            "Poids": "Aucune mention",
+            "Prix": "Aucune mention",
+            "Informations": "1 January 1416",
+            "Sources": "DE LABORDE, Les ducs de Bourgogne, étude sur les lettres, les arts et l'industrie pendant le XVe siècle, t. I, 1851, n° 396, p. 130"
+        }
+    ]
+}
