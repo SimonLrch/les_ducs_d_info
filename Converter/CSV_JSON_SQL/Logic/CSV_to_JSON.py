@@ -72,6 +72,7 @@ class CSV_to_JSON:
 
     def clean(self):
         self.data = {}
+
         # #######################################################
         # Méthode MonthFRtoEN(self, dateToChange):
         # Description :
@@ -149,6 +150,12 @@ class CSV_to_JSON:
     # ########################################################
     def CheckandConvert(self):
         try:
+            if not self.Win.con:
+                raise DbIsMissing()
+            if len(self.Win.listCSV) == 0:
+                raise ListCSVEmpty()
+            # Vider le list_Widget de Validation afin de pas confondre les anciennes convertions avec les nouvelles
+            self.Win.lw_Validation.clear()
             self.listJSON.clear()
             # Création des path pour les fichiers Json
             for fileCSV in self.Win.listCSV:
@@ -163,7 +170,7 @@ class CSV_to_JSON:
                             self.Win.lw_CSVfiles.takeItem(i)
                     raise CSVIsNoMore(nameCSV)
 
-        except CSVIsNoMore as e:
+        except (ListCSVEmpty, DbIsMissing, CSVIsNoMore) as e:
             e.ErrorMessage()
         else:
             for fileCSV in self.listJSON:
@@ -177,6 +184,6 @@ class CSV_to_JSON:
                     self.Win.lw_Validation.item(self.Win.lw_Validation.row(item)).setForeground(QtGui.QColor('red'))
                 self.Win.lw_CSVfiles.clear()
                 self.Win.listCSV.clear()
-
+                
     def GetlistJSON(self):
         return self.listJSON

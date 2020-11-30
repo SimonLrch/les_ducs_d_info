@@ -1,29 +1,17 @@
 import json
+import sys
 
 from PyQt5 import QtWidgets, QtGui
 
-
-# #######################################################
-# Méthode OpenFile(self,file)
-# Description :
-# Méthode permettant l'ouverture d'un fichier JSON passer en paramètre
-# @param self
-# @param file, un fichier JSON
-# 0return le dictionnaire correspondant au fichier JSON
-# ########################################################
-def OpenFile(file):
-    get = open(file, "r", encoding="utf-8")
-    temp = json.load(get)
-    get.close()
-    return temp
+from Logic.Exceptions import Error
 
 
 class JSON_to_SQL:
-    def __init__(self, MainWindow, path):
+    def __init__(self, MainWindow,path):
         self.con = MainWindow.getCon()
         self.Win = MainWindow
         self.nameJson = path.split("/")[-1].replace(".json", "")
-        self.json_file = OpenFile(path)
+        self.json_file = self.OpenFile(path)
 
     # #######################################################
     # Méthode TypeDon(self)
@@ -41,6 +29,20 @@ class JSON_to_SQL:
         cursor.close()
 
     # #######################################################
+    # Méthode OpenFile(self,file)
+    # Description :
+    # Méthode permettant l'ouverture d'un fichier JSON passer en paramètre
+    # @param self
+    # @param file, un fichier JSON
+    # 0return le dictionnaire correspondant au fichier JSON
+    # ########################################################
+    def OpenFile(self, file):
+        get = open(file, "r", encoding="utf-8")
+        temp = json.load(get)
+        get.close()
+        return temp
+
+    # #######################################################
     # Méthode GetCount(self,query)
     # Description :
     # Méthode permettant de faire la requête SELECT COUNT(*) donné et de retourné le résultat de la requête
@@ -48,11 +50,12 @@ class JSON_to_SQL:
     # @param query, une requête SQL
     # ########################################################
     def GetCount(self, query):
-        cursor = self.con.cursor()
-        cursor.execute(query)
-        res = cursor.fetchone()
-        count = res['Res']
-        cursor.close()
+        if "COUNT(*) as Res" in query:
+            cursor = self.con.cursor()
+            cursor.execute(query)
+            res = cursor.fetchone()
+            count = res['Res']
+            cursor.close()
         return count
 
     # #######################################################
@@ -64,12 +67,11 @@ class JSON_to_SQL:
     # ########################################################
     def Autres(self):
         cursor = self.con.cursor()
-        # rows = [[nom_table,nom_colonne,nom_JSON]]
         rows = [
-            ['statut', "fonction", "Statut"],
-            ['poids', "masse", "Poids"],
-            ['sourceDon', "recherche", "Sources"],
-            ['lieu', "emplacement", "Lieu"],
+            ['statut',"fonction", "Statut"],
+            ['poids',"masse", "Poids"],
+            ['sourceDon',"recherche", "Sources"],
+            ['lieu',"emplacement", "Lieu"],
         ]
 
         for row in rows:
@@ -145,7 +147,6 @@ class JSON_to_SQL:
                                 + str(intermediaire) + '")'
                     cursor.execute(req_inter)
                     self.con.commit()
-
     # #######################################################
     # Méthode Personnes(self)
     # Description :
@@ -164,7 +165,7 @@ class JSON_to_SQL:
                     # Si le champs correspond à une personne n'est pas vide
                     if info[p] != "":
                         # Vérifier si elle n'existe pas déjà dans la base de données
-                        query = 'SELECT COUNT(*) as Res FROM personne WHERE nom = "' + info[p] + '"'
+                        query = 'SELECT COUNT(*) as Res FROM personne WHERE nom = "' + info[p]+'"'
                         if self.GetCount(query=query) == 0:
                             if p == "Beneficiaire":
                                 query = 'INSERT IGNORE INTO Personne(nom,fonction) ' \
@@ -172,16 +173,15 @@ class JSON_to_SQL:
                             else:
                                 query = 'INSERT IGNORE INTO Personne(nom,fonction) ' \
                                         'VALUES ("' + info[p] + '", "Statut Inconnu")'
-
+                            
                         else:
                             if p == "Beneficiaire":
-                                if info['Statut'] != "":
-                                    query = 'SELECT fonction FROM personne WHERE nom ="' + info[p] + '"'
+                                if (info['Statut']!= "" ):                                    
+                                    query = 'SELECT fonction FROM personne WHERE nom ="' + info[p] +'"'
                                     cursor.execute(query)
                                     res = cursor.fetchone()['fonction']
-                                    if str(res) == "Statut Inconnu":
-                                        query = 'UPDATE personne SET fonction = "' + info[
-                                            'Statut'] + '" WHERE nom = "' + info[p] + '"'
+                                    if (str(res)=="Statut Inconnu"):
+                                        query = 'UPDATE personne SET fonction = "' + info['Statut'] + '" WHERE nom = "' + info[p] + '"'
                         cursor.execute(query)
         self.con.commit()
         cursor.close()

@@ -7,21 +7,24 @@
 # WARNING! All changes made in this file will be lost!
 
 # Import pour IHM
-
+import os
+from pathlib import Path
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMessageBox
 
+from IHM import resources
+from IHM import Dialog_Connection
 from IHM.Dialog_Connection import Ui_ConnectionWindow
 from Logic.CSV_to_JSON import CSV_to_JSON
-from Logic.Exceptions import CSVAlreadySaved, DbIsMissing, ListCSVEmpty
+from Logic.Exceptions import ListCSVEmpty, DbIsMissing, CSVIsNoMore, CSVAlreadySaved
 from Logic.JSON_to_SQL import JSON_to_SQL
 
 
 class Ui_MainWindow(object):
     def __init__(self):
         self.uiConnect = Ui_ConnectionWindow(self)
-        self.connectWin = QMainWindow()
+        self.connectWin = QtWidgets.QMainWindow()
         self.con = None
         self.listCSV = []
         self.ConverterToJson = CSV_to_JSON(self)
@@ -152,11 +155,11 @@ class Ui_MainWindow(object):
     def AddCSV(self):
         try:
             # Ouvre un FileDialog afin d'aller chercher le CSV à convertir
-            dialog = QFileDialog()
+            dialog = QtWidgets.QFileDialog()
             dialog.setWindowTitle('Cherchez un CSV à convertir')
             dialog.setNameFilter('csv(*.csv)')
             dialog.setDirectory(QtCore.QDir.currentPath())
-            dialog.setFileMode(QFileDialog.ExistingFile)
+            dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
             directory = None
             # On vérifie si un fichier a été choisis
             if dialog.exec_() == QtWidgets.QDialog.Accepted:
@@ -202,24 +205,15 @@ class Ui_MainWindow(object):
     # @param self
     # ########################################################
     def Convert(self):
-        try:
-            if not self.getCon():
-                raise DbIsMissing()
-            if len(self.listCSV) == 0:
-                raise ListCSVEmpty()
-            # Vider le list_Widget de Validation afin de pas confondre les anciennes convertions avec les nouvelles
-            self.lw_Validation.clear()
-            listConvertedCSV = []
-            self.ConverterToJson.CheckandConvert()
-            for newJson in self.ConverterToJson.GetlistJSON():
-                listConvertedCSV.append(self.ConverterToJson.GetlistJSON()[newJson])
-            for JSON in listConvertedCSV:
-                self.ConverterToSQL = JSON_to_SQL(self, JSON)
-                self.ConverterToSQL.CheckAndConvert()
-        except (ListCSVEmpty, DbIsMissing) as e:
-            e.ErrorMessage()
+        listConvertedCSV = []
+        self.ConverterToJson.CheckandConvert()
+        for newJson in self.ConverterToJson.GetlistJSON():
+            listConvertedCSV.append(self.ConverterToJson.GetlistJSON()[newJson])
+        for JSON in listConvertedCSV:
+            self.ConverterToSQL = JSON_to_SQL(self,JSON)
+            self.ConverterToSQL.CheckAndConvert()
 
-    # ############################################Getter & Setter######################################################
+# ############################################Getter & Setter###########################################################
     def setCon(self, connexion):
         self.con = connexion
 
