@@ -7,7 +7,7 @@
 		$db_villes = getPDO("PtutS3_villes");
 	
 		//Création des variables
-		$id = [];
+		$idDon = [];
 		$nomVille = [];
 		$sourceVille = [];
 		$lat = [];
@@ -17,20 +17,93 @@
 		$latitude = [];
 		$longitude = [];
 		
-		//Requête de l'id du don
-		$req = $db->query('SELECT idDon FROM don');
-		while ($row = $req->fetch())
-		{
-			$id = $row['idDon'];
-		}
-		
+		//Création des variables à afficher
+		$idsDonneur = [];
+		$idsReceveurs = [];
+		$noms_Receveurs = [];
+		$fonctions_Receveurs = [];
+		$nomDonneur = '';
+		$fonctionDonneur = '';
+		$nombre_don = 0;
+		$dates = [];
+			
+		//Requête récupération des données de la base de données
 		//Requête du lieu
 		$req = $db->query('SELECT emplacement FROM Lieu');
 		while ($row = $req->fetch())
 		{
 			array_push($nomVille,$row['emplacement']);
 		}
+		/*
+		//Requête de l'id du don
+		for($i =0; $i < count($nomVille);$i++){
+			$req = $db->query('SELECT idDon FROM don WHERE emplacement ='. $nomVille[$i].'');
+			while ($row = $req->fetch())
+			{
+				array_push($idDon,$row['idDon']);
+			}
+		}
 		
+		//Requête de l'id du Donneur
+		for($i =0; $i < count($nomVille);$i++){
+			$req = $db->query('SELECT idAuteur FROM don where emplacement ='. $nomVille[$i].'');
+			while ($row = $req->fetch())
+			{
+				array_push($idsDonneur,$row['idAuteur']);
+			}
+		}
+		
+		//Requête => donneur
+		for($i =0; $i < count($idsDonneur);$i++){
+			$req = $db->query('SELECT nom as nomD, fonction as fonctionD FROM personne
+												INNER JOIN don on personne.idPersonne = don.idAuteur
+												WHERE personne.idPersonne = '. $idsDonneur[$i] .'');
+			while ($row= $req->fetch())
+			{
+				array_push($nomDonneur,$row["nomD"]);
+				array_push($fonctionDonneur,$row["fonctionD"]);
+			}
+		}
+		
+		//Requête de l'id du Receveur
+		for($i =0; $i < count($nomVille);$i++){
+			$req = $db->query('SELECT idBeneficiaire FROM don where emplacement ='. $nomVille[$i].'');
+			while ($row = $req->fetch())
+			{
+				array_push($idsReceveurs,$row['idBeneficiaire']);
+			}
+		}
+		
+		//Requête avoir noms et fonction receveurs
+		for($i =0; $i < count($idsReceveurs);$i++){
+			$req = $db->query('SELECT nom as nomB, fonction as fonctionB FROM personne WHERE idPersonne ='. $idsReceveurs[$i] .'
+								GROUP BY idPersonne');
+			while ($row= $req->fetch())
+			{
+				array_push($noms_Receveurs,$row['nomB']);
+				array_push($fonctions_Receveurs,$row['fonctionB']);
+			}
+		}
+		
+		//Requête nombre de dons
+		for($i =0; $i < count($nomVille);$i++){
+			$req = $db->query('SELECT COUNT(idDon) as NbDon FROM don where emplacement ='. $nomVille[$i].'');
+			while ($row= $req->fetch())
+			{
+				array_push($nombre_don,$row["NbDon"]);
+			}
+		}
+		
+		//Requête , les différentes dates
+		for($i =0; $i < count($nomVille);$i++){
+			$req = $db->query('SELECT dateDon FROM don where emplacement ='. $nomVille[$i].'
+												GROUP BY dateDon');
+			while ($row= $req->fetch())
+			{
+				array_push($dates,$row['dateDon']);
+			}
+		}
+		*/
 		//Requête des sources de villes
 		$req = $db_villes->query('SELECT nom_commune FROM commune');
 		while ($row = $req->fetch())
@@ -98,7 +171,6 @@
         <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
         <script type='text/javascript' src='https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js'></script>
 		<script>
-			var id = <?php echo json_encode($id); ?>;
 			var villes = <?php echo json_encode($villes); ?>;
 		</script>
 		<script type="text/javascript">
