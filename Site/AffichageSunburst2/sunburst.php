@@ -49,5 +49,63 @@
         .attr("d", arc)
         .style('stroke', '#fff')
         .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); });
+        // partie affichage au centre + fonction souris 
+/*
+
+    // Fade all but the current sequence, and show it in the breadcrumb trail.
+function mouseover(d) {
+
+d3.select("#explanation")
+    .style("visibility", "");
+
+var sequenceArray = d.ancestors().reverse();
+sequenceArray.shift(); // remove root node from the array
+updateBreadcrumbs(sequenceArray, percentageString);
+
+// Fade all the segments.
+d3.selectAll("path")
+    .style("opacity", 0.3);
+
+// Then highlight only those that are an ancestor of the current segment.
+vis.selectAll("path")
+    .filter(function(node) {
+              return (sequenceArray.indexOf(node) >= 0);
+            })
+    .style("opacity", 1);
+}
+
+// Restore everything to full opacity when moving off the visualization.
+function mouseleave(d) {
+
+// Hide the breadcrumb trail
+d3.select("#trail")
+    .style("visibility", "hidden");
+
+// Deactivate all segments during transition.
+d3.selectAll("path").on("mouseover", null);
+
+// Transition each segment to full opacity and then reactivate it.
+d3.selectAll("path")
+    .transition()
+    .duration(1000)
+    .style("opacity", 1)
+    .on("end", function() {
+            d3.select(this).on("mouseover", mouseover);
+          });
+
+d3.select("#explanation")
+    .style("visibility", "hidden");
+    
+}*/
+
 
 </script>
+
+
+   <!--affichage du texte au centre-->
+   <div id="explanation" style="visibility: hidden, position: absolute, top: 260px, left: 305px, width: 140px,text-align: center, color: #666, z-index: -1;">
+          <br/>
+        </div>
+
+</html>
+
