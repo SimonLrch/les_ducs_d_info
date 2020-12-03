@@ -45,6 +45,8 @@ class CSV_to_JSON:
                     rows['Formes'] = "Aucune mention"
                 else:
                     rows['Formes'] = rows['Formes'].replace("\"", "\\\"")
+                if rows['Auteur'] == "":
+                    rows['Auteur'] = "Aucune mention"
                 if rows['Lieu'] == "":
                     rows['Lieu'] = "Aucune mention"
                 if rows['Poids'] == "":
