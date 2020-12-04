@@ -7,25 +7,15 @@
 		$db_villes = getPDO("PtutS3_villes");
 	
 		//Création des variables
-		$idDon = [];
 		$nomVille = [];
 		$sourceVille = [];
 		$lat = [];
 		$longi = [];
+		$idDon = [];
 		
 		$villes = [];
 		$latitude = [];
 		$longitude = [];
-		
-		//Création des variables à afficher
-		$idsDonneur = [];
-		$idsReceveurs = [];
-		$noms_Receveurs = [];
-		$fonctions_Receveurs = [];
-		$nomDonneur = '';
-		$fonctionDonneur = '';
-		$nombre_don = 0;
-		$dates = [];
 			
 		//Requête récupération des données de la base de données
 		//Requête du lieu
@@ -34,76 +24,7 @@
 		{
 			array_push($nomVille,$row['emplacement']);
 		}
-		/*
-		//Requête de l'id du don
-		for($i =0; $i < count($nomVille);$i++){
-			$req = $db->query('SELECT idDon FROM don WHERE emplacement ='. $nomVille[$i].'');
-			while ($row = $req->fetch())
-			{
-				array_push($idDon,$row['idDon']);
-			}
-		}
 		
-		//Requête de l'id du Donneur
-		for($i =0; $i < count($nomVille);$i++){
-			$req = $db->query('SELECT idAuteur FROM don where emplacement ='. $nomVille[$i].'');
-			while ($row = $req->fetch())
-			{
-				array_push($idsDonneur,$row['idAuteur']);
-			}
-		}
-		
-		//Requête => donneur
-		for($i =0; $i < count($idsDonneur);$i++){
-			$req = $db->query('SELECT nom as nomD, fonction as fonctionD FROM personne
-												INNER JOIN don on personne.idPersonne = don.idAuteur
-												WHERE personne.idPersonne = '. $idsDonneur[$i] .'');
-			while ($row= $req->fetch())
-			{
-				array_push($nomDonneur,$row["nomD"]);
-				array_push($fonctionDonneur,$row["fonctionD"]);
-			}
-		}
-		
-		//Requête de l'id du Receveur
-		for($i =0; $i < count($nomVille);$i++){
-			$req = $db->query('SELECT idBeneficiaire FROM don where emplacement ='. $nomVille[$i].'');
-			while ($row = $req->fetch())
-			{
-				array_push($idsReceveurs,$row['idBeneficiaire']);
-			}
-		}
-		
-		//Requête avoir noms et fonction receveurs
-		for($i =0; $i < count($idsReceveurs);$i++){
-			$req = $db->query('SELECT nom as nomB, fonction as fonctionB FROM personne WHERE idPersonne ='. $idsReceveurs[$i] .'
-								GROUP BY idPersonne');
-			while ($row= $req->fetch())
-			{
-				array_push($noms_Receveurs,$row['nomB']);
-				array_push($fonctions_Receveurs,$row['fonctionB']);
-			}
-		}
-		
-		//Requête nombre de dons
-		for($i =0; $i < count($nomVille);$i++){
-			$req = $db->query('SELECT COUNT(idDon) as NbDon FROM don where emplacement ='. $nomVille[$i].'');
-			while ($row= $req->fetch())
-			{
-				array_push($nombre_don,$row["NbDon"]);
-			}
-		}
-		
-		//Requête , les différentes dates
-		for($i =0; $i < count($nomVille);$i++){
-			$req = $db->query('SELECT dateDon FROM don where emplacement ='. $nomVille[$i].'
-												GROUP BY dateDon');
-			while ($row= $req->fetch())
-			{
-				array_push($dates,$row['dateDon']);
-			}
-		}
-		*/
 		//Requête des sources de villes
 		$req = $db_villes->query('SELECT nom_commune FROM commune');
 		while ($row = $req->fetch())
@@ -167,6 +88,7 @@
 	<div id="map">
 	    <!-- Ici s'affichera la carte -->
 	</div>
+		<div id="details"></div>
         <!-- Fichiers Javascript -->
         <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
         <script type='text/javascript' src='https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js'></script>
@@ -182,16 +104,18 @@
 			// Fonction d'initialisation de la carte
 			function initMap() {
 				var map = L.map('map').setView([lat, lon], 5);
+				var marker = [];
 
 				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 					attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				}).addTo(map);
-
+				
 				for (ville in villes) {
-					L.marker([villes[ville].lat, villes[ville].lon]).addTo(map)
-						.bindPopup(villes[ville].ville);
+					marker = L.marker([villes[ville].lat, villes[ville].lon]).bindPopup('<p><a href="../PerData/donPerVille.php?emplacement=' + villes[ville].ville +'">'+ villes[ville].ville +'</a><p>');;
+					marker.addTo(map);
 				}
 			}
+			
 			window.onload = function(){
 			// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
 			initMap(); 
