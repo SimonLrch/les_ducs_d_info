@@ -70,7 +70,7 @@ Calendar.prototype.initCalendar = function() {
     let objCalendar = this;
     this.calendarGridMonths.addEventListener("click", function(event) {
         let item = event.target;
-        if (item.nodeName == objCalendar.calendarGridMonths.children[0].children[0].nodeName && !item.classList.contains("calendar-date-null")) {
+        if (item.nodeName == objCalendar.calendarGridMonths.children[0].children[1].children[0].nodeName && !item.classList.contains("calendar-date-null")) {
             Array.from(document.querySelectorAll(".calendar-selected")).forEach(element => element.classList.remove("calendar-selected"));
             item.classList.add("calendar-selected");
             let dateTimeHtml = item.dateTime.split("-");
@@ -85,7 +85,7 @@ Calendar.prototype.initHeader = function() {
     this.calendarHeaderContainer.innerHTML = "";
 
     //On crée le titre
-    this.calendarTitle.innerText = this.listMonths[this.month] + " " + this.year;
+    this.calendarTitle.innerText = "Année " + this.year;
     
     //On crée les boutons de changement de mois
     let arrowSVG = '<svg enable-background=\"new 0 0 386.257 386.257" viewBox="0 0 492 492" xmlns="http://www.w3.org/2000/svg"><path d="M198.608 246.104L382.664 62.04c5.068-5.056 7.856-11.816 7.856-19.024 0-7.212-2.788-13.968-7.856-19.032l-16.128-16.12C361.476 2.792 354.712 0 347.504 0s-13.964 2.792-19.028 7.864L109.328 227.008c-5.084 5.08-7.868 11.868-7.848 19.084-.02 7.248 2.76 14.028 7.848 19.112l218.944 218.932c5.064 5.072 11.82 7.864 19.032 7.864 7.208 0 13.964-2.792 19.032-7.864l16.124-16.12c10.492-10.492 10.492-27.572 0-38.06L198.608 246.104z"></path></svg>';
@@ -95,23 +95,11 @@ Calendar.prototype.initHeader = function() {
     this.calendarHeaderContainer.addEventListener("click", function(event) {
         let item = event.target;
         if(item.closest("#" + objCalendar.calendarPreviousButton.id) != null) {
-            //Si le mois correspond à Janvier
-            if (objCalendar.month == 0) {
-                objCalendar.month = 11;
-                objCalendar.year -= 1;
-            } else {
-                objCalendar.month -= 1;
-            }
+            objCalendar.year -= 1;
             objCalendar.update();
         }
         if(item.closest("#" + objCalendar.calendarNextButton.id) != null) {
-            //Si le mois correspond à Décembre
-            if (objCalendar.month == 11) {
-                objCalendar.month = 0;
-                objCalendar.year += 1;
-            } else {
-                objCalendar.month += 1;
-            }
+            objCalendar.year += 1;
             objCalendar.update();
         }
     });
@@ -136,7 +124,18 @@ Calendar.prototype.initGrid = function() {
             calendarGridDays.appendChild(day);
         });
         calendarGridDays.classList.add("calendar-grid");
-        this.calendarGridMonths.appendChild(calendarGridDays);
+
+        let calendarMonthTot = document.createElement("div");
+        calendarMonthTot.classList.add("calendar-month-container");
+
+        let calendarMonthTitle = document.createElement("div");
+        calendarMonthTitle.classList.add("calendar-month-title");
+        calendarMonthTitle.innerText = this.listMonths[this.month+monthCount];
+        
+        calendarMonthTot.appendChild(calendarMonthTitle);
+        calendarMonthTot.appendChild(calendarGridDays);
+
+        this.calendarGridMonths.appendChild(calendarMonthTot);
 
         this.showDatesOfMonth(this.month+monthCount, this.year);
     }
@@ -205,12 +204,10 @@ Calendar.prototype.update = function() {
     this.day = this.date.getDate();
     this.month = this.date.getMonth();
     this.year = this.date.getFullYear();
-    
-    this.showDatesOfMonth(this.month, this.year);
 
     let objCalendar = this;
     window.requestAnimationFrame(function() {
-        objCalendar.calendarTitle.innerText = objCalendar.listMonths[objCalendar.month] + " " + objCalendar.year;
+        objCalendar.calendarTitle.innerText = "Année " + objCalendar.year;
         objCalendar.initGrid();
     });
 }
@@ -227,7 +224,7 @@ Calendar.prototype.showDatesOfMonth = function(month, year) {
         objCalendar.listDaysContent = body;
         let dayIncrement = 0;
         //On regarde chaque date (élément graphique) du calendrier
-        Array.from(objCalendar.calendarGridMonths.children[month].children).forEach(dayHtml => {
+        Array.from(objCalendar.calendarGridMonths.children[month].children[1].children).forEach(dayHtml => {
             //On vérifie si l'élément HTML correspond bien a une date
             if (!dayHtml.classList.contains("calendar-date-null")) {
                 dayIncrement++;
