@@ -1,10 +1,15 @@
 <?php include_once("sql_to_json.php"); ?>
 
 <!DOCTYPE html>
+<html lang="fr">
+<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
 <head>
+    <title >Sunburst</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
+<?php include'../include/mainHeader.php' ?>
+<br/>
     <svg></svg>
 </body>
 
