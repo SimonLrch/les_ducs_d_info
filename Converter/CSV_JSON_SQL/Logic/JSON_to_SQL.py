@@ -115,14 +115,22 @@ class JSON_to_SQL:
                 cursor.execute(req_masse)
                 masse = cursor.fetchone()['idPoids']
 
+                query = 'SELECT COUNT(*) as Res FROM don WHERE forme = "' + item['Formes'] \
+                        +'" AND nature = "' + item['Nature'] + '" AND prix = "' + item['Prix'] \
+                        + '" AND typeDon ="' + typeD + '" AND dateDon= STR_TO_DATE("' + item['Informations'] + '","%d %M %Y")'\
+                        + '" AND idAuteur = "'+ str(auteur) + '" AND idBeneficiaire = "' + str(beneficiaire) \
+                        + '" AND emplacement = "' + item['Lieu'] + '" AND sourceDon = "' + item['Sources'] \
+                        + '" AND idPoids= "' + str(masse) + '"'
+                       
                 # insertion dans la table don
-                req_don = 'INSERT IGNORE INTO don(forme, nature, prix, typeDon, dateDon, idAuteur, idBeneficiaire,' \
-                          'emplacement, sourceDon, idPoids) VALUES ("' + item['Formes'] + '", "' \
-                          + item['Nature'] + '", "' + item['Prix'] + '", "' + typeD \
-                          + '", STR_TO_DATE("' + item['Informations'] + '","%d %M %Y"), "' \
-                          + str(auteur) + '", "' + str(beneficiaire) + '", "' + item['Lieu'] \
-                          + '", "' + item['Sources'] + '", "' + str(masse) + '") '
-                cursor.execute(req_don)
+                if self.GetCount(query=query) == 0:
+                    req_don = 'INSERT IGNORE INTO don(forme, nature, prix, typeDon, dateDon, idAuteur, idBeneficiaire,' \
+                              'emplacement, sourceDon, idPoids) VALUES ("' + item['Formes'] + '", "' \
+                              + item['Nature'] + '", "' + item['Prix'] + '", "' + typeD \
+                              + '", STR_TO_DATE("' + item['Informations'] + '","%d %M %Y"), "' \
+                              + str(auteur) + '", "' + str(beneficiaire) + '", "' + item['Lieu'] \
+                              + '", "' + item['Sources'] + '", "' + str(masse) + '") '
+                    cursor.execute(req_don)
                 self.con.commit()
                 # récupérer l'id de l'intermédiaire si il y en a un
                 if item['Intermediaire'] != "":
