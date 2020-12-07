@@ -31,6 +31,10 @@
                     <img src="images/Sunburst.png" />
                     <span>Sunburst</span>
                 </a>
+                <a href="AffichageSunburst2/sunburst.php" class="grid-cell">
+                    <img src="images/Sunburst.png" />
+                    <span>Sunburst2</span>
+                </a>
             </div>
         </section>
     </main>

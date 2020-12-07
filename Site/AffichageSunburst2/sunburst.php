@@ -1,14 +1,20 @@
 <?php include_once("sql_to_json.php"); ?>
 
 <!DOCTYPE html>
+<html lang="fr">
+<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
 <head>
+    <title >Sunburst</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
+<?php include'../include/mainHeader.php' ?>
+<br/>
     <svg></svg>
 </body>
 
 <script>
+
     // JSON data
     var nodeData = <?php echo $DonJson_Tous ; ?>
 
@@ -42,61 +48,36 @@
         .outerRadius(function (d) { return d.y1 });
 
     // Put it all together
-    g.selectAll('path')
+    g.selectAll('g')
         .data(root.descendants())
-        .enter().append('path')
+        .enter().append('g').attr("class", "node")  // <-- 2
+        .append('path')  // <-- 2
         .attr("display", function (d) { return d.depth ? null : "none"; })
         .attr("d", arc)
         .style('stroke', '#fff')
         .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); });
-        // partie affichage au centre + fonction souris 
-/*
 
-    // Fade all but the current sequence, and show it in the breadcrumb trail.
-function mouseover(d) {
 
-d3.select("#explanation")
-    .style("visibility", "");
+    //Compute text
+    function computeTextRotation(d) {
+    var angle = (d.x0 + d.x1) / Math.PI * 90;  // <-- 1
+    // Avoid upside-down labels
+    return (angle < 90 || angle > 300) ? angle : angle + 180;  // <--2 "labels aligned with slices"
 
-var sequenceArray = d.ancestors().reverse();
-sequenceArray.shift(); // remove root node from the array
-updateBreadcrumbs(sequenceArray, percentageString);
+    // Alternate label formatting
+    //return (angle < 180) ? angle - 90 : angle + 90;  // <-- 3 "labels as spokes"
+    }
 
-// Fade all the segments.
-d3.selectAll("path")
-    .style("opacity", 0.3);
+    //Creer les labels
+    g.selectAll(".node")  // on selection les g de la classe .node
+    .append("text") //on créer une balise texte dans g
+    .attr("transform", function(d) {
+        return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
+    .attr("dx","-20") //placement
+    .attr("dy",".35em")
+    .style.display = none //rend la balise text cachée
+    .text(function(d) { return d.depth ? d.data.name : "" }); //prend le nom du parent
 
-// Then highlight only those that are an ancestor of the current segment.
-vis.selectAll("path")
-    .filter(function(node) {
-              return (sequenceArray.indexOf(node) >= 0);
-            })
-    .style("opacity", 1);
-}
-
-// Restore everything to full opacity when moving off the visualization.
-function mouseleave(d) {
-
-// Hide the breadcrumb trail
-d3.select("#trail")
-    .style("visibility", "hidden");
-
-// Deactivate all segments during transition.
-d3.selectAll("path").on("mouseover", null);
-
-// Transition each segment to full opacity and then reactivate it.
-d3.selectAll("path")
-    .transition()
-    .duration(1000)
-    .style("opacity", 1)
-    .on("end", function() {
-            d3.select(this).on("mouseover", mouseover);
-          });
-
-d3.select("#explanation")
-    .style("visibility", "hidden");
-    
-}*/
 
 
 </script>

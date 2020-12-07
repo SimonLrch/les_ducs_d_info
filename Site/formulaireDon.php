@@ -297,7 +297,7 @@
 
 		<body>
 			<br/>
-			<a href="./index.php">Revenir au Formulaire</a>
+			<a href="./donation-submission.php">Revenir au Formulaire</a>
 		</body>
 	</html>
 ';
