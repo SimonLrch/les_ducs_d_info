@@ -257,7 +257,8 @@ Calendar.prototype.getInfoDate = function(dateParam) {
 
         //On place le titre indiquant la date sélectionné
         let dateTitle = document.createElement("h4");
-        dateTitle.innerText = dateParam.toUTCString();
+        dateTitle.innerText = (body.length >= 2) ? "Dons du " : "Don du ";
+        dateTitle.innerText += dateParam.getDate() + " " + objCalendar.listMonths[dateParam.getMonth()] + " " + dateParam.getFullYear();
         objCalendar.calendarDetailsContainer.appendChild(dateTitle);
 
         if (body.length != 0) {
