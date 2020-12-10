@@ -14,8 +14,12 @@
         prix AS valeur,
         nature AS nature,
         emplacement AS lieu,
-        sourceDon AS source
-        FROM don NATURAL JOIN calendrier
+        sourceDon AS source,
+        auteur.nom AS auteur,
+        beneficiaire.nom AS beneficiaire
+        FROM Don NATURAL JOIN calendrier
+        JOIN Personne AS auteur ON Don.idAuteur = Auteur.idPersonne
+        JOIN Personne AS beneficiaire ON Don.idBeneficiaire = Beneficiaire.idPersonne
         WHERE YEAR(dateDon) = ? AND MONTH(dateDon) = ? AND DAY(dateDon) = ?");
 
 		$req->execute(array($nbYear, $nbMouth, $nbDay));

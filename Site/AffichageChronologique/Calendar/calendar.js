@@ -220,7 +220,6 @@ Calendar.prototype.showDatesOfMonth = function(month, year) {
     fetch(url).then(function (response) { //Ensuite on récupère les données de la bdd
         return response.json();
     }).then(function(body) { //Ensuite on afficher le résultat
-        console.log(body);
         objCalendar.listDaysContent = body;
         let dayIncrement = 0;
         //On regarde chaque date (élément graphique) du calendrier
@@ -247,6 +246,7 @@ Calendar.prototype.getInfoDate = function(dateParam) {
 
     //On récupère les données de la bdd (Fonction asynchrone)
     fetch(url).then(function (response) { //Ensuite on récupère les données de la bdd
+        console.log(response);
         return response.json();
     }).then(function(body) { //Ensuite on afficher le résultat
         console.log("getInfoDate : ");
@@ -267,7 +267,7 @@ Calendar.prototype.getInfoDate = function(dateParam) {
                 let detailsContainer = document.createElement("div");
 
                 let detailsTitle = document.createElement("h4");
-                detailsTitle.innerText = elt.id;
+                detailsTitle.innerText = "Don de " + elt.auteur + " à " + elt.beneficiaire;
                 detailsContainer.appendChild(detailsTitle);
 
                 let detailsTextContainer = document.createElement("div");
