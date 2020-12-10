@@ -1,6 +1,6 @@
 <?php
 
-//pour le sunburst
+//pour le sunburst (bd)
 function replaceSimpleQuote(string $s)
 {
     $res = '';
@@ -9,7 +9,7 @@ function replaceSimpleQuote(string $s)
     {
         if(substr($s,$i,1) == '\'')
         {
-           $res .= '"' ;
+           $res .= '\'\'' ;
         }
         else
         {
@@ -21,6 +21,7 @@ function replaceSimpleQuote(string $s)
     return $res;
 }
 
+//pour le sunburst (json)
 function replaceDoubleQuote(string $s)
 {
     $res = '';
@@ -29,7 +30,7 @@ function replaceDoubleQuote(string $s)
     {
         if(substr($s,$i,1) == '"')
         {
-           $res .= '\'' ;
+           $res .= '\\"' ;
         }
         else
         {
@@ -52,8 +53,6 @@ function replaceQuote(string $s)
     return $res;
 
 } */
-
-
 
 
 /*$var ='\'oui\'' ;

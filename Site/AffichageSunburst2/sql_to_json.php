@@ -71,7 +71,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
 
     //Json
     $DonJson_Auteur = '{
-                        "name" : " De '. $nomAuteur.' '. $fonctionAuteur.'",
+                        "name" : " De '. replaceDoubleQuote($nomAuteur).' '. replaceDoubleQuote($fonctionAuteur).'",
                         "children" : [';
 
         //requete idBeneficiaire
@@ -98,7 +98,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
 
             //json
             $DonJson_Beneficiaire = '{
-                "name" : " A l\' intention de '. $nomBeneficiaire.' '. $fonctionBeneficiaire.' ",
+                "name" : " A l\' intention de '. replaceDoubleQuote($nomBeneficiaire).' '. replaceDoubleQuote($fonctionBeneficiaire).' ",
                 "children" : [';
 
                 //requete lieux
@@ -113,7 +113,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                 for ($h=0;$h< count($lieu);$h++)
                 {
                     $DonJson_Lieu = '{
-                        "name" : " A '.$lieu[$h].' ",
+                        "name" : " A '.replaceDoubleQuote($lieu[$h]).' ",
                         "children" : [';
 
                         $lieu_quote = replaceSimpleQuote($lieu[$h]);
@@ -130,7 +130,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                         for($k=0;$k<count($date);$k++)
                         {
                             $DonJson_Date = '{
-                                "name" : " Le '.$date[$k].' ",
+                                "name" : " Le '.replaceDoubleQuote($date[$k]).' ",
                                 "children" : [';
 
                                     //requête prix
@@ -145,7 +145,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                     for($l=0;$l<count($prix);$l++)
                                     {
                                         $DonJson_Prix = '{
-                                            "name" : " Prix : '.$prix[$l].' ",
+                                            "name" : " Prix : '.replaceDoubleQuote($prix[$l]).' ",
                                             "children" : [';
 
                                             $prix_quote = replaceSimpleQuote($prix[$l]);
@@ -162,7 +162,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                             for($m = 0;$m< count($nature); $m++)
                                             {
                                                 $DonJson_Nature = '{
-                                                    "name" : "Nature :  '.$nature[$m].' ",
+                                                    "name" : "Nature : '. replaceDoubleQuote($nature[$m]).' ",
                                                     "children" : [';
 
                                                 $nature_quote =  replaceSimpleQuote($nature[$m]);
@@ -179,7 +179,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                                     for($n = 0;$n< count($typeDon); $n++)
                                                     {
                                                         $DonJson_Type = '{
-                                                            "name" : "Type :  '.$typeDon[$n].' ",
+                                                            "name" : "Type :  '.replaceDoubleQuote($typeDon[$n]).' ",
                                                             "children" : [';
 
                                                             $typeDon_quote = replaceSimpleQuote($typeDon[$n]);
@@ -196,7 +196,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                                             for($o= 0;$o< count($forme); $o++)
                                                             {
                                                                 $DonJson_Forme = '{
-                                                                    "name" : "'.$forme[$o].' ",
+                                                                    "name" : "'.replaceDoubleQuote($forme[$o]).' ",
                                                                     "children" : [';
 
                                                                     $forme_quote = replaceSimpleQuote($forme[$o]);
@@ -213,7 +213,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                                                     for($p= 0;$p< count($sources); $p++)
                                                                     {
                                                                         $DonJson_Sources = '{
-                                                                            "name" : "( Sources : '.$sources[$p].' ]",
+                                                                            "name" : "( Sources : '.replaceDoubleQuote($sources[$p]).' ]",
                                                                             "size" : 0.2}';
 
                                                                            // $sources_quote = replaceSimpleQuote($sources[$p]);

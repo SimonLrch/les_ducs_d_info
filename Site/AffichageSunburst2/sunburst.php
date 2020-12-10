@@ -75,7 +75,7 @@
         return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
     .attr("dx","-20") //placement
     .attr("dy",".35em")
-    //.style.display = none //rend la balise text cachée
+    .style.display = none //rend la balise text cachée
     .text(function(d) { return d.depth ? d.data.name : "" }); //prend le nom du parent
 
 
