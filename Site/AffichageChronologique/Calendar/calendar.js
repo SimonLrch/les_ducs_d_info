@@ -59,6 +59,7 @@ function Calendar(element, initDate) {
     this.calendarGridMonths.id = "calendar-grid-months";
     this.calendarDetailsContainer.id = "calendar-date-details";
 
+    this.getBarChart(Math.trunc(this.year/10)*10);
     this.initCalendar();
     this.initHeader();
     this.initGrid();
@@ -241,12 +242,11 @@ Calendar.prototype.showDatesOfMonth = function(month, year) {
 }
 
 Calendar.prototype.getInfoDate = function(dateParam) {
-    const url = "showDetailsDate.php?currentDay="+dateParam.getDate()+"&currentMonth="+(dateParam.getMonth()+1)+"&currentYear="+dateParam.getFullYear();
+    const url = "getDetailsDate.php?currentDay="+dateParam.getDate()+"&currentMonth="+(dateParam.getMonth()+1)+"&currentYear="+dateParam.getFullYear();
     let objCalendar = this;
 
     //On récupère les données de la bdd (Fonction asynchrone)
     fetch(url).then(function (response) { //Ensuite on récupère les données de la bdd
-        console.log(response);
         return response.json();
     }).then(function(body) { //Ensuite on afficher le résultat
         console.log("getInfoDate : ");
@@ -298,5 +298,21 @@ Calendar.prototype.getInfoDate = function(dateParam) {
         objCalendar.docElement.appendChild(objCalendar.calendarDetailsContainer);
     }).catch(function(err) { //En cas d'erreur
         console.error("La bdd n'a pas pu être chargé à la date indiqué : " + err);
+    });
+}
+
+Calendar.prototype.getBarChart = function(decade) {
+    const url = "getBarChart.php?currentDecade="+decade;
+    let objCalendar = this;
+
+    //On récupère les données de la bdd (Fonction asynchrone)
+    fetch(url).then(function (response) { //Ensuite on récupère les données de la bdd
+        console.log(response);
+        return response.json();
+    }).then(function(body) { //Ensuite on afficher le résultat
+        console.log("getBarChart : ");
+        console.log(body);
+    }).catch(function(err) { //En cas d'erreur
+        console.error("La bdd n'a pas pu être chargé à la décénie indiqué : " + err);
     });
 }
