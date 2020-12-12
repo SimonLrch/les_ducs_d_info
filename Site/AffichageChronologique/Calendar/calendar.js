@@ -5,7 +5,7 @@ function Calendar(element, initDate) {
     this.month = this.date.getMonth();
     this.year = this.date.getFullYear();
 
-    this.dateSelected = this.date;
+    this.dateSelected = null;
     
     this.listDaysContent = null;
     
@@ -59,7 +59,6 @@ function Calendar(element, initDate) {
     this.calendarGridMonths.id = "calendar-grid-months";
     this.calendarDetailsContainer.id = "calendar-date-details";
 
-    this.getBarChart(Math.trunc(this.year/10)*10);
     this.initCalendar();
     this.initHeader();
     this.initGrid();
@@ -88,26 +87,7 @@ Calendar.prototype.initHeader = function() {
     //On crée le titre
     this.calendarTitle.innerText = "Année " + this.year;
     
-    //On crée les boutons de changement de mois
-    let arrowSVG = '<svg enable-background=\"new 0 0 386.257 386.257" viewBox="0 0 492 492" xmlns="http://www.w3.org/2000/svg"><path d="M198.608 246.104L382.664 62.04c5.068-5.056 7.856-11.816 7.856-19.024 0-7.212-2.788-13.968-7.856-19.032l-16.128-16.12C361.476 2.792 354.712 0 347.504 0s-13.964 2.792-19.028 7.864L109.328 227.008c-5.084 5.08-7.868 11.868-7.848 19.084-.02 7.248 2.76 14.028 7.848 19.112l218.944 218.932c5.064 5.072 11.82 7.864 19.032 7.864 7.208 0 13.964-2.792 19.032-7.864l16.124-16.12c10.492-10.492 10.492-27.572 0-38.06L198.608 246.104z"></path></svg>';
-    this.calendarPreviousButton.innerHTML = arrowSVG;
-    this.calendarNextButton.innerHTML = arrowSVG;
-    let objCalendar = this;
-    this.calendarHeaderContainer.addEventListener("click", function(event) {
-        let item = event.target;
-        if(item.closest("#" + objCalendar.calendarPreviousButton.id) != null) {
-            objCalendar.year -= 1;
-            objCalendar.update();
-        }
-        if(item.closest("#" + objCalendar.calendarNextButton.id) != null) {
-            objCalendar.year += 1;
-            objCalendar.update();
-        }
-    });
-    
-    this.calendarHeaderContainer.appendChild(this.calendarPreviousButton);
     this.calendarHeaderContainer.appendChild(this.calendarTitle);
-    this.calendarHeaderContainer.appendChild(this.calendarNextButton);
 
     this.calendarMainContainer.appendChild(this.calendarHeaderContainer);
 }
@@ -159,8 +139,10 @@ Calendar.prototype.drawMonth = function(month, year) {
     daysToShow.forEach(day => {
         let dayElt = document.createElement("time");
         if (day != null) {
-            if (this.dateSelected.toString() == day.toString()) {
-                dayElt.classList.add("calendar-selected");
+            if (this.dateSelected != null) {
+                if (this.dateSelected.toString() == day.toString()) {
+                    dayElt.classList.add("calendar-selected");
+                }
             }
             let dayString = day.toString().split(" ")[2];
             dayElt.innerText = dayString;
@@ -201,11 +183,6 @@ Calendar.prototype.getDateText = function (date) {
 }
 
 Calendar.prototype.update = function() {
-    this.date = new Date(this.year, this.month);
-    this.day = this.date.getDate();
-    this.month = this.date.getMonth();
-    this.year = this.date.getFullYear();
-
     let objCalendar = this;
     window.requestAnimationFrame(function() {
         objCalendar.calendarTitle.innerText = "Année " + objCalendar.year;
@@ -298,21 +275,5 @@ Calendar.prototype.getInfoDate = function(dateParam) {
         objCalendar.docElement.appendChild(objCalendar.calendarDetailsContainer);
     }).catch(function(err) { //En cas d'erreur
         console.error("La bdd n'a pas pu être chargé à la date indiqué : " + err);
-    });
-}
-
-Calendar.prototype.getBarChart = function(decade) {
-    const url = "getBarChart.php?currentDecade="+decade;
-    let objCalendar = this;
-
-    //On récupère les données de la bdd (Fonction asynchrone)
-    fetch(url).then(function (response) { //Ensuite on récupère les données de la bdd
-        console.log(response);
-        return response.json();
-    }).then(function(body) { //Ensuite on afficher le résultat
-        console.log("getBarChart : ");
-        console.log(body);
-    }).catch(function(err) { //En cas d'erreur
-        console.error("La bdd n'a pas pu être chargé à la décénie indiqué : " + err);
     });
 }

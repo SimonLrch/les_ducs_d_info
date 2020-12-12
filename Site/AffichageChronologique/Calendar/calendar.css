@@ -10,10 +10,17 @@
     overflow: hidden;
 }
 /*---/Calendar Main/---*/
+.calendarObject {
+    display: flex;
+    flex-direction: column;
+    margin: 0 30px;
+}
+
 #calendar-main {
     display: flex;
     flex-direction: column;
-    /*height: 800px;*/
+    margin: auto;
+    max-width: 1800px;
 }
 
 #calendar-header {
@@ -95,6 +102,7 @@
 
 /*---/Calendar Details/---*/
 #calendar-date-details {
+    max-width: 1800px;
     box-sizing: border-box;
     padding: 20px;
 }
@@ -116,4 +124,89 @@
 #calendar-date-details > div > div {
     display: flex;
     flex-direction: column;
+}
+
+
+
+
+
+/*---/barChart Main/---*/
+.barChartObject {
+    margin: 0 30px;
+}
+
+#barChart-main {
+    display: flex;
+    margin: 30px auto;
+}
+#barChart-decade-container {
+    display: flex;
+}
+
+.barChart-year-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 150px;
+    cursor: pointer;
+}
+
+.barChart-year-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.barChart-month-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 1px;
+    padding: 1px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.barChart-year-container:last-child .barChart-month-container {
+    border-right: 1px solid black;
+}
+.barChart-month {
+    display: flex;
+    height: 100%;
+}
+.barChart-month-value {
+    width: 100%;
+    margin-top: auto;
+    background-color: #3D394A;
+}
+
+.barChart-selected::after {
+    content: " ";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--main-color);
+    opacity: 0.2;
+}
+
+#barChart-previous-btn, #barChart-next-btn {
+    cursor: pointer;
+    width: 40px;
+    background: none;
+    border: none;
+}
+#barChart-previous-btn svg, #barChart-next-btn svg {
+    width: 100%;
+    height: 100%;
+}
+#barChart-previous-btn {
+    margin-left: auto;
+}
+#barChart-next-btn {
+    margin-right: auto;
+}
+#barChart-next-btn svg {
+    transform: scale(-1,1);
 }
