@@ -4,12 +4,12 @@
 		<meta charset="utf-8">
 		<title>Accueil</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="style/mainStyle.css">
+		<link rel="stylesheet" href="../style/mainStyle.css">
 		<script defer src="script/mainScript.js"></script>
 	</head>
 	<body>
-	<?php include'include/mainHeader.php' ?>
-    <h1 style="text-align:center">MENTIONS LEGALES :</h1>
+	<?php include'../include/mainHeader.php' ?>
+    <h1 style="text-align:center">Mentions Légales :</h1>
     
             <p style="text-align:justify">Conformément aux dispositions des articles 6-III et 19 de la Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l'économie numérique, dite L.C.E.N., nous portons à la connaissance des utilisateurs et visiteurs du site : <a href="http://www.urldusite.fr" target="_blank">www.urldusite.fr</a> les informations suivantes :</p>
         

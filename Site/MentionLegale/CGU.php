@@ -4,11 +4,11 @@
 		<meta charset="utf-8">
 		<title>Accueil</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="style/mainStyle.css">
+		<link rel="stylesheet" href="../style/mainStyle.css">
 		<script defer src="script/mainScript.js"></script>
 	</head>
 	<body>
-	<?php include'include/mainHeader.php' ?>
+	<?php include'../include/mainHeader.php' ?>
 <h1 style="text-align:center">Conditions générales d'utilisation</h1> 
 
         <p style="text-align:center"><i>En vigueur au 01/01/2021</i></p> 
