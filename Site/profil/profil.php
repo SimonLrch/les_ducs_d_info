@@ -12,7 +12,7 @@
     <?php include("../include/mainHeader.php") ?>
     <main class="container-main">
         <section class="inner-box section-hero">
-            <span>Profil</span>
+            <span class="titreSection">Profil</span>
         </section>
         <section class="inner-box">
             <?php if (isset($profil_email)): ?>

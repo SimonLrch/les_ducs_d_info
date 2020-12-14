@@ -5,7 +5,7 @@
 <body>
 <?php include'../include/mainHeader.php' ?>
 <section class="inner-box section-hero">
-    <span>Restitution Par Dates</span>
+    <span class="titreSection">Restitution Par Dates</span>
 </section>
 <?php if(in_array($date,$datesTab)): ?>
 <p><a href="../AffichageChronologique/DonSelonChronologie.php">Voir avec le calendrier</a>  </p>
