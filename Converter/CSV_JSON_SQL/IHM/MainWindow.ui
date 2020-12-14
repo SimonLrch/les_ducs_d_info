@@ -39,7 +39,7 @@
     <normaloff>:/Icônes/SQL.png</normaloff>:/Icônes/SQL.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -174,8 +174,27 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menu</string>
+    </property>
+    <addaction name="actionHelp"/>
+   </widget>
+   <addaction name="menuMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="Images.qrc">
+     <normaloff>:/Icônes/help.png</normaloff>:/Icônes/help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>pb_EditConnection</tabstop>

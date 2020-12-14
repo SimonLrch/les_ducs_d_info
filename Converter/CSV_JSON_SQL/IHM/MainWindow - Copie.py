@@ -6,30 +6,11 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-# Import pour IHM
-import os
-from pathlib import Path
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMessageBox
 
-from IHM import resources
-from IHM import Dialog_Connection
-from IHM.Dialog_Connection import Ui_ConnectionWindow
-from Logic.CSV_to_JSON import CSV_to_JSON
-from Logic.Exceptions import ListCSVEmpty, DbIsMissing, CSVIsNoMore, CSVAlreadySaved
-from Logic.JSON_to_SQL import JSON_to_SQL
-from os import startfile
 
 class Ui_MainWindow(object):
-    def __init__(self):
-        self.uiConnect = Ui_ConnectionWindow(self)
-        self.connectWin = QtWidgets.QMainWindow()
-        self.con = None
-        self.listCSV = []
-        self.ConverterToJson = CSV_to_JSON(self)
-        self.ConverterToSQL = None
-
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
@@ -121,19 +102,6 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.pb_Remove, self.lw_CSVfiles)
         MainWindow.setTabOrder(self.lw_CSVfiles, self.lw_Validation)
 
-        # ###################################################################################
-        # Lance la fenêtre de création de connexion
-        self.pb_EditConnection.clicked.connect(lambda: self.Connect())
-        # Lance la fenêtre de récupération de CSV à convertir
-        self.pb_Add.clicked.connect(lambda: self.AddCSV())
-        # Retire un élément de la liste des CSV à convertir
-        self.pb_Remove.clicked.connect(lambda: self.RemoveCSV())
-        # Lance la convertion des fichiers choisis
-        self.pb_Convert.clicked.connect(lambda: self.Convert())
-
-        self.actionHelp.triggered.connect(lambda:startfile("Aide.pdf"))
-    # ###################################################################################
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Convert CSV to SQL"))
@@ -147,87 +115,4 @@ class Ui_MainWindow(object):
         self.menuMenu.setTitle(_translate("MainWindow", "Menu"))
         self.actionHelp.setText(_translate("MainWindow", "Help"))
         self.actionHelp.setShortcut(_translate("MainWindow", "F1"))
-
-    # #######################################################
-    # Méthode Connect(self)
-    # Description :
-    # Méthode permettant d'ouvrir la fenêtre de connexion à la base de données
-    # @param self
-    # #######################################################
-    def Connect(self):
-        self.uiConnect.setupUi(self.connectWin)
-        self.connectWin.show()
-
-    # #######################################################
-    # Méthode AddCSV(self)
-    # Description :
-    # Méthode permettant d'ajouter un CSV à la liste des CSV
-    # @param self
-    # ########################################################
-    def AddCSV(self):
-        try:
-            # Ouvre un FileDialog afin d'aller chercher le CSV à convertir
-            dialog = QtWidgets.QFileDialog()
-            dialog.setWindowTitle('Cherchez un CSV à convertir')
-            dialog.setNameFilter('csv(*.csv)')
-            dialog.setDirectory(QtCore.QDir.currentPath())
-            dialog.setFileMode(QtWidgets.QFileDialog.ExistingFile)
-            directory = None
-            # On vérifie si un fichier a été choisis
-            if dialog.exec_() == QtWidgets.QDialog.Accepted:
-                directory = dialog.selectedFiles()
-            if directory:
-                # Si le fichier n'était pas enregistré dans la liste des CSV
-                if not directory[0] in self.listCSV:
-                    # On l'enregistre
-                    self.listCSV.append(directory[0])
-                    # On l'affiche dans le listWidget
-                    self.lw_CSVfiles.addItem(directory[0].split("/")[-1])
-                else:
-                    # S'il existait déjà on lève l'erreur
-                    raise CSVAlreadySaved()
-        except CSVAlreadySaved as ex:
-            # Si l'erreur est levé, affichage du MessageBox
-            ex.ErrorMessage(Type=QMessageBox.Information)
-
-    # #######################################################
-    # Méthode RemoveCSV(self)
-    # Description :
-    # Méthode permettant de Retirer un CSV de la liste des CSV
-    # @param self
-    # ########################################################
-    def RemoveCSV(self):
-        # Vérification si au moins un élément a été cliqué
-        listItems = self.lw_CSVfiles.selectedItems()
-        # Sinon termine la méthode
-        if not listItems:
-            return
-        else:
-            # Ou les supprime de la liste et du visuel
-            for item in listItems:
-                self.lw_CSVfiles.takeItem(self.lw_CSVfiles.row(item))
-                for csv in self.listCSV:
-                    if item.text() in csv:
-                        self.listCSV.remove(csv)
-
-    # #######################################################
-    # Méthode Convert(self)
-    # Description :
-    # Méthode permettant la convertion de CSV à Json puis de Json à SQL
-    # @param self
-    # ########################################################
-    def Convert(self):
-        listConvertedCSV = []
-        self.ConverterToJson.CheckandConvert()
-        for newJson in self.ConverterToJson.GetlistJSON():
-            listConvertedCSV.append(self.ConverterToJson.GetlistJSON()[newJson])
-        for JSON in listConvertedCSV:
-            self.ConverterToSQL = JSON_to_SQL(self,JSON)
-            self.ConverterToSQL.CheckAndConvert()
-
-# ############################################Getter & Setter###########################################################
-    def setCon(self, connexion):
-        self.con = connexion
-
-    def getCon(self):
-        return self.con
+import Images_rc
