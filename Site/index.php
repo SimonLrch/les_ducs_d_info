@@ -9,11 +9,14 @@
 	</head>
 	<body>
 		<?php include'include/mainHeader.php' ?>
-		<main class="container-main">
-			<section class="inner-box section-hero section-hero-main">
-				<span>Bonjour les médiévistes !</span>
-			</section>
-		</main>
+			<main class="container-main">
+				<div class="main">
+					<section class="inner-box section-hero section-hero-main">
+						<img class="logo-index" src="Images/logoTotal.png" alt="Logo Illumination"/>
+						
+					</section>
+				</div>
+			</main>
 		<?php include'include/mainFooter.php' ?>
 	</body>
 </html>

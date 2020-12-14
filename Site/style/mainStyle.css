@@ -9,8 +9,8 @@ html {
 	font-size: 62.5%;
 }
 body {
-	background-color: #eaeaea;
-	color: #191919;
+	background-color: #890700;
+	color: #be8900;
 	font-family: helvetica, arial, sans-serif;
 	font-size: 1.4em; /* equiv 14px */
 	line-height: 1.5; /* adapt to your design */
@@ -169,10 +169,14 @@ body > script {display: none !important;}
 	z-index: 1000;
 	align-items: center;
 	justify-content: space-between;
-	background-color: white;
 	box-sizing: border-box;
+	background-color : #380000;
+	font-family: "Adamina";
+	font-size: 1.5em; 
 }
 	.topbar-logo {
+		height: 60px;
+		width: 60px;
 	}
 	.topbar-menu {
 		display: flex;
@@ -185,6 +189,7 @@ body > script {display: none !important;}
 			height: 100%;
 			align-items: center;
 			text-decoration: none;
+			color : white;
 		}
 		.topbar-menu a:after {
 			content: " ";
@@ -201,10 +206,10 @@ body > script {display: none !important;}
 
 /*---------------------------|Footer|---------------------------*/
 .bottombar {
-	position: sticky;
+	position: fixed;
 	display: flex;
 	padding: 0 3em;
-	top: 0;
+	top: 100;
 	left: 0;
 	right: 0;
 	height: 70px;
@@ -214,6 +219,10 @@ body > script {display: none !important;}
 	justify-content: space-between;
 	background-color: white;
 	box-sizing: border-box;
+	background-color : #380000;
+	bottom: 0px;
+	font-size: 1.5em; 
+	font-family: "Times";
 }
 	.bottombar-menu {
 		display: flex;
@@ -226,6 +235,7 @@ body > script {display: none !important;}
 			height: 100%;
 			align-items: center;
 			text-decoration: none;
+			color : white;
 		}
 		.bottombar-menu a:after {
 			content: " ";
@@ -246,17 +256,24 @@ body > script {display: none !important;}
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-    min-height: 100vh;
+    min-height: 100px;
 }
+	.main{
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		min-height: 100px;
+		position: fixed;
+	}
 	.inner-box {
 		display: flex;
-		margin: auto;
-		margin-top: 0;
 		max-width: 1200px;
 		width: 100%;
 		height: 100%;
 		justify-content: center;
 		align-items: center;
+		margin: auto;
 	}
 	.section-hero {
 		margin-bottom: 0;
@@ -266,14 +283,22 @@ body > script {display: none !important;}
 	.section-hero-main {
 		min-height: 100vh;
 	}
-		.section-hero span {
-			font-size: 30px;
-			font-weight: bold;
-		}
-		.section-hero-main span {
-			font-size: 40px;
-			font-weight: bold;
-		}
+	
+.logo-index{
+	width: 60%;
+	height: 60%;
+	margin-top: -140px;
+}
+
+.carre {
+	background-color: white;
+	height: 10000px;
+	width: 10000px;
+	margin: auto;
+	border-radius: 15%;
+	transform: skewY(25deg);
+}
+
 /*---------------------------|Grid|---------------------------*/
 .grid-list {
 	display: grid;

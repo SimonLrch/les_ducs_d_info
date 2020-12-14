@@ -31,5 +31,6 @@
             </form>
         </section>
     </main>
+	<?php include'include/mainFooter.php' ?>
 </body>
 </html>
