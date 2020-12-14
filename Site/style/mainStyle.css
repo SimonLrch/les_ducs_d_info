@@ -9,9 +9,9 @@ html {
 	font-size: 62.5%;
 }
 body {
-	background-color: #890700;
+	background-color: #6a040f;
 	color: #be8900;
-	font-family: helvetica, arial, sans-serif;
+	font-family: "Lato-Light";
 	font-size: 1.4em; /* equiv 14px */
 	line-height: 1.5; /* adapt to your design */
 }
@@ -112,7 +112,7 @@ code,
 pre,
 samp {
 	white-space: pre-wrap;
-	font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+	font-family: "Lato-Light";
 }
 code { line-height: 1em; }
 table { margin-bottom: 1.5em; }
@@ -171,8 +171,9 @@ body > script {display: none !important;}
 	justify-content: space-between;
 	box-sizing: border-box;
 	background-color : #380000;
-	font-family: "Adamina";
 	font-size: 1.5em; 
+	border-bottom: solid;
+	boder-color: #f2e7bf;
 }
 	.topbar-logo {
 		height: 60px;
@@ -189,7 +190,7 @@ body > script {display: none !important;}
 			height: 100%;
 			align-items: center;
 			text-decoration: none;
-			color : white;
+			color: #d7be69;
 		}
 		.topbar-menu a:after {
 			content: " ";
@@ -207,9 +208,9 @@ body > script {display: none !important;}
 /*---------------------------|Footer|---------------------------*/
 .bottombar {
 	position: fixed;
-	display: flex;
+	display: block;
 	padding: 0 3em;
-	top: 100;
+	bottom: 0;
 	left: 0;
 	right: 0;
 	height: 70px;
@@ -217,12 +218,11 @@ body > script {display: none !important;}
 	z-index: 1000;
 	align-items: center;
 	justify-content: space-between;
-	background-color: white;
 	box-sizing: border-box;
 	background-color : #380000;
-	bottom: 0px;
-	font-size: 1.5em; 
-	font-family: "Times";
+	font-size: 1.5em;
+	border-top: solid;
+	boder-color: #f2e7bf;
 }
 	.bottombar-menu {
 		display: flex;
@@ -235,7 +235,7 @@ body > script {display: none !important;}
 			height: 100%;
 			align-items: center;
 			text-decoration: none;
-			color : white;
+			color: #d7be69;
 		}
 		.bottombar-menu a:after {
 			content: " ";
@@ -287,24 +287,29 @@ body > script {display: none !important;}
 .logo-index{
 	width: 60%;
 	height: 60%;
-	margin-top: -140px;
+	margin-top: -160px;
 }
 
 .carre {
-	background-color: white;
-	height: 10000px;
-	width: 10000px;
+	background-color: #be8900;
+	height: 100px;
+	width: 100px;
 	margin: auto;
 	border-radius: 15%;
 	transform: skewY(25deg);
+}
+
+.titreSection {
+	font-size: 3.125em;
 }
 
 /*---------------------------|Grid|---------------------------*/
 .grid-list {
 	display: grid;
 	width: 100%;
+	height: 100%;
 	margin: 0 auto;
-	grid-template-columns: repeat(auto-fit, minmax(575px, 1fr));
+	grid-template-columns: repeat(4, 300px);
 	grid-gap: 25px;
 	justify-content: center;
 }
@@ -314,6 +319,13 @@ body > script {display: none !important;}
 		padding: 20px;
 		width: 100%;
 		box-sizing: border-box;
+		border: solid;
+		boder-color: #380000;
+	}
+
+	.grid-cell img {
+		width: 100%;
+		max-height: 100%;/
 	}
 
 .grid-restitution {
@@ -322,17 +334,17 @@ body > script {display: none !important;}
 }
 .grid-restitution a {
 	text-decoration: none;
-	color: black;
+	color: #380000;
 }
 	.grid-restitution .grid-cell {
 		padding: 30px;
-		background-color: white;
+		background-color: #f2e7bf;
 		border-radius: var(--border-radius-box);
 	}
 		.grid-restitution .grid-cell img {
 			width: 100%;
 			height: 200px;
-			object-fit: cover;
+			object-fit: contain;
 			border-radius: var(--border-radius-box);
 			overflow: hidden;
 		}
@@ -347,6 +359,7 @@ body > script {display: none !important;}
 		margin: auto;
 		max-width: 50em;
 		width: 100%;
+		color: #380000;
 	}
 		.title-form {
 			display: flex;
@@ -371,18 +384,19 @@ body > script {display: none !important;}
 						height: 50px;
 						border-radius: 50%;
 						font-size: 20pt;
-						color: #424242;
-						background-color: #b4b4b4;
+						color: #d7be69;
+						background-color: #380000;
 					}
 						.active-title span {
-							color: white;
-							background-color: var(--btn-color);
+							color: #380000;
+							background-color: #d7be69;
 						}
 		.global-form {
 			margin: 2em 0;
 			padding: 2.5em;
 			background-color: white;
 			border-radius: var(--border-radius-box);
+			background-color: #f2e7bf;
 		}
 			.form-step {
 				display: none;
@@ -422,7 +436,8 @@ body > script {display: none !important;}
 						margin: 0.5em;
 						padding: 0 2em;
 						width: 100%;
-						background-color: var(--btn-color);
+						color: #d7be69;
+						background-color: #6a040f;
 						color: white;
 						border: none;
 						border-radius: 50px;
@@ -435,7 +450,8 @@ body > script {display: none !important;}
 						max-width: 50%;
 					}
 						.container-btn-form button:hover {
-							background-color: var(--btn-color-hover);
+							color: #380000;
+							background-color: #d7be69;
 						}
 
 /*---------------------------|Eye-Tree|---------------------------*/

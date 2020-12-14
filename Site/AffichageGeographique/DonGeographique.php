@@ -83,7 +83,7 @@
     <body>
 		<?php include'../include/mainHeader.php' ?>
 		<section class="inner-box section-hero">
-            <span>Restitution Géographique</span>
+            <span class="titreSection">Restitution Géographique</span>
         </section>
 	<div id="map">
 	    <!-- Ici s'affichera la carte -->

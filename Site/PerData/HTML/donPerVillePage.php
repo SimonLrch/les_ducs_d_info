@@ -5,7 +5,7 @@
 <body>
 <?php include'../include/mainHeader.php' ?>
 <section class="inner-box section-hero">
-    <span>Restitution Par Lieux</span>
+    <span class="titreSection">Restitution Par Lieux</span>
 </section>
 <?php if(in_array($emplacement,$lieux)): ?>
     <p><a href="../AffichageGeographique/DonGeographique.php">Voir avec une carte</a>  </p>

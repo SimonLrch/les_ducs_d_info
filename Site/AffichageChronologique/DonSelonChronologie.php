@@ -10,7 +10,7 @@
 <body>
 	<?php include'../include/mainHeader.php' ?>
 	<section class="inner-box section-hero">
-        <span>Restitution Chronologique</span>
+        <span class="titreSection">Restitution Chronologique</span>
     </section>
 	<!--label for="start">Calendrier:</label>
 	<form lang="en" method="post" action="DonSelonChronologie.php">
