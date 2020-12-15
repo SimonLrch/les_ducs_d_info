@@ -1,12 +1,15 @@
 <?php
- include("getresult.php");
-    // On commence par récupérer les champs
+session_start();
+if(isset($_POST['confirmer']))
+{
+	include("getresult.php");
+	// On commence par récupérer les champs
 	//Attribution des variables :
 	//des personnes
 	$donateur_name = $donateur_statut = $beneficiaire_name = $beneficiaire_statut = null;
 	$intermediaire_name = $intermediaire_statut = "Aucune mention d'intermédiaire";
 	//des détails
-    $details_sources = "Aucune mention de Source";
+	$details_sources = "Aucune mention de Source";
 	$details_poids = "Aucune mention de Poids";
 	$details_formes = "Aucune mention de Forme";
 	$details_natures = "Aucune mention de Nature";
@@ -22,70 +25,70 @@
 	{
 		$donateur_statut=$_POST['donateur-statut'];
 	}
-    //Bénéficiaire
-    if(isset($_POST['beneficiaire-name']))     
+	//Bénéficiaire
+	if(isset($_POST['beneficiaire-name']))     
 	{
 		$beneficiaire_name=$_POST['beneficiaire-name'];
 	}
-    if(isset($_POST['beneficiaire-statut']))      
+	if(isset($_POST['beneficiaire-statut']))      
 	{
 		$beneficiaire_statut=$_POST['beneficiaire-statut'];
 	}
 
-    //Intermédiaire
-    if(isset($_POST['intermediaire-name'])  AND $_POST['intermediaire-name'] != '')
+	//Intermédiaire
+	if(isset($_POST['intermediaire-name'])  AND $_POST['intermediaire-name'] != '')
 	{
 		$intermediaire_name=$_POST['intermediaire-name'];
 	}
-    else
+	else
 	{
 		$idIntermediaire = -1;
 	}
-    if(isset($_POST['intermediaire-statut']) AND $_POST['intermediaire-statut'] != '')
+	if(isset($_POST['intermediaire-statut']) AND $_POST['intermediaire-statut'] != '')
 	{
 		$intermediaire_statut=$_POST['intermediaire-statut'];
 		$Liste_Personne["Intermédiaire"] = array($intermediaire_name,$intermediaire_statut);
 
 	}
 
-    //Formes
-    if(isset($_POST['details-formes']) AND $_POST['details-formes'] != '')
+	//Formes
+	if(isset($_POST['details-formes']) AND $_POST['details-formes'] != '')
 	{
 		$details_formes=$_POST['details-formes'];
 
 	}
 	//Natures
-    if(isset($_POST['details-natures']) AND $_POST['details-natures'] != '')
+	if(isset($_POST['details-natures']) AND $_POST['details-natures'] != '')
 	{
 		$details_natures=$_POST['details-natures'];
 	}
 	//Prix
-    if(isset($_POST['details-prix']) AND $_POST['details-prix'] != '')
+	if(isset($_POST['details-prix']) AND $_POST['details-prix'] != '')
 	{
 		$details_prix=$_POST['details-prix'];
 	}
 	//Type de Don
-    if(isset($_POST['details-typeDon']))
+	if(isset($_POST['details-typeDon']))
 	{
 		$details_typeDon=$_POST['details-typeDon'];
 	}
-    //Date
-    if(isset($_POST['details-date']))
+	//Date
+	if(isset($_POST['details-date']))
 	{
 		$details_date=$_POST['details-date'];
 	}
 	//Sources
-    if(isset($_POST['details-sources']) AND $_POST['details-sources'] != '')
+	if(isset($_POST['details-sources']) AND $_POST['details-sources'] != '')
 	{
 		$details_sources=$_POST['details-sources'];
 	}
-    //Poids
-    if(isset($_POST['details-poids']) AND $_POST['details-poids'] != '')
+	//Poids
+	if(isset($_POST['details-poids']) AND $_POST['details-poids'] != '')
 	{
 		$details_poids=$_POST['details-poids'];
 	}
 	//Lieu
-    if(isset($_POST['details-lieu']) AND $_POST['details-lieu'] != '') 
+	if(isset($_POST['details-lieu']) AND $_POST['details-lieu'] != '') 
 	{
 		$details_lieu=$_POST['details-lieu'];
 	}
@@ -107,32 +110,32 @@
 	$Info_don["H"] = $details_lieu; 
 /*
 	//Si nécessaire pour faire des test
-	 echo 'Donateur name : '.$donateur_name .'<br>';
-	 echo 'Donateur statut : '.$donateur_statut .'<br>';
-	 echo 'Beneficiaire name : '.$beneficiaire_name .'<br>';
-	 echo 'Beneficiaire statut : '.$beneficiaire_statut  .'<br>';
-	 echo 'Intermediaire name : '.$intermediaire_name .'<br>';
-	 echo 'Intermedaire statut : '.$intermediaire_statut .'<br>';
-	 echo 'typeDon : '.$details_typeDon .'<br>';
-	 echo 'Date : '.$details_date .'<br>';
-	 echo 'Source : '.$details_sources .'<br>';
-	 echo 'Poids : '.$details_poids .'<br>';
-	 echo 'Forme : '.$details_formes .'<br>';
-	 echo 'Natures : '.$details_natures .'<br>';
-	 echo 'Prix : '.$details_prix .'<br>';
-	 echo 'Lieu : '.$details_lieu .'<br>';
-	 print_r($Liste_Personne);
-	 echo '<br>';
-	 print_r($Info_don);
-	 echo '<br>';
-	 print_r($Liste_Autres);
-	 echo '<br>';
+	echo 'Donateur name : '.$donateur_name .'<br>';
+	echo 'Donateur statut : '.$donateur_statut .'<br>';
+	echo 'Beneficiaire name : '.$beneficiaire_name .'<br>';
+	echo 'Beneficiaire statut : '.$beneficiaire_statut  .'<br>';
+	echo 'Intermediaire name : '.$intermediaire_name .'<br>';
+	echo 'Intermedaire statut : '.$intermediaire_statut .'<br>';
+	echo 'typeDon : '.$details_typeDon .'<br>';
+	echo 'Date : '.$details_date .'<br>';
+	echo 'Source : '.$details_sources .'<br>';
+	echo 'Poids : '.$details_poids .'<br>';
+	echo 'Forme : '.$details_formes .'<br>';
+	echo 'Natures : '.$details_natures .'<br>';
+	echo 'Prix : '.$details_prix .'<br>';
+	echo 'Lieu : '.$details_lieu .'<br>';
+	print_r($Liste_Personne);
+	echo '<br>';
+	print_r($Info_don);
+	echo '<br>';
+	print_r($Liste_Autres);
+	echo '<br>';
 */
-	 
+	
 	// On vérifie si les champs sont vides ( autres que intermédiaire et poids)
 	if(empty($donateur_name) OR empty($donateur_statut) OR empty($beneficiaire_name) OR empty($beneficiaire_statut) OR empty($details_typeDon) OR empty($details_date) OR empty($details_lieu) OR empty($details_formes) OR empty($details_prix) OR empty($details_sources) OR empty($details_natures))
 	{
-		echo '<font color="red">Attention, seul les champs intermédiaire et poids peuvent rester vide !</font>';
+		$_SESSION['ajout'] = '<font color="red">Attention, seul les champs intermédiaire et poids peuvent rester vide !</font>';
 	}
 	else
 	{
@@ -242,10 +245,7 @@
 				"attributes"=>array($Info_don['J']),
 			];
 			//On change le details_poids en idPoids
-			echo $Info_don['J'].'<br>';
-			echo get_one_result($sql_id_Poids).'<br>';
-			$Info_don['J'] = get_one_result($sql_id_Poids);
-			echo $Info_don['J'].'<br>';
+
 			// Ajout du Don dans la base de données:
 			$sql = "INSERT INTO don(forme, nature, prix, typeDon, dateDon, idAuteur, idBeneficiaire, emplacement, sourceDon, idPoids) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			$stmt = $pdo->prepare($sql);
@@ -271,8 +271,7 @@
 				$stmt->closeCursor();
 			}
 			
-			// On affiche le résultat pour le visiteur
-			echo 'Ajout du don terminé';	
+			
 		}
 		catch(PDOException $e)
 		{
@@ -285,21 +284,23 @@
 			echo $e->getMessage();
 		}	
 		$pdo ->commit();
+		// On indique le résultat pour le visiteur
+		$_SESSION['ajout']=	'Ajout du don terminé';	
 	}
 
-	
+		
 
+	header('Location:Finformulaire.php');
+	//AFFICHAGE RETOUR
+	/*	echo '
+	<!DOCTYPE html>
+		<html lang="fr"> 
 
-//AFFICHAGE RETOUR
-	echo '
-<!DOCTYPE html>
-	<html lang="fr"> 
-
-		<body>
-			<br/>
-			<a href="./donation-submission.php">Revenir au Formulaire</a>
-		</body>
-	</html>
-';
-
+			<body>
+				<br/>
+				<a href="./donation-submission.php">Revenir au Formulaire</a>
+			</body>
+		</html>
+	';*/
+	}
 ?>              
