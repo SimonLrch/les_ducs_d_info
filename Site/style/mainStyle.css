@@ -9,9 +9,9 @@ html {
 	font-size: 62.5%;
 }
 body {
-	background-color: #6a040f;
+	background-color: 	hsl(354, 93%, 22%);
 	color: #be8900;
-	font-family: "Lato-Light";
+	font-family: "Lucida Sans Unicode";
 	font-size: 1.4em; /* equiv 14px */
 	line-height: 1.5; /* adapt to your design */
 }
