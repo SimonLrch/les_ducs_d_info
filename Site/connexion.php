@@ -1,15 +1,15 @@
-<?php require_once("../include/formulaireConnexion.php"); ?>
+<?php require_once("include/formulaireConnexion.php"); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="utf-8">
     <title>Connexion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/mainStyle.css">
-    <script defer src="../script/mainScript.js"></script>
+    <link rel="stylesheet" href="style/mainStyle.css">
+    <script defer src="script/mainScript.js"></script>
 </head>
 <body>
-    <?php include("../include/mainHeader.php") ?>
+    <?php include("include/mainHeader.php") ?>
     <main class="container-main">
         <section class="inner-box section-hero">
             <span class="titreSection">Connexion</span>
@@ -31,6 +31,6 @@
             </form>
         </section>
     </main>
-	<?php include'../include/mainFooter.php' ?>
+	<?php include'include/mainFooter.php' ?>
 </body>
 </html>
