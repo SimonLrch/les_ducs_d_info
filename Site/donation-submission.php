@@ -25,14 +25,14 @@
                     <div class="form-step active-step" id="form-step1">
                         <h4>Donateur</h4>
                         <label>Nom</label>
-                        <input type="text" name="donateur-name" required/>
+                        <input type="text" name="donateur-name" />
                         <label>Statut</label>
-                        <input type="text" name="donateur-statut" required/>
+                        <input type="text" name="donateur-statut" />
                         <h4>Bénéficiaire</h4>
                         <label>Nom</label>
-                        <input type="text" name="beneficiaire-name" required/>
+                        <input type="text" name="beneficiaire-name" />
                         <label>Statut</label>
-                        <input type="text" name="beneficiaire-statut" required/>
+                        <input type="text" name="beneficiaire-statut" />
                         <h4>Intermédiaire</h4>
                         <label>Nom</label>
                         <input type="text" name="intermediaire-name" placeholder="Aucune mention"/>
@@ -51,7 +51,7 @@
                             <option value="joyaux-vaisselle">Joyaux et vaisselle</option>
                         </select>
                         <label>Date</label>
-                        <input type="date" name="details-date" required />
+                        <input type="date" name="details-date" />
                         <label>Lieu</label>
                         <input type="text" name="details-lieu" placeholder="Aucune mention"/>
                         <label>Formes</label>
@@ -66,7 +66,7 @@
                         <textarea name="details-natures" placeholder="Aucune mention particulière"></textarea>
                         <div class="container-btn-form">
                             <button class="previous-button" type="button">Précédent</button>
-                            <button type="submit" name="confirmer">Confirmer</button>
+                            <button type="submit">Confirmer</button>
                         </div>
                     </div>
                 </div>
