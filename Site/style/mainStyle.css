@@ -173,7 +173,7 @@ body > script {display: none !important;}
 	background-color : #380000;
 	font-size: 1.5em; 
 	border-bottom: solid;
-	boder-color: #f2e7bf;
+	border-color: #f2e7bf;
 }
 	.topbar-logo {
 		height: 60px;
@@ -207,7 +207,6 @@ body > script {display: none !important;}
 
 /*---------------------------|Footer|---------------------------*/
 .bottombar {
-	position: fixed;
 	display: block;
 	padding: 0 3em;
 	bottom: 0;
@@ -256,7 +255,7 @@ body > script {display: none !important;}
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-    min-height: 100px;
+	min-height: 100vh;
 }
 	.main{
 		display: flex;
@@ -264,7 +263,6 @@ body > script {display: none !important;}
 		width: 100%;
 		height: 100%;
 		min-height: 100px;
-		position: fixed;
 	}
 	.inner-box {
 		display: flex;
@@ -277,6 +275,7 @@ body > script {display: none !important;}
 	}
 	.section-hero {
 		margin-bottom: 0;
+		margin-top: 0;
 		min-height: 10em;
 		width: 100%;
 	}

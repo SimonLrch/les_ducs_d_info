@@ -1,12 +1,12 @@
 <?php
- include("getresult.php");
-    // On commence par récupérer les champs
+	include("getresult.php");
+	// On commence par récupérer les champs
 	//Attribution des variables :
 	//des personnes
 	$donateur_name = $donateur_statut = $beneficiaire_name = $beneficiaire_statut = null;
 	$intermediaire_name = $intermediaire_statut = "Aucune mention d'intermédiaire";
 	//des détails
-    $details_sources = "Aucune mention de Source";
+	$details_sources = "Aucune mention de Source";
 	$details_poids = "Aucune mention de Poids";
 	$details_formes = "Aucune mention de Forme";
 	$details_natures = "Aucune mention de Nature";
@@ -22,70 +22,70 @@
 	{
 		$donateur_statut=$_POST['donateur-statut'];
 	}
-    //Bénéficiaire
-    if(isset($_POST['beneficiaire-name']))     
+	//Bénéficiaire
+	if(isset($_POST['beneficiaire-name']))     
 	{
 		$beneficiaire_name=$_POST['beneficiaire-name'];
 	}
-    if(isset($_POST['beneficiaire-statut']))      
+	if(isset($_POST['beneficiaire-statut']))      
 	{
 		$beneficiaire_statut=$_POST['beneficiaire-statut'];
 	}
 
-    //Intermédiaire
-    if(isset($_POST['intermediaire-name'])  AND $_POST['intermediaire-name'] != '')
+	//Intermédiaire
+	if(isset($_POST['intermediaire-name'])  AND $_POST['intermediaire-name'] != '')
 	{
 		$intermediaire_name=$_POST['intermediaire-name'];
 	}
-    else
+	else
 	{
 		$idIntermediaire = -1;
 	}
-    if(isset($_POST['intermediaire-statut']) AND $_POST['intermediaire-statut'] != '')
+	if(isset($_POST['intermediaire-statut']) AND $_POST['intermediaire-statut'] != '')
 	{
 		$intermediaire_statut=$_POST['intermediaire-statut'];
 		$Liste_Personne["Intermédiaire"] = array($intermediaire_name,$intermediaire_statut);
 
 	}
 
-    //Formes
-    if(isset($_POST['details-formes']) AND $_POST['details-formes'] != '')
+	//Formes
+	if(isset($_POST['details-formes']) AND $_POST['details-formes'] != '')
 	{
 		$details_formes=$_POST['details-formes'];
 
 	}
 	//Natures
-    if(isset($_POST['details-natures']) AND $_POST['details-natures'] != '')
+	if(isset($_POST['details-natures']) AND $_POST['details-natures'] != '')
 	{
 		$details_natures=$_POST['details-natures'];
 	}
 	//Prix
-    if(isset($_POST['details-prix']) AND $_POST['details-prix'] != '')
+	if(isset($_POST['details-prix']) AND $_POST['details-prix'] != '')
 	{
 		$details_prix=$_POST['details-prix'];
 	}
 	//Type de Don
-    if(isset($_POST['details-typeDon']))
+	if(isset($_POST['details-typeDon']))
 	{
 		$details_typeDon=$_POST['details-typeDon'];
 	}
-    //Date
-    if(isset($_POST['details-date']))
+	//Date
+	if(isset($_POST['details-date']))
 	{
 		$details_date=$_POST['details-date'];
 	}
 	//Sources
-    if(isset($_POST['details-sources']) AND $_POST['details-sources'] != '')
+	if(isset($_POST['details-sources']) AND $_POST['details-sources'] != '')
 	{
 		$details_sources=$_POST['details-sources'];
 	}
-    //Poids
-    if(isset($_POST['details-poids']) AND $_POST['details-poids'] != '')
+	//Poids
+	if(isset($_POST['details-poids']) AND $_POST['details-poids'] != '')
 	{
 		$details_poids=$_POST['details-poids'];
 	}
 	//Lieu
-    if(isset($_POST['details-lieu']) AND $_POST['details-lieu'] != '') 
+	if(isset($_POST['details-lieu']) AND $_POST['details-lieu'] != '') 
 	{
 		$details_lieu=$_POST['details-lieu'];
 	}
