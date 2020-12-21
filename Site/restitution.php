@@ -17,7 +17,7 @@
             <div class="grid-list grid-restitution">
                 <a href="PerData/listDonneurs.php" class="grid-cell">
                     <img src="Images/ParDonneur.png" />
-                    <span>Par donneur</span>
+                    <span>Par Beneficiaire</span>
                 </a>
                 <a href="AffichageChronologique/DonSelonChronologie.php" class="grid-cell">
                     <img src="Images/Chronologie.png" />

@@ -8,7 +8,7 @@
     <span class="titreSection">Restitution Par Lieux</span>
 </section>
 <?php if(in_array($emplacement,$lieux)): ?>
-    <p><a href="../AffichageGeographique/DonGeographique.php">Voir avec une carte</a>  </p>
+    <p><a href="../AffichageGeographique/DonGeographique.php">Voir la carte des donnations</a>  </p>
     <h1><?php echo 'Dons fait à '. $emplacement.''; ?></h1>
     <p>
         <br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>

@@ -4,19 +4,19 @@
 $db = new PDO('mysql:host=localhost; dbname=PtutS3', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 //Création des variables
-$idsDonneurs = [];
-$nomsDonneurs = [];
-$fonctionsDonneurs = [];
+$idsBeneficiaire = [];
+$nomsBeneficiaire= [];
+$fonctionsBeneficiaire = [];
 
 //Requête
-$req = $db->query('SELECT idPersonne as idD, nom as nomD, fonction as fonctionD FROM personne
-                                        INNER JOIN don on personne.idPersonne = don.idAuteur
+$req = $db->query('SELECT idPersonne as idB, nom as nomB, fonction as fonctionB FROM personne
+                                        INNER JOIN don on personne.idPersonne = don.idBeneficiaire
                                         GROUP BY personne.idPersonne');
 while ($row= $req->fetch())
 {
-    array_push($idsDonneurs,$row['idD']);
-    array_push($nomsDonneurs,$row['nomD']);
-    array_push($fonctionsDonneurs,$row['fonctionD']);
+    array_push($idsBeneficiaire,$row['idB']);
+    array_push($nomsBeneficiaire,$row['nomB']);
+    array_push($fonctionsBeneficiaire,$row['fonctionB']);
 
 }
 

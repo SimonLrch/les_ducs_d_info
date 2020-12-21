@@ -8,7 +8,7 @@ $pdo = getPDO("PtutS3");
 $id = $_GET["id"];
 
     //Création de variable
-    $idsReceveurs = [];
+    $idsDonneurs = [];
     $nb_Don_pers = [];
     $noms_Receveurs = [];
     $fonctions_Receveurs = [];
@@ -31,7 +31,7 @@ $id = $_GET["id"];
 
     //Requête => donneur
     $req = $pdo->query('SELECT nom as nomD, fonction as fonctionD FROM personne
-                                        INNER JOIN don on personne.idPersonne = don.idAuteur
+                                        INNER JOIN don on personne.idPersonne = don.idBeneficiaire
                                         WHERE personne.idPersonne = '. $id .'');
     while ($row= $req->fetch())
     {
@@ -40,18 +40,18 @@ $id = $_GET["id"];
 
     }
 
-    //Requête avoir id receveurs
-    $req = $pdo->query('SELECT idBeneficiaire as idB FROM don WHERE idAuteur ='. $id .'
-                                GROUP BY idBeneficiaire');
+    //Requête avoir id donneur
+    $req = $pdo->query('SELECT idAuteur as idB FROM don WHERE idBeneficiaire ='. $id .'
+                                GROUP BY idAuteur');
     while ($row= $req->fetch())
     {
-        array_push($idsReceveurs,$row['idB']);
+        array_push($idsDonneurs,$row['idB']);
     }
 
-    //Requête  nombre de don par id de Beneficiaire
-    for($i =0; $i < count($idsReceveurs); $i++){
-        $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $id .' and idBeneficiaire = "' . $idsReceveurs[$i].'"
-                                    group by idBeneficiaire');
+    //Requête  nombre de don par id de Donneur
+    for($i =0; $i < count($idsDonneurs); $i++){
+        $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $id .' and idAuteur = "' . $idsDonneurs[$i].'"
+                                group by idAuteur');
         while ($row= $req->fetch())
         {
             array_push($nb_Don_pers,$row['nbDon']);
@@ -59,8 +59,8 @@ $id = $_GET["id"];
     }
 
     //Requête avoir noms et fonction receveurs
-    for($i =0; $i < count($idsReceveurs);$i++){
-        $req = $pdo->query('SELECT nom as nomB, fonction as fonctionB FROM personne WHERE idPersonne ='. $idsReceveurs[$i] .'
+    for($i =0; $i < count($idsDonneurs);$i++){
+        $req = $pdo->query('SELECT nom as nomB, fonction as fonctionB FROM personne WHERE idPersonne ='. $idsDonneurs[$i] .'
                             GROUP BY idPersonne');
         while ($row= $req->fetch())
         {
@@ -70,7 +70,7 @@ $id = $_GET["id"];
     }
 
     //Requête nombre de dons
-    $req = $pdo->query('SELECT COUNT(idDon) as NbDon FROM don where idAuteur ='. $id .'');
+    $req = $pdo->query('SELECT COUNT(idDon) as NbDon FROM don where idBeneficiaire ='. $id .'');
     while ($row= $req->fetch())
     {
         $nombre_don = $row["NbDon"];
@@ -84,7 +84,7 @@ $id = $_GET["id"];
     }
 
     //Requête  les différents lieux
-    $req = $pdo->query('SELECT emplacement as lieux FROM don where idAuteur ='. $id .'
+    $req = $pdo->query('SELECT emplacement as lieux FROM don where idBeneficiaire ='. $id .'
                                     GROUP BY emplacement');
     while ($row= $req->fetch())
     {
@@ -93,7 +93,7 @@ $id = $_GET["id"];
 
     //Requête  nombre de don par lieux
     for($i =0; $i < count($lieux); $i++){
-        $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $id .' and emplacement = "' . $lieux[$i].'"');
+        $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $id .' and emplacement = "' . $lieux[$i].'"');
         while ($row= $req->fetch())
         {
             array_push($nb_Don_lieux,$row['nbDon']);
@@ -101,7 +101,7 @@ $id = $_GET["id"];
     }
 
     //Requête , les différentes dates
-    $req = $pdo->query('SELECT dateDon as dateD FROM don where idAuteur ='. $id .'
+    $req = $pdo->query('SELECT dateDon as dateD FROM don where idBeneficiaire ='. $id .'
                                         GROUP BY dateDon');
     while ($row= $req->fetch())
     {
@@ -110,7 +110,7 @@ $id = $_GET["id"];
 
     //Requête 9, nombre de don par dates
     for($i =0; $i < count($dates); $i++){
-        $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $id .' and dateDon = "' . $dates[$i].'"');
+        $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $id .' and dateDon = "' . $dates[$i].'"');
         while ($row= $req->fetch())
         {
             array_push($nb_Don_dates,$row['nbDon']);

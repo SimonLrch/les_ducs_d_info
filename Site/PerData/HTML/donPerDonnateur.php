@@ -1,24 +1,28 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
+    <title> <?php echo $nomDonneur.'  '. $fonctionDonneur.''; ?></title>
+</head>
+
 <body>
 <?php include'../include/mainHeader.php' ?>
-<?php if($nomDonneur != null): ?>
-<h1><?php echo ' Dons fait par '.$nomDonneur.' : '. $fonctionDonneur.''; ?></h1>
+<?php if($nomDonneur != null && $nombre_don != 0): ?>
+<h1><?php echo ' Dons fait à '.$nomDonneur.' : '. $fonctionDonneur.''; ?></h1>
 <p>
     <br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
 </p>
 
 <details>
-    <summary class="Eye-Tree-titre1">A fait des don à : </summary>
+    <summary class="Eye-Tree-titre1">A reçue des don de: </summary>
     <p><?php
-        for($i =0; $i < count($idsReceveurs);$i++)
+        for($i =0; $i < count($idsDonneurs);$i++)
         {
             echo '<details>
-                <summary class="Eye-Tree-titre2"><a href="donPerDonnateur.php?id=' . $idsReceveurs[$i] . '">' . $noms_Receveurs[$i] . ' :  ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
+                <summary class="Eye-Tree-titre2"><a href="donPerDonnateur.php?id=' . $idsDonneurs[$i] . '">' . $noms_Receveurs[$i] . ' :  ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
             //Requête pour avoir les dons par receveur:
-            $req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and idBeneficiaire =' . $idsReceveurs[$i] . '');
+            $req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $id . ' and idAuteur=' . $idsDonneurs[$i] . '');
             while ($row = $req->fetch())
             {
                 array_push($id_dons_receveurs, $row['idD']);
@@ -43,7 +47,7 @@
             echo ' <details>
                 <summary class="Eye-Tree-titre2"><a href="donPerVille.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . '</a> ( ' . $nb_Don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
             //Requête pour avoir les dons par ville:
-            $req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and emplacement ="' . $lieux[$i] . '"');
+            $req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $id . ' and emplacement ="' . $lieux[$i] . '"');
             while ($row = $req->fetch()) {
                 array_push($id_dons_lieux, $row['idD']);
             }
@@ -67,7 +71,7 @@
         {
             echo ' <details><summary class="Eye-Tree-titre2"><a href="donPerDate.php?date=' . $dates[$i] . '">' .$dates[$i] .'</a> ( '. $nb_Don_dates[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
             //Requête pour avoir les dons par date:
-            $req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $id . ' and dateDon ="' . $dates[$i] . '"');
+            $req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $id . ' and dateDon ="' . $dates[$i] . '"');
             while ($row = $req->fetch()) {
                 array_push($id_dons_date, $row['idD']);
             }
@@ -86,9 +90,9 @@
 
 
 
-    <?php elseif($nomDonneur == null): ?> <!-- si l'id envoyée ne correspondait pas à celle d'un donnateur, nomdonnateur == nul -->
+    <?php else: ?> <!-- si l'id envoyée ne correspondait pas à celle d'un donnateur, nomdonnateur == nul -->
 
-        <h1> Aucun don n'a été fait par cette personne</h1>
+        <h1> Aucun don n'a été fait à cette personne</h1>
         <p><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Revenir à la page précédente</a></p>
 
     <?php endif; ?>
