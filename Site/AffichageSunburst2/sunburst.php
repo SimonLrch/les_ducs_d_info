@@ -11,6 +11,10 @@
 <?php include'../include/mainHeader.php' ?>
 <br/>
     <svg></svg>
+
+     <div>
+        <p class="label"></p>
+    </div>
 </body>
 
 <script>
@@ -56,6 +60,23 @@
         .attr("d", arc)
         .style('stroke', '#fff')
         .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+        .on("mouseover" ,mouseOverF);
+
+        //variable pour label
+        var textLabel = d3.selectAll(".label") 
+        .append('text');
+
+        function mouseOverF(d)
+        {
+            
+
+            textLabel.text(function(d) { return  d3.select(this).data.name });
+            //insParagraphe = document.querySelector('#label');
+            //insParagraphe.textContent = "Mouse over";
+            //d3.select(this).data.name;
+                   
+
+        }
         ;
 
     
@@ -81,17 +102,11 @@
     //.style.display = none //rend la balise text cachée
     .text(function(d) { return d.depth ? d.data.name : "" }); //prend le nom du parent */
 
-
-
-
-
 </script>
 
 
    <!--affichage du texte au centre-->
-   <div id="explanation" style="visibility: hidden, position: absolute, top: 260px, left: 305px, width: 140px,text-align: center, color: #666, z-index: -1;">
-          <br/>
-    </div>
+  
 
 </html>
 
