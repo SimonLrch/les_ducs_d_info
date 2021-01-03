@@ -51,6 +51,11 @@
         .innerRadius(function (d) { return d.y0 })
         .outerRadius(function (d) { return d.y1 });
 
+
+        var textLabel = d3.selectAll(".label") 
+        .append('text');
+
+
     // Put it all together
     var path = g.selectAll('g')
         .data(root.descendants())
@@ -60,26 +65,26 @@
         .attr("d", arc)
         .style('stroke', '#fff')
         .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
-        .on("mouseover" ,mouseOverF);
+        .on("mouseover" ,mouseOverF) //quand la souris est sur un arc de cercle 
+        .on("mouseleave" ,mouseOutF);
+        //variable pour label (mouseover)
+        
 
-        //variable pour label
-        var textLabel = d3.selectAll(".label") 
-        .append('text');
 
-        function mouseOverF(d)
-        {
-            
+        //mouseover censé afficher autre chose que data 
+        function mouseOverF(d){
+            textLabel//.text(function(d) { var d = d3.select(this); return d.depth ? d.data.name : "" }); //prend le nom du parent */
+                    .text(function(d) {  var d = d3.select(this); return  d.data.name;});              
+        };
 
-            textLabel.text(function(d) { return  d3.select(this).data.name });
-            //insParagraphe = document.querySelector('#label');
-            //insParagraphe.textContent = "Mouse over";
-            //d3.select(this).data.name;
-                   
+        
+        function mouseOutF(d){
+            textLabel.text(function(d) { return  "" ; });              
+        };
 
-        }
-        ;
+        
 
-    
+    /*
 
 
     //Compute text
@@ -104,8 +109,6 @@
 
 </script>
 
-
-   <!--affichage du texte au centre-->
   
 
 </html>
