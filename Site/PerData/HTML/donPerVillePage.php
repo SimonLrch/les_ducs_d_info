@@ -42,7 +42,7 @@
         <summary class="Eye-Tree-titre1">Personnes ayant recues des dons à <?php echo ''.$emplacement.''; ?>: </summary><p>
 
             <?php
-            for($i =0; $i < count($idAuteurs);$i++)
+            for($i =0; $i < count($idBeneficiaires);$i++)
             {
                 echo '<details><summary class="Eye-Tree-titre2"><a href="donPerDonnateur.php?id=' . $idBeneficiaires[$i] . '">' . $nomBeneficiaires[$i] . ' :  ' . $fonctionBeneficiaires[$i] . '</a> ( ' . $nb_don_beneficiaires[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
                 //Requête pour avoir les dons par donneurs:

@@ -9,7 +9,7 @@
 <body>
 <?php include'../include/mainHeader.php' ?>
 <section class="inner-box section-hero">
-    <span class="titreSection">Restitution Par Donneurs</span>
+    <span class="titreSection">Restitution Par Beneficiaires</span>
 </section>
 <h1>Liste des Beneficiaires</h1>
 <p>
