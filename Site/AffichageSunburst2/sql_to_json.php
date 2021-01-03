@@ -213,7 +213,7 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                                                     for($p= 0;$p< count($sources); $p++)
                                                                     {
                                                                         $DonJson_Sources = '{
-                                                                            "name" : "( Sources : '.replaceDoubleQuote($sources[$p]).' ]",
+                                                                            "name" : "( Sources : '.replaceDoubleQuote($sources[$p]).' )",
                                                                             "size" : 0.2}';
 
                                                                            // $sources_quote = replaceSimpleQuote($sources[$p]);

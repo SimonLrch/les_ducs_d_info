@@ -48,14 +48,17 @@
         .outerRadius(function (d) { return d.y1 });
 
     // Put it all together
-    g.selectAll('g')
+    var path = g.selectAll('g')
         .data(root.descendants())
         .enter().append('g').attr("class", "node")  // <-- 2
         .append('path')  // <-- 2
         .attr("display", function (d) { return d.depth ? null : "none"; })
         .attr("d", arc)
         .style('stroke', '#fff')
-        .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); });
+        .style("fill", function (d) { return color((d.children ? d : d.parent).data.name); })
+        ;
+
+    
 
 
     //Compute text
@@ -69,14 +72,16 @@
     }
 
     //Creer les labels
-    g.selectAll(".node")  // on selection les g de la classe .node
+   /* g.selectAll(".node")  // on selection les g de la classe .node
     .append("text") //on créer une balise texte dans g
     .attr("transform", function(d) {
         return "translate(" + arc.centroid(d) + ")rotate(" + computeTextRotation(d) + ")"; })
     .attr("dx","-20") //placement
     .attr("dy",".35em")
-    .style.display = none //rend la balise text cachée
-    .text(function(d) { return d.depth ? d.data.name : "" }); //prend le nom du parent
+    //.style.display = none //rend la balise text cachée
+    .text(function(d) { return d.depth ? d.data.name : "" }); //prend le nom du parent */
+
+
 
 
 
@@ -86,7 +91,7 @@
    <!--affichage du texte au centre-->
    <div id="explanation" style="visibility: hidden, position: absolute, top: 260px, left: 305px, width: 140px,text-align: center, color: #666, z-index: -1;">
           <br/>
-        </div>
+    </div>
 
 </html>
 
