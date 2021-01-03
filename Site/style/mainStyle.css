@@ -9,8 +9,8 @@ html {
 	font-size: 62.5%;
 }
 body {
-	background-color: 	hsl(354, 93%, 22%);
-	color: #be8900;
+	background-color: 	#e5dcdc;
+	color: #380000;
 	font-family: "Lucida Sans Unicode";
 	font-size: 1.4em; /* equiv 14px */
 	line-height: 1.5; /* adapt to your design */
@@ -173,7 +173,7 @@ body > script {display: none !important;}
 	background-color : #380000;
 	font-size: 1.5em; 
 	border-bottom: solid;
-	border-color: #f2e7bf;
+	border-color: #c39728;
 }
 	.topbar-logo {
 		height: 60px;
@@ -190,7 +190,7 @@ body > script {display: none !important;}
 			height: 100%;
 			align-items: center;
 			text-decoration: none;
-			color: #d7be69;
+			color: #e5dcdc;
 		}
 		.topbar-menu a:after {
 			content: " ";
@@ -221,7 +221,8 @@ body > script {display: none !important;}
 	background-color : #380000;
 	font-size: 1.5em;
 	border-top: solid;
-	border-color: #f2e7bf;
+	border-color: #c39728;
+	position: fixed;
 }
 	.bottombar-menu {
 		display: flex;
@@ -234,7 +235,7 @@ body > script {display: none !important;}
 			height: 100%;
 			align-items: center;
 			text-decoration: none;
-			color: #d7be69;
+			color: #e5dcdc;
 		}
 		.bottombar-menu a:after {
 			content: " ";
@@ -324,9 +325,9 @@ body > script {display: none !important;}
 
 	.grid-cell img {
 		width: 100%;
-		max-height: 100%;/
+		max-height: 100%;
 	}
-
+	
 .grid-restitution {
 	font-size: 20px;
 	text-decoration: none;
@@ -335,24 +336,83 @@ body > script {display: none !important;}
 	text-decoration: none;
 	color: #380000;
 }
-	.grid-restitution .grid-cell {
+	/*Grid n°1*/
+	.grid-restitution .grid-cell1 {
 		padding: 30px;
-		background-color: #f2e7bf;
+		background-color: #c79b6f;
 		border-radius: var(--border-radius-box);
 	}
-		.grid-restitution .grid-cell img {
+		.grid-restitution .grid-cell1 img {
 			width: 100%;
 			height: 200px;
 			object-fit: contain;
 			border-radius: var(--border-radius-box);
 			overflow: hidden;
 		}
-		.grid-restitution .grid-cell span {
+		.grid-restitution .grid-cell1 span {
 			display: flex;
 			padding-top: 15px;
 			width: 100%;
 			justify-content: center;
 		}
+	/*Grid n°2*/
+	.grid-restitution .grid-cell2 {
+		padding: 30px;
+		background-color: #d66d4d;
+		border-radius: var(--border-radius-box);
+	}
+		.grid-restitution .grid-cell2 img {
+			width: 100%;
+			height: 200px;
+			object-fit: contain;
+			border-radius: var(--border-radius-box);
+			overflow: hidden;
+		}
+		.grid-restitution .grid-cell2 span {
+			display: flex;
+			padding-top: 15px;
+			width: 100%;
+			justify-content: center;
+		}
+	/*Grid n°3*/
+	.grid-restitution .grid-cell3 {
+		padding: 30px;
+		background-color: #d99755;
+		border-radius: var(--border-radius-box);
+	}
+		.grid-restitution .grid-cell3 img {
+			width: 100%;
+			height: 200px;
+			object-fit: contain;
+			border-radius: var(--border-radius-box);
+			overflow: hidden;
+		}
+		.grid-restitution .grid-cell3 span {
+			display: flex;
+			padding-top: 15px;
+			width: 100%;
+			justify-content: center;
+		}
+	/*Grid n°4*/
+	.grid-restitution .grid-cell4 {
+		padding: 30px;
+		background-color: #c56555;
+		border-radius: var(--border-radius-box);
+	}
+		.grid-restitution .grid-cell4 img {
+			width: 100%;
+			height: 200px;
+			object-fit: contain;
+			border-radius: var(--border-radius-box);
+			overflow: hidden;
+		}
+		.grid-restitution .grid-cell4 span {
+			display: flex;
+			padding-top: 15px;
+			width: 100%;
+			justify-content: center;
+		}
+		
 /*---------------------------|Form|---------------------------*/
 	.container-main form {
 		margin: auto;
@@ -383,19 +443,19 @@ body > script {display: none !important;}
 						height: 50px;
 						border-radius: 50%;
 						font-size: 20pt;
-						color: #d7be69;
+						color: #c79b6f;
 						background-color: #380000;
 					}
 						.active-title span {
 							color: #380000;
-							background-color: #d7be69;
+							background-color: #c79b6f;
 						}
 		.global-form {
 			margin: 2em 0;
 			padding: 2.5em;
 			background-color: white;
 			border-radius: var(--border-radius-box);
-			background-color: #f2e7bf;
+			background-color: #c79b6f;
 		}
 			.form-step {
 				display: none;
@@ -436,7 +496,7 @@ body > script {display: none !important;}
 						padding: 0 2em;
 						width: 100%;
 						color: #d7be69;
-						background-color: #6a040f;
+						background-color: #380000;
 						color: white;
 						border: none;
 						border-radius: 50px;
@@ -450,15 +510,34 @@ body > script {display: none !important;}
 					}
 						.container-btn-form button:hover {
 							color: #380000;
-							background-color: #d7be69;
+							background-color: #c79b6f;
 						}
 
-/*---------------------------|Eye-Tree|---------------------------*/
+/*---------------------------|Restitution par beneficiaire|---------------------------*/
+#titre-beneficiaire {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.restitutionDon {
+	text-align: center;
+}
+	.restitutionDon-a {
+		background-color: #e5dcdc;
+		color: #380000;
+		font-family: "Lucida Sans Unicode";
+		font-size: 1.4em; /* equiv 14px */
+		line-height: 1.5; /* adapt to your design */
+		text-decoration: none;
+	}
+		.restitutionDon-a:hover {
+			font-weight: bold;
+		}
 
 .Eye-Tree-titre1 {
 	font-size: 15pt;
 	font-weight: bold;
-	/*outline: solid;*/
+	
 }
 
 .Eye-Tree-titre2 {
@@ -469,3 +548,5 @@ body > script {display: none !important;}
 .Eye-Tree-content {
 	padding-left: 20pt;
 }
+
+

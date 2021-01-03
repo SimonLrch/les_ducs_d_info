@@ -19,7 +19,7 @@
         <?php
         for($i =0; $i < count($idAuteurs);$i++)
         {
-            echo '<details><summary class="Eye-Tree-titre2"><a href="donPerDonnateur.php?id=' . $idAuteurs[$i] . '">' . $nomAuteurs[$i] . ' :  ' . $fonctionAuteurs[$i] . '</a> ( ' . $nb_don_auteurs[$i] . ' )</summary>
+            echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerDonnateur.php?id=' . $idAuteurs[$i] . '">' . $nomAuteurs[$i] . ' :  ' . $fonctionAuteurs[$i] . '</a> ( ' . $nb_don_auteurs[$i] . ' )</summary>
                 <div class="Eye-Tree-content"> <p>';
             //Requête pour avoir les dons par donneurs:
             $req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $idAuteurs[$i] . ' and dateDon = "' . $date . '"');
@@ -29,7 +29,7 @@
             }
             for ($j = 0; $j < count($id_don_auteurs); $j++)
             {
-                echo ' <a href="..\Afficher_don.php?id=' . $id_don_auteurs[$j] . '">Don ' . $id_don_auteurs[$j] . '</a>
+                echo ' <a class="restitutionDon-a" href="..\Afficher_don.php?id=' . $id_don_auteurs[$j] . '">Don ' . $id_don_auteurs[$j] . '</a>
                     <br/>';
             }
             $id_don_auteurs = []; //reset le tableau
@@ -46,7 +46,7 @@
         <?php
         for($i =0; $i < count($idBeneficiaires);$i++)
         {
-            echo '<details><summary class="Eye-Tree-titre2"><a href="donPerDonnateur.php?id=' . $idBeneficiaires[$i] . '">' . $nomBeneficiaires[$i] . ' :  ' . $fonctionBeneficiaires[$i] . '</a> ( ' . $nb_don_beneficiaires[$i] . ' )</summary><div class="Eye-Tree-content"><p>';
+            echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerDonnateur.php?id=' . $idBeneficiaires[$i] . '">' . $nomBeneficiaires[$i] . ' :  ' . $fonctionBeneficiaires[$i] . '</a> ( ' . $nb_don_beneficiaires[$i] . ' )</summary><div class="Eye-Tree-content"><p>';
             //Requête pour avoir les dons par donneurs:
             $req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $idBeneficiaires[$i] . ' and dateDon = "' . $date . '"');
             while ($row = $req->fetch())
@@ -55,7 +55,7 @@
             }
             for ($j = 0; $j < count($id_don_beneficiaires); $j++)
             {
-                echo ' <a href="..\Afficher_don.php?id=' . $id_don_beneficiaires[$j] . '">Don ' . $id_don_beneficiaires[$j] . '</a>
+                echo ' <a class="restitutionDon-a" href="..\Afficher_don.php?id=' . $id_don_beneficiaires[$j] . '">Don ' . $id_don_beneficiaires[$j] . '</a>
                 <br/>';
             }
             $id_don_beneficiaires = []; //reset le tableau
@@ -70,7 +70,7 @@
         <?php
         for($i =0; $i < count($lieux);$i++)
         {
-            echo '<details><summary class="Eye-Tree-titre2"><a href="donPerVille.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . ' </a> ( ' . $nb_don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
+            echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerVille.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . ' </a> ( ' . $nb_don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
             //Requête pour avoir les dons par donneurs:
             $req = $pdo->query('SELECT idDon as idD FROM don where emplacement ="' . $lieux[$i] . '" and dateDon = "' . $date . '"
             ');
@@ -80,7 +80,7 @@
             }
             for ($j = 0; $j < count($id_don_lieux); $j++)
             {
-                echo ' <a href="..\Afficher_don.php?id=' . $id_don_lieux[$j] . '">Don ' . $id_don_lieux[$j] . '</a>
+                echo ' <a class="restitutionDon-a" href="..\Afficher_don.php?id=' . $id_don_lieux[$j] . '">Don ' . $id_don_lieux[$j] . '</a>
                 <br/>';
             }
             $id_don_lieux = []; //reset le tableau
