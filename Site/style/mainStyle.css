@@ -549,9 +549,4 @@ body > script {display: none !important;}
 	padding-left: 20pt;
 }
 
-/*---------------------------|Restitution par géographie|---------------------------*/
-#map {
-	border: thick double #380000;
-	width: 70%;
-	margin: auto;
-}
+
