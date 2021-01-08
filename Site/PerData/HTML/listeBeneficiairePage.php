@@ -14,9 +14,10 @@
 			<h1 id="titre-beneficiaire">Liste des Beneficiaires :</h1>
 				<p>
 					<?php for ($i = 0; $i < count($idsBeneficiaire) ; $i++) { //Afficher tous les donneurs
-						echo ' <a class="restitutionDon-a" href="donPerDonnateur.php?id='. $idsBeneficiaire[$i] .'">' .$nomsBeneficiaire[$i] . ' - ' . $fonctionsBeneficiaire[$i] . ' </a> <br/>';
+						echo ' <a class="restitutionDon-a" href="donPerBeneficiaire.php?id='. $idsBeneficiaire[$i] .'">' .$nomsBeneficiaire[$i] . ' - ' . $fonctionsBeneficiaire[$i] . ' </a> <br/>';
 					}  ?>
 				</p>
 		</div>
+		<?php include'../include/mainFooter.php' ?>
 	</body>
 </html>

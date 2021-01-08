@@ -21,7 +21,7 @@ while ($row= $req->fetch())
 }
 
     //HTML
-    require_once ("HTML/listeDonneursPage.php");
+    require_once ("HTML/listeBeneficiairePage.php");
 
 ?>
 

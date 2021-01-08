@@ -20,7 +20,7 @@
 					for($i =0; $i < count($idsDonneurs);$i++)
 					{
 						echo '<details>
-							<summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerDonnateur.php?id=' . $idsDonneurs[$i] . '">' . $noms_Receveurs[$i] . ' :  ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
+							<summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerBeneficiaire.php?id=' . $idsDonneurs[$i] . '">' . $noms_Receveurs[$i] . ' :  ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 						//Requête pour avoir les dons par receveur:
 						$req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $id . ' and idAuteur=' . $idsDonneurs[$i] . '');
 						while ($row = $req->fetch())
@@ -93,5 +93,6 @@
 			<h1> Aucun don n'a été fait à cette personne</h1>
 			<p><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Revenir à la page précédente</a></p>
 		<?php endif; ?>
+		<?php include'../include/mainFooter.php' ?>
 	</body>
 </html>

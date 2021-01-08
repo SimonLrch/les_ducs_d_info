@@ -223,7 +223,6 @@ body > script {display: none !important;}
 	font-size: 1.5em;
 	border-top: solid;
 	border-color: #c39728;
-	position: absolute;
 }
 	.bottombar-menu {
 		display: flex;

@@ -15,8 +15,8 @@
         </section>
         <section class="inner-box">
             <div class="grid-list grid-restitution">
-                <a href="PerData/listDonneurs.php" class="grid-cell1">
-					<img src="Images/ParDonneur.png" />
+                <a href="PerData/listBeneficiaires.php" class="grid-cell1">
+					<img src="Images/Person.png" />
 					<span>Par Beneficiaire</span>
                 </a>
                 <a href="AffichageChronologique/DonSelonChronologie.php" class="grid-cell2">
@@ -27,7 +27,7 @@
                     <img src="Images/Geographique.png" />
                     <span>Géographique</span>
                 </a>
-                <a href="AffichageSunburst2/sunburst.php" class="grid-cell4">
+                <a href="AffichageSunburst/sunburst.php" class="grid-cell4">
                     <img src="Images/Sunburst.png" />
                     <span>Sunburst</span>
                 </a>

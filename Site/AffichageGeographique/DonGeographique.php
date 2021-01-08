@@ -121,5 +121,6 @@
 			initMap(); 
 			};
 		</script>
+		<?php include'../include/mainFooter.php' ?>
     </body>
 </html>

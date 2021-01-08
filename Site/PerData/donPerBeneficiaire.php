@@ -118,7 +118,5 @@ $id = $_GET["id"];
     }
 
     //HTML
-    require_once ("HTML/donPerDonnateur.php");
-
-
+    require_once ("HTML/donPerBeneficiaire.php");
 ?>
