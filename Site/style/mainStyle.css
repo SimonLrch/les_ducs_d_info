@@ -556,3 +556,8 @@ body > script {display: none !important;}
 	width: 70%;
 	margin: auto;
 }
+
+/*---------------------------|Restitution Par Sunburst|---------------------------*/
+.RestSunburst {
+	text-align: center;
+}
