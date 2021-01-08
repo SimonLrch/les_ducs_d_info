@@ -111,7 +111,7 @@
 				}).addTo(map);
 				
 				for (ville in villes) {
-					marker = L.marker([villes[ville].lat, villes[ville].lon]).bindPopup('<p><a href="../PerData/donPerVille.php?emplacement=' + villes[ville].ville +'">'+ villes[ville].ville +'</a><p>');;
+					marker = L.marker([villes[ville].lat, villes[ville].lon]).bindPopup('<p><a class="restitutionGeographique-a" href="../PerData/donPerVille.php?emplacement=' + villes[ville].ville +'">'+ villes[ville].ville +'</a><p>');;
 					marker.addTo(map);
 				}
 			}

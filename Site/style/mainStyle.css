@@ -556,6 +556,13 @@ body > script {display: none !important;}
 	margin: auto;
 }
 
+.restitutionGeographique-a{
+	font-family: "Lucida Sans Unicode";
+	font-size: 1.4em; /* equiv 14px */
+	line-height: 1.5; /* adapt to your design */
+	text-decoration: none;
+}
+
 /*---------------------------|Restitution Par Sunburst|---------------------------*/
 .RestSunburst {
 	text-align: center;
