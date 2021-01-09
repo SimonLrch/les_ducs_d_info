@@ -358,6 +358,7 @@ body > script {display: none !important;}
 
 .titreSection {
 	font-size: 3.125em;
+	text-align: center;
 }
 
 /*---------------------------|Grid|---------------------------*/
