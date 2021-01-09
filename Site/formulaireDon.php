@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 	include("getresult.php");
 	// On commence par récupérer les champs
 	//Attribution des variables :
@@ -132,7 +134,7 @@
 	// On vérifie si les champs sont vides ( autres que intermédiaire et poids)
 	if(empty($donateur_name) OR empty($donateur_statut) OR empty($beneficiaire_name) OR empty($beneficiaire_statut) OR empty($details_typeDon) OR empty($details_date) OR empty($details_lieu) OR empty($details_formes) OR empty($details_prix) OR empty($details_sources) OR empty($details_natures))
 	{
-		echo '<font color="red">Attention, seul les champs intermédiaire et poids peuvent rester vide !</font>';
+		$_SESSION['ajout'] = '<font color="red">Attention, seul les champs intermédiaire et poids peuvent rester vide !</font>';
 	}
 	else
 	{
@@ -271,8 +273,6 @@
 				$stmt->closeCursor();
 			}
 			
-			// On affiche le résultat pour le visiteur
-			echo 'Ajout du don terminé';	
 		}
 		catch(PDOException $e)
 		{
@@ -285,13 +285,16 @@
 			echo $e->getMessage();
 		}	
 		$pdo ->commit();
+		// On affiche le résultat pour le visiteur
+		$_SESSION['ajout']=	'Ajout du don terminé';	
 	}
 
 	
 
+	header('Location:Finformulaire.php');
 
 //AFFICHAGE RETOUR
-	echo '
+/*	echo '
 <!DOCTYPE html>
 	<html lang="fr"> 
 
@@ -300,6 +303,6 @@
 			<a href="./donation-submission.php">Revenir au Formulaire</a>
 		</body>
 	</html>
-';
+'; */
 
 ?>              
