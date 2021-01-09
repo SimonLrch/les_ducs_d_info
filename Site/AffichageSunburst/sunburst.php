@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
+    	<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
 		<title >Sunburst</title>
 		<script src="https://d3js.org/d3.v4.min.js"></script>

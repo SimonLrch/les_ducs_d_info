@@ -3,7 +3,7 @@
 }
 
 #calendar-main, #calendar-date-details{
-    margin: 20px auto;
+    margin: 30px auto;
     width: 100%;
     background-color: white;
     box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.2);
@@ -20,23 +20,25 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    max-width: 1800px;
+    max-width: 1600px;
+    border-radius: 20px;
 }
 
 #calendar-header {
     display: flex;
     width: 100%;
-    height: 200px;
+    height: 150px;
     background-color: var(--main-color);
     color: white;
     fill: white;
     align-items: center;
     justify-content: space-around;
+    border-radius: 0 0 20px 20px;
 }
 #calendar-title {
     margin: 0;
 }
-#calendar-header button {
+/*#calendar-header button {
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -49,23 +51,26 @@
 }
 #calendar-next-btn svg {
     transform: scale(-1,1);
-}
+}*/
 
 #calendar-grid-months {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 30px 0;
 }
 
 .calendar-month-container {
     margin: 10px;
+    padding: 5px;
     border: 2px solid var(--main-color);
+    border-radius: 20px;
 }
 
 .calendar-month-title {
     width: 100%;
-    font-size: 30px;
-    font-family: monospace;
+    font-size: 24px;
+    font-weight: bold;
     color: var(--main-color);
     text-align: center;
 }
@@ -78,9 +83,9 @@
 .calendar-grid time {
     position: relative;
     display: flex;
-    margin: 5px;
-    width: 50px;
-    height: 50px;
+    margin: 4px;
+    width: 42px;
+    height: 42px;
     box-sizing: border-box;
     cursor: pointer;
     align-items: center;
@@ -102,9 +107,10 @@
 
 /*---/Calendar Details/---*/
 #calendar-date-details {
-    max-width: 1800px;
+    max-width: 1600px;
     box-sizing: border-box;
     padding: 20px;
+    border-radius: 20px;
 }
 #calendar-date-details h3 {
     font-weight: bold;
@@ -117,9 +123,10 @@
 #calendar-date-details > div {
     float: left;
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
     background-color: var(--main-color);
     color: white;
+    border-radius: 20px;
 }
 #calendar-date-details > div > div {
     display: flex;
@@ -141,13 +148,15 @@
 }
 #barChart-decade-container {
     display: flex;
+    width: 100%;
+    max-width: 1000px;
 }
 
 .barChart-year-container {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 100px;
+    width: 100%;
     height: 150px;
     cursor: pointer;
 }
@@ -165,12 +174,12 @@
     height: 100%;
     width: 100%;
     box-sizing: border-box;
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid var(--main-color);
+    border-left: 1px solid var(--main-color);
+    border-bottom: 1px solid var(--main-color);
 }
 .barChart-year-container:last-child .barChart-month-container {
-    border-right: 1px solid black;
+    border-right: 1px solid var(--main-color);
 }
 .barChart-month {
     display: flex;
@@ -189,6 +198,7 @@
     width: 100%;
     background-color: var(--main-color);
     opacity: 0.2;
+    border-radius: 10px 10px 0 0;
 }
 
 #barChart-previous-btn, #barChart-next-btn {

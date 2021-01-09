@@ -98,6 +98,7 @@ while ($row= $req->fetch())
 	<head>
 		<title>Don n°<?php echo ''.$id .''; ?></title>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="style/mainStyle.css">
 		<script defer src="script/mainScript.js"></script>
 	</head>
