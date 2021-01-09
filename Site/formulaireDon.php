@@ -97,16 +97,23 @@ session_start();
 	$Info_don["A"] = $details_formes;
 	$Info_don["B"] = $details_natures;
 	$Info_don["C"] = $details_prix;
-	$Liste_Autres[$details_typeDon]=["TypeDon","TypeDon"];
 	$Info_don["D"] = $details_typeDon;
-	$Liste_Autres[$details_date]=["Calendrier","DateDon"];
 	$Info_don["E"] = $details_date;
-	$Liste_Autres[$details_sources]=["sourceDon","recherche"];
 	$Info_don["I"] = $details_sources;
-	$Liste_Autres[$details_poids]=["Poids","Masse"];
 	$Info_don["J"] = $details_poids;
-	$Liste_Autres[$details_lieu]=["Lieu","Emplacement"];
-	$Info_don["H"] = $details_lieu; 
+	$Info_don["H"] = $details_lieu;
+	
+	/*$Liste_Autres[$details_typeDon]=["TypeDon","TypeDon"];
+	$Liste_Autres[$details_date]=["Calendrier","DateDon"];
+	$Liste_Autres[$details_sources]=["sourceDon","recherche"];
+	$Liste_Autres[$details_poids]=["Poids","Masse"];
+	$Liste_Autres[$details_lieu]=["Lieu","Emplacement"];*/
+	$Liste_Autres = array();
+	array_push($Liste_Autres, array($details_typeDon, "TypeDon", "TypeDon"));
+	array_push($Liste_Autres, array($details_date, "Calendrier", "DateDon"));
+	array_push($Liste_Autres, array($details_sources, "sourceDon", "recherche"));
+	array_push($Liste_Autres, array($details_poids, "Poids", "Masse"));
+	array_push($Liste_Autres, array($details_lieu, "Lieu", "Emplacement"));
 /*
 	//Si nécessaire pour faire des test
 	 echo 'Donateur name : '.$donateur_name .'<br>';
@@ -130,7 +137,6 @@ session_start();
 	 print_r($Liste_Autres);
 	 echo '<br>';
 */
-	 
 	// On vérifie si les champs sont vides ( autres que intermédiaire et poids)
 	if(empty($donateur_name) OR empty($donateur_statut) OR empty($beneficiaire_name) OR empty($beneficiaire_statut) OR empty($details_typeDon) OR empty($details_date) OR empty($details_lieu) OR empty($details_formes) OR empty($details_prix) OR empty($details_sources) OR empty($details_natures))
 	{
@@ -154,7 +160,8 @@ session_start();
 					"sql" => "SELECT Count(*) as Res from statut WHERE fonction = ?",
 					//L'attribut statut changeant à chaque loop. Dans un array car pdo execute avec une liste d'attributs
 					"attributes"=>array($info[1])
-				];	
+				];
+				
 				// Si le statut n'existe pas déjà dans la BDD : la fonction renvoie 0
 				if(get_one_result($sql_statuts) == 0)
 				{
@@ -218,20 +225,23 @@ session_start();
 							
 			foreach($Liste_Autres as $value => $TableAndColumn)	
 			{
+				echo "<pre>";
+				echo var_dump($TableAndColumn);
+				echo "</pre>";
 				//Création d'un Array Key composé de 
 				$sql_Autres = [
 					//Un objet Pdo pour executer les requêtes
 					"pdo"=>$pdo,
 					//La requête à préparer
-					"sql" => "SELECT Count(*) as Res from $TableAndColumn[0] WHERE $TableAndColumn[1] = ?",
+					"sql" => "SELECT Count(*) as Res from $TableAndColumn[1] WHERE $TableAndColumn[2] = ?",
 					//L'attribut $value changeant à chaque loop. Dans un array car pdo execute avec une liste d'attributs
-					"attributes"=>array($value)
+					"attributes"=>array($TableAndColumn[0])
 				];
 				//Si l'information n'existe pas dans la BDD : la fonction renvoie 0
 				if(get_one_result($sql_Autres) == 0)
 				{
 					//Ajout de la nouvelle information dans la Table correspondante
-					$stmt = $pdo->prepare("INSERT INTO $TableAndColumn[0]($TableAndColumn[1]) VALUES (?)");
+					$stmt = $pdo->prepare("INSERT INTO $TableAndColumn[1]($TableAndColumn[2]) VALUES (?)");
 					$stmt->execute($sql_Autres["attributes"]);
 					$stmt->closeCursor();
 				}
@@ -241,13 +251,14 @@ session_start();
 			$sql_id_Poids= [
 				"pdo"=>$pdo,
 				"sql"=>"SELECT idPoids AS Res FROM Poids WHERE masse = ?",
-				"attributes"=>array($Info_don['J']),
+				"attributes"=> array($Info_don['J']),
 			];
 			//On change le details_poids en idPoids
 			echo $Info_don['J'].'<br>';
 			echo get_one_result($sql_id_Poids).'<br>';
 			$Info_don['J'] = get_one_result($sql_id_Poids);
 			echo $Info_don['J'].'<br>';
+
 			// Ajout du Don dans la base de données:
 			$sql = "INSERT INTO don(forme, nature, prix, typeDon, dateDon, idAuteur, idBeneficiaire, emplacement, sourceDon, idPoids) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			$stmt = $pdo->prepare($sql);

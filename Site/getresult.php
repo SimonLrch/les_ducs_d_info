@@ -6,7 +6,8 @@ function get_one_result($query)
 	$stmt = $query["pdo"]->prepare($query["sql"]);
 	//Exécuter la requêter préparée avec la liste d'attributs
 	$stmt->execute($query["attributes"]);
-	
+
+	$output = 0;
 	//Obtenir le résultat
 	while ($row = $stmt->fetch())
 	{
