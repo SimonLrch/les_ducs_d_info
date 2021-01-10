@@ -1,90 +1,88 @@
 <?php
-
+session_start();
 require_once ('include/dbConfig.php');
-
 $pdo = getPDO("PtutS3");
-
-$id = $_GET["id"];
+$_SESSION['idDon'] = $_GET["id"];
 
 
 //Création de variable
-$nomAuteur = '';
-$fonctionAuteur = '';
-$idAuteur = '';
+$_SESSION['nomAuteur'] = '';
+$_SESSION['fonctionAuteur'] = '';
+$_SESSION['idAuteur'] = '';
 
-$nomDestinataire = '';
-$fonctionDestinataire = '';
-$idDestinataire = '';
+$_SESSION['nomDestinataire'] = '';
+$_SESSION['fonctionDestinataire'] = '';
+$_SESSION['idDestinataire'] = '';
 
-$nomIntermediaire = '';
-$fonctionIntermediaire = '';
-$idIntermediaire = '';
+$_SESSION['nomIntermediaire'] = '';
+$_SESSION['fonctionIntermediaire'] = '';
+$_SESSION['idIntermediaire'] = '';
 
-$typeDon = '';
-$formeDon = '';
+$_SESSION['typeDon'] = '';
+$_SESSION['formeDon'] = '';
 
-$idPoids = '';
-$poids = '';
+$_SESSION['idPoids'] = '';
+$_SESSION['poids'] = '';
 
-$date = '';
-$lieu = '';
-$raison = '';
-$source = '';
-$prix = '';
+$_SESSION['date'] = '';
+$_SESSION['lieu'] = '';
+$_SESSION['nature'] = '';
+$_SESSION['source'] = '';
+$_SESSION['prix'] = '';
 
 
 //Requete 1, sur table don
 $req = $pdo->query('SELECT typeDon as TypeD, forme as FormeD, nature as NatureD, prix as PrixD, 
-                dateDon as DateD, idPoids as PoidD, emplacement as LieuD, sourceDon as SourceD FROM don where idDon = '. $id .'');
+                dateDon as DateD, idPoids as PoidD, emplacement as LieuD, sourceDon as SourceD FROM don where idDon = '. $_SESSION['idDon'] .'');
 while ($row= $req->fetch())
 {
-$typeDon = $row['TypeD'];
-$formeDon = $row['FormeD'];
-$raison = $row['NatureD'];
-$prix = $row['PrixD'];
-$date = $row['DateD'];
-$idPoids = $row['PoidD'];
-$lieu = $row['LieuD'];
-$source = $row['SourceD'];
-
+	$_SESSION['typeDon'] = $row['TypeD'];
+	$_SESSION['formeDon'] = $row['FormeD'];
+	$_SESSION['nature'] = $row['NatureD'];
+	$_SESSION['prix'] = $row['PrixD'];
+$_SESSION['date'] = $row['DateD'];
+$_SESSION['idPoids'] = $row['PoidD'];
+$_SESSION['lieu'] = $row['LieuD'];
+$_SESSION['source'] = $row['SourceD'];
 }
 
 //Requete 2, sur table Personne / Auteur
-$req = $pdo->query('SELECT idPersonne as idA, nom as NomA, fonction as FonctionA FROM personne INNER JOIN don on personne.idPersonne = don.idAuteur where idDon = '. $id .'');
+$req = $pdo->query('SELECT idPersonne as idA, nom as NomA, fonction as FonctionA FROM personne 
+	INNER JOIN don on personne.idPersonne = don.idAuteur where idDon = '. $_SESSION['idDon'] .'');
 while ($row= $req->fetch())
 {
-    $nomAuteur = $row['NomA'];
-    $fonctionAuteur = $row['FonctionA'];
-    $idAuteur = $row['idA'];
+    $_SESSION['nomAuteur'] = $row['NomA'];
+	$_SESSION['fonctionAuteur'] = $row['FonctionA'];
+    $_SESSION['idAuteur']  = $row['idA'];
 }
 
 //Requete 3, sur table Personne / Destinataire
-$req = $pdo->query('SELECT idPersonne as idD, nom as NomD, fonction as FonctionD FROM personne INNER JOIN don on personne.idPersonne = don.idBeneficiaire where idDon = '. $id .'');
+$req = $pdo->query('SELECT idPersonne as idD, nom as NomD, fonction as FonctionD FROM personne 
+	INNER JOIN don on personne.idPersonne = don.idBeneficiaire where idDon = '.$_SESSION['idDon'] .'');
 while ($row= $req->fetch())
 {
-    $nomDestinataire = $row['NomD'];
-    $fonctionDestinataire = $row['FonctionD'];
-    $idDestinataire = $row['idD'];
+    $_SESSION['nomDestinataire'] = $row['NomD'];
+    $_SESSION['fonctionDestinataire'] = $row['FonctionD'];
+    $_SESSION['idDestinataire'] = $row['idD'];
 }
 
 //Requete 4, sur table Personne via table intermédiaire
 $req = $pdo->query('SELECT personne.idPersonne as idI, personne.nom as NomI, personne.fonction as FonctionI FROM personne
                                 INNER JOIN intermediaire on personne.idPersonne = intermediaire.idIntermediaire 
                                 LEFT JOIN don on intermediaire.idDon = don.idDon
-                WHERE don.idDon = '. $id .'');
+                WHERE don.idDon = '. $_SESSION['idDon'] .'');
 while ($row= $req->fetch())
 {
-    $nomIntermediaire = $row['NomI'];
-    $fonctionIntermediaire = $row['FonctionI'];
-    $idIntermediaire = $row['idI'];
+    $_SESSION['nomIntermediaire'] = $row['NomI'];
+    $_SESSION['fonctionIntermediaire'] = $row['FonctionI'];
+    $_SESSION['idIntermediaire'] = $row['idI'];
 }
 
 //Requete sur le poids
-$req = $pdo->query('SELECT masse as poids from poids natural join don
-                WHERE idPoids = '. $idPoids .'');
+$req = $pdo->query('SELECT masse as poids from poids WHERE idPoids = '. $_SESSION['idPoids'] .'');
 while ($row= $req->fetch())
 {
-    $poids = $row['poids'];
+    $_SESSION['poids'] = $row['poids'];
 
 }
 
@@ -96,7 +94,7 @@ while ($row= $req->fetch())
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<title>Don n°<?php echo ''.$id .''; ?></title>
+		<title>Don n°<?php echo ''.$_SESSION['idDon'] .''; ?></title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="style/mainStyle.css">
@@ -104,46 +102,54 @@ while ($row= $req->fetch())
 	</head>
     <body>
 		<?php include'include/mainHeader.php' ?>
-		<section class="inner-box section-hero">
-            <span class="titreSection">Don numéro<?php echo ' ' . $id .''; ?></span>
-        </section>
 		<div class="restitutionDon">
+			<h1>Don numéro <?php echo ' ' . $_SESSION['idDon'] .''; ?></h1>
 			<p>
-				Auteur : <?php echo '<a class="restitutionDon-a" href="PerData/donPerBeneficiaire.php?id='. $idAuteur .'">' . $nomAuteur .'  -  ' . $fonctionAuteur .'</a>'; ?>
-				<br/>A l' intention de :<?php echo '<a class="restitutionDon-a" href="PerData/donPerBeneficiaire.php?id='. $idDestinataire .'">' . $nomDestinataire .' - ' . $fonctionDestinataire .'</a>'; ?>
+				<br/>
+				<br/>Auteur : <?php echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. $_SESSION['idAuteur'] .'">' .
+					 $_SESSION['nomAuteur'] .'  : ' . $_SESSION['fonctionAuteur'] .'</a>'; ?>
+				<br/>A l' intention de : <?php echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. 
+					$_SESSION['idDestinataire'] .'">' . $_SESSION['nomDestinataire'] .' : ' . $_SESSION['fonctionDestinataire'] .'</a>'; ?>
 				<br/>Par le biais de : <?php
-						if($nomIntermediaire == null)
+						if($_SESSION['nomIntermediaire'] == null)
 						{
 							echo 'Aucune Mention';
 						}
 						else
 						{
-							 echo '<a class="restitutionDon-a" href="PerData/donPerBeneficiaire.php?id='. $idIntermediaire .'">' . $nomIntermediaire .' - ' . $fonctionIntermediaire .'</a>';
+							 echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. $_SESSION['idIntermediaire'] .'">' . 
+								$_SESSION['nomIntermediaire'] .' : ' . $_SESSION['fonctionIntermediaire'] .'</a>';
 						}
 						?>
 				<br/>
-				<br/>Type :<?php echo ' ' . $typeDon .''; ?>
-				<br/>Forme :<?php echo ' ' . $formeDon .''; ?>
+				<br/>Type :<?php echo ' ' . $_SESSION['typeDon'] .''; ?>
+				<br/>Forme :<?php echo ' ' . $_SESSION['formeDon'] .''; ?>
 				<br/>Poids :<?php //Poid peut être null
-						if($poids == null)
+						if($_SESSION['poids'] == null)
 						{
 							echo 'Aucune Mention de poids';
 						}
 						else
 						{
-							echo '' . $poids .' ';
+							echo '' . $_SESSION['poids'] .' ';
 						}
 						?>
-				<br/>Prix :  <?php echo ' ' . $prix .''; ?>
+				<br/>Prix :  <?php echo ' ' . $_SESSION['prix'] .''; ?>
 				<br/>
-				<br/>Date :<?php echo ' <a class="restitutionDon-a" href="PerData/donPerDate.php?date=' . $date . '">' . $date .'</a>'; ?>
-				<br/>Lieu:  <?php echo '<a class="restitutionDon-a" href="PerData/donPerVille.php?emplacement=' . $lieu . '">' . $lieu .'</a>'; ?>
+				<br/>Date :<?php echo ' <a class="restitutionDon-a" href="PerData/donPerDate.php?date=' . $_SESSION['date'] . '">' . $_SESSION['date'] .'</a>'; ?>
+				<br/>Lieu:  <?php echo '<a class="restitutionDon-a" href="PerData/donPerVille.php?emplacement=' . $_SESSION['lieu'] . '">' . $_SESSION['lieu'] .'</a>'; ?>
 				<br/>
-				<br/>Raison :<?php echo ' ' . $raison .''; ?>
+				<br/>Nature :<?php echo ' ' . $_SESSION['nature'] .''; ?>
 				<br/>
-				<br/>Source: <?php echo ' ' . $source .''; ?>
+				<br/>Source: <?php echo ' ' . $_SESSION['source'] .''; ?>
 			</p>
 		</div>
+		<form method="POST" action=<?php echo "FormulaireModification.php"?>>
+			<div class="container-btn-form">
+				<button type="submit" name="Modifier">Modifier</button>
+				<button type="submit" name="Supprimer">Supprimer</button>
+			</div>
+    	</form>
 		<?php include'include/mainFooter.php' ?>
     </body>
 </html>

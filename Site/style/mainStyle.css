@@ -175,9 +175,11 @@ body > script {display: none !important;}
 	font-size: 1.5em; 
 	border-bottom: solid;
 	border-color: #c39728;
-	overflow: hidden;
-	transition: all .2s ease-in-out;
 }
+	.topbar-logo {
+		height: 60px;
+		width: 60px;
+	}
 	.topbar-menu {
 		display: flex;
 		height: 100%;
@@ -187,7 +189,6 @@ body > script {display: none !important;}
 			display: flex;
 			padding: 0 1em;
 			height: 100%;
-			justify-content: center;
 			align-items: center;
 			text-decoration: none;
 			color: #e5dcdc;
@@ -204,74 +205,19 @@ body > script {display: none !important;}
 		.topbar-menu a:hover:after {
 			background-color: gray;
 		}
-	.topbar-box {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: 70px;
-	}
-		.topbar-logo {
-			height: 60px;
-			width: 60px;
-			object-fit: contain;
-		}
-		.hamburger-menu {
-			display: none;
-			align-items: center;
-			width: 70px;
-			height: 100%;
-			justify-content: center;
-			text-decoration: none;
-			cursor: pointer;
-		}
-			.hamburger-menu svg {
-				min-width: 30px;
-				transition: transform 400ms;
-				fill: white;
-			}
-			.hamburger-menu.hamburger-active svg {
-				transform: rotate(45deg);
-			}
-				.hamburger-menu path {
-					fill: none;
-					transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-					stroke: white;
-					stroke-width: 6;
-					stroke-linecap: round;
-				}
-				.hamburger-menu path:nth-child(1) {
-					stroke-dasharray: 40 160;
-				}
-				.hamburger-menu path:nth-child(2) {
-					stroke-dasharray: 40 142;
-					transform-origin: 50%;
-					transition: transform 400ms;
-				}
-				.hamburger-menu path:nth-child(3) {
-					stroke-dasharray: 40 85;
-					transform-origin: 50%;
-					transition: transform 400ms, stroke-dashoffset 400ms		
-				}
-				.hamburger-menu.hamburger-active svg path:nth-child(1) {
-					stroke-dashoffset: -64px;
-				}
-				.hamburger-menu.hamburger-active svg path:nth-child(2) {
-					transform: rotate(90deg);
-				}
-				.hamburger-menu.hamburger-active svg path:nth-child(3) {
-					stroke-dashoffset: -64px;	
-				}
 
 /*---------------------------|Footer|---------------------------*/
 .bottombar {
-	display: flex;
-	padding: 4px 3em;
+	display: block;
+	padding: 0 3em;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	height: 70px;
 	width: 100%;
 	z-index: 1000;
+	align-items: center;
+	justify-content: space-between;
 	box-sizing: border-box;
 	background-color : #380000;
 	font-size: 1.5em;
@@ -280,7 +226,6 @@ body > script {display: none !important;}
 }
 	.bottombar-menu {
 		display: flex;
-		margin: auto;
 		height: 100%;
 	}
 		.bottombar-menu a {
@@ -291,7 +236,6 @@ body > script {display: none !important;}
 			align-items: center;
 			text-decoration: none;
 			color: #e5dcdc;
-			white-space: nowrap;
 		}
 		.bottombar-menu a:after {
 			content: " ";
@@ -358,7 +302,6 @@ body > script {display: none !important;}
 
 .titreSection {
 	font-size: 3.125em;
-	text-align: center;
 }
 
 /*---------------------------|Grid|---------------------------*/
@@ -391,7 +334,6 @@ body > script {display: none !important;}
 			display: block;
 			margin-top: 20px;
 			font-size: 22px;
-			white-space: nowrap;
 		}
 
 	.grid-cell1 {
@@ -484,7 +426,7 @@ body > script {display: none !important;}
 					display: flex;
 					justify-content: flex-end;
 				}
-					.container-btn-form button {
+					.container-btn-form button, .button-form-a {
 						cursor: pointer;
 						margin: 0.5em;
 						padding: 0 2em;
@@ -498,11 +440,13 @@ body > script {display: none !important;}
 						font-family: "Sk-Modernist-Bold", "Inter", Sans-serif;
 						font-size: 16pt;
 						overflow: hidden;
+						text-decoration: none;
+						text-align: center;
 					}
 					.next-button {
 						max-width: 50%;
 					}
-						.container-btn-form button:hover {
+						.container-btn-form button:hover, .button-form-a:hover{
 							color: #380000;
 							background-color: #c79b6f;
 						}
@@ -561,58 +505,4 @@ body > script {display: none !important;}
 /*---------------------------|Restitution Par Sunburst|---------------------------*/
 .RestSunburst {
 	text-align: center;
-}
-
-
-
-
-/*---------------------------|Responsive design|---------------------------*/
-@media screen and (max-width: 900px) {
-	/*------Menu------*/
-	.topbar {
-		flex-direction: column;
-		padding: 0 1em;
-	}
-		.topbar-menu {
-			display: none;
-			width: 100%;
-			margin-bottom: 20px;
-		}
-		.topbar-box {
-			width: 100%;
-		}
-			.hamburger-menu {
-				display: flex;
-			}
-
-	.menu-show {
-		height: 250px;
-	}
-		.menu-show .topbar-menu {
-			display: flex;
-			flex-direction: column;
-		}
-	
-	.bottombar {
-		height: 100px;
-	}
-		.bottombar-menu {
-			flex-direction: column;
-		}
-
-	/*------Grid------*/
-	.grid-cell {
-		width: 130px;
-		height: 130px;
-		margin: 5px;
-		padding: 20px;
-	}
-		.grid-cell span {
-			font-size: 18px;
-		}
-	
-	/*------Calendar------*/
-	.calendarObject {
-		margin: 0;
-	}
 }

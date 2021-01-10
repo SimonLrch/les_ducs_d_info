@@ -4,15 +4,7 @@ function BarChart(element, calendar) {
 
     this.yearSelected = this.calendar.year;
 
-    //Le nombre d'année qu'on affiche en une seul fois
-    if (window.innerWidth > 700)
-        this.nbYearToShow = 10;
-    else {
-        this.nbYearToShow = 5;
-    }
-	this.isWindowSizeSmall = false;
-
-	//L'élément où on insère le graphique
+    //L'élément où on insère le graphique
     this.docElement = document.querySelector(element);
 
     this.barChartMainContainer = document.createElement("div");
@@ -36,7 +28,8 @@ BarChart.prototype.getDecadeOfYear = function(year) {
  * @return objet json représentant les données recherchée
  */
 BarChart.prototype.getDataBarChart = async function() {
-    const url = "getBarChart.php?currentDecade="+this.decade+"&nbYear="+this.nbYearToShow;
+    const url = "getBarChart.php?currentDecade="+this.decade;
+    let objBarChart = this;
 
     //On récupère les données de la bdd (Fonction asynchrone)
     const response = await fetch(url);
@@ -135,11 +128,11 @@ BarChart.prototype.initEvents = function() {
     this.barChartMainContainer.addEventListener("click", (event) => {
         let item = event.target;
         if(item.closest("#" + barChartPreviousButton.id) != null) {
-            this.decade -= this.nbYearToShow;
+            this.decade -= 10;
             this.update();
         }
         if(item.closest("#" + barChartNextButton.id) != null) {
-            this.decade += this.nbYearToShow;
+            this.decade += 10;
             this.update();
         }
     });
@@ -153,33 +146,4 @@ BarChart.prototype.update = function() {
     window.requestAnimationFrame(() => {
         this.initBarChart();
     });
-}
-
-
-BarChart.prototype.resize = function() {
-	window.requestAnimationFrame(() => {
-		if (window.innerWidth <= 700 && !this.isWindowSizeSmall) {
-			this.isWindowSizeSmall = true;
-			this.nbYearToShow = 5;
-			reload(this);
-		}
-		else if (window.innerWidth > 700 && this.isWindowSizeSmall) {
-			this.isWindowSizeSmall = false;
-			this.nbYearToShow = 10;
-			reload(this);
-		}
-
-		function reload(barObj) {
-            barObj.docElement.removeChild(barObj.barChartMainContainer);
-            
-			barObj.barChartMainContainer = document.createElement("div");
-            barObj.barChartDecadeContainer = document.createElement("div");
-			barObj.barChartMainContainer.id = "barChart-main";
-            barObj.barChartDecadeContainer.id = "barChart-decade-container";
-            
-			barObj.initBarChart();
-			barObj.initEvents();
-            barObj.docElement.appendChild(barObj.barChartMainContainer);
-		}
-	});
 }
