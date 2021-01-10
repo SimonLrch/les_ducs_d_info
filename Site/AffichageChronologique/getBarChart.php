@@ -4,7 +4,7 @@ require_once("../include/dbConfig.php");
 $db = getPDO("PtutS3");
 
 //On récupère la décénie (ex: 1410 correspond aux années 1410, 1411, ..., 1419)
-if (isset($_GET["currentDecade"])) {
+if (isset($_GET["currentDecade"]) & isset($_GET["nbYear"])) {
     $nbDecade = $_GET["currentDecade"];
 
     $listYear = array();
@@ -14,7 +14,7 @@ if (isset($_GET["currentDecade"])) {
         $listMonth = array();
 
         //On regarde pour tous les mois de l'année
-        for ($currMonth = 1; $currMonth <= 12; $currMonth++) {
+        for ($currYear = 0; $currYear < $_GET["nbYear"]; $currYear++) {
             $req = $db->prepare("SELECT COUNT(idDon) AS nbDon
             FROM Don NATURAL JOIN Calendrier
             WHERE YEAR(dateDon) = ? AND MONTH(dateDon) = ?");

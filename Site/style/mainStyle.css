@@ -192,6 +192,7 @@ body > script {display: none !important;}
 			display: flex;
 			padding: 0 1em;
 			height: 100%;
+			justify-content: center;
 			align-items: center;
 			text-decoration: none;
 			color: #e5dcdc;
@@ -286,8 +287,8 @@ body > script {display: none !important;}
 }
 	.bottombar-menu {
 		display: flex;
+		margin: auto;
 		height: 100%;
-		white-space: nowrap;
 	}
 		.bottombar-menu a {
 			position: relative;
@@ -297,6 +298,7 @@ body > script {display: none !important;}
 			align-items: center;
 			text-decoration: none;
 			color: #e5dcdc;
+			white-space: nowrap;
 		}
 		.bottombar-menu a:after {
 			content: " ";
