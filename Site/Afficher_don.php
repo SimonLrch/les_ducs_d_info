@@ -144,12 +144,16 @@ while ($row= $req->fetch())
 				<br/>Source: <?php echo ' ' . $_SESSION['source'] .''; ?>
 			</p>
 		</div>
-		<form method="POST" action=<?php echo "FormulaireModification.php"?>>
-			<div class="container-btn-form">
-				<button type="submit" name="Modifier">Modifier</button>
-				<button type="submit" name="Supprimer">Supprimer</button>
-			</div>
-    	</form>
+		<?php if(isset($_SESSION['type']) && $_SESSION['type']=='Administrateur')
+			{
+				echo '<form method="POST" action="FormulaireModification.php">
+					<div class="container-btn-form">
+						<button type="submit" name="Modifier">Modifier</button>
+						<button type="submit" name="Supprimer">Supprimer</button>
+					</div>
+					</form>';
+			}
+		?>
 		<?php include'include/mainFooter.php' ?>
     </body>
 </html>
