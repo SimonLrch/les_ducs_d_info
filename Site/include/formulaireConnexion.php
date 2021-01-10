@@ -33,6 +33,7 @@ try {
                     $_SESSION["nom"] = $data["Nom"];
                     $_SESSION["prenom"] = $data["Prenom"];
                     $_SESSION["email"] = $email;
+                    $_SESSION["type"] = $data['TypeCompte'];
                     header("Location: profil/profil.php");
                 }
             }
