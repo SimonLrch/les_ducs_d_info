@@ -1,8 +1,6 @@
 <?php 
 	require_once("profilScript.php");
-	require_once("modificationProfil.php");
-	var_dump($_SESSION);
-?>
+	require_once("modificationProfil.php");?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -18,7 +16,7 @@
 			<section class="inner-box section-hero">
 				<span class="titreSection">Profil</span>
 			</section>
-			<h2 class="title-form">Bienvenue <?php echo $profil_nom ?></h2>
+			<h2 class="title-form">Bienvenue <?php echo $_SESSION['nom'].' '.$_SESSION['prenom']?></h2>
 			<section class="inner-box">
 				<?php if (isset($profil_email)): ?>
 				<form method="POST" action="">
@@ -27,11 +25,11 @@
 							<span class="warning"><?php if(isset($err)) {echo $err; }?></span>
 							<legend>Les * sont des champs obligatoires</legend>
 							<label>Prenom*</label>
-							<input type="text" name="prenom" value="<?php echo $profil_prenom ?>" required />
+							<input type="text" name="Prenom" value="<?php echo $_SESSION["prenom"] ?>" required />
 							<label>Nom*</label>
-							<input type="text" name="nom" value="<?php echo $profil_nom ?>" required />
+							<input type="text" name="Nom" value="<?php echo $_SESSION["nom"] ?>" required />
 							<label>Email*</label>
-							<input type="text" name="email" value="<?php echo $profil_email ?>" required />
+							<input type="text" name="Email" value="<?php echo $_SESSION["email"] ?>" required />
 							<label>Ancien mot de passe*</label>
 							<input type="password" name="ancien_mdp" required />
 							<label>Nouveau mot de passe</label>
