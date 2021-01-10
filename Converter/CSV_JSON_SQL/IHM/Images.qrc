@@ -1,9 +1,0 @@
-<RCC>
-  <qresource prefix="logo">
-    <file>CVS_to_JSON_to_SQL.png</file>
-  </qresource>
-  <qresource prefix="Icônes">
-    <file>help.png</file>
-    <file>SQL.png</file>
-  </qresource>
-</RCC>
