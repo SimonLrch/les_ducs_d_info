@@ -506,3 +506,10 @@ body > script {display: none !important;}
 .RestSunburst {
 	text-align: center;
 }
+
+/*---------------------------|Erreur|---------------------------*/
+.warning {
+	text-align: center;
+	color: darkred;
+	text-decoration: bold;
+}

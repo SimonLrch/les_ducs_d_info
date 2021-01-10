@@ -1,4 +1,8 @@
-<?php require_once("profilScript.php"); ?>
+<?php 
+	require_once("profilScript.php");
+	require_once("modificationProfil.php");
+	var_dump($_SESSION);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -14,28 +18,31 @@
 			<section class="inner-box section-hero">
 				<span class="titreSection">Profil</span>
 			</section>
+			<h2 class="title-form">Bienvenue <?php echo $profil_nom ?></h2>
 			<section class="inner-box">
 				<?php if (isset($profil_email)): ?>
-				<div class="title-form">
-					<h2>Bienvenue <?php echo $profil_nom ?></h2>
-				</div>
-                <div class="global-form">
-					<form method="POST" action=<?php echo "FormulaireModification.php"?>>
-							<label>Prenom</label>
-							<input type="text" name="donateur-name" />
-							<label>Nom</label>
-							<input type="text" name="donateur-statut" />
-							<label>Email</label>
-							<input type="text" name="beneficiaire-name" />
-							<label>Mot de passe</label>
-							<input type="text" name="beneficiaire-statut" />
+				<form method="POST" action="">
+					<fieldset class="global-form">
+						<div class="form-step active-step" id="form-step1">
+							<span class="warning"><?php if(isset($err)) {echo $err; }?></span>
+							<legend>Les * sont des champs obligatoires</legend>
+							<label>Prenom*</label>
+							<input type="text" name="prenom" value="<?php echo $profil_prenom ?>" required />
+							<label>Nom*</label>
+							<input type="text" name="nom" value="<?php echo $profil_nom ?>" required />
+							<label>Email*</label>
+							<input type="text" name="email" value="<?php echo $profil_email ?>" required />
+							<label>Ancien mot de passe*</label>
+							<input type="password" name="ancien_mdp" required />
+							<label>Nouveau mot de passe</label>
+							<input type="password" name="nouveau_mdp"/>
 							<div class="container-btn-form">
-								<button type="submit" name="Enregistrer">Enregistrer</button>
+								<button type="submit" name="Enregistrer-profil">Enregistrer</button>
 								<a class="button-form-a" href="deconnexion.php">Se déconnecter</a>
 							</div>
 						</div>
-					</form>
-				</div>
+					</fieldset>
+				</form>
 				<?php else: ?>
 				<span>Vous n'êtes pas connecté</span>
 				<?php endif; ?>
