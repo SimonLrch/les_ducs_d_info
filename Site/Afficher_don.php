@@ -44,10 +44,10 @@ while ($row= $req->fetch())
 	$_SESSION['formeDon'] = $row['FormeD'];
 	$_SESSION['nature'] = $row['NatureD'];
 	$_SESSION['prix'] = $row['PrixD'];
-$_SESSION['date'] = $row['DateD'];
-$_SESSION['idPoids'] = $row['PoidD'];
-$_SESSION['lieu'] = $row['LieuD'];
-$_SESSION['source'] = $row['SourceD'];
+	$_SESSION['date'] = $row['DateD'];
+	$_SESSION['idPoids'] = $row['PoidD'];
+	$_SESSION['lieu'] = $row['LieuD'];
+	$_SESSION['source'] = $row['SourceD'];
 }
 
 //Requete 2, sur table Personne / Auteur
@@ -94,7 +94,6 @@ $req->execute(array($_SESSION['idPoids']));
 while ($row= $req->fetch())
 {
     $_SESSION['poids'] = $row['poids']; //variable session pour gérer les boutons modifier et supprimer que si on est un utilisateur ADMIN
-
 }
 
 
@@ -121,9 +120,9 @@ while ($row= $req->fetch())
 				<div class="restitutionDon">
 					<p>
 						<br/>
-						<br/>Auteur : <?php echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. $_SESSION['idAuteur'] .'">' .
+						<br/>Auteur : <?php echo '<a class="restitutionDon-a" href="PerData/donPerBeneficiaire.php?id='. $_SESSION['idAuteur'] .'">' .
 							$_SESSION['nomAuteur'] .'  : ' . $_SESSION['fonctionAuteur'] .'</a>'; ?>
-						<br/>A l' intention de : <?php echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. 
+						<br/>A l' intention de : <?php echo '<a class="restitutionDon-a" href="PerData/donPerBeneficiaire.php?id='. 
 							$_SESSION['idDestinataire'] .'">' . $_SESSION['nomDestinataire'] .' : ' . $_SESSION['fonctionDestinataire'] .'</a>'; ?>
 						<br/>Par le biais de : <?php
 								if($_SESSION['nomIntermediaire'] == null)
@@ -132,7 +131,7 @@ while ($row= $req->fetch())
 								}
 								else
 								{
-									echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. $_SESSION['idIntermediaire'] .'">' . 
+									echo '<a class="restitutionDon-a" href="PerData/donPerBeneficiaire.php?id='. $_SESSION['idIntermediaire'] .'">' . 
 										$_SESSION['nomIntermediaire'] .' : ' . $_SESSION['fonctionIntermediaire'] .'</a>';
 								}
 								?>
