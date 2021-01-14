@@ -62,7 +62,7 @@ function replaceDoubleQuoteHTML(string $s)
 
 } 
 
-//transforme \ en \\
+//transforme \ en \\ (perData)
 function addAntiSlash(string $s)
 {
     $res = '';
@@ -83,11 +83,31 @@ function addAntiSlash(string $s)
 
 } 
 
+//transformer \\ en  \ (perDataHtml)
+function deleteAntiSlash(string $s)
+{
+    $res = '';
+
+    for($i=0;$i<strlen($s);$i++)
+    {
+        if(substr($s,$i,2) == '\\\\')
+        {
+           $res .= '' ;
+        }
+        else
+        {
+            $res .= substr($s,$i,1);
+        }
+    }
+
+    return $res;
+
+} 
 
 
 
-/*$oui = '"oui"';
-$non = replaceDoubleQuoteHTML($oui);
+/*$oui = '\\\\oui"';
+$non = deleteAntiSlash($oui);
 
 echo $oui . '<br> '; echo $non; */
 

@@ -4,7 +4,7 @@
     	<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
-		<title>Restitution à : <?php echo $emplacement; ?></title>  <!-- variables qui viennent d'un fichier php -->
+		<title>Restitution à : <?php echo deleteAntiSlash($emplacement); ?></title>  <!-- variables qui viennent d'un fichier php -->
 	</header>
 	<body>
 		<?php include'../include/mainHeader.php' ?>
@@ -16,12 +16,12 @@
 				<div class="restitutionDon">
 					<?php if(in_array($emplacement,$lieux)): ?>
 						<p><a href="../AffichageGeographique/DonGeographique.php">Voir la carte des donations</a>  </p>
-						<h1><?php echo 'Dons fait à '. $emplacement.''; ?></h1>
+						<h1><?php echo 'Dons fait à '. deleteAntiSlash($emplacement).''; ?></h1>
 						<p>
 							<br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
 						</p>
 						<details>
-							<summary class="Eye-Tree-titre1">Personnes ayant donné à <?php echo ''.$emplacement.''; ?>: </summary><p>
+							<summary class="Eye-Tree-titre1">Personnes ayant donné à <?php echo ''.deleteAntiSlash($emplacement).''; ?>: </summary><p>
 								<?php
 								for($i =0; $i < count($idAuteurs);$i++)
 								{
@@ -49,7 +49,7 @@
 							</p>
 						</details>
 						<details>
-							<summary class="Eye-Tree-titre1">Personnes ayant reçu des dons à <?php echo ''.$emplacement.''; ?>: </summary><p>
+							<summary class="Eye-Tree-titre1">Personnes ayant reçu des dons à <?php echo ''.deleteAntiSlash($emplacement).''; ?>: </summary><p>
 
 								<?php
 								for($i =0; $i < count($idBeneficiaires);$i++)
@@ -78,7 +78,7 @@
 							</p>
 						</details>
 						<details>
-							<summary class="Eye-Tree-titre1">Dates où il y a eu des dons à <?php echo ''.$emplacement.''; ?>: </summary><p>
+							<summary class="Eye-Tree-titre1">Dates où il y a eu des dons à <?php echo ''.deleteAntiSlash($emplacement).''; ?>: </summary><p>
 
 								<?php
 								for($i =0; $i < count($dates);$i++)
