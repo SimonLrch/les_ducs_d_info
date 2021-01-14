@@ -31,7 +31,9 @@
 									echo '<details>
 								<summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerBeneficiaire.php?id=' . $idAuteurs[$i] . '">' . $nomAuteurs[$i] . ' :  ' . $fonctionAuteurs[$i] . '</a> ( ' . $nb_don_auteurs[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 									//Requête pour avoir les dons par donneurs:
-									$req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $idAuteurs[$i] . ' and emplacement = "' . $emplacementQuote . '"');
+									$req = $pdo->prepare('SELECT idDon as idD FROM don where idAuteur = ? and emplacement = " ? "');
+									$req->execute(array($idAuteurs[$i],$emplacementQuote));
+
 									while ($row = $req->fetch())
 									{
 										array_push($id_don_auteurs, $row['idD']);
@@ -60,7 +62,8 @@
 
 									echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerBeneficiaire.php?id=' . $idBeneficiaires[$i] . '">' . $nomBeneficiaires[$i] . ' :  ' . $fonctionBeneficiaires[$i] . '</a> ( ' . $nb_don_beneficiaires[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 									//Requête pour avoir les dons par donneurs:
-									$req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $idBeneficiaires[$i] . ' and emplacement = "' . $emplacementQuote . '"');
+									$req = $pdo->prepare('SELECT idDon as idD FROM don where idBeneficiaire =?  and emplacement = "?"');
+									$req->execute(array($idBeneficiaires[$i],$emplacementQuote));
 									while ($row = $req->fetch())
 									{
 										array_push($id_don_beneficiaires, $row['idD']);
@@ -89,8 +92,8 @@
 
 									echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerDate.php?date=' . $dates[$i] . '">' . $dates[$i] . ' </a> ( ' . $nb_don_dates[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 									//Requête pour avoir les dons par donneurs:
-									$req = $pdo->query('SELECT idDon as idD FROM don where dateDon ="' . $dates[$i] . '" and emplacement = "' . $emplacementQuote . '"
-								');
+									$req = $pdo->prepare('SELECT idDon as idD FROM don where dateDon =" ? " and emplacement = " ? "');
+									$req->execute(array($dates[$i],$emplacementQuote));
 									while ($row = $req->fetch())
 									{
 										array_push($id_don_dates, $row['idD']);

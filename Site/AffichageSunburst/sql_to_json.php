@@ -66,9 +66,10 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
 {
 
     //requete détails Auteurs
-    $req = $pdo->query('SELECT nom as nomA, fonction as fonctionA
+    $req = $pdo->prepare('SELECT nom as nomA, fonction as fonctionA
     from don inner join personne on don.idAuteur =personne.idPersonne
-    where idPersonne ='.$idAuteur[$i].'');
+    where idPersonne = ?');
+    $req->execute(array($idAuteur[$i]));
     while ($row= $req->fetch())
     {
         $nomAuteur = $row["nomA"];
@@ -81,8 +82,10 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                         "children" : [';
 
         //requete idBeneficiaire
-        $req = $pdo->query('SELECT distinct(idBeneficiaire) as idB from don 
-                            where idAuteur = '. $idAuteur[$i].'');
+        $req = $pdo->prepare('SELECT distinct(idBeneficiaire) as idB from don 
+                            where idAuteur = ?');
+        $req->execute(array( $idAuteur[$i]));
+
         while ($row= $req->fetch())
         {
             array_push($idBeneficiaire,$row["idB"]);
@@ -93,9 +96,13 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
         {
 
             //requete détails Beneficiaires
-            $req = $pdo->query('SELECT nom as nomB, fonction as fonctionB
+            $req = $pdo->prepare('SELECT nom as nomB, fonction as fonctionB
             from don inner join personne on don.idBeneficiaire =personne.idPersonne
-            where idPersonne ='.$idBeneficiaire[$j].'');
+            where idPersonne = ?');
+
+            $req->execute(array($idBeneficiaire[$j]));
+
+
             while ($row= $req->fetch())
             {
                 $nomBeneficiaire = $row["nomB"];
@@ -108,8 +115,10 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                 "children" : [';
 
                 //requete lieux
-                $req = $pdo->query('SELECT distinct(emplacement) as lieu from don 
-                where idBeneficiaire = '. $idBeneficiaire[$j].' and idAuteur = '. $idAuteur[$i].'');
+                $req = $pdo->prepare('SELECT distinct(emplacement) as lieu from don 
+                where idBeneficiaire = ? and idAuteur = ?');
+                $req->execute(array($idBeneficiaire[$j],$idAuteur[$i]));
+
                 while ($row= $req->fetch())
                 {
                     array_push($lieu,$row["lieu"]);
@@ -125,8 +134,10 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                         $lieu_quote = replaceSimpleQuote($lieu[$h]);
 
                         //requete date
-                        $req = $pdo->query('SELECT distinct(dateDon) as dateD from don 
-                        where emplacement = \''. $lieu_quote.'\' and idBeneficiaire = '.$idBeneficiaire[$j].' and idAuteur = '. $idAuteur[$i].'');
+                        $req = $pdo->prepare('SELECT distinct(dateDon) as dateD from don 
+                        where emplacement = ? and idBeneficiaire = ? and idAuteur = ?');
+                        $req->execute(array($lieu_quote,$idBeneficiaire[$j],$idAuteur[$i]));
+
                         while ($row= $req->fetch())
                         {
                             array_push($date,$row["dateD"]);
@@ -140,8 +151,10 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                 "children" : [';
 
                                     //requête prix
-                                    $req = $pdo->query('SELECT distinct(prix) as prix from don 
-                                    where dateDon =\''.$date[$k].'\' and emplacement = \''. $lieu_quote.'\' and idBeneficiaire = '.$idBeneficiaire[$j].' and idAuteur = '. $idAuteur[$i].'');
+                                    $req = $pdo->prepare('SELECT distinct(prix) as prix from don 
+                                    where dateDon = ? and emplacement =? and idBeneficiaire = ? and idAuteur = ?');
+                                    $req->execute(array($date[$k],$lieu_quote,$idBeneficiaire[$j],$idAuteur[$i]));
+
                                     while ($row= $req->fetch())
                                     {
                                         array_push($prix,$row["prix"]);
@@ -157,8 +170,11 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                             $prix_quote = replaceSimpleQuote($prix[$l]);
 
                                             //requete Nature
-                                            $req = $pdo->query('SELECT distinct(nature) as nature from don 
-                                            where prix = \''.$prix_quote.'\' and dateDon =\''.$date[$k].'\' and emplacement = \''. $lieu_quote.'\' and idBeneficiaire = '.$idBeneficiaire[$j].' and idAuteur = '. $idAuteur[$i].'');
+                                            $req = $pdo->prepare('SELECT distinct(nature) as nature from don 
+                                            where prix = ? and dateDon = ? and emplacement = ? and idBeneficiaire = ? and idAuteur = ?');
+                                            $req->execute(array($prix_quote,$date[$k], $lieu_quote,$idBeneficiaire[$j], $idAuteur[$i]));
+                                            
+                                            
                                             while ($row= $req->fetch())
                                             {
                                                 array_push($nature,$row["nature"]);
@@ -174,8 +190,9 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                                 $nature_quote =  replaceSimpleQuote($nature[$m]);
 
                                                     //requete TypeDon
-                                                    $req = $pdo->query('SELECT distinct(typeDon) as typeD from don 
-                                                    where nature = \''.$nature_quote.'\' and prix = \''.$prix_quote.'\' and dateDon =\''.$date[$k].'\' and emplacement = \''. $lieu_quote.'\' and idBeneficiaire = '.$idBeneficiaire[$j].' and idAuteur = '. $idAuteur[$i].'');
+                                                    $req = $pdo->prepare('SELECT distinct(typeDon) as typeD from don 
+                                                    where nature = ? and prix =  ?  and dateDon = ? and emplacement =  ? and idBeneficiaire = ? and idAuteur = ? ');
+                                                     $req->execute(array($nature_quote,$prix_quote,$date[$k], $lieu_quote,$idBeneficiaire[$j], $idAuteur[$i]));
                                                     while ($row= $req->fetch())
                                                     {
                                                         array_push($typeDon,$row["typeD"]);
@@ -191,8 +208,9 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                                             $typeDon_quote = replaceSimpleQuote($typeDon[$n]);
 
                                                             //requete Forme
-                                                            $req = $pdo->query('SELECT distinct(forme) as forme from don 
-                                                            where typeDon = \''.$typeDon_quote.'\' and nature = \''.$nature_quote.'\' and prix = \''.$prix_quote.'\' and dateDon =\''.$date[$k].'\' and emplacement = \''. $lieu_quote.'\' and idBeneficiaire = '.$idBeneficiaire[$j].' and idAuteur = '. $idAuteur[$i].'');
+                                                            $req = $pdo->prepare('SELECT distinct(forme) as forme from don 
+                                                            where typeDon = ? and nature = ? and prix = ? and dateDon = ? and emplacement = ? and idBeneficiaire = ? and idAuteur = ?');
+                                                            $req->execute(array($typeDon_quote,$nature_quote,$prix_quote,$date[$k], $lieu_quote,$idBeneficiaire[$j], $idAuteur[$i]));
                                                             while ($row= $req->fetch())
                                                             {
                                                                 array_push($forme,$row["forme"]);
@@ -208,8 +226,9 @@ for($i = 0 ; $i < count($idAuteur); $i++) //
                                                                     $forme_quote = replaceSimpleQuote($forme[$o]);
 
                                                                     //requete Source
-                                                                    $req = $pdo->query('SELECT distinct(sourceDon) as sourceD from don 
-                                                                    where forme =\''.$forme_quote.'\' and typeDon = \''.$typeDon_quote.'\'and nature = \''.$nature_quote.'\' and prix = \''.$prix_quote.'\' and dateDon =\''.$date[$k].'\' and emplacement = \''. $lieu_quote.'\' and idBeneficiaire = '.$idBeneficiaire[$j].' and idAuteur = '. $idAuteur[$i].'');
+                                                                    $req = $pdo->prepare('SELECT distinct(sourceDon) as sourceD from don 
+                                                                    where forme = ? and typeDon = ? and nature = ? and prix = ? and dateDon = ? and emplacement = ? and idBeneficiaire = ? and idAuteur = ?');
+                                                                    $req->execute(array($forme_quote,$typeDon_quote,$nature_quote,$prix_quote,$date[$k], $lieu_quote,$idBeneficiaire[$j], $idAuteur[$i]));
                                                                     while ($row= $req->fetch())
                                                                     {
                                                                         array_push($sources,$row["sourceD"]);

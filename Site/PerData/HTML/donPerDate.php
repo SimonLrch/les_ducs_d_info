@@ -30,7 +30,8 @@
 								echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerBeneficiaire.php?id=' . $idAuteurs[$i] . '">' . $nomAuteurs[$i] . ' :  ' . $fonctionAuteurs[$i] . '</a> ( ' . $nb_don_auteurs[$i] . ' )</summary>
 									<div class="Eye-Tree-content"> <p>';
 								//Requête pour avoir les dons par donneurs:
-								$req = $pdo->query('SELECT idDon as idD FROM don where idAuteur =' . $idAuteurs[$i] . ' and dateDon = "' . $date . '"');
+								$req = $pdo->prepare('SELECT idDon as idD FROM don where idAuteur = ? and dateDon = " ? "');
+								$req->execute(array($idAuteurs[$i], $date ));
 								while ($row = $req->fetch())
 								{
 									array_push($id_don_auteurs, $row['idD']);
@@ -56,7 +57,8 @@
 							{
 								echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerBeneficiaire.php?id=' . $idBeneficiaires[$i] . '">' . $nomBeneficiaires[$i] . ' :  ' . $fonctionBeneficiaires[$i] . '</a> ( ' . $nb_don_beneficiaires[$i] . ' )</summary><div class="Eye-Tree-content"><p>';
 								//Requête pour avoir les dons par donneurs:
-								$req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $idBeneficiaires[$i] . ' and dateDon = "' . $date . '"');
+								$req = $pdo->prepare('SELECT idDon as idD FROM don where idBeneficiaire = ? and dateDon = " ? "');
+								$req->execute(array($idBeneficiaires[$i],$date));
 								while ($row = $req->fetch())
 								{
 									array_push($id_don_beneficiaires, $row['idD']);
@@ -85,8 +87,8 @@
 
 								echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerVille.php?emplacement=' . $lieuxHTMLQuote . ' ">' . $lieux[$i] . ' </a> ( ' . $nb_don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 								//Requête pour avoir les dons par donneurs:
-								$req = $pdo->query('SELECT idDon as idD FROM don where emplacement ="' . $lieuxQuote . '" and dateDon = "' . $date . '"
-								');
+								$req = $pdo->prepare('SELECT idDon as idD FROM don where emplacement =" ? " and dateDon = " ? "');
+								$req->execute(array($lieuxQuote,$date));
 								while ($row = $req->fetch())
 								{
 									array_push($id_don_lieux, $row['idD']);
