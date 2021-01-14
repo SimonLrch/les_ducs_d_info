@@ -7,11 +7,7 @@
     $pdo = getPDO("PtutS3");
 
     $emplacement = $_GET["emplacement"];
-    $emplacementQuote = replaceDoubleQuote($emplacement);
-
-    $emplacement = addAntiSlash($emplacement); //remplacement de caractère pouvais géner
-    $emplacementQuote = addAntiSlash($emplacementQuote); //remplacement de caractère pouvais géner
-
+    $emplacementQuote = $emplacement;
 
 
     //Initialisation variables
