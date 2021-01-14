@@ -62,10 +62,10 @@ $id = $_GET["id"];
 
     //Requête  nombre de don par id de Donneur
     for($i =0; $i < count($idsDonneurs); $i++){
-        $req = $pdo->prepare('SELECT count(idDon) as nbDon FROM don where idBeneficiaire = ? and idAuteur = "' . $idsDonneurs[$i].'"
+        $req = $pdo->prepare('SELECT count(idDon) as nbDon FROM don where idBeneficiaire = ? and idAuteur = ?
                                 group by idAuteur');
 
-        $req->execute(array($id));
+        $req->execute(array($id,$idsDonneurs[$i]));
         while ($row= $req->fetch())
         {
             array_push($nb_Don_pers,$row['nbDon']);
