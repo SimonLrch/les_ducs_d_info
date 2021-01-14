@@ -37,13 +37,15 @@ $nb_don_lieux = [];
         //Requête donne une liste de dates
         $req = $pdo->query('SELECT dateDon as dateD from don
                                                     group by dateDon');
+
         while ($row= $req->fetch())
         {
             array_push($datesTab,$row['dateD']);
         }
 
         //Requête nombre de dons
-        $req = $pdo->query('SELECT COUNT(idDon) as NbDon FROM don where dateDon = "'.$date.'"');
+        $req = $pdo->prepare('SELECT COUNT(idDon) as NbDon FROM don where dateDon = ?');
+        $req->execute(array($date));
         while ($row= $req->fetch())
         {
             $nombre_don = $row["NbDon"];
@@ -51,18 +53,21 @@ $nb_don_lieux = [];
 
     //AUTEURs
         //Requête => iddonneur
-        $req = $pdo->query('SELECT idAuteur as idA from don where dateDon = "'.$date.'"
+        $req = $pdo->prepare('SELECT idAuteur as idA from don where dateDon = ?
                                             group by idAuteur');
+         $req->execute(array($date));
         while ($row= $req->fetch())
         {
             array_push($idAuteurs,$row['idA']);
         }
 
         //Requête info Auteur
-        $req = $pdo->query('SELECT personne.nom as nomA, personne.fonction as fonctionA from don
+        $req = $pdo->prepare('SELECT personne.nom as nomA, personne.fonction as fonctionA from don
                                                 INNER JOIN personne on personne.idPersonne = don.idAuteur 
-                                                where don.dateDon = "'.$date.'"
+                                                where don.dateDon = ?
                                                 group by personne.idPersonne');
+
+        $req->execute(array($date));
         while ($row= $req->fetch())
         {
             array_push($nomAuteurs,$row['nomA']);
@@ -71,7 +76,9 @@ $nb_don_lieux = [];
 
         //Requête nombre de don par Auteur
         for($i =0; $i < count($idAuteurs); $i++){
-            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $idAuteurs[$i] .' and dateDon = "'.$date.'"');
+            $req = $pdo->prepare('SELECT count(idDon) as nbDon FROM don where idAuteur = ? and dateDon = ?');
+
+            $req->execute(array($idAuteurs[$i],$date));
             while ($row= $req->fetch())
             {
                 array_push($nb_don_auteurs,$row['nbDon']);
@@ -80,18 +87,22 @@ $nb_don_lieux = [];
 
     //RECEVEURS
         //Requête => iddonneur
-        $req = $pdo->query('SELECT idBeneficiaire as idB from don where dateDon = "'.$date.'"
+        $req = $pdo->prepare('SELECT idBeneficiaire as idB from don where dateDon = ?
                                                 group by idBeneficiaire');
+
+        $req->execute(array($date));
         while ($row= $req->fetch())
         {
             array_push($idBeneficiaires,$row['idB']);
         }
 
         //Requête info Beneficiaire
-        $req = $pdo->query('SELECT personne.nom as nomB, personne.fonction as fonctionB from don
+        $req = $pdo->prepare('SELECT personne.nom as nomB, personne.fonction as fonctionB from don
                                                     INNER JOIN personne on personne.idPersonne = don.idBeneficiaire 
-                                                    where don.dateDon = "'.$date.'"
+                                                    where don.dateDon =  ?
                                                     group by personne.idPersonne');
+        
+        $req->execute(array($date));                                           
         while ($row= $req->fetch())
         {
             array_push($nomBeneficiaires,$row['nomB']);
@@ -100,7 +111,8 @@ $nb_don_lieux = [];
 
         //Requête nombre de don par Beneficiaire
         for($i =0; $i < count($idBeneficiaires); $i++){
-            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $idBeneficiaires[$i] .' and dateDon = "'.$date.'"');
+            $req = $pdo->prepare('SELECT count(idDon) as nbDon FROM don where idBeneficiaire = ? and dateDon = ? ');
+            $req->execute(array($idBeneficiaires[$i],$date));
             while ($row= $req->fetch())
             {
                 array_push($nb_don_beneficiaires,$row['nbDon']);
@@ -109,9 +121,11 @@ $nb_don_lieux = [];
 
     //Lieux
         //Requête => lieux
-        $req = $pdo->query('SELECT emplacement as lieu from don where dateDon = "'.$date.'"
+        $req = $pdo->prepare('SELECT emplacement as lieu from don where dateDon = ?
                                                 group by emplacement');
-        while ($row= $req->fetch())
+        
+       $req->execute(array($date));                                        
+       while ($row= $req->fetch())
         {
             array_push($lieux,$row['lieu']);
         }
@@ -122,7 +136,8 @@ $nb_don_lieux = [];
             $lieuxQuote = replaceDoubleQuote($lieux[$i]); //remplacement de caractère pouvais géner
 
 
-            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where emplacement ="'. $lieuxQuote .'" and dateDon = "'.$date.'"');
+            $req = $pdo->prepare('SELECT count(idDon) as nbDon FROM don where emplacement = ? and dateDon =  ?');
+            $req->execute(array($lieuxQuote,$date));
             while ($row= $req->fetch())
             {
                 array_push($nb_don_lieux,$row['nbDon']);
