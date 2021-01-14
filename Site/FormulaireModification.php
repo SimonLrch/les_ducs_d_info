@@ -69,13 +69,13 @@
                         "sql" => "SELECT Count(*) as Res from statut WHERE fonction = ?",
                         //L'attribut statut changeant à chaque loop. Dans un array car pdo execute avec une liste d'attributs
                         "attributes"=>array($info[1])
-                    ];	
+                    ];  
                     // Si le statut n'existe pas déjà dans la BDD : la fonction renvoie 0
                     if(get_one_result($sql_statuts) == 0)
                     {
                         //Création du statut dans la BDD
                         $stmt = $pdo->prepare("INSERT INTO Statut VALUES (?)");
-                        $stmt->execute($sql_statuts["attributes"]);	
+                        $stmt->execute($sql_statuts["attributes"]); 
                         $stmt->closeCursor();
                     }
                     
@@ -95,14 +95,14 @@
                     {
                         //Création de la personne dans la BDD
                         $stmt = $pdo->prepare("INSERT IGNORE INTO personne(nom,fonction) VALUES (?, ?)");
-                        $stmt->execute($sql_personnes["attributes"]);		
+                        $stmt->execute($sql_personnes["attributes"]);       
                         $stmt->closeCursor();
                     }
                     else
                     {
                         //Modification de la personne dans la BDD
                         $stmt = $pdo->prepare("UPDATE personne set fonction = ? WHERE nom = ?");
-                        $stmt->execute(array($info[1],$info[0]));		
+                        $stmt->execute(array($info[1],$info[0]));       
                         $stmt->closeCursor();
                     }
                     
@@ -138,7 +138,7 @@
                 ksort($Info_don);
                 //---Vérification des autres données---
                                 
-                foreach($Liste_Autres as $value => $TableAndColumn)	
+                foreach($Liste_Autres as $value => $TableAndColumn) 
                 {
                     //Création d'un Array Key composé de 
                     $sql_Autres = [
@@ -184,11 +184,11 @@
                         "sql" => "SELECT Count(*) as Res from intermediaire WHERE idDon = ?",
                         //L'attribut statut changeant à chaque loop. Dans un array car pdo execute avec une liste d'attributs
                         "attributes"=>array($_SESSION['idDon'])
-                    ];	
+                    ];  
                     // Si le statut n'existe pas déjà dans la BDD : la fonction renvoie 0
                     if(get_one_result($sql_inter) == 0)
                     {
-                    //Ajout de l'intermediaire dans la base de données :	
+                    //Ajout de l'intermediaire dans la base de données :    
                     $sql = "INSERT INTO intermediaire(idDon,idIntermediaire) VALUES (?,?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute(array($_SESSION['idDon'],$idIntermediaire));
@@ -212,7 +212,7 @@
                         "sql" => "SELECT Count(*) as Res from intermediaire WHERE idDon = ?",
                         //L'attribut statut changeant à chaque loop. Dans un array car pdo execute avec une liste d'attributs
                         "attributes"=>array($_SESSION['idDon'])
-                    ];	
+                    ];  
                     // Si l'on trouve un intermédiaire, il renvoie quelque chose différent de 0
                     if(get_one_result($sql_inter) != 0)
                     {
@@ -233,7 +233,7 @@
             catch(Exception $e)
             {
                 echo $e->getMessage();
-            }	
+            }   
             $warningSpan = '<span class="warning">Modification effectuée</span>';
         }
         if(isset($_POST['Modifier']) || isset($_POST['Modify']))
@@ -264,50 +264,50 @@
                 ?>
                 <main class="container-main">
                 <form method="POST" action=<?php echo "FormulaireModification.php"?>>
-					<div class="global-form">
-						<div class="form-step active-step" id="form-step1">
+                    <div class="global-form">
+                        <div class="form-step active-step" id="form-step1">
                             <?php echo $warningSpan ?>
-							<label for="auteur"> Auteur :</label>
-							<input type="text" name="auteur" value = "<?php echo $_SESSION['nomAuteur'];?>" required>
-							<label for="statutauteur"> Statut :</label>
-							<input type="text" name="statutauteur" value = "<?php echo $_SESSION['fonctionAuteur'];?>" required>
-							</br>
-							<label for="beneficiaire"> Bénéficiaire :</label>
-							<input type="text" name="beneficiaire" value = "<?php echo $_SESSION['nomDestinataire']; ?>" required>
-							<label for="statutbeneficiaire"> Statut :</label>
-							<input type="text" name="statutbeneficiaire" value = "<?php echo $_SESSION['fonctionDestinataire'];?>" >
-							<br>
-							<label for="intermediaire"> Intermédiaire :</label>
-							<input type="text" name="intermediaire" value = "<?php echo $_SESSION['nomIntermediaire'];?>">
-							<label for="statutintermediaire"> Statut :</label>
-							<input type="text" name="statutintermediaire" value = "<?php echo $_SESSION['fonctionIntermediaire'];?>"  >
-							<br>
-							<label for="details-typeDon">Type de don</label>
-							<?php echo generateSelect('details-typeDon',$options,$_SESSION['typeDon'])?>
-							<label for="details-date">Date</label>
-							<input type="date" name="details-date" value = "<?php echo $_SESSION['date']; ?>" required>
-							<br>
-							<label for="details-lieu">Lieu</label>
-							<input type="text" name="details-lieu" value = "<?php echo $_SESSION['lieu']; ?>" required>
-							<label for="details-forme">Formes</label>
-							<input type="text" name="details-forme" value = "<?php echo $_SESSION['formeDon'];?>" required>
-							<br>
-							<label>Poids</label>
-							<input type="text" name="details-poids" value = "<?php echo $_SESSION['poids'];?>" required>
-							<label>Prix</label>
-							<input type="text" name="details-prix" value = "<?php echo $_SESSION['prix'];?>">
-							<label>Sources</label>
-							<input type="text" name="details-source" value = "<?php echo $_SESSION['source']; ?>" required>
-							<br>
-							<label>Natures</label>
-							<textarea name="details-nature" ><?php echo $_SESSION['nature']; ?></textarea>
-							<br>
-							<div class="container-btn-form">
-								<button type="submit" name="Modify" >Modifier</button>
-								<button type="submit" name="Supprimer" >Supprimer</button>
-							</div>
-						</div>
-					</div>
+                            <label for="auteur"> Auteur :</label>
+                            <input type="text" name="auteur" value = "<?php echo $_SESSION['nomAuteur'];?>" required>
+                            <label for="statutauteur"> Statut :</label>
+                            <input type="text" name="statutauteur" value = "<?php echo $_SESSION['fonctionAuteur'];?>" required>
+                            </br>
+                            <label for="beneficiaire"> Bénéficiaire :</label>
+                            <input type="text" name="beneficiaire" value = "<?php echo $_SESSION['nomDestinataire']; ?>" required>
+                            <label for="statutbeneficiaire"> Statut :</label>
+                            <input type="text" name="statutbeneficiaire" value = "<?php echo $_SESSION['fonctionDestinataire'];?>" >
+                            <br>
+                            <label for="intermediaire"> Intermédiaire :</label>
+                            <input type="text" name="intermediaire" value = "<?php echo $_SESSION['nomIntermediaire'];?>">
+                            <label for="statutintermediaire"> Statut :</label>
+                            <input type="text" name="statutintermediaire" value = "<?php echo $_SESSION['fonctionIntermediaire'];?>"  >
+                            <br>
+                            <label for="details-typeDon">Type de don</label>
+                            <?php echo generateSelect('details-typeDon',$options,$_SESSION['typeDon'])?>
+                            <label for="details-date">Date</label>
+                            <input type="date" name="details-date" value = "<?php echo $_SESSION['date']; ?>" required>
+                            <br>
+                            <label for="details-lieu">Lieu</label>
+                            <input type="text" name="details-lieu" value = "<?php echo $_SESSION['lieu']; ?>" required>
+                            <label for="details-forme">Formes</label>
+                            <input type="text" name="details-forme" value = "<?php echo $_SESSION['formeDon'];?>" required>
+                            <br>
+                            <label>Poids</label>
+                            <input type="text" name="details-poids" value = "<?php echo $_SESSION['poids'];?>" required>
+                            <label>Prix</label>
+                            <input type="text" name="details-prix" value = "<?php echo $_SESSION['prix'];?>">
+                            <label>Sources</label>
+                            <input type="text" name="details-source" value = "<?php echo $_SESSION['source']; ?>" required>
+                            <br>
+                            <label>Natures</label>
+                            <textarea name="details-nature" ><?php echo $_SESSION['nature']; ?></textarea>
+                            <br>
+                            <div class="container-btn-form">
+                                <button type="submit" name="Modify" >Modifier</button>
+                                <button type="submit" name="Supprimer" >Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
                 </main>
 
@@ -327,11 +327,67 @@
                 $req = $pdo->prepare('DELETE FROM intermediaire WHERE idDon = :idDon');
                 $req->bindValue("idDon",$_SESSION['idDon'],PDO::PARAM_INT);
                 $req->execute();
+
+                //Suppression du lieu si c'est le seul don possédant ce lieu
+                //On récupère d'abord le lieu ou se produit le don
+                $req = $pdo->prepare('SELECT emplacement as Lieu from don where idDon = :idDon');
+                $req->bindValue("idDon",$_SESSION['idDon']);
+                $req->execute();
+                while($row = $req->fetch())
+                {
+                    $emplacement = $row['Lieu'];
+                }
+                //Puis on COUNT le nombre de don fait en ce lieu
+                $req = $pdo->prepare('SELECT count(idDon) as nbDon FROM don where emplacement = :empla');
+                $req->bindValue(":empla",$emplacement,PDO::PARAM_STR);
+                $req->execute();
+                while($row = $req->fetch())
+                {
+                    $nbDonEmpla = $row['nbDon'];
+                }
+
+                //Suppression de la date si c'est le seul don possédant cette date
+                //On récupère d'abord la date à laquelle se produit le don
+                $req = $pdo->prepare('SELECT dateDon from don where idDon = :idDon');
+                $req->bindValue("idDon",$_SESSION['idDon'],PDO::PARAM_INT);
+                $req->execute();
+                while($row = $req->fetch())
+                {
+                    $date = $row['dateDon'];
+                }
+                //Puis on COUNT le nombre de don fait en ce lieu
+                $req = $pdo->prepare('SELECT count(idDon) as nbDon FROM don where dateDon = :dateD');
+                $req->bindValue(":dateD",$date,PDO::PARAM_STR);
+                $req->execute();
+                while($row = $req->fetch())
+                {
+                    $nbDonDate = $row['nbDon'];
+                }
+
+
                 //$req = $pdo->query('DELETE FROM intermediaire WHERE idDon = "'.$_SESSION['idDon'].'" AND idIntermediaire = "'.$_SESSION['idIntermediaire'].'"');
                 //Puis on supprime le don
                 $req = $pdo->prepare('DELETE FROM Don WHERE idDon = :idDon');
                 $req->bindValue("idDon",$_SESSION['idDon'],PDO::PARAM_INT);
                 $req->execute();
+                
+                
+                //Les suppressions d'emplacements et calendrier se font après celle de don pour questions d'intégrité
+                //Si existe qu'un seul don à ce lieu
+                if($nbDonEmpla == 1)
+                {
+                    $req = $pdo->prepare('DELETE FROM lieu WHERE emplacement = :empla');
+                    $req->bindValue(':empla',$emplacement,PDO::PARAM_STR);
+                    $req->execute();
+                }
+
+                //Si existe qu'un seul don à cette Date
+                if($nbDonDate == 1)
+                {
+                    $req = $pdo->prepare('DELETE FROM calendrier WHERE dateDon = :dateD');
+                    $req->bindValue(':dateD',$date,PDO::PARAM_STR);
+                    $req->execute();
+                }
                 /*$sql = "DELETE FROM Don WHERE idDon =  :idDon";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':idDon', $_SESSION['idDon'], PDO::PARAM_INT);   
