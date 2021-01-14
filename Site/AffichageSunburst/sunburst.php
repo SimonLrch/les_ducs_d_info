@@ -32,7 +32,7 @@
 							var radius = Math.min(width, height) / 2;
 							var color = d3.scaleOrdinal(d3.schemeCategory20b);
 
-							// Create primary <g> element
+							// Element g
 							var g = d3.select('#sunburst-svg')
 								.attr('width', width)
 								.attr('height', height)
@@ -43,11 +43,11 @@
 							var partition = d3.partition()
 								.size([2 * Math.PI, radius]);
 
-							// Find data root
+							// Root
 							var root = d3.hierarchy(nodeData)
 								.sum(function (d) { return d.size});
 
-							// Size arcs
+							// taille des arc
 							partition(root);
 							var arc = d3.arc()
 								.startAngle(function (d) { return d.x0 })
@@ -58,7 +58,7 @@
 								var textLabel = d3.selectAll(".label") 
 								.append('text');
 
-							// Put it all together
+							// tout mettre ensemble
 							var path = g.selectAll('g')
 								.data(root.descendants())
 								.enter().append('g').attr("class", "node")  // <-- 2
@@ -71,7 +71,7 @@
 								.on("mouseleave" ,mouseOutF);
 								//variable pour label (mouseover)
 
-								//mouseover censé afficher autre chose que data 
+								//mouseover sensé afficher autre chose que data 
 								function mouseOverF(d){
 									textLabel//.text(function(d) { var d = d3.select(this); return d.depth ? d.data.name : "" }); //prend le nom du parent */
 											.text(function(d) {  var d = d3.select(this); return  d.data.name;});              

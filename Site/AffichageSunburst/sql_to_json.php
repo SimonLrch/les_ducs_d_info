@@ -6,13 +6,18 @@ require_once ('../include/replace.php');
 
 $pdo = getPDO("PtutS3");
 
+// Ce fichier permet de créer un Json a partir des infos de la bd
+
 //Déclaration des variables pour requêtes
+//id
 $idDon  = [];
 
+//auteur
 $idAuteur = [];
 $nomAuteur = '';
 $fonctionAuteur = '';
 
+//bénéficaire
 $idBeneficiaire = [];
 $nomBeneficiaire = '';
 $fonctionBeneficiaire = '';
@@ -21,6 +26,7 @@ $fonctionBeneficiaire = '';
 //$nomIntermedaire = [];
 //$fonctionIntermedaire = [];*/
 
+//autres détails dons
 $lieu = [];
 $statut = [];
 $nature = [];
