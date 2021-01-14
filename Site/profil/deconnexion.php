@@ -1,4 +1,6 @@
 <?php
+
+//jeux de sessin
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

@@ -1,6 +1,6 @@
 <?php
 
-//pour le sunburst (bd)
+//pour le sunburst (bd) , remplace les simple quote par deux simple quote
 function replaceSimpleQuote(string $s)
 {
     $res = '';
@@ -21,7 +21,7 @@ function replaceSimpleQuote(string $s)
     return $res;
 }
 
-//pour le sunburst (json)
+//pour le sunburst (json) remplace les double quote par des\"
 function replaceDoubleQuote(string $s)
 {
     $res = '';

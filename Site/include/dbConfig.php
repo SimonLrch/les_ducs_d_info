@@ -6,6 +6,7 @@ function getPDO($db_name) {
 	$pass = '';
 	$charset = 'utf8mb4';
 	
+	//créer le dsn
 	$dsn = "mysql:host=$host;dbname=$db_name;charset=$charset";
 	$options = [
 		PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -13,7 +14,7 @@ function getPDO($db_name) {
 		PDO::ATTR_EMULATE_PREPARES   => false,
 	];
 	try {
-		$pdo = new PDO($dsn, $user, $pass, $options);
+		$pdo = new PDO($dsn, $user, $pass, $options); //créer le pdo
 	} catch (\PDOException $e) {
 		throw new \PDOException($e->getMessage(), (int)$e->getCode());
 	}

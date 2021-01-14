@@ -1,3 +1,5 @@
+//Pour les formulaires
+
 const formSteps = Array.from(document.querySelectorAll(".form-step"));
 const formTitleSteps = Array.from(document.querySelectorAll(".steps-title h3"));
 const nextButton = document.querySelectorAll(".form-step .next-button");
