@@ -82,7 +82,7 @@ while ($row= $req->fetch())
 $req = $pdo->query('SELECT masse as poids from poids WHERE idPoids = '. $_SESSION['idPoids'] .'');
 while ($row= $req->fetch())
 {
-    $_SESSION['poids'] = $row['poids'];
+    $_SESSION['poids'] = $row['poids']; //variable session pour gérer les boutons modifier et supprimer que si on est un utilisateur ADMIN
 
 }
 
@@ -149,7 +149,7 @@ while ($row= $req->fetch())
 					</p>
 				</div>
 			<?php if(isset($_SESSION['type']) && $_SESSION['type']=='Administrateur')
-				{
+				{ //formulaire de modification et supression
 					echo '<form method="POST" action="FormulaireModification.php">
 						<div class="container-btn-form container-btn-form-small">
 							<button type="submit" name="Modifier">Modifier</button>

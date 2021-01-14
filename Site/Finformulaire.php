@@ -1,13 +1,3 @@
-<style>
-input  {
-    color:white;
-    background-color:black;
-}
-input:hover{
-    background-color:white;
-    color:black;
-}
-</style>
 <?php
     if(isset($_POST['FinF']))
     {
