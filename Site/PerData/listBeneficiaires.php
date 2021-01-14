@@ -1,17 +1,18 @@
 <?php
 
 //Connexion bd
-$db = new PDO('mysql:host=localhost; dbname=PtutS3', 'root', '',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-
+include_once("../include/dbConfig.php");
+$db = getPDO("PtutS3");
 //Création des variables
 $idsBeneficiaire = [];
 $nomsBeneficiaire= [];
 $fonctionsBeneficiaire = [];
 
 //Requête
-$req = $db->query('SELECT idPersonne as idB, nom as nomB, fonction as fonctionB FROM personne
+$req = $db->prepare('SELECT idPersonne as idB, nom as nomB, fonction as fonctionB FROM personne
                                         INNER JOIN don on personne.idPersonne = don.idBeneficiaire
                                         GROUP BY personne.idPersonne');
+$req->execute();
 while ($row= $req->fetch())
 {
     array_push($idsBeneficiaire,$row['idB']);

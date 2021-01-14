@@ -1,6 +1,6 @@
 <?php
 //pour le sunburst (bd) , remplace les simple quote par deux simple quote
-function replaceSimpleQuote(string $s)
+function replaceSimpleQuote( $s)
 {
     $res = '';
 
@@ -21,7 +21,7 @@ function replaceSimpleQuote(string $s)
 }
 
 //pour le sunburst (json) et perData remplace les double quote par des\"
-function replaceDoubleQuote(string $s)
+function replaceDoubleQuote( $s)
 {
     $res = '';
 
@@ -42,7 +42,7 @@ function replaceDoubleQuote(string $s)
 } 
 
 // pour le PerData, remplace les " par &quot;
-function replaceDoubleQuoteHTML(string $s)
+function replaceDoubleQuoteHTML($s)
 {
     $res = '';
 
@@ -63,7 +63,7 @@ function replaceDoubleQuoteHTML(string $s)
 } 
 
 //transforme \ en \\ (perData)
-function addAntiSlash(string $s)
+function addAntiSlash( $s)
 {
     $res = '';
 
@@ -84,7 +84,7 @@ function addAntiSlash(string $s)
 } 
 
 //transformer \\ en  \ (perDataHtml)
-function deleteAntiSlash(string $s)
+function deleteAntiSlash( $s)
 {
     $res = '';
 
