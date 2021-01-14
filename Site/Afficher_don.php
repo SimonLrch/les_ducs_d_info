@@ -32,8 +32,12 @@ $_SESSION['prix'] = '';
 
 
 //Requete 1, sur table don
-$req = $pdo->query('SELECT typeDon as TypeD, forme as FormeD, nature as NatureD, prix as PrixD, 
-                dateDon as DateD, idPoids as PoidD, emplacement as LieuD, sourceDon as SourceD FROM don where idDon = '. $_SESSION['idDon'] .'');
+$req = $pdo->prepare('SELECT typeDon as TypeD, forme as FormeD, nature as NatureD, prix as PrixD, 
+				dateDon as DateD, idPoids as PoidD, emplacement as LieuD, sourceDon as SourceD FROM don where idDon = ?');
+
+$req->execute(array($_SESSION['idDon']));
+
+
 while ($row= $req->fetch())
 {
 	$_SESSION['typeDon'] = $row['TypeD'];
@@ -47,8 +51,10 @@ $_SESSION['source'] = $row['SourceD'];
 }
 
 //Requete 2, sur table Personne / Auteur
-$req = $pdo->query('SELECT idPersonne as idA, nom as NomA, fonction as FonctionA FROM personne 
-	INNER JOIN don on personne.idPersonne = don.idAuteur where idDon = '. $_SESSION['idDon'] .'');
+$req = $pdo->prepare('SELECT idPersonne as idA, nom as NomA, fonction as FonctionA FROM personne 
+	INNER JOIN don on personne.idPersonne = don.idAuteur where idDon = ?');
+$req->execute(array($_SESSION['idDon']));
+
 while ($row= $req->fetch())
 {
     $_SESSION['nomAuteur'] = $row['NomA'];
@@ -57,8 +63,10 @@ while ($row= $req->fetch())
 }
 
 //Requete 3, sur table Personne / Destinataire
-$req = $pdo->query('SELECT idPersonne as idD, nom as NomD, fonction as FonctionD FROM personne 
-	INNER JOIN don on personne.idPersonne = don.idBeneficiaire where idDon = '.$_SESSION['idDon'] .'');
+$req = $pdo->prepare('SELECT idPersonne as idD, nom as NomD, fonction as FonctionD FROM personne 
+	INNER JOIN don on personne.idPersonne = don.idBeneficiaire where idDon = ?');
+$req->execute(array($_SESSION['idDon']));
+
 while ($row= $req->fetch())
 {
     $_SESSION['nomDestinataire'] = $row['NomD'];
@@ -67,10 +75,12 @@ while ($row= $req->fetch())
 }
 
 //Requete 4, sur table Personne via table intermédiaire
-$req = $pdo->query('SELECT personne.idPersonne as idI, personne.nom as NomI, personne.fonction as FonctionI FROM personne
+$req = $pdo->prepare('SELECT personne.idPersonne as idI, personne.nom as NomI, personne.fonction as FonctionI FROM personne
                                 INNER JOIN intermediaire on personne.idPersonne = intermediaire.idIntermediaire 
                                 LEFT JOIN don on intermediaire.idDon = don.idDon
-                WHERE don.idDon = '. $_SESSION['idDon'] .'');
+				WHERE don.idDon = ?');
+$req->execute(array($_SESSION['idDon']));
+
 while ($row= $req->fetch())
 {
     $_SESSION['nomIntermediaire'] = $row['NomI'];
@@ -79,7 +89,8 @@ while ($row= $req->fetch())
 }
 
 //Requete sur le poids
-$req = $pdo->query('SELECT masse as poids from poids WHERE idPoids = '. $_SESSION['idPoids'] .'');
+$req = $pdo->prepare('SELECT masse as poids from poids WHERE idPoids = ?');
+$req->execute(array($_SESSION['idPoids']));
 while ($row= $req->fetch())
 {
     $_SESSION['poids'] = $row['poids']; //variable session pour gérer les boutons modifier et supprimer que si on est un utilisateur ADMIN
