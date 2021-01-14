@@ -270,7 +270,6 @@ body > script {display: none !important;}
 /*---------------------------|Footer|---------------------------*/
 .bottombar {
 	display: flex;
-	padding: 4px 3em;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -296,9 +295,10 @@ body > script {display: none !important;}
 			padding: 0 1em;
 			height: 100%;
 			align-items: center;
+			justify-content: center;
 			text-decoration: none;
 			color: #e5dcdc;
-			white-space: nowrap;
+			text-align: center;
 		}
 		.bottombar-menu a:after {
 			content: " ";
