@@ -10,11 +10,11 @@ if (isset($_GET["currentDecade"]) & isset($_GET["nbYear"])) {
     $listYear = array();
 
     //On regarde pour toutes les années de la décénie
-    for ($currYear = 0; $currYear < 10; $currYear++) {
+    for ($currYear = 0; $currYear < $_GET["nbYear"]; $currYear++) {
         $listMonth = array();
 
         //On regarde pour tous les mois de l'année
-        for ($currYear = 0; $currYear < $_GET["nbYear"]; $currYear++) {
+        for ($currMonth = 0; $currMonth < 12; $currMonth++) {
             $req = $db->prepare("SELECT COUNT(idDon) AS nbDon
             FROM Don NATURAL JOIN Calendrier
             WHERE YEAR(dateDon) = ? AND MONTH(dateDon) = ?");
