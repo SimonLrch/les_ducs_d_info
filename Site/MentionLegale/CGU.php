@@ -13,9 +13,9 @@
 
         <p style="text-align:center"><i>En vigueur au 01/01/2021</i></p> 
 
-        <p style="text-align:justify">Les présentes conditions générales d'utilisation (dites « <strong>CGU</strong> ») ont pour objet l'encadrement juridique des modalités de mise à disposition du site et des services par _______ et de définir les conditions d’accès et d’utilisation des services par « <strong>l'Utilisateur</strong> ».<br/>Les présentes CGU sont accessibles sur le site à la rubrique «<strong>CGU</strong>».</p>
+        <p style="text-align:justify">Les présentes conditions générales d'utilisation (dites « <strong>CGU</strong> ») ont pour objet l'encadrement juridique des modalités de mise à disposition du site et des services par Sayens et de définir les conditions d’accès et d’utilisation des services par « <strong>l'Utilisateur</strong> ».<br/>Les présentes CGU sont accessibles sur le site à la rubrique «<strong>CGU</strong>».</p>
 
-        p style="text-align:justify">Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes CGU par l’utilisateur. Lors de l'inscription sur le site via le Formulaire d’inscription, chaque utilisateur accepte expressément les présentes CGU en cochant la case précédant le texte suivant : <br/>
+        <p style="text-align:justify">Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes CGU par l’utilisateur. Lors de l'inscription sur le site via le Formulaire d’inscription, chaque utilisateur accepte expressément les présentes CGU en cochant la case précédant le texte suivant : <br/>
         <i>« Je reconnais avoir lu et compris les CGU et je les accepte ».</i><br/>
         <br/>
         En cas de non-acceptation des CGU stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés par le site.<br/>
@@ -23,20 +23,20 @@
 
     <h2>Article 1 : Les mentions légales</h2>
 
-        <p style="text-align:justify">L’édition et la direction de la publication du site www.urldusite.fr est assurée par Christophe Nicolle et les Ducs d'info, domicilié 7 Boulevard Dr Petitjean.<br/>
+        <p style="text-align:justify">L’édition et la direction de la publication du site www.urldusite.fr est assurée par Sayens, domicilié 64 rue de Sully, 21000 Dijon.<br/>
         Numéro de téléphone : non indiqué<br/>
         Adresse e-mail : cnicolle@u-bourgogne.fr</p>
 
         <p style="text-align:justify">La personne est assujetie au RCS avec le numéro d'inscription __________ et son numéro de TVA intracommunautaire est le ____________</p>
 
-        <p style="text-align:justify">L'hébergeur du site www.urldusite.fr est la société Christophe Nicolle, dont le siège social est situé au 7 Boulevard Dr Petitjean, avec le numéro de téléphone : Non indiqué.</p>
+        <p style="text-align:justify">L'hébergeur du site www.urldusite.fr est la société Sayens, dont le siège social est situé au 64 rue de Sully, 21000 Dijon, avec le numéro de téléphone : Non indiqué.</p>
 
     <h2>Article 2 : Accès au site</h2>
 
         <p style="text-align:justify">Le site www.urldusite.fr permet à l'Utilisateur un accès gratuit aux services suivants :</p>
 
         <p style="text-align:justify">Le site internet propose les services suivants :<br/>
-        INDIQUEZ SERVICES SITE WEB</p>
+        </p>
 
         <p style="text-align:justify">Le site est accessible gratuitement en tout lieu à tout Utilisateur ayant un accès à Internet. Tous les frais supportés par l'Utilisateur pour accéder au service (matériel informatique, logiciels, connexion Internet, etc.) sont à sa charge.</p>
 
