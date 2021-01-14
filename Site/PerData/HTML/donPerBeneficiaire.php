@@ -4,7 +4,7 @@
     	<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
-		<title><?php echo $nomDonneur.'  '. $fonctionDonneur.''; ?></title>
+		<title><?php echo $nomDonneur.'  '. $fonctionDonneur.''; ?></title> <!-- variables qui viennent d'un fichier php -->
 	</head>
 
 	<body>
@@ -18,7 +18,7 @@
 					<br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
 				</p>
 					<details>
-						<summary class="Eye-Tree-titre1">A reçu des dons de: </summary>
+						<summary class="Eye-Tree-titre1">A reçu des dons de: </summary> 
 						<p><?php
 							for($i =0; $i < count($idsDonneurs);$i++)
 							{

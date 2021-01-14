@@ -5,7 +5,7 @@
     	<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="../style/mainStyle.css"/>
-		<title>Restitution par date</title>
+		<title>Restitution au : <?php echo $date ;?></title> <!-- variables qui viennent d'un fichier php -->
 	</header>
 	<body>
 		<?php include'../include/mainHeader.php' ?>

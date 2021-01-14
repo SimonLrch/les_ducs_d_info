@@ -3,11 +3,13 @@
 require_once("../include/dbConfig.php");
 $db = getPDO("PtutS3");
 
+//si le jour, le moi et l'année sont envoyées
 if (isset($_GET["currentDay"]) && isset($_GET["currentMonth"]) && isset($_GET["currentYear"])) {
 	$nbYear = $_GET["currentYear"];
     $nbMouth = $_GET["currentMonth"];
     $nbDay = $_GET["currentDay"];
 
+    //requete pour avoir le don à ceyye date
     $req = $db->prepare("SELECT idDon AS id,
     dateDon AS date,
     forme AS forme,

@@ -3,11 +3,14 @@
 	require_once("../include/dbConfig.php");
     $db = getPDO("PtutS3");
 
+	//si le mois et l'année sont envoyée
     if (isset($_GET["currentMonth"]) && isset($_GET["currentYear"])) {
 		$nbYear = $_GET["currentYear"];
 		$nbMouth = $_GET["currentMonth"];
+
+		//requete pour avoire les date qui corresponde (ou il y a eu des don)
         $req = $db->prepare("SELECT dateDon AS date FROM calendrier WHERE YEAR(dateDon) = ? AND MONTH(dateDon) = ?");
-		$req->execute(array($nbYear, $nbMouth));
+		$req->execute(array($nbYear, $nbMouth)); 
         $res = $req->fetchAll();
 		echo json_encode($res);
     }

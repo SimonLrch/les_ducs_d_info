@@ -9,21 +9,25 @@ $emplacement = $_GET["emplacement"];
 
 //Initialisation variables
 
+//lieux
 $lieux = [];
 $nombre_don = 0;
 
+//auteur
 $idAuteurs = [];
 $nomAuteurs = [];
 $fonctionAuteurs = [];
 $id_don_auteurs = [];
 $nb_don_auteurs = [];
 
+//bénéficiaire
 $idBeneficiaires = [];
 $nomBeneficiaires = [];
 $fonctionBeneficiaires = [];
 $id_don_beneficiaires = [];
 $nb_don_beneficiaires = [];
 
+//date
 $dates = [];
 $id_don_dates = [];
 $nb_don_dates = [];

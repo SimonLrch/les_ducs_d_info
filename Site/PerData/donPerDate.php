@@ -8,21 +8,26 @@ $pdo = getPDO("PtutS3");
 $date = $_GET["date"];
 
 //Variables
+
+//date
 $datesTab = [];
 $nombre_don = 0;
 
+//auteur
 $idAuteurs = [];
 $nomAuteurs = [];
 $fonctionAuteurs = [];
 $id_don_auteurs = [];
 $nb_don_auteurs = [];
 
+//bénéficiaires
 $idBeneficiaires = [];
 $nomBeneficiaires = [];
 $fonctionBeneficiaires = [];
 $id_don_beneficiaires = [];
 $nb_don_beneficiaires = [];
 
+//lieux
 $lieux = [];
 $id_don_lieux = [];
 $nb_don_lieux = [];

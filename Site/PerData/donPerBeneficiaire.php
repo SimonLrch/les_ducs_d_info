@@ -8,22 +8,30 @@ $pdo = getPDO("PtutS3");
 $id = $_GET["id"];
 
     //Création de variable
+
+    //donneurs
     $idsDonneurs = [];
     $nb_Don_pers = [];
+    $nomDonneur = '';
+    $fonctionDonneur = '';
+
+    //receveur
     $noms_Receveurs = [];
     $fonctions_Receveurs = [];
     $id_dons_receveurs = [];
 
-    $nomDonneur = '';
-    $fonctionDonneur = '';
+    //nb don
     $nombre_don = 0;
 
+    //id
     $id_dons = [];
 
+    //lieu
     $lieux = [];
     $nb_Don_lieux = [];
     $id_dons_lieux = [];
 
+    //dates
     $dates = [];
     $nb_Don_dates = [];
     $id_dons_date = [];
