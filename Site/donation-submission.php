@@ -53,7 +53,7 @@ session_start();?>
                                     <option value="pensions">Pensions</option>
                                     <option value="animaux">Animaux</option>
                                     <option value="vetement-draps">Vêtements et draps</option>
-                                    <option value="joyaux-vaisselle">Joyaux et vaisselle</option>
+                                    <option value="joyaux-vaisselle">Joyaux et vaisselles</option>
                                 </select>
                                 <label>Date</label>
                                 <input type="date" name="details-date" />
@@ -81,7 +81,7 @@ session_start();?>
             else
             {
                 echo '<div class="grid-list">
-                        <h1>Vous ne pouvez accéder à cette page sans être connecté en tant qu\'Administrateur</h1>
+                        <h1>Vous ne pouvez pas accéder à cette page sans être connecté en tant qu\'Administrateur</h1>
                         <a href="connexion.php" class="restitutionDon-a">Cliquez ici pour vous connecter</a>
                     </div>
                 ';

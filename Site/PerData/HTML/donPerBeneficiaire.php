@@ -18,7 +18,7 @@
 					<br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
 				</p>
 					<details>
-						<summary class="Eye-Tree-titre1">A reçue des dons de: </summary>
+						<summary class="Eye-Tree-titre1">A reçu des dons de: </summary>
 						<p><?php
 							for($i =0; $i < count($idsDonneurs);$i++)
 							{

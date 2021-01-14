@@ -10,7 +10,7 @@
 		<?php include'../include/mainHeader.php' ?>
 		<main class="container-main">
 			<section class="inner-box section-hero">
-				<span class="titreSection">Restitution Par Lieux</span>
+				<span class="titreSection">Restitution par Lieu</span>
 			</section>
 			<section class="inner-box">
 				<div class="restitutionDon">
