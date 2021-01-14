@@ -11,11 +11,12 @@ input:hover{
 <?php
     if(isset($_POST['FinF']))
     {
-        if($_POST['FinF']=="Retourner à la page principale")
+        echo "<script>console.log(". $_POST['FinF'] .");</script>";
+        if($_POST['FinF']=="PagePrincipale")
         {
             header("Location:index.php");
         }
-        if($_POST['FinF']=="Rajouter un don")
+        if($_POST['FinF']=="AjoutDon")
         {
             header("Location:donation-submission.php");
         }
@@ -44,8 +45,8 @@ input:hover{
                         <span><?php echo $_SESSION['ajout']?></span>
                         <span><?php if(isset($error)) {echo $error;} ?></span>
                         <div class="container-btn-form">
-                            <button type="submit" name="FinF">Page principale</button>
-                            <button type="submit" name="FinF">Rajouter un don</button>
+                            <button type="submit" name="FinF" value="PagePrincipale">Page principale</button>
+                            <button type="submit" name="FinF" value="AjoutDon">Rajouter un don</button>
                         </div>
                     </div>
                 </div>
