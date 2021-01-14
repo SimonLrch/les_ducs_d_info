@@ -8,7 +8,7 @@
 		<script defer src="script/mainScript.js"></script>
 	</head>
 	<body>
-	<?php include'../include/mainHeader.php' ?>
+	<?php include_once('../include/mainHeader.php')?>
 <h1 style="text-align:center">Conditions générales d'utilisation</h1> 
 
         <p style="text-align:center"><i>En vigueur au 01/01/2021</i></p> 
@@ -101,5 +101,6 @@
         <p style="text-align:justify">La législation française s'applique au présent contrat. En cas d'absence de résolution amiable d'un litige né entre les parties, les tribunaux français seront seuls compétents pour en connaître.
         Pour toute question relative à l’application des présentes CGU, vous pouvez joindre l’éditeur aux coordonnées inscrites à l’ARTICLE 1.</p>
 
+        <?php include_once('../include/mainFooter.php')?>
 	</body>
 <html>
