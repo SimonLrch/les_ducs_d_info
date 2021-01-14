@@ -595,8 +595,9 @@ button {
 /*---------------------------|Erreur|---------------------------*/
 .warning {
 	text-align: center;
-	color: darkred;
+	color: #5a0000;
 	text-decoration: bold;
+	font-weight: bold;
 }
 
 /*---------------------------|Responsive design|---------------------------*/
