@@ -214,7 +214,9 @@
                     // Si l'on trouve un intermédiaire, il renvoie quelque chose différent de 0
                     if(get_one_result($sql_inter) != 0)
                     {
-                        $req = $pdo->query('DELETE FROM intermediaire WHERE idDon = "'.$_SESSION['idDon'].'"');
+                        $req = $pdo->prepare('DELETE FROM intermediaire WHERE idDon = :idDon');
+                        $req->bindValue("idDon",$_SESSION['idDon'],PDO::PARAM_INT);
+                        $req->execute();
                     }
 
                 }
@@ -319,11 +321,14 @@
                 $stmt->bindValue(':idDon',$_SESSION['idDon']);
                 $stmt->bindValue('idInter',$_SESSION['idIntermediaire']);
                 $stmt->execute();*/
-                $req = $pdo->query('DELETE FROM intermediaire WHERE idDon = "'.$_SESSION['idDon'].'"');
-
+                $req = $pdo->prepare('DELETE FROM intermediaire WHERE idDon = :idDon');
+                $req->bindValue("idDon",$_SESSION['idDon'],PDO::PARAM_INT);
+                $req->execute();
                 //$req = $pdo->query('DELETE FROM intermediaire WHERE idDon = "'.$_SESSION['idDon'].'" AND idIntermediaire = "'.$_SESSION['idIntermediaire'].'"');
                 //Puis on supprime le don
-                $req = $pdo->query('DELETE FROM Don WHERE idDon = "'.$_SESSION['idDon'].'"');
+                $req = $pdo->prepare('DELETE FROM Don WHERE idDon = :idDon');
+                $req->bindValue("idDon",$_SESSION['idDon'],PDO::PARAM_INT);
+                $req->execute();
                 /*$sql = "DELETE FROM Don WHERE idDon =  :idDon";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':idDon', $_SESSION['idDon'], PDO::PARAM_INT);   
