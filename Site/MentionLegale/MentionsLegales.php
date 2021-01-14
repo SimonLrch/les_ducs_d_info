@@ -69,7 +69,8 @@
             Le site www.illumination.checksem.fr est en conformité avec le RGPD voir notre politique RGPD  <a href="CGU.php">CGU</a>.</p>
             
             <p style="text-align:justify">Les bases de données sont protégées par les dispositions de la loi du 1er juillet 1998 transposant la directive 96/9 du 11 mars 1996 relative à la protection juridique des bases de données.</p>
-            <?php include_once('../include/mainHeader.php')?>
+            
+            <?php include_once('../include/mainFooter.php')?>
             
         </body>
 <html>
