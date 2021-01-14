@@ -348,7 +348,7 @@
             }
             finally
             {
-                echo "Suppression terminée !";
+                echo '<span class="warning">Suppression terminée ! </span>';
             }
         }
 
