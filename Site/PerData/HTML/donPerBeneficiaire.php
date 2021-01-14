@@ -20,12 +20,14 @@
 					<details>
 						<summary class="Eye-Tree-titre1">A reçu des dons de: </summary> 
 						<p><?php
+
 							for($i =0; $i < count($idsDonneurs);$i++)
 							{
 								echo '<details>
 									<summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerBeneficiaire.php?id=' . $idsDonneurs[$i] . '">' . $noms_Receveurs[$i] . ' :  ' . $fonctions_Receveurs[$i] . '</a> ( ' . $nb_Don_pers[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 								//Requête pour avoir les dons par receveur:
-								$req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $id . ' and idAuteur=' . $idsDonneurs[$i] . '');
+								$req = $pdo->prepare('SELECT idDon as idD FROM don where idBeneficiaire = ?  and idAuteur= ?');
+								$req->execute(array($id, $idsDonneurs[$i]));
 								while ($row = $req->fetch())
 								{
 									array_push($id_dons_receveurs, $row['idD']);
@@ -54,7 +56,8 @@
 								echo ' <details>
 									<summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerVille.php?emplacement=' . $lieuxHTMLQuote  . '">' . $lieux[$i] . '</a> ( ' . $nb_Don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 								//Requête pour avoir les dons par ville:
-								$req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $id . ' and emplacement ="' . $lieuxQuote . '"');
+								$req = $pdo->prepare('SELECT idDon as idD FROM don where idBeneficiaire = ? and emplacement =" ? "');
+								$req->execute(array($id, $lieuxQuote ));
 								while ($row = $req->fetch()) {
 									array_push($id_dons_lieux, $row['idD']);
 								}
@@ -78,7 +81,8 @@
 							{
 								echo ' <details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerDate.php?date=' . $dates[$i] . '">' .$dates[$i] .'</a> ( '. $nb_Don_dates[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 								//Requête pour avoir les dons par date:
-								$req = $pdo->query('SELECT idDon as idD FROM don where idBeneficiaire =' . $id . ' and dateDon ="' . $dates[$i] . '"');
+								$req = $pdo->prepare('SELECT idDon as idD FROM don where idBeneficiaire = ?  and dateDon =" ? "');
+								$req->prepare(array($id,$dates[$i]));
 								while ($row = $req->fetch()) {
 									array_push($id_dons_date, $row['idD']);
 								}

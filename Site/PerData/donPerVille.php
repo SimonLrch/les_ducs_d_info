@@ -84,7 +84,8 @@ $nb_don_dates = [];
 
         //Requête nombre de don par Auteur
         for($i =0; $i < count($idAuteurs); $i++){
-            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idAuteur ='. $idAuteurs[$i] .' and emplacement = "' . $emplacementQuote.'"');
+            $req = $pdo->prepare('SELECT count(idDon) as nbDon FROM don where idAuteur = ? and emplacement = ? ');
+            $req->execute(array($idAuteurs[$i],$emplacementQuote));
             while ($row= $req->fetch())
             {
                 array_push($nb_don_auteurs,$row['nbDon']);
