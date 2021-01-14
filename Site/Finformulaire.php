@@ -32,8 +32,8 @@
             <form method="POST" action="Finformulaire.php">
                 <div class="global-form">
                     <div class="form-step active-step">
-                        <span><?php echo $_SESSION['ajout']?></span>
-                        <span><?php if(isset($error)) {echo $error;} ?></span>
+                        <span class="warning"><?php echo $_SESSION['ajout']?></span>
+                        <span class="warning"><?php if(isset($error)) {echo $error;} ?></span>
                         <div class="container-btn-form">
                             <button type="submit" name="FinF" value="PagePrincipale">Page principale</button>
                             <button type="submit" name="FinF" value="AjoutDon">Rajouter un don</button>

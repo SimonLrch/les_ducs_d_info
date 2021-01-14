@@ -13,7 +13,9 @@
         include('include/mainHeader.php'); 
         include('getresult.php');
         require_once('include/dbConfig.php');
-        $pdo = getPDO("PtutS3"); 
+        $pdo = getPDO("PtutS3");
+
+        $warningSpan = "";
 
         //Si le formulaire de cette page a été submit
         if(isset($_POST['Modify']))
@@ -232,7 +234,7 @@
             {
                 echo $e->getMessage();
             }	
-            echo '<span class="warning">Modification effectuée</span>';
+            $warningSpan = '<span class="warning">Modification effectuée</span>';
         }
         if(isset($_POST['Modifier']) || isset($_POST['Modify']))
         {
@@ -264,6 +266,7 @@
                 <form method="POST" action=<?php echo "FormulaireModification.php"?>>
 					<div class="global-form">
 						<div class="form-step active-step" id="form-step1">
+                            <?php echo $warningSpan ?>
 							<label for="auteur"> Auteur :</label>
 							<input type="text" name="auteur" value = "<?php echo $_SESSION['nomAuteur'];?>" required>
 							<label for="statutauteur"> Statut :</label>
