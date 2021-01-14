@@ -2,6 +2,7 @@
 
 //Connexion bd
 require_once ('../include/dbConfig.php');
+require_once('../include/replace.php');
 
 $pdo = getPDO("PtutS3");
 
@@ -117,7 +118,11 @@ $nb_don_lieux = [];
 
         //Requête nombre de don par date
         for($i =0; $i < count($lieux); $i++){
-            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where emplacement ="'. $lieux[$i] .'" and dateDon = "'.$date.'"');
+
+            $lieuxQuote = replaceDoubleQuote($lieux[$i]);
+
+
+            $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where emplacement ="'. $lieuxQuote .'" and dateDon = "'.$date.'"');
             while ($row= $req->fetch())
             {
                 array_push($nb_don_lieux,$row['nbDon']);

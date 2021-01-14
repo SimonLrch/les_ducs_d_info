@@ -15,7 +15,7 @@ session_start();?>
     <?php if(isset($_SESSION['type']) && $_SESSION['type']=='Administrateur'): ?>
 
         <section class="inner-box section-hero">
-            <span class="titreSection">Ajout d\'un don</span>
+            <span class="titreSection">Ajout d'un don</span>
         </section>
         <section class="inner-box">
         <form method="POST" action="formulaireDon.php">

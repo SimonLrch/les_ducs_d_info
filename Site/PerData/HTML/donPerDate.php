@@ -78,9 +78,14 @@
 							<?php
 							for($i =0; $i < count($lieux);$i++)
 							{
-								echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerVille.php?emplacement=' . $lieux[$i] . '">' . $lieux[$i] . ' </a> ( ' . $nb_don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
+
+								$lieuxQuote = replaceDoubleQuote($lieux[$i]);
+								$lieuxHTMLQuote = replaceDoubleQuoteHTML($lieux[$i]);
+
+
+								echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerVille.php?emplacement=' . $lieuxHTMLQuote . ' ">' . $lieux[$i] . ' </a> ( ' . $nb_don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
 								//Requête pour avoir les dons par donneurs:
-								$req = $pdo->query('SELECT idDon as idD FROM don where emplacement ="' . $lieux[$i] . '" and dateDon = "' . $date . '"
+								$req = $pdo->query('SELECT idDon as idD FROM don where emplacement ="' . $lieuxQuote . '" and dateDon = "' . $date . '"
 								');
 								while ($row = $req->fetch())
 								{

@@ -2,6 +2,7 @@
 
 //Connexion bd
 require_once ('../include/dbConfig.php');
+require_once('../include/replace.php');
 
 $pdo = getPDO("PtutS3");
 
@@ -100,8 +101,13 @@ $id = $_GET["id"];
     }
 
     //Requête  nombre de don par lieux
+    
     for($i =0; $i < count($lieux); $i++){
-        $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $id .' and emplacement = "' . $lieux[$i].'"');
+
+        $lieuxQuote = replaceDoubleQuote($lieux[$i]);
+
+
+        $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $id .' and emplacement = "' . $lieuxQuote.'"');
         while ($row= $req->fetch())
         {
             array_push($nb_Don_lieux,$row['nbDon']);
