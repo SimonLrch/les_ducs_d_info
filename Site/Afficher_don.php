@@ -102,58 +102,62 @@ while ($row= $req->fetch())
 	</head>
     <body>
 		<?php include'include/mainHeader.php' ?>
-		<div class="restitutionDon">
-			<h1>Don numéro <?php echo ' ' . $_SESSION['idDon'] .''; ?></h1>
-			<p>
-				<br/>
-				<br/>Auteur : <?php echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. $_SESSION['idAuteur'] .'">' .
-					 $_SESSION['nomAuteur'] .'  : ' . $_SESSION['fonctionAuteur'] .'</a>'; ?>
-				<br/>A l' intention de : <?php echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. 
-					$_SESSION['idDestinataire'] .'">' . $_SESSION['nomDestinataire'] .' : ' . $_SESSION['fonctionDestinataire'] .'</a>'; ?>
-				<br/>Par le biais de : <?php
-						if($_SESSION['nomIntermediaire'] == null)
-						{
-							echo 'Aucune Mention';
-						}
-						else
-						{
-							 echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. $_SESSION['idIntermediaire'] .'">' . 
-								$_SESSION['nomIntermediaire'] .' : ' . $_SESSION['fonctionIntermediaire'] .'</a>';
-						}
-						?>
-				<br/>
-				<br/>Type :<?php echo ' ' . $_SESSION['typeDon'] .''; ?>
-				<br/>Forme :<?php echo ' ' . $_SESSION['formeDon'] .''; ?>
-				<br/>Poids :<?php //Poid peut être null
-						if($_SESSION['poids'] == null)
-						{
-							echo 'Aucune Mention de poids';
-						}
-						else
-						{
-							echo '' . $_SESSION['poids'] .' ';
-						}
-						?>
-				<br/>Prix :  <?php echo ' ' . $_SESSION['prix'] .''; ?>
-				<br/>
-				<br/>Date :<?php echo ' <a class="restitutionDon-a" href="PerData/donPerDate.php?date=' . $_SESSION['date'] . '">' . $_SESSION['date'] .'</a>'; ?>
-				<br/>Lieu:  <?php echo '<a class="restitutionDon-a" href="PerData/donPerVille.php?emplacement=' . $_SESSION['lieu'] . '">' . $_SESSION['lieu'] .'</a>'; ?>
-				<br/>
-				<br/>Nature :<?php echo ' ' . $_SESSION['nature'] .''; ?>
-				<br/>
-				<br/>Source: <?php echo ' ' . $_SESSION['source'] .''; ?>
-			</p>
-		</div>
-		<?php if(isset($_SESSION['type']) && $_SESSION['type']=='Administrateur')
-			{
-				echo '<form method="POST" action="FormulaireModification.php">
-					<div class="container-btn-form">
-						<button type="submit" name="Modifier">Modifier</button>
-						<button type="submit" name="Supprimer">Supprimer</button>
-					</div>
-					</form>';
-			}
-		?>
+		<main class="container-main">
+			<section class="inner-box">
+				<div class="restitutionDon">
+				<h1>Don numéro <?php echo ' ' . $_SESSION['idDon'] .''; ?></h1>
+				<p>
+					<br/>
+					<br/>Auteur : <?php echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. $_SESSION['idAuteur'] .'">' .
+						$_SESSION['nomAuteur'] .'  : ' . $_SESSION['fonctionAuteur'] .'</a>'; ?>
+					<br/>A l' intention de : <?php echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. 
+						$_SESSION['idDestinataire'] .'">' . $_SESSION['nomDestinataire'] .' : ' . $_SESSION['fonctionDestinataire'] .'</a>'; ?>
+					<br/>Par le biais de : <?php
+							if($_SESSION['nomIntermediaire'] == null)
+							{
+								echo 'Aucune Mention';
+							}
+							else
+							{
+								echo '<a class="restitutionDon-a" href="PerData/donPerDonnateur.php?id='. $_SESSION['idIntermediaire'] .'">' . 
+									$_SESSION['nomIntermediaire'] .' : ' . $_SESSION['fonctionIntermediaire'] .'</a>';
+							}
+							?>
+					<br/>
+					<br/>Type :<?php echo ' ' . $_SESSION['typeDon'] .''; ?>
+					<br/>Forme :<?php echo ' ' . $_SESSION['formeDon'] .''; ?>
+					<br/>Poids :<?php //Poid peut être null
+							if($_SESSION['poids'] == null)
+							{
+								echo 'Aucune Mention de poids';
+							}
+							else
+							{
+								echo '' . $_SESSION['poids'] .' ';
+							}
+							?>
+					<br/>Prix :  <?php echo ' ' . $_SESSION['prix'] .''; ?>
+					<br/>
+					<br/>Date :<?php echo ' <a class="restitutionDon-a" href="PerData/donPerDate.php?date=' . $_SESSION['date'] . '">' . $_SESSION['date'] .'</a>'; ?>
+					<br/>Lieu:  <?php echo '<a class="restitutionDon-a" href="PerData/donPerVille.php?emplacement=' . $_SESSION['lieu'] . '">' . $_SESSION['lieu'] .'</a>'; ?>
+					<br/>
+					<br/>Nature :<?php echo ' ' . $_SESSION['nature'] .''; ?>
+					<br/>
+					<br/>Source: <?php echo ' ' . $_SESSION['source'] .''; ?>
+				</p>
+			</div>
+			<?php if(isset($_SESSION['type']) && $_SESSION['type']=='Administrateur')
+				{
+					echo '<form method="POST" action="FormulaireModification.php">
+						<div class="container-btn-form">
+							<button type="submit" name="Modifier">Modifier</button>
+							<button type="submit" name="Supprimer">Supprimer</button>
+						</div>
+						</form>';
+				}
+			?>
+			</section>
+		</main>
 		<?php include'include/mainFooter.php' ?>
     </body>
 </html>

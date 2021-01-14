@@ -37,11 +37,20 @@ input:hover{
         include('include/mainHeader.php'); 
     ?>
     <main class="container-main">
-    <p><?php echo $_SESSION['ajout']?></p>
-    <form method="POST" action="Finformulaire.php">
-        <input type="submit" name="FinF" value ="Retourner à la page principale">
-        <input type="submit" name="FinF" value ="Rajouter un don">
-    </form>
+        <section class="inner-box">
+            <form method="POST" action="Finformulaire.php">
+                <div class="global-form">
+                    <div class="form-step active-step">
+                        <span><?php echo $_SESSION['ajout']?></span>
+                        <span><?php if(isset($error)) {echo $error;} ?></span>
+                        <div class="container-btn-form">
+                            <button type="submit" name="FinF">Page principale</button>
+                            <button type="submit" name="FinF">Rajouter un don</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
     </main>
     <?php include'include/mainFooter.php'?>
 </body>

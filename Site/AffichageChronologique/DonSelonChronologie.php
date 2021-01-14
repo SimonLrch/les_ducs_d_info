@@ -14,6 +14,7 @@
     </section>
 	<div class="barChartObject"></div>
 	<div class="calendarObject"></div>
+    <?php include'../include/mainFooter.php'?>
 </body>
 <script src="Calendar/calendar.js"></script>
 <script src="Calendar/barChart.js"></script>

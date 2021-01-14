@@ -157,6 +157,10 @@ a img { border: 0; }
 /* scripts */
 body > script {display: none !important;}
 
+button {
+	outline: none;
+}
+
 /*---------------------------|Header|---------------------------*/
 .topbar {
 	position: sticky;
@@ -523,10 +527,9 @@ body > script {display: none !important;}
 }
 
 .restitutionDon {
-	text-align: center;
+	text-align: left;
 }
 	.restitutionDon-a {
-		background-color: #e5dcdc;
 		color: #380000;
 		font-family: "Lucida Sans Unicode";
 		font-size: 1.4em; /* equiv 14px */
