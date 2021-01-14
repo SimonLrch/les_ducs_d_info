@@ -100,11 +100,16 @@ $id = $_GET["id"];
         array_push($lieux,$row['lieux']);
     }
 
+    
+
+    
+
     //Requête  nombre de don par lieux
     
     for($i =0; $i < count($lieux); $i++){
 
-        $lieuxQuote = replaceDoubleQuote($lieux[$i]);
+        $lieuxQuote = replaceDoubleQuote($lieux[$i]); //remplacement de caractère pouvais géner
+        $lieuxQuote = addAntiSlash($lieuxQuote);
 
 
         $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where idBeneficiaire ='. $id .' and emplacement = "' . $lieuxQuote.'"');

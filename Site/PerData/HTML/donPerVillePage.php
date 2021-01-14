@@ -55,7 +55,7 @@
 								for($i =0; $i < count($idBeneficiaires);$i++)
 								{
 
-									$emplacementQuote = replaceDoubleQuote($emplacement);
+									$emplacementQuote = replaceDoubleQuote($emplacement); //remplacement de caractère pouvais géner
 
 
 									echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerBeneficiaire.php?id=' . $idBeneficiaires[$i] . '">' . $nomBeneficiaires[$i] . ' :  ' . $fonctionBeneficiaires[$i] . '</a> ( ' . $nb_don_beneficiaires[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
@@ -84,7 +84,7 @@
 								for($i =0; $i < count($dates);$i++)
 								{
 
-									$emplacementQuote = replaceDoubleQuote($emplacement);
+									$emplacementQuote = replaceDoubleQuote($emplacement); //remplacement de caractère pouvais géner
 
 
 									echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerDate.php?date=' . $dates[$i] . '">' . $dates[$i] . ' </a> ( ' . $nb_don_dates[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
@@ -109,7 +109,7 @@
 						</details>
 
 					<?php elseif(!in_array($emplacement,$lieux)): ?> <!-- si l'id du lieu envoyé ne correspond pas a un lieu qui existe -->
-
+						
 						<h1> Aucun don n'a été fait par en ce lieux</h1>
 						<p><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>">Revenir à la page précédente</a></p>
 

@@ -8,8 +8,10 @@ $pdo = getPDO("PtutS3");
 
 $emplacement = $_GET["emplacement"];
 $emplacementQuote = replaceDoubleQuote($emplacement);
-$emplacement = addAntiSlash($emplacement);
-$emplacementQuote = addAntiSlash($emplacementQuote);
+
+$emplacement = addAntiSlash($emplacement); //remplacement de caractère pouvais géner
+$emplacementQuote = addAntiSlash($emplacementQuote); //remplacement de caractère pouvais géner
+
 
 
 //Initialisation variables
@@ -46,12 +48,19 @@ $nb_don_dates = [];
             array_push($lieux,$row['lieu']);
         }
 
+        for($i =0; $i < count($lieux); $i++)
+        {   
+            $lieux[$i] =  addAntiSlash($lieux[$i]); //remplacement de caractère pouvais géner
+        }
+
         //Requête nombre de dons
         $req = $pdo->query('SELECT COUNT(idDon) as NbDon FROM don where emplacement = "'.$emplacementQuote.'"');
         while ($row= $req->fetch())
         {
             $nombre_don = $row["NbDon"];
         }
+
+
 
     //AUTEURs
         //Requête => iddonneur

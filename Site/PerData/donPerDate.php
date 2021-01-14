@@ -119,7 +119,7 @@ $nb_don_lieux = [];
         //Requête nombre de don par date
         for($i =0; $i < count($lieux); $i++){
 
-            $lieuxQuote = replaceDoubleQuote($lieux[$i]);
+            $lieuxQuote = replaceDoubleQuote($lieux[$i]); //remplacement de caractère pouvais géner
 
 
             $req = $pdo->query('SELECT count(idDon) as nbDon FROM don where emplacement ="'. $lieuxQuote .'" and dateDon = "'.$date.'"');

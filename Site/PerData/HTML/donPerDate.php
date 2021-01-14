@@ -79,8 +79,8 @@
 							for($i =0; $i < count($lieux);$i++)
 							{
 
-								$lieuxQuote = replaceDoubleQuote($lieux[$i]);
-								$lieuxHTMLQuote = replaceDoubleQuoteHTML($lieux[$i]);
+								$lieuxQuote = replaceDoubleQuote($lieux[$i]); //remplacement de caractère pouvais géner
+								$lieuxHTMLQuote = replaceDoubleQuoteHTML($lieux[$i]); //remplacement de caractère pouvais géner
 
 
 								echo '<details><summary class="Eye-Tree-titre2"><a class="restitutionDon-a" href="donPerVille.php?emplacement=' . $lieuxHTMLQuote . ' ">' . $lieux[$i] . ' </a> ( ' . $nb_don_lieux[$i] . ' )</summary><div class="Eye-Tree-content" ><p>';
