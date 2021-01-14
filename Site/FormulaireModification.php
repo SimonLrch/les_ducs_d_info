@@ -263,52 +263,54 @@
                     }   
                 ?>
                 <main class="container-main">
-                <form method="POST" action=<?php echo "FormulaireModification.php"?>>
-					<div class="global-form">
-						<div class="form-step active-step" id="form-step1">
-                            <?php echo $warningSpan ?>
-							<label for="auteur"> Auteur :</label>
-							<input type="text" name="auteur" value = "<?php echo $_SESSION['nomAuteur'];?>" required>
-							<label for="statutauteur"> Statut :</label>
-							<input type="text" name="statutauteur" value = "<?php echo $_SESSION['fonctionAuteur'];?>" required>
-							</br>
-							<label for="beneficiaire"> Bénéficiaire :</label>
-							<input type="text" name="beneficiaire" value = "<?php echo $_SESSION['nomDestinataire']; ?>" required>
-							<label for="statutbeneficiaire"> Statut :</label>
-							<input type="text" name="statutbeneficiaire" value = "<?php echo $_SESSION['fonctionDestinataire'];?>" >
-							<br>
-							<label for="intermediaire"> Intermédiaire :</label>
-							<input type="text" name="intermediaire" value = "<?php echo $_SESSION['nomIntermediaire'];?>">
-							<label for="statutintermediaire"> Statut :</label>
-							<input type="text" name="statutintermediaire" value = "<?php echo $_SESSION['fonctionIntermediaire'];?>"  >
-							<br>
-							<label for="details-typeDon">Type de don</label>
-							<?php echo generateSelect('details-typeDon',$options,$_SESSION['typeDon'])?>
-							<label for="details-date">Date</label>
-							<input type="date" name="details-date" value = "<?php echo $_SESSION['date']; ?>" required>
-							<br>
-							<label for="details-lieu">Lieu</label>
-							<input type="text" name="details-lieu" value = "<?php echo $_SESSION['lieu']; ?>" required>
-							<label for="details-forme">Formes</label>
-							<input type="text" name="details-forme" value = "<?php echo $_SESSION['formeDon'];?>" required>
-							<br>
-							<label>Poids</label>
-							<input type="text" name="details-poids" value = "<?php echo $_SESSION['poids'];?>" required>
-							<label>Prix</label>
-							<input type="text" name="details-prix" value = "<?php echo $_SESSION['prix'];?>">
-							<label>Sources</label>
-							<input type="text" name="details-source" value = "<?php echo $_SESSION['source']; ?>" required>
-							<br>
-							<label>Natures</label>
-							<textarea name="details-nature" ><?php echo $_SESSION['nature']; ?></textarea>
-							<br>
-							<div class="container-btn-form">
-								<button type="submit" name="Modify" >Modifier</button>
-								<button type="submit" name="Supprimer" >Supprimer</button>
-							</div>
-						</div>
-					</div>
-                </form>
+                    <section class="inner-box">
+                        <form method="POST" action=<?php echo "FormulaireModification.php"?>>
+                            <div class="global-form">
+                                <div class="form-step active-step" id="form-step1">
+                                    <?php echo $warningSpan ?>
+                                    <label for="auteur"> Auteur :</label>
+                                    <input type="text" name="auteur" value = "<?php echo $_SESSION['nomAuteur'];?>" required>
+                                    <label for="statutauteur"> Statut :</label>
+                                    <input type="text" name="statutauteur" value = "<?php echo $_SESSION['fonctionAuteur'];?>" required>
+                                    </br>
+                                    <label for="beneficiaire"> Bénéficiaire :</label>
+                                    <input type="text" name="beneficiaire" value = "<?php echo $_SESSION['nomDestinataire']; ?>" required>
+                                    <label for="statutbeneficiaire"> Statut :</label>
+                                    <input type="text" name="statutbeneficiaire" value = "<?php echo $_SESSION['fonctionDestinataire'];?>" >
+                                    <br>
+                                    <label for="intermediaire"> Intermédiaire :</label>
+                                    <input type="text" name="intermediaire" value = "<?php echo $_SESSION['nomIntermediaire'];?>">
+                                    <label for="statutintermediaire"> Statut :</label>
+                                    <input type="text" name="statutintermediaire" value = "<?php echo $_SESSION['fonctionIntermediaire'];?>"  >
+                                    <br>
+                                    <label for="details-typeDon">Type de don</label>
+                                    <?php echo generateSelect('details-typeDon',$options,$_SESSION['typeDon'])?>
+                                    <label for="details-date">Date</label>
+                                    <input type="date" name="details-date" value = "<?php echo $_SESSION['date']; ?>" required>
+                                    <br>
+                                    <label for="details-lieu">Lieu</label>
+                                    <input type="text" name="details-lieu" value = "<?php echo $_SESSION['lieu']; ?>" required>
+                                    <label for="details-forme">Formes</label>
+                                    <input type="text" name="details-forme" value = "<?php echo $_SESSION['formeDon'];?>" required>
+                                    <br>
+                                    <label>Poids</label>
+                                    <input type="text" name="details-poids" value = "<?php echo $_SESSION['poids'];?>" required>
+                                    <label>Prix</label>
+                                    <input type="text" name="details-prix" value = "<?php echo $_SESSION['prix'];?>">
+                                    <label>Sources</label>
+                                    <input type="text" name="details-source" value = "<?php echo $_SESSION['source']; ?>" required>
+                                    <br>
+                                    <label>Natures</label>
+                                    <textarea name="details-nature" ><?php echo $_SESSION['nature']; ?></textarea>
+                                    <br>
+                                    <div class="container-btn-form">
+                                        <button type="submit" name="Modify" >Modifier</button>
+                                        <button type="submit" name="Supprimer" >Supprimer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
                 </main>
 
         <?php
@@ -351,7 +353,22 @@
             }
             finally
             {
-                echo '<span class="warning">Suppression terminée ! </span>';
+                $warningSpan = '<span class="warning">Suppression terminée ! </span>';
+                ?>
+
+                <main class="container-main">
+                    <section class="inner-box">
+                        <form method="POST" action=<?php echo "FormulaireModification.php"?>>
+                            <div class="global-form">
+                                <div class="form-step active-step" id="form-step1">
+                                    <?php echo $warningSpan ?>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                </main>
+
+                <?php
             }
         }
 
