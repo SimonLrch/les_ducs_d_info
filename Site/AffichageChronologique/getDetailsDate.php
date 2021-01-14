@@ -17,7 +17,9 @@ if (isset($_GET["currentDay"]) && isset($_GET["currentMonth"]) && isset($_GET["c
     nature AS nature,
     emplacement AS lieu,
     sourceDon AS source,
+    auteur.idPersonne AS auteurId,
     auteur.nom AS auteur,
+    beneficiaire.idPersonne AS beneficiaireId,
     beneficiaire.nom AS beneficiaire
     FROM Don NATURAL JOIN calendrier
     JOIN Personne AS auteur ON Don.idAuteur = Auteur.idPersonne

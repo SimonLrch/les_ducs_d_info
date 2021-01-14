@@ -283,7 +283,8 @@ Calendar.prototype.getInfoDate = function(dateParam) {
                 let detailsContainer = document.createElement("div");
 
                 let detailsTitle = document.createElement("h4");
-                detailsTitle.innerText = "Don de " + elt.auteur + " à " + elt.beneficiaire;
+                detailsTitle.innerHTML = "Don de <a href=\"../Afficher_don.php?id=" + elt.auteurId + "\">" + elt.auteur + "</a>";
+                detailsTitle.innerHTML += "à <a href=\"../Afficher_don.php?id=" + elt.beneficiaireId + "\">" + elt.beneficiaire + "</a>";
                 detailsContainer.appendChild(detailsTitle);
 
                 let detailsTextContainer = document.createElement("div");
