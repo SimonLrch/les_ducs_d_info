@@ -334,6 +334,7 @@ button {
 	}
 	.inner-box {
 		display: flex;
+		flex-direction: column;
 		max-width: 1200px;
 		min-height: 50vh;
 		width: 100%;
@@ -491,9 +492,17 @@ button {
 				.form-step textarea {
 					resize: vertical;
 				}
+				.form-step span {
+					text-align: center;
+				}
 				.container-btn-form {
 					display: flex;
 					justify-content: flex-end;
+				}
+				.container-btn-form-small {
+					flex-direction: column;
+					max-width: 20em;
+					margin: auto;
 				}
 					.container-btn-form button, .button-form-a {
 						cursor: pointer;
