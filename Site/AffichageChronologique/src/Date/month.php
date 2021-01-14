@@ -10,7 +10,7 @@ class Month {
             throw new \Exception(message:"le mois $month n'est pas valide");
         }
         if($year < 1700){
-            throw new \Exception(message:"l'année est inferieur à 1700 """) ;   
+            throw new \Exception(message:"l'année est inférieure à 1700 """) ;   
         }
     }
 }

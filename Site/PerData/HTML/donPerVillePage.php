@@ -15,13 +15,13 @@
 			<section class="inner-box">
 				<div class="restitutionDon">
 					<?php if(in_array($emplacement,$lieux)): ?>
-						<p><a href="../AffichageGeographique/DonGeographique.php">Voir la carte des donnations</a>  </p>
+						<p><a href="../AffichageGeographique/DonGeographique.php">Voir la carte des donations</a>  </p>
 						<h1><?php echo 'Dons fait à '. $emplacement.''; ?></h1>
 						<p>
 							<br/>Nombre de dons : <?php echo ' '.$nombre_don.''; ?>
 						</p>
 						<details>
-							<summary class="Eye-Tree-titre1">Personnes ayant données à <?php echo ''.$emplacement.''; ?>: </summary><p>
+							<summary class="Eye-Tree-titre1">Personnes ayant donné à <?php echo ''.$emplacement.''; ?>: </summary><p>
 								<?php
 								for($i =0; $i < count($idAuteurs);$i++)
 								{
@@ -46,7 +46,7 @@
 							</p>
 						</details>
 						<details>
-							<summary class="Eye-Tree-titre1">Personnes ayant recues des dons à <?php echo ''.$emplacement.''; ?>: </summary><p>
+							<summary class="Eye-Tree-titre1">Personnes ayant reçu des dons à <?php echo ''.$emplacement.''; ?>: </summary><p>
 
 								<?php
 								for($i =0; $i < count($idBeneficiaires);$i++)

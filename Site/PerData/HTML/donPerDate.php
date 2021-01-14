@@ -11,7 +11,7 @@
 		<?php include'../include/mainHeader.php' ?>
 		<main class="container-main">
 			<section class="inner-box section-hero">
-				<span class="titreSection">Restitution Par Dates</span>
+				<span class="titreSection">Restitution Par Date</span>
 			</section>
 			<section class="inner-box">
 				<div class="restitutionDon">
@@ -23,7 +23,7 @@
 					</p>
 
 					<details>
-						<summary class="Eye-Tree-titre1">Personnes ayant données le <?php echo ''.$date.''; ?> : </summary><p>
+						<summary class="Eye-Tree-titre1">Personnes ayant donné le <?php echo ''.$date.''; ?> : </summary><p>
 							<?php
 							for($i =0; $i < count($idAuteurs);$i++)
 							{
@@ -73,7 +73,7 @@
 
 						</p>
 					</details>
-					<details><summary class="Eye-Tree-titre1">Lieux dans lesquels les dons du <?php echo ''.$date.''; ?> ont été fait : </summary><p>
+					<details><summary class="Eye-Tree-titre1">Lieux dans lesquels les dons du <?php echo ''.$date.''; ?> ont été faits : </summary><p>
 
 							<?php
 							for($i =0; $i < count($lieux);$i++)

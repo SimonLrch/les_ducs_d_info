@@ -140,7 +140,7 @@ session_start();
 	// On vérifie si les champs sont vides ( autres que intermédiaire et poids)
 	if(empty($donateur_name) OR empty($donateur_statut) OR empty($beneficiaire_name) OR empty($beneficiaire_statut) OR empty($details_typeDon) OR empty($details_date) OR empty($details_lieu) OR empty($details_formes) OR empty($details_prix) OR empty($details_sources) OR empty($details_natures))
 	{
-		$_SESSION['ajout'] = '<font color="red">Attention, seul les champs intermédiaire et poids peuvent rester vide !</font>';
+		$_SESSION['ajout'] = '<font color="red">Attention, seuls les champs intermédiaire et poids peuvent rester vide !</font>';
 	}
 	else
 	{

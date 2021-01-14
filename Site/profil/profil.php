@@ -24,7 +24,7 @@
 						<div class="form-step active-step" id="form-step1">
 							<span class="warning"><?php if(isset($err)) {echo $err; }?></span>
 							<legend>Les * sont des champs obligatoires</legend>
-							<label>Prenom*</label>
+							<label>Prénom*</label>
 							<input type="text" name="Prenom" value="<?php echo $_SESSION["prenom"] ?>" required />
 							<label>Nom*</label>
 							<input type="text" name="Nom" value="<?php echo $_SESSION["nom"] ?>" required />

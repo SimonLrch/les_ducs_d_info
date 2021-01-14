@@ -267,12 +267,12 @@
 							<label for="statutauteur"> Statut :</label>
 							<input type="text" name="statutauteur" value = "<?php echo $_SESSION['fonctionAuteur'];?>" required>
 							</br>
-							<label for="beneficiaire"> Beneficiaire :</label>
+							<label for="beneficiaire"> Bénéficiaire :</label>
 							<input type="text" name="beneficiaire" value = "<?php echo $_SESSION['nomDestinataire']; ?>" required>
 							<label for="statutbeneficiaire"> Statut :</label>
 							<input type="text" name="statutbeneficiaire" value = "<?php echo $_SESSION['fonctionDestinataire'];?>" >
 							<br>
-							<label for="intermediaire"> Intermediaire :</label>
+							<label for="intermediaire"> Intermédiaire :</label>
 							<input type="text" name="intermediaire" value = "<?php echo $_SESSION['nomIntermediaire'];?>">
 							<label for="statutintermediaire"> Statut :</label>
 							<input type="text" name="statutintermediaire" value = "<?php echo $_SESSION['fonctionIntermediaire'];?>"  >
