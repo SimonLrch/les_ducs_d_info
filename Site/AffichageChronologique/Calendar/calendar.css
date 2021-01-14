@@ -120,15 +120,16 @@
     margin-bottom: 5px;
     font-weight: bold;
 }
-#calendar-date-details > div {
+#calendar-date-details .calendar-details-text-container {
     float: left;
     margin: 10px;
     padding: 20px;
     background-color: var(--main-color);
     color: white;
     border-radius: 20px;
+    text-decoration: none;
 }
-#calendar-date-details > div > div {
+#calendar-date-details .calendar-details-text-container > div {
     display: flex;
     flex-direction: column;
 }

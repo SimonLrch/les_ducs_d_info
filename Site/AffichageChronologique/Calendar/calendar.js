@@ -280,11 +280,12 @@ Calendar.prototype.getInfoDate = function(dateParam) {
         if (body.length > 0) {
             //Pour chaque don trouvé on crée l'html pour afficher le don
             Array.from(body).forEach(elt => {
-                let detailsContainer = document.createElement("div");
+                let detailsContainer = document.createElement("a");
+                detailsContainer.href = "../Afficher_don.php?id=" + elt.id;
+                detailsContainer.classList.add("calendar-details-text-container");
 
                 let detailsTitle = document.createElement("h4");
-                detailsTitle.innerHTML = "Don de <a href=\"../Afficher_don.php?id=" + elt.auteurId + "\">" + elt.auteur + "</a>";
-                detailsTitle.innerHTML += "à <a href=\"../Afficher_don.php?id=" + elt.beneficiaireId + "\">" + elt.beneficiaire + "</a>";
+                detailsTitle.innerText = "Don de " + elt.auteur + " à " + elt.beneficiaire;
                 detailsContainer.appendChild(detailsTitle);
 
                 let detailsTextContainer = document.createElement("div");
@@ -305,7 +306,8 @@ Calendar.prototype.getInfoDate = function(dateParam) {
         }
         //Sinon si on ne trouve rien on affiche à l'utilisateur que l'on a rien trouvé
         else {
-            let detailsContainer = document.createElement("div");
+            let detailsContainer = document.createElement("a");
+            detailsContainer.classList.add("calendar-details-text-container");
 
             let detailsTitle = document.createElement("h4");
             detailsTitle.innerText = "Il n'y a pas de don effectué sur cette date";
